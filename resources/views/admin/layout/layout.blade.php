@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ url('admin/vendors/feather/feather.css') }}">
@@ -60,6 +61,8 @@
     <script src="{{ url('admin/js/todolist.js')}}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
+<!-- Custom js fpassword-->
+    <script src="{{ url('admin/js/custom-password.js') }}"></script>
     <script src="{{ url('admin/js/dashboard.js')}}"></script>
     <script src="j{{ url('admin/s/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
