@@ -29,8 +29,16 @@
                             <div class="brand-logo">
                                 <img src="{{ url('admin/images/logo.svg') }}" alt="logo">
                             </div>
-                            <h4>Đăng Nhập</h4>
-                            <h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
+                            <h4>{{ __('Đăng Nhập') }}</h4>
+                            <h6 class="font-weight-light">{{ __('Đăng Nhập Để Tiếp Tục') }}</h6>
+                            @if(Session::has('error_message'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
                             <form class="pt-3" action="{{ url('admin/login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -45,27 +53,24 @@
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit"
-                                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
-                                        IN</button>
-
-                                    {{-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN IN</a> --}}
+                                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">{{ __('Đăng Nhập') }}</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
                                             <input type="checkbox" class="form-check-input">
-                                            Keep me signed in
+                                            {{ __('Ghi Nhớ Để Đăng Nhập') }}
                                         </label>
                                     </div>
-                                    <a href="#" class="auth-link text-black">Forgot password?</a>
+                                    <a href="#" class="auth-link text-black">{{ __('Quên Mật Khẩu?') }}</a>
                                 </div>
                                 <div class="mb-2">
                                     <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                                        <i class="ti-facebook mr-2"></i>Connect using facebook
+                                        <i class="ti-facebook mr-2"></i>{{ __('Kết Nối Bằng Facebook') }}
                                     </button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                    Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                                    {{ __('Không Có Tài Khoản') }} <a href="register.html" class="text-primary">{{ __('Đăng Ký') }}</a>
                                 </div>
                             </form>
                         </div>

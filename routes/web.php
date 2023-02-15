@@ -30,11 +30,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+Route::prefix('admin')->group(function () {
     //admin Login
     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
-    Route::group(['middleware' => ['admin']], function () {
-        // Admin Dashboard Route WITHOUT admin group
-        Route::get('dashboard', [AdminController::class, 'index']);
+    Route::group(['middleware' => ['admin']], function() {
+        Route::get('dashboard', [AdminController::class, 'dashboard']);
+        //Admin logout
+        Route::get('logout',[AdminController::class, 'logout']);
     });
 });
