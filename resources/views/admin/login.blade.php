@@ -31,25 +31,37 @@
                             </div>
                             <h4>{{ __('Đăng Nhập') }}</h4>
                             <h6 class="font-weight-light">{{ __('Đăng Nhập Để Tiếp Tục') }}</h6>
-                            @if(Session::has('error_message'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                            @if (Session::has('error_message'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </div>
                             @endif
                             <form class="pt-3" action="{{ url('admin/login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email"
+                                    <input type="text" name="email" id="email"
                                         class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Username" required>
+                                        placeholder="Username">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password"
-                                        class="form-control form-control-lg" id="exampleInputPassword1"
-                                        placeholder="Password" required>
+                                    <div class="position-relative auth-pass-inputgroup mb-3 d-flex">
+                                        <input type="password" id="password" class="form-control pe-5 float-left "
+                                            name="password" placeholder="Password">
+                                        <span class="input-group-text bg-white" id="btnPassword">
+                                            <span class="icon-layout eye-icon"></span>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit"
@@ -70,7 +82,8 @@
                                     </button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                    {{ __('Không Có Tài Khoản') }} <a href="register.html" class="text-primary">{{ __('Đăng Ký') }}</a>
+                                    {{ __('Không Có Tài Khoản') }} <a href="register.html"
+                                        class="text-primary">{{ __('Đăng Ký') }}</a>
                                 </div>
                             </form>
                         </div>
@@ -94,6 +107,20 @@
     <script src="{{ url('admin/js/settings.js') }}"></script>
     <script src="{{ url('admin/js/todolist.js') }}"></script>
     <!-- endinject -->
+    <script>
+        const ipnElement = document.querySelector('#password')
+        const btnElement = document.querySelector('#btnPassword')
+
+        btnElement.addEventListener('click', function() {
+
+            const currentType = ipnElement.getAttribute('type')
+
+            ipnElement.setAttribute(
+                'type',
+                currentType === 'password' ? 'text' : 'password'
+            )
+        })
+    </script>
 </body>
 
 </html>
