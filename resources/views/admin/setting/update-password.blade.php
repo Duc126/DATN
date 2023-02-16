@@ -55,9 +55,9 @@
                                         id="confirm_password" placeholder="Xác Nhận Lại Mật Khẩu"required>
                                 </div>
                                 <button type="submit"
-                                    class="btn btn-primary mr-2 float-right">{{ __('Submit') }}</button>
-                                <button class="btn btn-light">{{ __('Back') }}</button>
-                            </form>
+                                    class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
+                                    <button class="btn btn-light" href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                </form>
                         </div>
                     </div>
                 </div>

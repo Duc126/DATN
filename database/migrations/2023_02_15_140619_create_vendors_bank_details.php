@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('vendors_bank_details', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('type');
             $table->integer('vendor_id');
-            $table->string('phone');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('image');
-            $table->tinyInteger('status');
+            $table->string('account_holder_name');
+            $table->string('bank_name');
+            $table->string('account_number');
+            $table->string('bank_ifsc_code');
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('vendors_bank_details');
     }
 };
