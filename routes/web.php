@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,15 +35,16 @@ Route::prefix('admin')->group(function () {
     //admin Login
     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('dashboard', [AdminController::class, 'dashboard']);
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('Ad-dashboard');
         //Update Password
         Route::match(['get', 'post'], 'update-password', [AdminController::class, 'updatePassword'])->name('update-password');
         Route::post('check-admin-password', [AdminController::class, 'checkPassword']);
         //Admin logout
         Route::get('logout', [AdminController::class, 'logout']);
-
         //Update Detail
-
         Route::match(['get', 'post'], 'update-details', [AdminController::class, 'updateDetails'])->name('update-details');
+        //Update Vendor Detail
+        Route::match(['get', 'post'], 'update-vendor-details/{slug}', [VendorController::class, 'updateVendorsDetail']);
+
     });
 });

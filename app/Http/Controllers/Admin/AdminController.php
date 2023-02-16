@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Expr\Print_;
+use Image;
 
 class AdminController extends Controller
 {
@@ -73,26 +74,48 @@ class AdminController extends Controller
         };
     }
 
-    public function updateDetails(Request $request){
+    public function updateDetails(Request $request)
+    {
         if ($request->isMethod('post')) {
             $updateDetails = $request->all();
             $rules = [
-                'name' => 'required|min:6',
-                'mobile' => 'required|numeric|min:10',
+                'first_name' => 'required|min:2',
+                'last_name' => 'required|min:6',
+                'phone' => 'required|numeric|min:10',
             ];
             $customMessages = [
-                'name.required' => 'Tên là bắt buộc',
-                'name.min' => 'Tên phải có ít nhất 6 ký tự',
-                'mobile.required' => 'Số điện thoại là bắt buộc',
-                'mobile.numeric' => 'Số điện thoại không hợp lệ',
-                'mobile.min' => 'Số điện thoại phải 10 ký tự đúng định dạng',
+                'first_name.required' => 'Họ là bắt buộc',
+                'first_name.min' => 'Họ phải có ít nhất 2 ký tự',
+                'last_name.required' => 'Tên là bắt buộc',
+                'last_name.min' => 'Tên phải có ít nhất 6 ký tự',
+                'phone.required' => 'Số điện thoại là bắt buộc',
+                'phone.numeric' => 'Số điện thoại không hợp lệ',
+                'phone.min' => 'Số điện thoại phải 10 ký tự đúng định dạng',
                 // 'mobile.regex' => 'Số điện thoại phải đúng định dạng'
             ];
-
             $this->validate($request, $rules, $customMessages);
+            //update Image
+            if ($request->hasFile('image')) {
+                $avatar = $request->file('image');
+                if ($avatar->isValid()) {
+                    //Lấy ảnh từ extension
+                    $extension = $avatar->getClientOriginalExtension();
+                    //Xuat ra anh moi
+                    $imageName = rand(111, 99999) . '.' . $extension;
+                    $imagePath = 'admin/images/photos' . $imageName;
+                    Image::make($avatar)->save($imagePath);
+                };
+            } else if (!empty($updateDetails['current-image'])) {
+                $imageName = $updateDetails['current-image'];
+            } else {
+                $imageName = "";
+            }
             // dd($updateDetails);
-            Admin::where('id', Auth::guard('admin')->user()->id)->update(['name' => $updateDetails['name'], 'mobile' => $updateDetails['mobile']]);
-                    return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
+            Admin::where('id', Auth::guard('admin')->user()->id)->update([
+                'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
+                'phone' => $updateDetails['phone'], 'image' => $updateDetails['image']
+            ]);
+            return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
         }
         return view('admin.setting.update-details');
     }
