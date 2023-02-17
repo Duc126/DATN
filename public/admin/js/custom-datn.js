@@ -1,7 +1,12 @@
 $(document).ready(function () {
+    //call datatable
+    $("#section").DataTable();
+
+    //remove active side-bar
     $(".nav-item").removeClass("active");
     $(".nav-link").removeClass("active");
 
+    //check password
     $("#current_password").keyup(function () {
         var current_password = $("#current_password").val();
         $.ajax({
@@ -62,3 +67,56 @@ $(document).on("click", ".updateAdminStatus", function () {
         },
     });
 });
+//update status section
+$(document).on("click", ".updateSection", function () {
+    var status = $(this).children("i").attr("status");
+    var section_id = $(this).attr("section_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-section",
+        data: {
+            status: status,
+            section_id: section_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#section-" + section_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#section-" + section_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+
+$(".confirm-section").click(function(){
+    var module = $(this).attr('module');
+    var moduleid = $(this).attr('moduleid');
+    Swal.fire({
+        title: 'Bạn có chắc không?',
+        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Đã xóa!',
+            'Sản Phẩm Bạn Chọn Đã Được Xóa.',
+            'success'
+          )
+          window.location = "/admin/delete-"+module+"/"+moduleid;
+        }
+      })
+})

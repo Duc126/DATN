@@ -81,19 +81,19 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-user">
+        <a class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false" aria-controls="ui-catalogue">
             <i class="icon-grid-2 menu-icon"></i>
-            <span class="menu-title">{{ __('Quản Lý Tài Khoản User') }}</span>
+            <span class="menu-title">{{ __('Quản lý danh mục') }}</span>
             <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-user">
+        <div class="collapse" id="ui-catalogue">
             <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link"
-                        href="{{ url('admin/list-admin/admin') }}">{{ __('Tất Cả') }}</a>
+                        href="{{ url('admin/sections') }}">{{ __('Tất Cả Sản Phẩm') }}</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/list-admin/subadmin') }}">subadmin</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/categories') }}">{{ __('Thể loại') }}</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/list-admin/vendor') }}">vendor</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a>
             </ul>
         </div>
     </li>

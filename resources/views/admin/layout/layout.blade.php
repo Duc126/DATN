@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="{{ url('admin/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ url('admin/images/logol.jpeg') }}" />
+    {{-- datatable --}}
+    <link rel="stylesheet" href="{{ url('admin/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ url('admin/css/dataTables.bootstrap4.min.css') }}" />
+
 </head>
 
 <body>
@@ -63,11 +67,19 @@
     <script src="{{ url('admin/js/todolist.js')}}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
+
 <!-- Custom js fpassword-->
     <script src="{{ url('admin/js/custom-datn.js') }}"></script>
     <script src="{{ url('admin/js/dashboard.js')}}"></script>
-    <script src="j{{ url('admin/s/Chart.roundedBarCharts.js')}}"></script>
+    {{-- <script src="j{{ url('admin/s/Chart.roundedBarCharts.js')}}"></script> --}}
     <!-- End custom js for this page-->
+        <!-- End remove delete-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- custom.css-->
+        <link rel="stylesheet" href="{{ url('admin/css/custome.css') }}" />
+
+
 </body>
 
 </html>
