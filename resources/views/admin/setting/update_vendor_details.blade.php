@@ -123,8 +123,19 @@
                                                 <label for="country">{{ __('Country') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
-                                                <input type="text" id="country" class="form-control" name="country"
-                                                    placeholder="Nhập Tên" value="{{ $vendorDetail['country'] }}">
+                                                {{-- <input type="text" id="country" class="form-control" name="country"
+                                                    placeholder="Nhập Tên" value="{{ $vendorDetail['country'] }}"> --}}
+                                                <select class="form-control text-dark" id="country" name="country">
+                                                    <option value="">{{ __('Chọn Quốc Gia') }}</option>
+                                                    @foreach ($countries as $country)
+                                                        {
+                                                        <option value={{ $country['country_name'] }}
+                                                            @if ($country['country_name'] == $vendorDetail['country']) selected @endif>
+                                                            {{ $country['country_name'] }} </option>
+
+                                                        }
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="pincode">{{ __('PinCode') }}<span
@@ -236,9 +247,21 @@
                                                 <label for="shop_country">{{ __('Quốc Gia') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
-                                                <input type="text" id="shop_country" class="form-control"
+                                                {{-- <input type="text" id="shop_country" class="form-control"
                                                     name="shop_country" placeholder="Nhập Địa Chỉ"
-                                                    value="{{ $vendorDetail['shop_country'] }}">
+                                                    value="{{ $vendorDetail['shop_country'] }}"> --}}
+                                                <select class="form-control text-dark" id="shop_country"
+                                                    name="shop_country">
+                                                    <option value="">{{ __('Chọn Quốc Gia') }}</option>
+                                                    @foreach ($countries as $country)
+                                                        {
+                                                        <option value={{ $country['country_name'] }}
+                                                            @if ($country['country_name'] == $vendorDetail['shop_country']) selected @endif>
+                                                            {{ $country['country_name'] }} </option>
+
+                                                        }
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_pincode">{{ __('Mã code') }}<span
@@ -305,8 +328,9 @@
                                                 <label for="address_proof">{{ __('Địa chỉ Proof') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
-                                                <select class="form-control" value="{{ $vendorDetail['address_proof'] }}"
-                                                    name="address_proof" id="address_proof">
+                                                <select class="form-control text-dark"
+                                                    value="{{ $vendorDetail['address_proof'] }}" name="address_proof"
+                                                    id="address_proof">
                                                     <option value="Passpost"
                                                         @if ($vendorDetail['address_proof'] == 'Passpost') selected @endif>
                                                         {{ __('Passpost') }}</option>
@@ -357,79 +381,81 @@
                     </div>
                 </div>
             @elseif($slug == 'bank')
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ __('Cập nhật chi tiết ngân hàng ') }}</h4>
-                            @if (Session::has('error_message'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if (Session::has('success_message'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </div>
-                            @endif
-                            <form class="forms-sample" action="{{ url('admin/update-vendor-details/bank') }}"
-                                method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="account_holder_name">{{ __('Tên Tài Khoản') }}<span
-                                                    class="text-danger">*</span> :</label>
-                                            <input type="text" class="form-control" name="account_holder_name" id="account_holder_name"
-                                                value="{{ $vendorDetail['account_holder_name'] }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="account_number">{{ __('Số Tài Khoản') }}<span
-                                                    class="text-danger">*</span>
-                                                :</label>
-                                            <input type="text" id="account_number" class="form-control" name="account_number"
-                                                value="{{ $vendorDetail['account_number']  }}">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ __('Cập nhật chi tiết ngân hàng ') }}</h4>
+                                @if (Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if (Session::has('success_message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                <form class="forms-sample" action="{{ url('admin/update-vendor-details/bank') }}"
+                                    method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="account_holder_name">{{ __('Tên Tài Khoản') }}<span
+                                                        class="text-danger">*</span> :</label>
+                                                <input type="text" class="form-control" name="account_holder_name"
+                                                    id="account_holder_name"
+                                                    value="{{ $vendorDetail['account_holder_name'] }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="account_number">{{ __('Số Tài Khoản') }}<span
+                                                        class="text-danger">*</span>
+                                                    :</label>
+                                                <input type="text" id="account_number" class="form-control"
+                                                    name="account_number"
+                                                    value=">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="bank_name">{{ __('Tên Ngân Hàng') }}<span
-                                                    class="text-danger">*</span>
-                                                :</label>
-                                            <input type="text" id="bank_name" class="form-control" name="bank_name"
-                                                placeholder="Nhập Tên Thành Phố" value="{{ $vendorDetail['bank_name'] }}">
+                                                <div class="form-group">
+                                                    <label for="bank_name">{{ __('Tên Ngân Hàng') }}<span
+                                                            class="text-danger">*</span>
+                                                        :</label>
+                                                    <input type="text" id="bank_name" class="form-control"
+                                                        name="bank_name" placeholder="Nhập Tên Thành Phố">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
+                                                            class="text-danger">*</span>
+                                                        :</label>
+                                                    <input type="text" id="bank_ifsc_code" class="form-control"
+                                                        name="bank_ifsc_code" placeholder="Nhập Tên">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
-                                                    class="text-danger">*</span>
-                                                :</label>
-                                            <input type="text" id="bank_ifsc_code" class="form-control" name="bank_ifsc_code"
-                                                placeholder="Nhập Tên" value="{{ $vendorDetail['bank_ifsc_code'] }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit"
-                                    class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <button class="btn btn-danger"
-                                    href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
-                            </form>
+                                        <button type="submit"
+                                            class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
+                                        <button class="btn btn-danger"
+                                            href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endif
         </div>
         <!-- content-wrapper ends -->

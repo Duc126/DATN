@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminManagerController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,13 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'update-details', [AdminController::class, 'updateDetails'])->name('update-details');
         //Update Vendor Detail
         Route::match(['get', 'post'], 'update-vendor-details/{slug}', [VendorController::class, 'updateVendorsDetail']);
+        ////Manager Admin
+        Route::get('list-admin/{type?}',[AdminManagerController::class, 'admins']);
 
+        //View Vendor
+        Route::get('view-vendor/{id}', [AdminManagerController::class, 'viewVendor']);
+
+        //update Status Admin
+        Route::post('update-status-admin', [AdminManagerController::class, 'updateStatus']);
     });
 });
