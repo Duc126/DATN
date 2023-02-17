@@ -7,13 +7,14 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Expr\Print_;
+use Illuminate\Support\Facades\Session;
 use Image;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
+        Session::put('page', 'dashboard');
         return view('admin.dashboard');
     }
     public function login(Request $request)
@@ -46,6 +47,8 @@ class AdminController extends Controller
     }
     public function updatePassword(Request $request)
     {
+        Session::put('page', 'update-password');
+
         if ($request->isMethod('post')) {
             $updatePass = $request->all();
             // dd($data);
@@ -76,6 +79,8 @@ class AdminController extends Controller
 
     public function updateDetails(Request $request)
     {
+        Session::put('page', 'update-details');
+
         if ($request->isMethod('post')) {
             $updateDetails = $request->all();
             $rules = [
