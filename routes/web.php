@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminManagerController;
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -48,11 +49,16 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'update-vendor-details/{slug}', [VendorController::class, 'updateVendorsDetail']);
         ////Manager Admin
         Route::get('list-admin/{type?}',[AdminManagerController::class, 'admins']);
-
         //View Vendor
         Route::get('view-vendor/{id}', [AdminManagerController::class, 'viewVendor']);
-
         //update Status Admin
         Route::post('update-status-admin', [AdminManagerController::class, 'updateStatus']);
+        // Sections
+        Route::resource('sections', SectionController::class);
+        Route::get('delete-section/{id}', [SectionController::class, 'deleteSection']);
+        //update Status Sections
+        Route::post('update-status-section', [SectionController::class, 'updateStatusSection']);
+        //add edit sections
+        Route::match(['get', 'post'], 'add-edit-section/{id?}', [SectionController::class, 'addEditSection']);
     });
 });
