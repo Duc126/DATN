@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 class AdminManagerController extends Controller
 {
     public function admins($type=null){
-        $admin =Admin::query();
+        $admins =Admin::query();
+        // dd($admins);
         if(!empty($type)){
-            $admin = $admin->where('type', $type);
+            $admin = $admins->where('type',$type);
             $title = "Danh Sách"." ".ucfirst($type);
         }else {
-            $title="All Admins/Subadmins/Vendors";
+            $title="Tất Cả";
         }
-        $admin = $admin->get()->toArray();
+        $admin = $admins->get()->toArray();
         // dd($admin);
         return view('admin/manager/list-manager')->with(compact('admin', 'title'));
     }

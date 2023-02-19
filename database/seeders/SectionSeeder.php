@@ -16,9 +16,9 @@ class SectionSeeder extends Seeder
     public function run()
     {
         Section::insert([
-                ['name' => 'Quần Áo', 'status' => 1],
-                ['name' => 'Thiết Bị', 'status' => 1],
-                ['name' => 'Điện Tử', 'status' => 1],
+                ['name' => 'Clothing', 'status' => 1],
+                ['name' => 'Electronics', 'status' => 1],
+                ['name' => 'Appliances', 'status' => 1],
         ]);
     }
 }

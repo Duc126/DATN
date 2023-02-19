@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Expr\Print_;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class VendorController extends Controller
 {
@@ -48,7 +48,7 @@ class VendorController extends Controller
                         $extension = $avatar->getClientOriginalExtension();
                         //Xuat ra anh moi
                         $imageName = rand(111, 99999) . '.' . $extension;
-                        $imagePath = 'admin/images/photos' . $imageName;
+                        $imagePath = 'admin/images/photos/' . $imageName;
                         Image::make($avatar)->save($imagePath);
                     };
                 } else if (!empty($updateDetails['current-image'])) {
@@ -59,7 +59,7 @@ class VendorController extends Controller
                 Admin::where('id', Auth::guard('admin')->user()->id)->update([
                     'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
                     'phone' => $updateDetails['phone'],
-                    'image' => $updateDetails['image']
+                    'image' => $imageName
                 ]);
                 Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->update([
                     'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
@@ -78,7 +78,8 @@ class VendorController extends Controller
                     'shop_name' => 'required|min:2',
                     'shop_name' => 'required|min:6',
                     'shop_mobile' => 'required|numeric|min:10',
-                    'address_proof' => 'required'
+                    'address_proof' => 'required',
+                    // 'address_proof_image' =>  'required|image'
                 ];
                 $customMessages = [
                     'first_name.required' => 'Họ là bắt buộc',
@@ -89,6 +90,9 @@ class VendorController extends Controller
                     'shop_mobile.numeric' => 'Số điện thoại không hợp lệ',
                     'shop_mobile.min' => 'Số điện thoại phải 10 ký tự đúng định dạng',
                     'address_proof.required' => 'Địa Chỉ là bắt buộc',
+                    // 'address_proof_image.required' => 'Ảnh là bắt buộc',
+                    // 'address_proof_image.image' => 'Ảnh không hợp lê',
+
                     // 'mobile.regex' => 'Số điện thoại phải đúng định dạng'
                 ];
 
@@ -102,11 +106,11 @@ class VendorController extends Controller
                         $extension = $avatar->getClientOriginalExtension();
                         //Xuat ra anh moi
                         $imageName = rand(111, 99999) . '.' . $extension;
-                        $imagePath = 'admin/images/photos' . $imageName;
+                        $imagePath = 'admin/images/proofs/' . $imageName;
                         Image::make($avatar)->save($imagePath);
                     };
-                } else if (!empty($updateDetails['current-image'])) {
-                    $imageName = $updateDetails['current-image'];
+                } else if (!empty($updateDetails['current-address_proof'])) {
+                    $imageName = $updateDetails['current-address_proof'];
                 } else {
                     $imageName = "";
                 }
@@ -117,8 +121,7 @@ class VendorController extends Controller
                     'shop_mobile' => $updateDetails['shop_mobile'], 'shop_website' => $updateDetails['shop_website'],
                     'shop_email' => $updateDetails['shop_email'], 'business_license_number' => $updateDetails['business_license_number'],
                     'pan_number' => $updateDetails['pan_number'], 'gst_number' => $updateDetails['gst_number'],
-                    'address_proof' => $updateDetails['address_proof'], 'address_proof_image' => $updateDetails['address_proof_image'],
-                    // 'image' => $updateDetails['image'],
+                    'address_proof' => $updateDetails['address_proof'], 'address_proof_image' => $imageName,
                 ]);
                 return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
             }

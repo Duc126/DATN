@@ -2,7 +2,7 @@
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @if ($slug == 'personal')
                 <div class="row">
                     <div class="col-md-12 grid-margin stretch-card">
@@ -153,15 +153,28 @@
                                                     placeholder="Số Điện Thoại">
                                             </div>
                                         </div>
-
-                                        <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="image">{{ __('Số Điện Thoại') }}<span
+                                                    class="text-danger">*</span>
+                                                :</label>
+                                            <input type="file" class="form-control" id="image" name="image">
+                                            @if (!empty(Auth::guard('admin')->user()->image))
+                                                <a target="_blank"
+                                                    href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">Xem
+                                                    Avatar
+                                                </a>
+                                                <input type="hidden" name="current-image"
+                                                    value="{{ Auth::guard('admin')->user()->image }}">
+                                            @endif
+                                        </div>
+                                        {{-- <div class="col-md-12">
                                             <div class="d-flex justify-content-center mb-4">
                                                 <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                                                     class="rounded-circle" alt="example placeholder"
-                                                    style="width: 200px;" />
+                                                    style="width: 200px;" /> --}}
                                                 {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
                                         class="rounded-circle" alt="example placeholder" style="width: 200px;" /> --}}
-                                            </div>
+                                            {{-- </div>
                                             <div class="d-flex justify-content-center">
                                                 <div>
                                                     <label class="btn btn-primary btn-rounded"
@@ -170,7 +183,7 @@
                                                         id="image" name="image" />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <button type="submit"
                                         class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
@@ -272,13 +285,27 @@
                                                     value="{{ $vendorDetail['shop_pincode'] }}">
                                             </div>
                                             <div class="form-group">
+                                                <label for="address_proof_image">{{ __('Số Điện Thoại') }}<span
+                                                        class="text-danger">*</span>
+                                                    :</label>
+                                                <input type="file" class="form-control" id="address_proof_image" name="address_proof_image">
+                                                @if (!empty($vendorDetail['address_proof_image']))
+                                                    <a target="_blank"
+                                                        href="{{ url('admin/images/proofs/' . $vendorDetail['address_proof_image']) }}">Xem
+                                                        Avatar
+                                                    </a>
+                                                    <input type="hidden" name="current-address_proof"
+                                                        value="{{ $vendorDetail['address_proof_image'] }}">
+                                                @endif
+                                            </div>
+                                            {{-- <div class="form-group">
                                                 <div class="d-flex justify-content-center mb-4">
                                                     <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                                                         class="rounded-circle" alt="example placeholder"
-                                                        style="width: 200px;" />
+                                                        style="width: 200px;" /> --}}
                                                     {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
                                             class="rounded-circle" alt="example placeholder" style="width: 200px;" /> --}}
-                                                </div>
+                                                {{-- </div>
                                                 <div class="d-flex justify-content-center">
                                                     <div>
                                                         <label class="btn btn-primary btn-rounded"
@@ -287,7 +314,7 @@
                                                             id="address_proof_image" name="address_proof_image" />
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                         </div>
                                         <div class="col-md-6">
@@ -427,7 +454,7 @@
                                                     :</label>
                                                 <input type="text" id="account_number" class="form-control"
                                                     name="account_number"
-                                                    value=">
+                                                    value="{{ $vendorDetail['account_number'] }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -436,14 +463,16 @@
                                                             class="text-danger">*</span>
                                                         :</label>
                                                     <input type="text" id="bank_name" class="form-control"
-                                                        name="bank_name" placeholder="Nhập Tên Thành Phố">
+                                                        name="bank_name" placeholder="Nhập Tên Thành Phố"
+                                                         value="{{ $vendorDetail['bank_name'] }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
                                                             class="text-danger">*</span>
                                                         :</label>
                                                     <input type="text" id="bank_ifsc_code" class="form-control"
-                                                        name="bank_ifsc_code" placeholder="Nhập Tên">
+                                                        name="bank_ifsc_code" placeholder="Nhập Tên"
+                                                        value="{{ $vendorDetail['bank_ifsc_code'] }}">
                                                 </div>
                                             </div>
                                         </div>

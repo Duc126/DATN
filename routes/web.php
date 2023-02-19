@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminManagerController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
@@ -60,5 +61,14 @@ Route::prefix('admin')->group(function () {
         Route::post('update-status-section', [SectionController::class, 'updateStatusSection']);
         //add edit sections
         Route::match(['get', 'post'], 'add-edit-section/{id?}', [SectionController::class, 'addEditSection']);
+
+        //categories
+        Route::resource('categories', CategoryController::class);
+        Route::post('update-category-status', [CategoryController::class, 'updateCategoryStatus']);
+        Route::match(['get', 'post'], 'add-edit-category/{id?}', [CategoryController::class, 'addEditCategory']);
+        Route::get('append-categories',[CategoryController::class, 'appendCategories']);
+        Route::get('delete-category/{id}', [CategoryController::class, 'deleteCategory']);
+        Route::get('delete-category-image/{id}', [CategoryController::class, 'deleteCategoryImage']);
+
     });
 });

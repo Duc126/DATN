@@ -75,7 +75,7 @@
                 <li class="nav-item"><a class="nav-link"
                         href="{{ url('admin/list-admin/vendor') }}">{{ __('Nhân Viên') }}</a>
                 <li class="nav-item"><a class="nav-link"
-                        href="{{ url('admin/list-admin/all') }}">{{ __('Tất Cả') }}</a>
+                        href="{{ url('admin/list-admin') }}">{{ __('Tất Cả') }}</a>
 
             </ul>
         </div>
@@ -92,6 +92,9 @@
                         href="{{ url('admin/sections') }}">{{ __('Tất Cả Sản Phẩm') }}</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/categories') }}">{{ __('Thể loại') }}</a>
+
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Brands') }}</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a>
             </ul>
