@@ -89,12 +89,12 @@
         <div class="collapse" id="ui-catalogue">
             <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link"
-                        href="{{ url('admin/sections') }}">{{ __('Tất Cả Sản Phẩm') }}</a>
+                        href="{{ url('admin/sections') }}">{{ __('Thể Loại') }}</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/categories') }}">{{ __('Thể loại') }}</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/categories') }}">{{ __('Danh Mục') }}</a>
 
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Brands') }}</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Thương Hiệu') }}</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a>
             </ul>

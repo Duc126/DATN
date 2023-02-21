@@ -184,3 +184,103 @@ $(".confirm-category").click(function () {
         }
     });
 });
+
+//brands
+$(document).on("click", ".updateBrand", function () {
+    var status = $(this).children("i").attr("status");
+    var brand_id = $(this).attr("brand_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-brand",
+        data: {
+            status: status,
+            brand_id: brand_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#brand-" + brand_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#brand-" + brand_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+
+$(".confirm-brand").click(function () {
+    var module = $(this).attr("module");
+    var moduleid = $(this).attr("moduleid");
+    Swal.fire({
+        title: "Bạn có chắc không?",
+        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire("Đã xóa!", "Thương Hiệu Bạn Chọn Đã Được Xóa.", "success");
+            window.location = "/admin/delete-" + module + "/" + moduleid;
+        }
+    });
+});
+
+//products
+$(document).on("click", ".updateProduct", function () {
+    var status = $(this).children("i").attr("status");
+    var product_id = $(this).attr("product_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-product",
+        data: {
+            status: status,
+            product_id: product_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#product-" + product_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#product-" + product_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+
+$(".confirm-product").click(function () {
+    var module = $(this).attr("module");
+    var moduleid = $(this).attr("moduleid");
+    Swal.fire({
+        title: "Bạn có chắc không?",
+        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire("Đã xóa!", "Thương Hiệu Bạn Chọn Đã Được Xóa.", "success");
+            window.location = "/admin/delete-" + module + "/" + moduleid;
+        }
+    });
+});
