@@ -14,10 +14,9 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Sections</h4>
-                            <a style="max-width: 150px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-section') }}" class="btn btn-block btn-primary">Thêm Sản
-                                Phẩm</a>
+                            <h4 class="card-title">{{ __('Thể Loại') }}</h4>
+                            <a style="max-width: 175px; float:right;display: inline-block;"
+                                href="{{ url('admin/add-edit-section') }}" class="btn btn-block btn-primary">{{ __('Thêm Thể Loại') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -27,7 +26,7 @@
                                 </div>
                             @endif
                             <div class="table-responsive">
-                                <table id="section" class="table table-striped text-center display">
+                                <table id="section" class="table table-striped  display">
                                     <thead>
                                         <tr>
                                             <th>#</th>

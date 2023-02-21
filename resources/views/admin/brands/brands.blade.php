@@ -14,9 +14,9 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Danh Mục') }}</h4>
+                            <h4 class="card-title">{{ __('Thương Hiệu') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-category') }}" class="btn btn-block btn-primary">{{__('Thêm Danh Mục')}}</a>
+                                href="{{ url('admin/add-edit-brand') }}" class="btn btn-block btn-primary">{{ __('Thêm Thương Hiệu') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -30,49 +30,35 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên Loại') }}</th>
-                                            <th>{{ __('Nguồn Gốc') }}</th>
-                                            <th>{{ __('Thuộc nhóm') }}</th>
-                                            <th>{{ __('url') }}</th>
+                                            <th>{{ __('Tên') }}</th>
                                             <th>{{ __('Trang Thái') }}</th>
                                             <th>{{ __('Hoạt động') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
-                                            @if (isset($category['parentcategory']['category_name']) && !empty($category['parentcategory']['category_name']))
-                                                @php $parent_category = $category['parentcategory']['category_name']; @endphp
-                                            @else
-                                                @php $parent_category="Root";  @endphp
-                                            @endif
+                                        @foreach ($brands as $brandList)
                                             <tr>
-                                                <td>{{ $category['id'] }}</td>
-                                                <td>{{ $category['category_name'] }} </td>
+                                                <td>{{ $brandList['id'] }}</td>
+                                                <td>{{ $brandList['name'] }} </td>
                                                 <td>
-                                                    {{ $parent_category }}
-                                                 </td>
-                                                <td>{{ $category['section']['name'] }} </td>
-                                                <td>{{ $category['url'] }} </td>
-                                                <td>
-                                                    @if ($category['status'] == 1)
-                                                        <a class="updateCategory" id="category-{{ $category['id'] }}"
-                                                            category_id={{ $category['id'] }}
-                                                            href="javascript:void(0)">
+                                                    @if ($brandList['status'] == 1)
+                                                        <a class="updateBrand" id="brand-{{ $brandList['id'] }}"
+                                                            brand_id={{ $brandList['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-check"
                                                                 status="Active"></i></a>
                                                     @else
-                                                        <a class="updateCategory" id="category-{{ $category['id'] }}"
-                                                            category_id={{ $category['id'] }}
-                                                            href="javascript:void(0)">
+                                                        <a class="updateBrand" id="brand-{{ $brandList['id'] }}"
+                                                        brand_id={{ $brandList['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()
                                                 </td>
                                                 <th>
-                                                    <a href={{ url('admin/add-edit-category/' . $category['id']) }}>
+                                                    <a href={{ url('admin/add-edit-brand/' . $brandList['id']) }}>
                                                         <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
-                                                    <a href="javascript:void(0)" class="confirm-category" module="category"
-                                                        moduleid="{{ $category['id'] }}">
+
+                                                    <a href="javascript:void(0)" class="confirm-brand" module="brand"
+                                                        moduleid="{{ $brandList['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
                                                 </th>
                                             </tr>

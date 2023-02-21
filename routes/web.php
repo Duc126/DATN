@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminManagerController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
@@ -49,7 +51,7 @@ Route::prefix('admin')->group(function () {
         //Update Vendor Detail
         Route::match(['get', 'post'], 'update-vendor-details/{slug}', [VendorController::class, 'updateVendorsDetail']);
         ////Manager Admin
-        Route::get('list-admin/{type?}',[AdminManagerController::class, 'admins']);
+        Route::get('list-admin/{type?}', [AdminManagerController::class, 'admins']);
         //View Vendor
         Route::get('view-vendor/{id}', [AdminManagerController::class, 'viewVendor']);
         //update Status Admin
@@ -66,9 +68,24 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::post('update-category-status', [CategoryController::class, 'updateCategoryStatus']);
         Route::match(['get', 'post'], 'add-edit-category/{id?}', [CategoryController::class, 'addEditCategory']);
-        Route::get('append-categories',[CategoryController::class, 'appendCategories']);
+        Route::get('append-categories', [CategoryController::class, 'appendCategories']);
         Route::get('delete-category/{id}', [CategoryController::class, 'deleteCategory']);
         Route::get('delete-category-image/{id}', [CategoryController::class, 'deleteCategoryImage']);
 
+        // Brands
+        Route::resource('brands', BrandController::class);
+        Route::get('delete-brand/{id}', [BrandController::class, 'deleteBrand']);
+        //update Status Sections
+        Route::post('update-status-brand', [BrandController::class, 'updateStatusBrand']);
+        //add edit sections
+        Route::match(['get', 'post'], 'add-edit-brand/{id?}', [BrandController::class, 'addEditBrand']);
+
+        //products
+        Route::resource('products', ProductController::class);
+        Route::get('delete-product/{id}', [ProductController::class, 'deleteProduct']);
+        //update Status Sections
+        Route::post('update-status-product', [ProductController::class, 'updateStatusProduct']);
+        //add edit sections
+        Route::match(['get', 'post'], 'add-edit-product/{id?}', [ProductController::class, 'addEditProduct']);
     });
 });
