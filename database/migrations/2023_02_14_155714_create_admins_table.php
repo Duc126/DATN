@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('type');
             $table->integer('vendor_id');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image');

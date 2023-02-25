@@ -16,7 +16,7 @@ use Intervention\Image\Facades\Image;
 
 class VendorController extends Controller
 {
-    public function updateVendorsDetail($slug, REquest $request)
+    public function updateVendorsDetail($slug, Request $request)
     {
         if ($slug == "personal") {
             if ($request->isMethod('post')) {
