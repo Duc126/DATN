@@ -109,6 +109,13 @@
                                             placeholder="Số Điện Thoại"
                                             value="{{ $vendor['vendor_personal']['phone'] }}"readonly>
                                     </div>
+                                    @if(!empty($vendor['image']))
+                                    <div class="form-group">
+                                            <label for=""> Ảnh</label>
+                                            <br>
+                                            <img style="width:200px; height:100px;" src="{{ url('admin/images/photos/'.$vendor['image']) }}">
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -228,6 +235,13 @@
                                             value="{{ $vendor['vendor_business']['gst_number'] }}"id="gst_number"
                                             name="gst_number" placeholder="Số Điện Thoại" readonly>
                                     </div>
+                                    @if(!empty($vendor['vendor_business']['address_proof_images']))
+                                    <div class="form-group">
+                                            <label for=""> Ảnh</label>
+                                            <br>
+                                            <img style="width:200px; height:100px;" src="{{ url('admin/images/proofs/'.$vendor['vendor_business']['address_proof_images']) }}">
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

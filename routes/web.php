@@ -83,9 +83,13 @@ Route::prefix('admin')->group(function () {
         //products
         Route::resource('products', ProductController::class);
         Route::get('delete-product/{id}', [ProductController::class, 'deleteProduct']);
-        //update Status Sections
+        //update Status Product
         Route::post('update-status-product', [ProductController::class, 'updateStatusProduct']);
-        //add edit sections
+        //add edit Product
         Route::match(['get', 'post'], 'add-edit-product/{id?}', [ProductController::class, 'addEditProduct']);
+        Route::get('delete-product-image/{id}', [ProductController::class, 'deleteProductImage']);
+        Route::get('delete-product-video/{id}', [ProductController::class, 'deleteProductVideo']);
+
+
     });
 });

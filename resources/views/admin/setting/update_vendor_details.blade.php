@@ -154,7 +154,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">{{ __('Số Điện Thoại') }}<span
+                                            <label for="image">{{ __('Ảnh') }}<span
                                                     class="text-danger">*</span>
                                                 :</label>
                                             <input type="file" class="form-control" id="image" name="image">
@@ -285,7 +285,7 @@
                                                     value="{{ $vendorDetail['shop_pincode'] }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="address_proof_image">{{ __('Số Điện Thoại') }}<span
+                                                <label for="address_proof_image">{{ __('Anh') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="file" class="form-control" id="address_proof_image" name="address_proof_image">
