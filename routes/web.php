@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ProfileController;
@@ -96,7 +97,9 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'edit-attributes/{id}', [ProductAttributesController::class, 'editAttributesProduct']);
 
         //Image Product
-        Route::match(['get', 'post'], 'add-image-product/{id}',[ProductAttributesController::class,'addImageProduct']);
+        Route::match(['get', 'post'], 'add-image-product/{id}',[ProductImageController::class,'addImageProduct']);
+        Route::get('delete-image/{id}', [ProductImageController::class, 'deleteImagesProduct']);
+        Route::post('update-status-images-product', [ProductImageController::class, 'updateStatusImagesProduct']);
 
     });
 });

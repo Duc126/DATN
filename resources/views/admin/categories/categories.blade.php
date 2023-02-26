@@ -71,7 +71,7 @@
                                                 <th>
                                                     <a href={{ url('admin/add-edit-category/' . $category['id']) }}>
                                                         <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
-                                                    <a href="javascript:void(0)" class="confirm-category" module="category"
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="category"
                                                         moduleid="{{ $category['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
                                                 </th>

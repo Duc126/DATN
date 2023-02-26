@@ -57,7 +57,7 @@
                                                     <a href={{ url('admin/add-edit-brand/' . $brandList['id']) }}>
                                                         <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
 
-                                                    <a href="javascript:void(0)" class="confirm-brand" module="brand"
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="brand"
                                                         moduleid="{{ $brandList['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
                                                 </th>

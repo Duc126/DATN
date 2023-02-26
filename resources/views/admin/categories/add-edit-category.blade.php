@@ -68,7 +68,7 @@
                                                 @if(!empty($category['category_image']))
                                                 <a target="_blank" href="{{ url('front/images/category_images/'.$category['category_image']) }}">
                                                 Xem Ảnh</a>&nbsp;|&nbsp;
-                                                <a href="javascript:void(0)" class="confirm-category" module="category-image"
+                                                <a href="javascript:void(0)" class="confirmDelete" module="category-image"
                                                 moduleid="{{ $category['id'] }}">Delete Image</a>
                                                 @endif
                                         </div>
