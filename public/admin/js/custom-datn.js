@@ -1,6 +1,10 @@
 $(document).ready(function () {
     //call datatable
     $("#section").DataTable();
+    $("#products").DataTable();
+    $("#category").DataTable();
+    $("#attributes_Product").DataTable();
+    $("#brand").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");
@@ -229,7 +233,11 @@ $(".confirm-brand").click(function () {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire("Đã xóa!", "Thương Hiệu Bạn Chọn Đã Được Xóa.", "success");
+            Swal.fire(
+                "Đã xóa!",
+                "Thương Hiệu Bạn Chọn Đã Được Xóa.",
+                "success"
+            );
             window.location = "/admin/delete-" + module + "/" + moduleid;
         }
     });
@@ -279,8 +287,68 @@ $(".confirm-product").click(function () {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire("Đã xóa!", "Thương Hiệu Bạn Chọn Đã Được Xóa.", "success");
+            Swal.fire(
+                "Đã xóa!",
+                "Thương Hiệu Bạn Chọn Đã Được Xóa.",
+                "success"
+            );
             window.location = "/admin/delete-" + module + "/" + moduleid;
         }
+    });
+});
+//Products Attributes add/remove script
+$(document).ready(function () {
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $(".add_button"); //Add button selector
+    var wrapper = $(".field_wrapper"); //Input field wrapper
+    var fieldHTML =
+        '<div class="mt-2"><input type="text" name="size[]" placeholder="Kích Thước" style="width:120px;"/>&nbsp;<input type="text" name="sku[]" placeholder="Mã Sản Phẩm" style="width:120px;"/>&nbsp;<input type="text" name="price[]" placeholder="Giá" style="width:120px;"/>&nbsp;<input type="text" name="stock[]" placeholder="Số Lượng" style="width:120px;"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Xóa</a></div>'; //New input field html
+    var x = 1; //Initial field counter is 1
+
+    //Once add button is clicked
+    $(addButton).click(function () {
+        //Check maximum number of input fields
+        if (x < maxField) {
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+
+    //Once remove button is clicked
+    $(wrapper).on("click", ".remove_button", function (e) {
+        e.preventDefault();
+        $(this).parent("div").remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+
+//Update Attributes Product Status
+$(document).on("click", ".updateAtributesProduct", function () {
+    var status = $(this).children("i").attr("status");
+    var attributes_id = $(this).attr("attributes_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-attributes-product",
+        data: {
+            status: status,
+            attributes_id: attributes_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#attributes-" + attributes_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#attributes-" + attributes_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
     });
 });

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminManagerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
@@ -89,7 +90,13 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'add-edit-product/{id?}', [ProductController::class, 'addEditProduct']);
         Route::get('delete-product-image/{id}', [ProductController::class, 'deleteProductImage']);
         Route::get('delete-product-video/{id}', [ProductController::class, 'deleteProductVideo']);
+        //Attributes Product
+        Route::match(['get', 'post'], 'add-attributes-product/{id}', [ProductAttributesController::class, 'addAttributesProduct']);
+        Route::post('update-status-attributes-product', [ProductAttributesController::class, 'updateStatusAttributesProduct']);
+        Route::match(['get', 'post'], 'edit-attributes/{id}', [ProductAttributesController::class, 'editAttributesProduct']);
 
+        //Image Product
+        Route::match(['get', 'post'], 'add-image-product/{id}',[ProductAttributesController::class,'addImageProduct']);
 
     });
 });

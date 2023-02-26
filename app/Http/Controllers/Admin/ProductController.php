@@ -48,14 +48,14 @@ class ProductController extends Controller
     public function addEditProduct(Request $request, $id = null)
     {
         if ($id == "") {
-            $title = "Thêm Product";
+            $title = "Thêm Sản Phẩm";
             $product = new Product;
-            $message = "Thêm product thành công";
+            $message = "Thêm sản phẩm thành công";
         } else {
-            $title = "Chỉnh sửa product";
+            $title = "Chỉnh sửa sản phẩm";
             $product = Product::find($id);
             // dd($product);
-            $message = "Cập nhật product thành công";
+            $message = "Cập nhật sản phẩm thành công";
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
