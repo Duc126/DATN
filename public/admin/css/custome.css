@@ -1,6 +1,15 @@
 div#section_filter {
     margin-top: 15px;
 }
+div#category_filter {
+    margin-top: 15px;
+}div#brand_filter {
+    margin-top: 15px;
+}div#banner_filter {
+    margin-top: 15px;
+}div#products_filter {
+    margin-top: 15px;
+}
 .swal2-icon.swal2-warning.swal2-icon-show {
     margin-top: 20px;
 }

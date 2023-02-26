@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminManagerController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductAttributesController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -100,6 +102,17 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'add-image-product/{id}',[ProductImageController::class,'addImageProduct']);
         Route::get('delete-image/{id}', [ProductImageController::class, 'deleteImagesProduct']);
         Route::post('update-status-images-product', [ProductImageController::class, 'updateStatusImagesProduct']);
+        //Banner
+        Route::resource('banner', BannerController::class);
+        Route::post('update-status-banner', [BannerController::class, 'updateStatusBanner']);
+        Route::get('delete-banner/{id}', [BannerController::class, 'deleteBanner']);
+        Route::match(['get', 'post'], 'add-edit-banner/{id?}', [BannerController::class, 'addEditBanner']);
+
+
 
     });
+});
+
+Route::namespace('App\Http\Controllers\Front')->group(function(){
+    Route::get('/',[IndexController::class, 'index']);
 });

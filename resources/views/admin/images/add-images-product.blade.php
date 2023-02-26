@@ -132,7 +132,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <button type="submit" class="btn btn-primary">{{ __('Cập Nhật') }}</button>
                                 </form>
                             </div>
                         </div>

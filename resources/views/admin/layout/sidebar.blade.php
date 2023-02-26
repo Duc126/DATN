@@ -100,6 +100,46 @@
             </ul>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-user">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Quản lý Người Dùng') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-user">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link"
+                        href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/subscribers') }}">{{ __('subscribers') }}</a>
+
+                </li>
+                 {{--<li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Thương Hiệu') }}</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a> --}}
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-banner" aria-expanded="false" aria-controls="ui-banner">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Quản lý Banners') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-banner">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link"
+                        href="{{ url('admin/banner') }}">{{ __('Slider Banner') }}</a>
+                </li>
+                {{-- <li class="nav-item"><a class="nav-link" href="{{ url('admin/categories') }}">{{ __('Danh Mục') }}</a>
+
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Thương Hiệu') }}</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a> --}}
+            </ul>
+        </div>
+    </li>
     @endif
     {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
