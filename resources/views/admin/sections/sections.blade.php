@@ -57,7 +57,7 @@
                                                     <a href={{ url('admin/add-edit-section/' . $sectionList['id']) }}>
                                                         <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
 
-                                                    <a href="javascript:void(0)" class="confirm-section" module="section"
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="section"
                                                         moduleid="{{ $sectionList['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
                                                 </th>

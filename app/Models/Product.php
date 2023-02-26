@@ -17,4 +17,7 @@ class Product extends Model
     public function attributes(){
         return $this->hasMany(ProductsAttributes::class);
     }
+    public function images(){
+        return $this->hasMany(ProductsImage::class);
+    }
 }

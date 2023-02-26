@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#products").DataTable();
     $("#category").DataTable();
     $("#attributes_Product").DataTable();
+    $("#image_Product").DataTable();
     $("#brand").DataTable();
 
     //remove active side-bar
@@ -131,8 +132,8 @@ $(document).on("click", ".updateCategory", function () {
         },
     });
 });
-
-$(".confirm-section").click(function () {
+//Confirm Delete
+$(".confirmDelete").click(function () {
     var module = $(this).attr("module");
     var moduleid = $(this).attr("moduleid");
     Swal.fire({
@@ -169,26 +170,6 @@ $("#section_id").change(function () {
     });
 });
 
-//confirm delete category
-$(".confirm-category").click(function () {
-    var module = $(this).attr("module");
-    var moduleid = $(this).attr("moduleid");
-    Swal.fire({
-        title: "Bạn có chắc không?",
-        text: "Bạn sẽ không thể hoàn nguyên điều này!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire("Đã xóa!", "Sản Phẩm Bạn Chọn Đã Được Xóa.", "success");
-            window.location = "/admin/delete-" + module + "/" + moduleid;
-        }
-    });
-});
-
 //brands
 $(document).on("click", ".updateBrand", function () {
     var status = $(this).children("i").attr("status");
@@ -217,29 +198,6 @@ $(document).on("click", ".updateBrand", function () {
         error: function () {
             alert("Error");
         },
-    });
-});
-
-$(".confirm-brand").click(function () {
-    var module = $(this).attr("module");
-    var moduleid = $(this).attr("moduleid");
-    Swal.fire({
-        title: "Bạn có chắc không?",
-        text: "Bạn sẽ không thể hoàn nguyên điều này!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                "Đã xóa!",
-                "Thương Hiệu Bạn Chọn Đã Được Xóa.",
-                "success"
-            );
-            window.location = "/admin/delete-" + module + "/" + moduleid;
-        }
     });
 });
 
@@ -274,28 +232,6 @@ $(document).on("click", ".updateProduct", function () {
     });
 });
 
-$(".confirm-product").click(function () {
-    var module = $(this).attr("module");
-    var moduleid = $(this).attr("moduleid");
-    Swal.fire({
-        title: "Bạn có chắc không?",
-        text: "Bạn sẽ không thể hoàn nguyên điều này!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                "Đã xóa!",
-                "Thương Hiệu Bạn Chọn Đã Được Xóa.",
-                "success"
-            );
-            window.location = "/admin/delete-" + module + "/" + moduleid;
-        }
-    });
-});
 //Products Attributes add/remove script
 $(document).ready(function () {
     var maxField = 10; //Input fields increment limitation
@@ -323,7 +259,7 @@ $(document).ready(function () {
 });
 
 //Update Attributes Product Status
-$(document).on("click", ".updateAtributesProduct", function () {
+$(document).on("click", ".updateAttributesProduct", function () {
     var status = $(this).children("i").attr("status");
     var attributes_id = $(this).attr("attributes_id");
     $.ajax({
@@ -343,6 +279,37 @@ $(document).on("click", ".updateAtributesProduct", function () {
                 );
             } else if (resp["status"] == 1) {
                 $("#attributes-" + attributes_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+
+//update Image Product status
+$(document).on("click", ".updateImageProduct", function () {
+    var status = $(this).children("i").attr("status");
+    var image_id = $(this).attr("image_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-images-product",
+        data: {
+            status: status,
+            image_id: image_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#image-" + image_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#image-" + image_id).html(
                     "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
                 );
             }

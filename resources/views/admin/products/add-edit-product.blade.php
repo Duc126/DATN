@@ -125,7 +125,7 @@
                                                 <a target="_blank"
                                                     href="{{ url('front/images/product_images/medium/' . $product['product_image']) }}">
                                                     Xem Ảnh</a>&nbsp;|&nbsp;
-                                                <a href="javascript:void(0)" class="confirm-category"
+                                                <a href="javascript:void(0)" class="confirmDelete"
                                                     module="product-image" moduleid="{{ $product['id'] }}">Delete
                                                     Image</a>
                                             @endif
@@ -143,7 +143,7 @@
                                                 <a target="_blank"
                                                     href="{{ url('front/videos/product_videos/' . $product['product_video']) }}">
                                                     Xem Video</a>&nbsp;|&nbsp;
-                                                <a href="javascript:void(0)" class="confirm-category"
+                                                <a href="javascript:void(0)" class="confirmDelete"
                                                     module="product-video" moduleid="{{ $product['id'] }}">Xóa
                                                     Video</a>
                                             @endif

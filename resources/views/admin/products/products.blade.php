@@ -97,7 +97,7 @@
                                                         <i style="font-size: 25px" class="mdi mdi-library-plus"
                                                             data-toggle="tooltip" data-placement="top"
                                                             title="Thêm Ảnh Sản Phẩm"></i></a>
-                                                    <a href="javascript:void(0)" class="confirm-product" module="product"
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="product"
                                                         moduleid="{{ $product['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi-delete-sweep"
                                                             data-toggle="tooltip" data-placement="top"

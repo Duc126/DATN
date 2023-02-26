@@ -6,7 +6,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Thuộc Tính Sản Phẩm') }}</h4>
+                            <h4 class="card-title">{{ __('Ảnh Sản Phẩm') }}</h4>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
@@ -31,8 +31,8 @@
                                 </div>
                             @endif
                             <form class="forms-sample"
-                                @if (empty($productAttributes['id'])) action="{{ url('admin/add-attributes-product') }}"
-                            @else action="{{ url('admin/add-attributes-product/' . $productAttributes['id']) }}" @endif
+                                @if (empty($imageProduct['id'])) action="{{ url('admin/add-image-product') }}"
+                            @else action="{{ url('admin/add-image-product/' . $imageProduct['id']) }}" @endif
                                 method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -40,27 +40,27 @@
                                         <div class="form-group">
                                             <label for="product_name">{{ __('Tên Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            &nbsp; {{ $productAttributes['product_name'] }}
+                                            &nbsp; {{ $imageProduct['product_name'] }}
                                         </div>
                                         <div class="form-group">
                                             <label for="product_code">{{ __('Mã Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            &nbsp; {{ $productAttributes['product_code'] }}
+                                            &nbsp; {{ $imageProduct['product_code'] }}
                                         </div>
                                         <div class="form-group">
                                             <label for="product_color">{{ __('Màu Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            &nbsp; {{ $productAttributes['product_color'] }}
+                                            &nbsp; {{ $imageProduct['product_color'] }}
                                         </div>
                                         <div class="form-group">
                                             <label for="product_price">{{ __('Giá Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            &nbsp; {{ $productAttributes['product_price'] }}
+                                            &nbsp; {{ $imageProduct['product_price'] }}
                                         </div>
                                         <div class="form-group">
-                                            @if (!empty($productAttributes['product_image']))
+                                            @if (!empty($imageProduct['product_image']))
                                                 <img style="width: 120px;"
-                                                    src="{{ url('front/images/product_images/small/' . $productAttributes['product_image']) }}">
+                                                    src="{{ url('front/images/product_images/small/' . $imageProduct['product_image']) }}">
                                             @else
                                                 <img style="width: 120px;"
                                                     src="{{ url('front/images/product_images/small/no-image.png') }}">
@@ -69,16 +69,9 @@
                                         <div class="form-group">
                                             <div class="field_wrapper">
                                                 <div>
-                                                    <input type="text" name="size[]" placeholder="Kích Thước" required
-                                                        style="width:120px;">
-                                                    <input type="text" name="sku[]" placeholder="Mã Sản Phẩm" required
-                                                        style="width:120px;">
-                                                    <input type="text" name="price[]" placeholder="Giá" required
-                                                        style="width:120px;">
-                                                    <input type="text" name="stock[]" placeholder="Số Lượng" required
-                                                        style="width:120px;">
-                                                    <a href="javascript:void(0);" class="add_button"
-                                                        title="Add field">{{ __('Thêm') }}</a>
+                                                    <input type="file" name="images[]" multiple="" id="images">
+                                                    {{-- <a href="javascript:void(0);" class="add_button"
+                                                        title="Add field">{{ __('Thêm') }}</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -92,56 +85,48 @@
                             <br>
                             <br>
                             <h5><strong>
-                                    {{ _('Bảng thuộc tính') }}</strong></h5>
+                                    {{ _('Bảng Hình Ảnh') }}</strong></h5>
                             <div class="table-responsive">
-                                <form method="post"
-                                    action={{ url('admin/edit-attributes/' . $productAttributes['id']) }}>
+                                <form method="post" action={{ url('admin/edit-attributes/' . $imageProduct['id']) }}>
                                     @csrf
-                                    <table id="attributes_Product" class="table table-striped display">
+                                    <table id="image_Product" class="table table-striped display">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ __('Kích Thước') }}</th>
-                                                <th>{{ __('Mã Sản Phẩm') }}</th>
-                                                <th>{{ __('Giá') }}</th>
-                                                <th>{{ __('Số Lựơng') }}</th>
+                                                <th>{{ __('Ảnh') }}</th>
                                                 <th>{{ __('Trạng Thái') }}</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($productAttributes['attributes'] as $attributes)
-                                            <input class="d-none" type="text" name="attributeId[]" value="{{ $attributes['id'] }}">
+                                            @foreach ($imageProduct['images'] as $image)
                                                 <tr>
-                                                    <td>{{ $attributes['id'] }}</td>
-                                                    <td>{{ $attributes['size'] }} </td>
-                                                    <td>{{ $attributes['sku'] }} </td>
+                                                    <td>{{ $image['id'] }}</td>
                                                     <td>
-                                                        <input type="number" name="price[]"
-                                                            value="{{ $attributes['price'] }}" require class="w-50">
+                                                        <img
+                                                            src="{{ url('front/images/product_images/small/' . $image['image']) }}">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="stock[]"
-                                                            value="{{ $attributes['stock'] }}" require class="w-50">
-                                                    </td>
-                                                    <td>
-                                                        @if ($attributes['status'] == 1)
-                                                            <a class="updateAttributesProduct"
-                                                                id="attributes-{{ $attributes['id'] }}"
-                                                                attributes_id={{ $attributes['id'] }}
-                                                                href="javascript:void(0)">
+                                                        @if ($image['status'] == 1)
+                                                            <a class="updateImageProduct" id="image-{{ $image['id'] }}"
+                                                                image_id={{ $image['id'] }} href="javascript:void(0)">
                                                                 <i style="font-size: 25px"
                                                                     class="mdi mdi mdi-bookmark-check"
                                                                     status="Active"></i></a>
                                                         @else
-                                                            <a class="updateAttributesProduct"
-                                                                id="attributes-{{ $attributes['id'] }}"
-                                                                attributes_id={{ $attributes['id'] }}
-                                                                href="javascript:void(0)">
+                                                            <a class="updateImageProduct" id="image-{{ $image['id'] }}"
+                                                                image_id={{ $image['id'] }} href="javascript:void(0)">
                                                                 <i style="font-size: 25px"
                                                                     class="mdi mdi mdi-bookmark-outline"
                                                                     status="Inactive"></i></a>
-                                                        @endif()
+                                                        @endif
+
+                                                        &nbsp;
+                                                        <a href="javascript:void(0)" class="confirmDelete" module="image"
+                                                        moduleid="{{ $image['id'] }}">
+                                                        <i style="font-size: 25px" class="mdi mdi-delete-sweep"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Xóa Sản Phẩm"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
