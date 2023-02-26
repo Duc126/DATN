@@ -27,7 +27,7 @@
                                 </div>
                             @endif
                             <div class="table-responsive">
-                                <table id="section" class="table table-striped display">
+                                <table id="products" class="table table-striped display">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -50,10 +50,12 @@
                                                 <td>{{ $product['product_code'] }} </td>
                                                 <td>{{ $product['product_color'] }} </td>
                                                 <td>
-                                                    @if(!empty($product['product_image']))
-                                                    <img src="{{ asset('front/images/product_images/small/'. $product['product_image']) }}">
+                                                    @if (!empty($product['product_image']))
+                                                        <img
+                                                            src="{{ asset('front/images/product_images/small/' . $product['product_image']) }}">
                                                     @else
-                                                    <img src="{{ asset('front/images/product_images/small/no-image.png') }}">
+                                                        <img
+                                                            src="{{ asset('front/images/product_images/small/no-image.png') }}">
                                                     @endif
                                                 </td>
                                                 <td>{{ $product['category']['category_name'] }} </td>
@@ -62,7 +64,7 @@
                                                     @if ($product['admin_type'] == 'vendor')
                                                         <a target="_blank"
                                                             href="{{ url('admin/view-vendor/' . $product['admin_id']) }}">
-                                                            {{ ($product['admin_type']) }}
+                                                            {{ $product['admin_type'] }}
                                                         </a>
                                                     @else
                                                         {{ ucfirst($product['admin_type']) }}
@@ -84,10 +86,22 @@
                                                 </td>
                                                 <th>
                                                     <a href={{ url('admin/add-edit-product/' . $product['id']) }}>
-                                                        <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
+                                                        <i style="font-size: 25px"
+                                                            class="mdi mdi-pencil-box"data-toggle="tooltip"
+                                                            data-placement="top" title="Chỉnh Sửa Sản Phẩm"></i></a>
+                                                    <a href={{ url('admin/add-attributes-product/' . $product['id']) }}>
+                                                        <i style="font-size: 25px" class="mdi mdi-plus-box"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Thêm Thuộc Tính Sản Phẩm"></i></a>
+                                                    <a href={{ url('admin/add-image-product/' . $product['id']) }}>
+                                                        <i style="font-size: 25px" class="mdi mdi-library-plus"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Thêm Ảnh Sản Phẩm"></i></a>
                                                     <a href="javascript:void(0)" class="confirm-product" module="product"
                                                         moduleid="{{ $product['id'] }}">
-                                                        <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
+                                                        <i style="font-size: 25px" class="mdi mdi-delete-sweep"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Xóa Sản Phẩm"></i></a>
                                                 </th>
                                             </tr>
                                         @endforeach
@@ -102,5 +116,4 @@
     </div>
 @endsection
 @section('script')
-    {{-- <script src="{{ url('admin/js/section.js') }}"></script> --}}
 @endsection

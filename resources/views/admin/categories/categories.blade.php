@@ -26,7 +26,7 @@
                                 </div>
                             @endif
                             <div class="table-responsive">
-                                <table id="section" class="table table-striped display">
+                                <table id="category" class="table table-striped display">
                                     <thead>
                                         <tr>
                                             <th>#</th>
