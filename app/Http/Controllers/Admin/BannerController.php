@@ -68,6 +68,13 @@ class BannerController extends Controller
             //     'alt.required' => 'alt là bắt buộc',
             // ];
             // $this->validate($request, $rules, $customMessages);
+            if($data['type']=="Slider"){
+                $width = "1920";
+                $height = "720";
+            } else if($data['type'] == "Fix"){
+                $width = "1920";
+                $height = "450";
+            }
             if ($request->hasFile('image')) {
                 $image_banner = $request->file('image');
                 if ($image_banner->isValid()) {
@@ -76,10 +83,11 @@ class BannerController extends Controller
                     //Xuat ra anh moi
                     $imageName = rand(111, 99999) . '.' . $extension;
                     $imagePath = 'front/images/banner_images/' . $imageName;
-                    Image::make($image_banner)->resize(1920, 720)->save($imagePath);
+                    Image::make($image_banner)->resize($width, $height)->save($imagePath);
                     $banner->image = $imageName;
                 };
             }
+            $banner->type = $data['type'];
             $banner->link = $data['link'];
             $banner->title = $data['title'];
             $banner->alt = $data['alt'];

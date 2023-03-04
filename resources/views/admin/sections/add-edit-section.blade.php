@@ -39,7 +39,7 @@
                                     <div class="form-group">
                                         <label for="section_name">{{ __('Tên Sản Phẩm ') }}<span
                                                 class="text-danger">*</span> :</label>
-                
+
                                             <input type="text" class="form-control" id="section_name" placeholder="Nhập Tên Sản Phẩm" name="section_name"
                                                 @if(!empty($section['name'])) value="{{ $section['name']}}" @else value="{{ old('section_name') }}" @endif>
                                     </div>
@@ -47,7 +47,8 @@
                             </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <button class="btn btn-danger" href="{{  url('admin/sections')}}">{{ __('Quay Lại') }}</button>
+                        <a class="btn btn-danger " href="{{  url('admin/sections')}}">{{ __('Quay lai ') }}</a>
+
                             </form>
                         </div>
                     </div>
