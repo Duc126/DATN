@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id');
             $table->string('size');
-            $table->float('price');
+            $table->float('price', 12, 2);
             $table->integer('stock');
             $table->string('sku');
             $table->tinyInteger('status');

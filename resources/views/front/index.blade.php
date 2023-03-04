@@ -1,3 +1,4 @@
+ <?php use App\Models\Product; ?>
  @extends('front.layout.layout')
  @section('content')
      <!-- Main-Slider -->
@@ -62,12 +63,20 @@
                          <div class="tab-pane active show fade" id="men-latest-products">
                              <div class="slider-fouc">
                                  <div class="products-slider owl-carousel" data-item="4">
+                                    @foreach ( $newProducts as $product )
+                                        <?php $product_image_path='front/images/product_images/small/'. $product['product_image'];?>
                                      <div class="item">
                                          <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
+                                             <a class="item-img-wrapper-link" href="{{ url('product/'.$product['id']) }}">
+                                                @if(!empty($product['product_image']) && file_exists($product_image_path))
                                                  <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
+                                                     src="{{ asset($product_image_path) }}"
                                                      alt="Product">
+                                                    @else
+                                                     <img class="img-fluid"
+                                                     src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                     alt="Product">
+                                                     @endif
                                              </a>
                                              <div class="item-action-behaviors">
                                                  <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
@@ -82,11 +91,11 @@
                                              <div class="what-product-is">
                                                  <ul class="bread-crumb">
                                                      <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
+                                                         <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_code'] }}</a>
                                                      </li>
                                                  </ul>
                                                  <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
+                                                     <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_name'] }}</a>
                                                  </h6>
                                                  <div class="item-stars">
                                                      <div class='star' title="0 out of 5 - based on 0 Reviews">
@@ -95,20 +104,31 @@
                                                      <span>(0)</span>
                                                  </div>
                                              </div>
+                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
+                                             @if ($getDiscountPrice > 0)
                                              <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
+                                                <div class="item-new-price">
+                                             {{ $getDiscountPrice }}đ
+                                                </div>
+                                                <div class="item-old-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
+                                            </div>
+                                             @else
+                                             <div class="price-template">
+                                                <div class="item-new-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
+                                            </div>
+                                            @endif
+
                                          </div>
                                          <div class="tag new">
                                              <span>NEW</span>
                                          </div>
                                      </div>
-                                     <div class="item">
+                                     @endforeach
+                                     {{-- <div class="item">
                                          <div class="image-container">
                                              <a class="item-img-wrapper-link" href="single-product.html">
                                                  <img class="img-fluid"
@@ -419,7 +439,7 @@
                                          <div class="tag discount">
                                              <span>-15%</span>
                                          </div>
-                                     </div>
+                                     </div> --}}
                                  </div>
                              </div>
                          </div>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('section_id');
             $table->string('category_name');
             $table->string('category_image');
-            $table->float('category_discount');
+            $table->float('category_discount',12, 2);
             $table->text('description')->nullable();
             $table->string('url');
             $table->string('meta_title')->nullable();

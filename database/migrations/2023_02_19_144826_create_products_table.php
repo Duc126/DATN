@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('product_name')->nullable();
             $table->string('product_code')->nullable();
             $table->string('product_color')->nullable();
-            $table->string('product_price')->nullable();
-            $table->string('product_discount')->nullable();
-            $table->string('product_weight')->nullable();
+            $table->float('product_price',12, 2)->nullable();
+            $table->float('product_discount',12, 2)->nullable();
+            $table->integer('product_weight')->nullable();
             $table->string('product_image')->nullable();
             $table->string('product_video')->nullable();
             $table->string('description')->nullable();
