@@ -41,19 +41,19 @@
      <section class="section-maker">
          <div class="container">
              <div class="sec-maker-header text-center">
-                 <h3 class="sec-maker-h3">TOP COLLECTION</h3>
+                 <h3 class="sec-maker-h3">{{ __('Top Hàng Đầu') }}</h3>
                  <ul class="nav tab-nav-style-1-a justify-content-center">
                      <li class="nav-item">
-                         <a class="nav-link active" data-toggle="tab" href="#men-latest-products">New Arrivals</a>
+                         <a class="nav-link active" data-toggle="tab" href="#men-latest-products">{{ __('Sản Phẩm Mới') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">Best Sellers</a>
+                         <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">{{ __('Sản Phẩm Bán Chạy Nhất') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#discounted-products">Discounted Products</a>
+                         <a class="nav-link" data-toggle="tab" href="#discounted-products">{{ __('Sản Phẩm Giảm Giá') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#men-featured-products">Featured Products</a>
+                         <a class="nav-link" data-toggle="tab" href="#men-featured-products">{{ __('Sản Phẩm Nổi Bật') }}</a>
                      </li>
                  </ul>
              </div>
@@ -128,1054 +128,221 @@
                                          </div>
                                      </div>
                                      @endforeach
-                                     {{-- <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag new">
-                                             <span>NEW</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag sale">
-                                             <span>SALE</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag discount">
-                                             <span>-15%</span>
-                                         </div>
-                                     </div> --}}
                                  </div>
                              </div>
                          </div>
                          <div class="tab-pane show fade" id="men-best-selling-products">
                              <div class="slider-fouc">
                                  <div class="products-slider owl-carousel" data-item="4">
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
+                                    @foreach ( $bestSellers as $productBest )
+                                    <?php $product_image_path='front/images/product_images/small/'. $productBest['product_image'];?>
+                                 <div class="item">
+                                     <div class="image-container">
+                                         <a class="item-img-wrapper-link" href="{{ url('product/'.$productBest['id']) }}">
+                                            @if(!empty($productBest['product_image']) && file_exists($product_image_path))
+                                             <img class="img-fluid"
+                                                 src="{{ asset($product_image_path) }}"
+                                                 alt="Product">
+                                                @else
                                                  <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
+                                                 src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                 alt="Product">
+                                                 @endif
+                                         </a>
+                                         <div class="item-action-behaviors">
+                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
+                                                 Look
                                              </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag new">
-                                             <span>NEW</span>
+                                             <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                             <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
+                                             <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
                                          </div>
                                      </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                     <div class="item-content">
+                                         <div class="what-product-is">
+                                             <ul class="bread-crumb">
+                                                 <li>
+                                                     <a href="{{ url('product/'.$productBest['id']) }}">{{ $productBest['product_code'] }}</a>
+                                                 </li>
+                                             </ul>
+                                             <h6 class="item-title">
+                                                 <a href="{{ url('product/'.$productBest['id']) }}">{{ $productBest['product_name'] }}</a>
+                                             </h6>
+                                             <div class="item-stars">
+                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                     <span style='width:0'></span>
+                                                 </div>
+                                                 <span>(0)</span>
                                              </div>
                                          </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
+                                         <?php $getDiscountPrice = Product::getDiscountPrice($productBest['id']); ?>
+                                         @if ($getDiscountPrice > 0)
+                                         <div class="price-template">
+                                            <div class="item-new-price">
+                                         {{ $getDiscountPrice }}đ
+                                            </div>
+                                            <div class="item-old-price">
+                                                {{ $productBest['product_price'] }}đ
+                                            </div>
+                                        </div>
+                                         @else
+                                         <div class="price-template">
+                                            <div class="item-new-price">
+                                                {{ $productBest['product_price'] }}đ
+                                            </div>
+                                        </div>
+                                        @endif
+
                                      </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
+                                     <div class="tag new">
+                                         <span>NEW</span>
                                      </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag new">
-                                             <span>NEW</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag sale">
-                                             <span>SALE</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag discount">
-                                             <span>-15%</span>
-                                         </div>
-                                     </div>
+                                 </div>
+                                 @endforeach
                                  </div>
                              </div>
                          </div>
                          <div class="tab-pane fade" id="discounted-products">
-                             <div class="slider-fouc">
-                                 <div class="products-slider owl-carousel" data-item="4">
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag sale">
-                                             <span>SALE</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag discount">
-                                             <span>-15%</span>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
+                            <div class="slider-fouc">
+                                <div class="products-slider owl-carousel" data-item="4">
+                                   @foreach ( $discountedProducts as $productDiscount )
+                                   <?php $product_image_path='front/images/product_images/small/'. $productDiscount['product_image'];?>
+                                <div class="item">
+                                    <div class="image-container">
+                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$productDiscount['id']) }}">
+                                           @if(!empty($productDiscount['product_image']) && file_exists($product_image_path))
+                                            <img class="img-fluid"
+                                                src="{{ asset($product_image_path) }}"
+                                                alt="Product">
+                                               @else
+                                                <img class="img-fluid"
+                                                src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                alt="Product">
+                                                @endif
+                                        </a>
+                                        <div class="item-action-behaviors">
+                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
+                                                Look
+                                            </a>
+                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
+                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="what-product-is">
+                                            <ul class="bread-crumb">
+                                                <li>
+                                                    <a href="{{ url('product/'.$productDiscount['id']) }}">{{ $productDiscount['product_code'] }}</a>
+                                                </li>
+                                            </ul>
+                                            <h6 class="item-title">
+                                                <a href="{{ url('product/'.$productDiscount['id']) }}">{{ $productDiscount['product_name'] }}</a>
+                                            </h6>
+                                            <div class="item-stars">
+                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                    <span style='width:0'></span>
+                                                </div>
+                                                <span>(0)</span>
+                                            </div>
+                                        </div>
+                                        <?php $getDiscountPrice = Product::getDiscountPrice($productDiscount['id']); ?>
+                                        @if ($getDiscountPrice > 0)
+                                        <div class="price-template">
+                                           <div class="item-new-price">
+                                        {{ $getDiscountPrice }}đ
+                                           </div>
+                                           <div class="item-old-price">
+                                               {{ $productDiscount['product_price'] }}đ
+                                           </div>
+                                       </div>
+                                        @else
+                                        <div class="price-template">
+                                           <div class="item-new-price">
+                                               {{ $productDiscount['product_price'] }}đ
+                                           </div>
+                                       </div>
+                                       @endif
+
+                                    </div>
+                                    <div class="tag new">
+                                        <span>NEW</span>
+                                    </div>
+                                </div>
+                                @endforeach
+                                </div>
+                            </div>
                          </div>
                          <div class="tab-pane fade" id="men-featured-products">
-                             <div class="slider-fouc">
-                                 <div class="products-slider owl-carousel" data-item="4">
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag sale">
-                                             <span>SALE</span>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="single-product.html">
-                                                 <img class="img-fluid"
-                                                     src="{{ asset('front/images/product/product@3x.jpg') }}"
-                                                     alt="Product">
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
-                                                 </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="shop-v1-root-category.html">Product Code</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="single-product.html">Product Name
-                                                     </a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                                         <span style='width:67px'></span>
-                                                     </div>
-                                                     <span>(23)</span>
-                                                 </div>
-                                             </div>
-                                             <div class="price-template">
-                                                 <div class="item-new-price">
-                                                     $100.00
-                                                 </div>
-                                                 <div class="item-old-price">
-                                                     $120.00
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="tag discount">
-                                             <span>-15%</span>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
+                            <div class="slider-fouc">
+                                <div class="products-slider owl-carousel" data-item="4">
+                                   @foreach ( $featuredProduct as $productFeature )
+                                   <?php $product_image_path='front/images/product_images/small/'. $productFeature['product_image'];?>
+                                <div class="item">
+                                    <div class="image-container">
+                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$productFeature['id']) }}">
+                                           @if(!empty($productFeature['product_image']) && file_exists($product_image_path))
+                                            <img class="img-fluid"
+                                                src="{{ asset($product_image_path) }}"
+                                                alt="Product">
+                                               @else
+                                                <img class="img-fluid"
+                                                src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                alt="Product">
+                                                @endif
+                                        </a>
+                                        <div class="item-action-behaviors">
+                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
+                                                Look
+                                            </a>
+                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
+                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="what-product-is">
+                                            <ul class="bread-crumb">
+                                                <li>
+                                                    <a href="{{ url('product/'.$productFeature['id']) }}">{{ $productFeature['product_code'] }}</a>
+                                                </li>
+                                            </ul>
+                                            <h6 class="item-title">
+                                                <a href="{{ url('product/'.$productFeature['id']) }}">{{ $productFeature['product_name'] }}</a>
+                                            </h6>
+                                            <div class="item-stars">
+                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                    <span style='width:0'></span>
+                                                </div>
+                                                <span>(0)</span>
+                                            </div>
+                                        </div>
+                                        <?php $getDiscountPrice = Product::getDiscountPrice($productFeature['id']); ?>
+                                        @if ($getDiscountPrice > 0)
+                                        <div class="price-template">
+                                           <div class="item-new-price">
+                                        {{ $getDiscountPrice }}đ
+                                           </div>
+                                           <div class="item-old-price">
+                                               {{ $productFeature['product_price'] }}đ
+                                           </div>
+                                       </div>
+                                        @else
+                                        <div class="price-template">
+                                           <div class="item-new-price">
+                                               {{ $productFeature['product_price'] }}đ
+                                           </div>
+                                       </div>
+                                       @endif
+
+                                    </div>
+                                    <div class="tag new">
+                                        <span>NEW</span>
+                                    </div>
+                                </div>
+                                @endforeach
+                                </div>
+                            </div>
                          </div>
                      </div>
                  </div>

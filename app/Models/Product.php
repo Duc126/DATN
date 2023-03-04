@@ -29,7 +29,7 @@ class Product extends Model
         if($proDetails['product_discount'] > 0){
             $discounted_price = $proDetails['product_price'] - ($proDetails['product_price'] *  $proDetails['product_discount']/100);
         } else if($catDetails['category_discount'] > 0){
-            $discounted_price = $catDetails['product_price'] - ($catDetails['product_price'] *  $catDetails['category_discount']/100);
+            $discounted_price = $proDetails['product_price'] - ($proDetails['product_price'] *  $catDetails['category_discount']/100);
 
         }else{
             $discounted_price = 0;
