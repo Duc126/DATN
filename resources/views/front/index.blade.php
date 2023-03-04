@@ -44,16 +44,20 @@
                  <h3 class="sec-maker-h3">{{ __('Top Hàng Đầu') }}</h3>
                  <ul class="nav tab-nav-style-1-a justify-content-center">
                      <li class="nav-item">
-                         <a class="nav-link active" data-toggle="tab" href="#men-latest-products">{{ __('Sản Phẩm Mới') }}</a>
+                         <a class="nav-link active" data-toggle="tab"
+                             href="#men-latest-products">{{ __('Sản Phẩm Mới') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">{{ __('Sản Phẩm Bán Chạy Nhất') }}</a>
+                         <a class="nav-link" data-toggle="tab"
+                             href="#men-best-selling-products">{{ __('Sản Phẩm Bán Chạy Nhất') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#discounted-products">{{ __('Sản Phẩm Giảm Giá') }}</a>
+                         <a class="nav-link" data-toggle="tab"
+                             href="#discounted-products">{{ __('Sản Phẩm Giảm Giá') }}</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" data-toggle="tab" href="#men-featured-products">{{ __('Sản Phẩm Nổi Bật') }}</a>
+                         <a class="nav-link" data-toggle="tab"
+                             href="#men-featured-products">{{ __('Sản Phẩm Nổi Bật') }}</a>
                      </li>
                  </ul>
              </div>
@@ -63,70 +67,73 @@
                          <div class="tab-pane active show fade" id="men-latest-products">
                              <div class="slider-fouc">
                                  <div class="products-slider owl-carousel" data-item="4">
-                                    @foreach ( $newProducts as $product )
-                                        <?php $product_image_path='front/images/product_images/small/'. $product['product_image'];?>
-                                     <div class="item">
-                                         <div class="image-container">
-                                             <a class="item-img-wrapper-link" href="{{ url('product/'.$product['id']) }}">
-                                                @if(!empty($product['product_image']) && file_exists($product_image_path))
-                                                 <img class="img-fluid"
-                                                     src="{{ asset($product_image_path) }}"
-                                                     alt="Product">
-                                                    @else
-                                                     <img class="img-fluid"
-                                                     src="{{ asset('front/images/product_images/small/no-image.png') }}"
-                                                     alt="Product">
+                                     @foreach ($newProducts as $product)
+                                         <?php $product_image_path = 'front/images/product_images/small/' . $product['product_image']; ?>
+                                         <div class="item">
+                                             <div class="image-container">
+                                                 <a class="item-img-wrapper-link"
+                                                     href="{{ url('product/' . $product['id']) }}">
+                                                     @if (!empty($product['product_image']) && file_exists($product_image_path))
+                                                         <img class="img-fluid" src="{{ asset($product_image_path) }}"
+                                                             alt="Product">
+                                                     @else
+                                                         <img class="img-fluid"
+                                                             src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                             alt="Product">
                                                      @endif
-                                             </a>
-                                             <div class="item-action-behaviors">
-                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                     Look
                                                  </a>
-                                                 <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                 <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                 <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                             </div>
-                                         </div>
-                                         <div class="item-content">
-                                             <div class="what-product-is">
-                                                 <ul class="bread-crumb">
-                                                     <li>
-                                                         <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_code'] }}</a>
-                                                     </li>
-                                                 </ul>
-                                                 <h6 class="item-title">
-                                                     <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_name'] }}</a>
-                                                 </h6>
-                                                 <div class="item-stars">
-                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                         <span style='width:0'></span>
-                                                     </div>
-                                                     <span>(0)</span>
+                                                 <div class="item-action-behaviors">
+                                                     <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
+                                                         Look
+                                                     </a>
+                                                     <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                                     <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                         Wishlist</a>
+                                                     <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
                                                  </div>
                                              </div>
-                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
-                                             @if ($getDiscountPrice > 0)
-                                             <div class="price-template">
-                                                <div class="item-new-price">
-                                             {{ $getDiscountPrice }}đ
-                                                </div>
-                                                <div class="item-old-price">
-                                                    {{ $product['product_price'] }}đ
-                                                </div>
-                                            </div>
-                                             @else
-                                             <div class="price-template">
-                                                <div class="item-new-price">
-                                                    {{ $product['product_price'] }}đ
-                                                </div>
-                                            </div>
-                                            @endif
+                                             <div class="item-content">
+                                                 <div class="what-product-is">
+                                                     <ul class="bread-crumb">
+                                                         <li>
+                                                             <a
+                                                                 href="{{ url('product/' . $product['id']) }}">{{ $product['product_code'] }}</a>
+                                                         </li>
+                                                     </ul>
+                                                     <h6 class="item-title">
+                                                         <a
+                                                             href="{{ url('product/' . $product['id']) }}">{{ $product['product_name'] }}</a>
+                                                     </h6>
+                                                     <div class="item-stars">
+                                                         <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                             <span style='width:0'></span>
+                                                         </div>
+                                                         <span>(0)</span>
+                                                     </div>
+                                                 </div>
+                                                 <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
+                                                 @if ($getDiscountPrice > 0)
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $getDiscountPrice }}đ
+                                                         </div>
+                                                         <div class="item-old-price">
+                                                             {{ $product['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @else
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $product['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @endif
 
+                                             </div>
+                                             <div class="tag new">
+                                                 <span>NEW</span>
+                                             </div>
                                          </div>
-                                         <div class="tag new">
-                                             <span>NEW</span>
-                                         </div>
-                                     </div>
                                      @endforeach
                                  </div>
                              </div>
@@ -134,215 +141,227 @@
                          <div class="tab-pane show fade" id="men-best-selling-products">
                              <div class="slider-fouc">
                                  <div class="products-slider owl-carousel" data-item="4">
-                                    @foreach ( $bestSellers as $productBest )
-                                    <?php $product_image_path='front/images/product_images/small/'. $productBest['product_image'];?>
-                                 <div class="item">
-                                     <div class="image-container">
-                                         <a class="item-img-wrapper-link" href="{{ url('product/'.$productBest['id']) }}">
-                                            @if(!empty($productBest['product_image']) && file_exists($product_image_path))
-                                             <img class="img-fluid"
-                                                 src="{{ asset($product_image_path) }}"
-                                                 alt="Product">
-                                                @else
-                                                 <img class="img-fluid"
-                                                 src="{{ asset('front/images/product_images/small/no-image.png') }}"
-                                                 alt="Product">
-                                                 @endif
-                                         </a>
-                                         <div class="item-action-behaviors">
-                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                 Look
-                                             </a>
-                                             <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                             <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                             <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                         </div>
-                                     </div>
-                                     <div class="item-content">
-                                         <div class="what-product-is">
-                                             <ul class="bread-crumb">
-                                                 <li>
-                                                     <a href="{{ url('product/'.$productBest['id']) }}">{{ $productBest['product_code'] }}</a>
-                                                 </li>
-                                             </ul>
-                                             <h6 class="item-title">
-                                                 <a href="{{ url('product/'.$productBest['id']) }}">{{ $productBest['product_name'] }}</a>
-                                             </h6>
-                                             <div class="item-stars">
-                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                     <span style='width:0'></span>
+                                     @foreach ($bestSellers as $productBest)
+                                         <?php $product_image_path = 'front/images/product_images/small/' . $productBest['product_image']; ?>
+                                         <div class="item">
+                                             <div class="image-container">
+                                                 <a class="item-img-wrapper-link"
+                                                     href="{{ url('product/' . $productBest['id']) }}">
+                                                     @if (!empty($productBest['product_image']) && file_exists($product_image_path))
+                                                         <img class="img-fluid" src="{{ asset($product_image_path) }}"
+                                                             alt="Product">
+                                                     @else
+                                                         <img class="img-fluid"
+                                                             src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                             alt="Product">
+                                                     @endif
+                                                 </a>
+                                                 <div class="item-action-behaviors">
+                                                     <a class="item-quick-look" data-toggle="modal"
+                                                         href="#quick-view">Quick
+                                                         Look
+                                                     </a>
+                                                     <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                                     <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                         Wishlist</a>
+                                                     <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
                                                  </div>
-                                                 <span>(0)</span>
+                                             </div>
+                                             <div class="item-content">
+                                                 <div class="what-product-is">
+                                                     <ul class="bread-crumb">
+                                                         <li>
+                                                             <a
+                                                                 href="{{ url('product/' . $productBest['id']) }}">{{ $productBest['product_code'] }}</a>
+                                                         </li>
+                                                     </ul>
+                                                     <h6 class="item-title">
+                                                         <a
+                                                             href="{{ url('product/' . $productBest['id']) }}">{{ $productBest['product_name'] }}</a>
+                                                     </h6>
+                                                     <div class="item-stars">
+                                                         <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                             <span style='width:0'></span>
+                                                         </div>
+                                                         <span>(0)</span>
+                                                     </div>
+                                                 </div>
+                                                 <?php $getDiscountPrice = Product::getDiscountPrice($productBest['id']); ?>
+                                                 @if ($getDiscountPrice > 0)
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $getDiscountPrice }}đ
+                                                         </div>
+                                                         <div class="item-old-price">
+                                                             {{ $productBest['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @else
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $productBest['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @endif
+
+                                             </div>
+                                             <div class="tag new">
+                                                 <span>NEW</span>
                                              </div>
                                          </div>
-                                         <?php $getDiscountPrice = Product::getDiscountPrice($productBest['id']); ?>
-                                         @if ($getDiscountPrice > 0)
-                                         <div class="price-template">
-                                            <div class="item-new-price">
-                                         {{ $getDiscountPrice }}đ
-                                            </div>
-                                            <div class="item-old-price">
-                                                {{ $productBest['product_price'] }}đ
-                                            </div>
-                                        </div>
-                                         @else
-                                         <div class="price-template">
-                                            <div class="item-new-price">
-                                                {{ $productBest['product_price'] }}đ
-                                            </div>
-                                        </div>
-                                        @endif
-
-                                     </div>
-                                     <div class="tag new">
-                                         <span>NEW</span>
-                                     </div>
-                                 </div>
-                                 @endforeach
+                                     @endforeach
                                  </div>
                              </div>
                          </div>
                          <div class="tab-pane fade" id="discounted-products">
-                            <div class="slider-fouc">
-                                <div class="products-slider owl-carousel" data-item="4">
-                                   @foreach ( $discountedProducts as $productDiscount )
-                                   <?php $product_image_path='front/images/product_images/small/'. $productDiscount['product_image'];?>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$productDiscount['id']) }}">
-                                           @if(!empty($productDiscount['product_image']) && file_exists($product_image_path))
-                                            <img class="img-fluid"
-                                                src="{{ asset($product_image_path) }}"
-                                                alt="Product">
-                                               @else
-                                                <img class="img-fluid"
-                                                src="{{ asset('front/images/product_images/small/no-image.png') }}"
-                                                alt="Product">
-                                                @endif
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                Look
-                                            </a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li>
-                                                    <a href="{{ url('product/'.$productDiscount['id']) }}">{{ $productDiscount['product_code'] }}</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="{{ url('product/'.$productDiscount['id']) }}">{{ $productDiscount['product_name'] }}</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <?php $getDiscountPrice = Product::getDiscountPrice($productDiscount['id']); ?>
-                                        @if ($getDiscountPrice > 0)
-                                        <div class="price-template">
-                                           <div class="item-new-price">
-                                        {{ $getDiscountPrice }}đ
-                                           </div>
-                                           <div class="item-old-price">
-                                               {{ $productDiscount['product_price'] }}đ
-                                           </div>
-                                       </div>
-                                        @else
-                                        <div class="price-template">
-                                           <div class="item-new-price">
-                                               {{ $productDiscount['product_price'] }}đ
-                                           </div>
-                                       </div>
-                                       @endif
+                             <div class="slider-fouc">
+                                 <div class="products-slider owl-carousel" data-item="4">
+                                     @foreach ($discountedProducts as $productDiscount)
+                                         <?php $product_image_path = 'front/images/product_images/small/' . $productDiscount['product_image']; ?>
+                                         <div class="item">
+                                             <div class="image-container">
+                                                 <a class="item-img-wrapper-link"
+                                                     href="{{ url('product/' . $productDiscount['id']) }}">
+                                                     @if (!empty($productDiscount['product_image']) && file_exists($product_image_path))
+                                                         <img class="img-fluid" src="{{ asset($product_image_path) }}"
+                                                             alt="Product">
+                                                     @else
+                                                         <img class="img-fluid"
+                                                             src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                             alt="Product">
+                                                     @endif
+                                                 </a>
+                                                 <div class="item-action-behaviors">
+                                                     <a class="item-quick-look" data-toggle="modal"
+                                                         href="#quick-view">Quick
+                                                         Look
+                                                     </a>
+                                                     <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                                     <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                         Wishlist</a>
+                                                     <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                                 </div>
+                                             </div>
+                                             <div class="item-content">
+                                                 <div class="what-product-is">
+                                                     <ul class="bread-crumb">
+                                                         <li>
+                                                             <a
+                                                                 href="{{ url('product/' . $productDiscount['id']) }}">{{ $productDiscount['product_code'] }}</a>
+                                                         </li>
+                                                     </ul>
+                                                     <h6 class="item-title">
+                                                         <a
+                                                             href="{{ url('product/' . $productDiscount['id']) }}">{{ $productDiscount['product_name'] }}</a>
+                                                     </h6>
+                                                     <div class="item-stars">
+                                                         <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                             <span style='width:0'></span>
+                                                         </div>
+                                                         <span>(0)</span>
+                                                     </div>
+                                                 </div>
+                                                 <?php $getDiscountPrice = Product::getDiscountPrice($productDiscount['id']); ?>
+                                                 @if ($getDiscountPrice > 0)
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $getDiscountPrice }}đ
+                                                         </div>
+                                                         <div class="item-old-price">
+                                                             {{ $productDiscount['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @else
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $productDiscount['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @endif
 
-                                    </div>
-                                    <div class="tag new">
-                                        <span>NEW</span>
-                                    </div>
-                                </div>
-                                @endforeach
-                                </div>
-                            </div>
+                                             </div>
+                                             <div class="tag new">
+                                                 <span>NEW</span>
+                                             </div>
+                                         </div>
+                                     @endforeach
+                                 </div>
+                             </div>
                          </div>
                          <div class="tab-pane fade" id="men-featured-products">
-                            <div class="slider-fouc">
-                                <div class="products-slider owl-carousel" data-item="4">
-                                   @foreach ( $featuredProduct as $productFeature )
-                                   <?php $product_image_path='front/images/product_images/small/'. $productFeature['product_image'];?>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$productFeature['id']) }}">
-                                           @if(!empty($productFeature['product_image']) && file_exists($product_image_path))
-                                            <img class="img-fluid"
-                                                src="{{ asset($product_image_path) }}"
-                                                alt="Product">
-                                               @else
-                                                <img class="img-fluid"
-                                                src="{{ asset('front/images/product_images/small/no-image.png') }}"
-                                                alt="Product">
-                                                @endif
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                Look
-                                            </a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li>
-                                                    <a href="{{ url('product/'.$productFeature['id']) }}">{{ $productFeature['product_code'] }}</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="{{ url('product/'.$productFeature['id']) }}">{{ $productFeature['product_name'] }}</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <?php $getDiscountPrice = Product::getDiscountPrice($productFeature['id']); ?>
-                                        @if ($getDiscountPrice > 0)
-                                        <div class="price-template">
-                                           <div class="item-new-price">
-                                        {{ $getDiscountPrice }}đ
-                                           </div>
-                                           <div class="item-old-price">
-                                               {{ $productFeature['product_price'] }}đ
-                                           </div>
-                                       </div>
-                                        @else
-                                        <div class="price-template">
-                                           <div class="item-new-price">
-                                               {{ $productFeature['product_price'] }}đ
-                                           </div>
-                                       </div>
-                                       @endif
+                             <div class="slider-fouc">
+                                 <div class="products-slider owl-carousel" data-item="4">
+                                     @foreach ($featuredProduct as $productFeature)
+                                         <?php $product_image_path = 'front/images/product_images/small/' . $productFeature['product_image']; ?>
+                                         <div class="item">
+                                             <div class="image-container">
+                                                 <a class="item-img-wrapper-link"
+                                                     href="{{ url('product/' . $productFeature['id']) }}">
+                                                     @if (!empty($productFeature['product_image']) && file_exists($product_image_path))
+                                                         <img class="img-fluid" src="{{ asset($product_image_path) }}"
+                                                             alt="Product">
+                                                     @else
+                                                         <img class="img-fluid"
+                                                             src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                             alt="Product">
+                                                     @endif
+                                                 </a>
+                                                 <div class="item-action-behaviors">
+                                                     <a class="item-quick-look" data-toggle="modal"
+                                                         href="#quick-view">Quick
+                                                         Look
+                                                     </a>
+                                                     <a class="item-mail" href="javascript:void(0)">Mail</a>
+                                                     <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                         Wishlist</a>
+                                                     <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                                 </div>
+                                             </div>
+                                             <div class="item-content">
+                                                 <div class="what-product-is">
+                                                     <ul class="bread-crumb">
+                                                         <li>
+                                                             <a
+                                                                 href="{{ url('product/' . $productFeature['id']) }}">{{ $productFeature['product_code'] }}</a>
+                                                         </li>
+                                                     </ul>
+                                                     <h6 class="item-title">
+                                                         <a
+                                                             href="{{ url('product/' . $productFeature['id']) }}">{{ $productFeature['product_name'] }}</a>
+                                                     </h6>
+                                                     <div class="item-stars">
+                                                         <div class='star' title="0 out of 5 - based on 0 Reviews">
+                                                             <span style='width:0'></span>
+                                                         </div>
+                                                         <span>(0)</span>
+                                                     </div>
+                                                 </div>
+                                                 <?php $getDiscountPrice = Product::getDiscountPrice($productFeature['id']); ?>
+                                                 @if ($getDiscountPrice > 0)
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $getDiscountPrice }}đ
+                                                         </div>
+                                                         <div class="item-old-price">
+                                                             {{ $productFeature['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @else
+                                                     <div class="price-template">
+                                                         <div class="item-new-price">
+                                                             {{ $productFeature['product_price'] }}đ
+                                                         </div>
+                                                     </div>
+                                                 @endif
 
-                                    </div>
-                                    <div class="tag new">
-                                        <span>NEW</span>
-                                    </div>
-                                </div>
-                                @endforeach
-                                </div>
-                            </div>
+                                             </div>
+                                             <div class="tag new">
+                                                 <span>NEW</span>
+                                             </div>
+                                         </div>
+                                     @endforeach
+                                 </div>
+                             </div>
                          </div>
                      </div>
                  </div>
@@ -352,20 +371,21 @@
      <!-- Top Collection /- -->
      <!-- Banner-Layer -->
      @if (isset($fixBanners[0]['image']))
-     <!-- Banner-Layer -->
-     <div class="banner-layer">
-         <div class="container">
-             <div class="image-banner">
-                 <a target="_blank" rel="nofollow" href="{{ url($fixBanners[0]['link']) }}"
-                     class="mx-auto banner-hover effect-dark-opacity">
-                     <img class="img-fluid" src="{{ asset('front/images/banner_images/' . $fixBanners[0]['image']) }}"
-                         alt="{{ $fixBanners[0]['alt'] }}" title="{{ $fixBanners[0]['title'] }}">
-                 </a>
+         <!-- Banner-Layer -->
+         <div class="banner-layer">
+             <div class="container">
+                 <div class="image-banner">
+                     <a target="_blank" rel="nofollow" href="{{ url($fixBanners[0]['link']) }}"
+                         class="mx-auto banner-hover effect-dark-opacity">
+                         <img class="img-fluid"
+                             src="{{ asset('front/images/banner_images/' . $fixBanners[0]['image']) }}"
+                             alt="{{ $fixBanners[0]['alt'] }}" title="{{ $fixBanners[0]['title'] }}">
+                     </a>
+                 </div>
              </div>
          </div>
-     </div>
-     <!-- Banner-Layer /- -->
- @endif
+         <!-- Banner-Layer /- -->
+     @endif
      <!-- Banner-Layer /- -->
      <!-- Site-Priorities -->
      <section class="app-priority">

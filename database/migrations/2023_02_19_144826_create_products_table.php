@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('product_weight')->nullable();
             $table->string('product_image')->nullable();
             $table->string('product_video')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();

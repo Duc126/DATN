@@ -82,7 +82,9 @@
                                         <div class="form-group">
                                             <label for="description">{{ __('Mô Tả Danh Mục') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                                            <textarea name="description" id="description" class="form-control" rows="3">
+                                                {{ $category['description'] }}
+                                            </textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="url">{{ __('URL') }}<span class="text-danger">*</span>
