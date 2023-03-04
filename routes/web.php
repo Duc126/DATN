@@ -11,8 +11,10 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,4 +117,9 @@ Route::prefix('admin')->group(function () {
 
 Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/',[IndexController::class, 'index']);
+    $catUrls = Category::select('url')->where('status', 1)->get()->pluck('url')->toArray();
+    // dd($catUrls);die;
+    foreach($catUrls as $key => $url){
+        Route::get('/'.$url, [ProductsViewController::class, 'listingIndex']);
+    }
 });
