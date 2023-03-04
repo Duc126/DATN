@@ -31,6 +31,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>{{ __('Ảnh') }}</th>
+                                            <th>{{ __('Type ') }}</th>
                                             <th>{{ __('Link') }}</th>
                                             <th>{{ __('Tiêu Đề ') }}</th>
                                             <th>{{ __('Trang Thái') }}</th>
@@ -44,6 +45,7 @@
                                                 <td>
                                                     <img src="{{ asset('front/images/banner_images/'.$banner['image']) }}">
                                                 </td>
+                                                <td>{{ $banner['type'] }} </td>
                                                 <td>{{ $banner['link'] }} </td>
                                                 <td>{{ $banner['title'] }} </td>
                                                 <td>

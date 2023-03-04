@@ -89,8 +89,8 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <button class="btn btn-danger"
-                                    href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                <a class="btn btn-danger" href="{{ route('Ad-dashboard') }}">{{ __('Quay lai ') }}</a>
+
                             </form>
                         </div>
                     </div>

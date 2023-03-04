@@ -113,15 +113,13 @@
                                                     placeholder="Nhập Tên Thành Phố" value="{{ $vendorDetail['city'] }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="state">{{ __('State') }}<span
-                                                        class="text-danger">*</span>
+                                                <label for="state">{{ __('State') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="state" class="form-control" name="state"
                                                     placeholder="Nhập Tên" value="{{ $vendorDetail['state'] }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="country">{{ __('Country') }}<span
-                                                        class="text-danger">*</span>
+                                                <label for="country">{{ __('Country') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 {{-- <input type="text" id="country" class="form-control" name="country"
                                                     placeholder="Nhập Tên" value="{{ $vendorDetail['country'] }}"> --}}
@@ -138,8 +136,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="pincode">{{ __('PinCode') }}<span
-                                                        class="text-danger">*</span>
+                                                <label for="pincode">{{ __('PinCode') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="pincode" class="form-control" name="pincode"
                                                     placeholder="Nhập Tên" value="{{ $vendorDetail['pincode'] }}">
@@ -154,8 +151,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">{{ __('Ảnh') }}<span
-                                                    class="text-danger">*</span>
+                                            <label for="image">{{ __('Ảnh') }}<span class="text-danger">*</span>
                                                 :</label>
                                             <input type="file" class="form-control" id="image" name="image">
                                             @if (!empty(Auth::guard('admin')->user()->image))
@@ -172,9 +168,9 @@
                                                 <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                                                     class="rounded-circle" alt="example placeholder"
                                                     style="width: 200px;" /> --}}
-                                                {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
+                                        {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
                                         class="rounded-circle" alt="example placeholder" style="width: 200px;" /> --}}
-                                            {{-- </div>
+                                        {{-- </div>
                                             <div class="d-flex justify-content-center">
                                                 <div>
                                                     <label class="btn btn-primary btn-rounded"
@@ -187,8 +183,8 @@
                                     </div>
                                     <button type="submit"
                                         class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <button class="btn btn-danger"
-                                        href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                        <a class="btn btn-danger" href="{{ route('Ad-dashboard') }}">{{ __('Quay lai ') }}</a>
+
                                 </form>
                             </div>
                         </div>
@@ -288,7 +284,8 @@
                                                 <label for="address_proof_image">{{ __('Anh') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
-                                                <input type="file" class="form-control" id="address_proof_image" name="address_proof_image">
+                                                <input type="file" class="form-control" id="address_proof_image"
+                                                    name="address_proof_image">
                                                 @if (!empty($vendorDetail['address_proof_image']))
                                                     <a target="_blank"
                                                         href="{{ url('admin/images/proofs/' . $vendorDetail['address_proof_image']) }}">Xem
@@ -303,9 +300,9 @@
                                                     <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                                                         class="rounded-circle" alt="example placeholder"
                                                         style="width: 200px;" /> --}}
-                                                    {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
+                                            {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
                                             class="rounded-circle" alt="example placeholder" style="width: 200px;" /> --}}
-                                                {{-- </div>
+                                            {{-- </div>
                                                 <div class="d-flex justify-content-center">
                                                     <div>
                                                         <label class="btn btn-primary btn-rounded"
@@ -400,8 +397,8 @@
                                     </div>
                                     <button type="submit"
                                         class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <button class="btn btn-danger"
-                                        href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                        <a class="btn btn-danger" href="{{ route('Ad-dashboard') }}">{{ __('Quay lai ') }}</a>
+
                                 </form>
                             </div>
                         </div>
@@ -453,33 +450,34 @@
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="account_number" class="form-control"
-                                                    name="account_number"
-                                                    value="{{ $vendorDetail['account_number'] }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="bank_name">{{ __('Tên Ngân Hàng') }}<span
-                                                            class="text-danger">*</span>
-                                                        :</label>
-                                                    <input type="text" id="bank_name" class="form-control"
-                                                        name="bank_name" placeholder="Nhập Tên Thành Phố"
-                                                         value="{{ $vendorDetail['bank_name'] }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
-                                                            class="text-danger">*</span>
-                                                        :</label>
-                                                    <input type="text" id="bank_ifsc_code" class="form-control"
-                                                        name="bank_ifsc_code" placeholder="Nhập Tên"
-                                                        value="{{ $vendorDetail['bank_ifsc_code'] }}">
-                                                </div>
+                                                    name="account_number" value="{{ $vendorDetail['account_number'] }}">
                                             </div>
                                         </div>
-                                        <button type="submit"
-                                            class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                        <button class="btn btn-danger"
-                                            href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="bank_name">{{ __('Tên Ngân Hàng') }}<span
+                                                        class="text-danger">*</span>
+                                                    :</label>
+                                                <input type="text" id="bank_name" class="form-control"
+                                                    name="bank_name" placeholder="Nhập Tên Thành Phố"
+                                                    value="{{ $vendorDetail['bank_name'] }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
+                                                        class="text-danger">*</span>
+                                                    :</label>
+                                                <input type="text" id="bank_ifsc_code" class="form-control"
+                                                    name="bank_ifsc_code" placeholder="Nhập Tên"
+                                                    value="{{ $vendorDetail['bank_ifsc_code'] }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit"
+                                        class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
+
+                                    <a class="btn btn-danger"
+                                        href="{{ route('Ad-dashboard') }}">{{ __('Quay lai ') }}</a>
+
                                 </form>
                             </div>
                         </div>

@@ -38,6 +38,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="link"> type</label>
+                                            <select class="form-control" id="type" name="type" required>
+                                                <option value="">Chon</option>
+                                                <option @if (!empty($banner['type']) && $banner['type'] == "Slider")
+                                                selected="" @endif value="Slider">Slider</option>
+                                                <option @if (!empty($banner['type']) && $banner['type'] == "Fix")
+                                                selected="" @endif value="Fix">Fix</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="image">{{ __('Danh Mục Hình Ảnh') }}<span
                                                     class="text-danger">*</span>
                                                 :</label>
@@ -77,8 +88,8 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <button class="btn btn-danger"
-                                    href="{{ url('admin/sections') }}">{{ __('Quay Lại') }}</button>
+                                    <a class="btn btn-danger" href="{{  url('admin/brands')  }}">{{ __('Quay lai ') }}</a>
+
                             </form>
                         </div>
                     </div>
