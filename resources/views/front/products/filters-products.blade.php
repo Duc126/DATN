@@ -1,3 +1,7 @@
+<?php use App\Models\ProductsFilter;
+$productFilters = ProductsFilter::productFilters();
+// dd($productFilters);
+?>
 <div class="col-lg-3 col-md-3 col-sm-12">
     <!-- Fetch-Categories-from-Root-Category  -->
     <div class="fetch-categories">
@@ -166,6 +170,29 @@
         </form>
     </div>
     <!-- Filter-Brand /- -->
+    <!-- Filter -->
+    @foreach ($productFilters as $filter)
+        <?php $filterAvailable = ProductsFilter::filterAvailable($filter['id'], $categoryDetails['categoryDetails']['id']);
+        ?>
+        @if ($filterAvailable == 'Yes')
+        @if(count($filter['filter_value'])>0)
+            <div class="facet-filter-associates">
+                <h3 class="title-name">{{ $filter['filter_name'] }}</h3>
+                <form class="facet-form" action="#" method="post">
+                    <div class="associate-wrapper">
+                        @foreach ($filter['filter_value'] as $value)
+                            <input type="checkbox" class="check-box" id="{{ $value['filter_value'] }}">
+                            <label class="label-text" for="{{ $value['filter_value'] }}">{{ ucwords($value['filter_value']) }}
+                                {{-- <span class="total-fetch-items">(0)</span> --}}
+                            </label>
+                        @endforeach
+                    </div>
+                </form>
+            </div>
+        @endif
+        @endif
+    @endforeach
+    <!-- Filter /- -->
     <!-- Filter-Price -->
     <div class="facet-filter-by-price">
         <h3 class="title-name">Price</h3>
@@ -180,7 +207,8 @@
             <div class="price-filter"></div>
             <!-- Range-Slider /- -->
             <!-- Range-Manipulator -->
-            <div class="price-slider-range" data-min="0" data-max="5000" data-default-low="0" data-default-high="3000" data-currency="$"></div>
+            <div class="price-slider-range" data-min="0" data-max="5000" data-default-low="0"
+                data-default-high="3000" data-currency="$"></div>
             <!-- Range-Manipulator /- -->
             <button type="submit" class="button button-primary">Filter</button>
         </form>

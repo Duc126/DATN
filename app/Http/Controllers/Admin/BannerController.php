@@ -16,7 +16,7 @@ class BannerController extends Controller
         return view('admin/banners/banners')->with(compact('banners'));
     }
     public function updateStatusBanner(Request $request)
-    { {
+    {
             if ($request->ajax()) {
                 $data = $request->all();
                 if ($data['status'] == "Active") {
@@ -28,7 +28,7 @@ class BannerController extends Controller
 
                 return response()->json(['status' => $status, 'banner_id' => $data['banner_id']]);
             }
-        }
+
     }
     public function deleteBanner($id)
     {

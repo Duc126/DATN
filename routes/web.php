@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminManagerController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
@@ -109,6 +110,15 @@ Route::prefix('admin')->group(function () {
         Route::post('update-status-banner', [BannerController::class, 'updateStatusBanner']);
         Route::get('delete-banner/{id}', [BannerController::class, 'deleteBanner']);
         Route::match(['get', 'post'], 'add-edit-banner/{id?}', [BannerController::class, 'addEditBanner']);
+        //Filters
+
+        Route::resource('filters', FilterController::class);
+        Route::get('filters-value', [FilterController::class, 'filterValue']);
+        Route::post('update-status-filter', [FilterController::class, 'updateStatusFilter']);
+        Route::post('update-status-filterValue', [FilterController::class, 'updateStatusFilterValue']);
+        Route::match(['get', 'post'], 'add-edit-filter/{id?}', [FilterController::class, 'addEditFilter']);
+        Route::match(['get', 'post'], 'add-edit-filter-value/{id?}', [FilterController::class, 'addEditFilterValue']);
+
 
 
 
@@ -120,6 +130,6 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     $catUrls = Category::select('url')->where('status', 1)->get()->pluck('url')->toArray();
     // dd($catUrls);die;
     foreach($catUrls as $key => $url){
-        Route::get('/'.$url, [ProductsViewController::class, 'listingIndex']);
+        Route::match(['get','post'],'/'.$url, [ProductsViewController::class, 'listingIndex']);
     }
 });

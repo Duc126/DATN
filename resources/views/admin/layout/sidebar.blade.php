@@ -97,6 +97,9 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Thương Hiệu') }}</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a>
+                    <li class="nav-item"><a class="nav-link"
+                        href="{{ url('admin/filters') }}">{{ __('Bộ Lọc') }}</a>
+                </li>
             </ul>
         </div>
     </li>

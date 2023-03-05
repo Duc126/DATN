@@ -69,7 +69,7 @@
     <!-- Custom js for this page-->
 
 <!-- Custom js fpassword-->
-    <script src="{{ url('admin/js/custom-datn.js') }}"></script>
+    <script src="{{ url('admin/js/custome-BE-admin.js') }}"></script>
     <script src="{{ url('admin/js/dashboard.js')}}"></script>
     {{-- <script src="j{{ url('admin/s/Chart.roundedBarCharts.js')}}"></script> --}}
     <!-- End custom js for this page-->
