@@ -7,6 +7,8 @@ $(document).ready(function () {
     $("#image_Product").DataTable();
     $("#brand").DataTable();
     $("#banners").DataTable();
+    $("#filters").DataTable();
+
 
 
     //remove active side-bar
@@ -342,6 +344,64 @@ $(document).on("click", ".updateBanner", function () {
                 );
             } else if (resp["status"] == 1) {
                 $("#banner-" + banner_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+$(document).on("click", ".updateFilters", function () {
+    var status = $(this).children("i").attr("status");
+    var filter_id = $(this).attr("filter_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-filter",
+        data: {
+            status: status,
+            filter_id: filter_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#filter-" + filter_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#filter-" + filter_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+$(document).on("click", ".updateFiltersValue", function () {
+    var status = $(this).children("i").attr("status");
+    var filterValue_id = $(this).attr("filterValue_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-filterValue",
+        data: {
+            status: status,
+            filterValue_id: filterValue_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#filterValue-" + filterValue_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#filterValue-" + filterValue_id).html(
                     "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
                 );
             }

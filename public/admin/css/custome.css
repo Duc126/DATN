@@ -17,6 +17,10 @@ div#banner_filter {
 div#products_filter {
     margin-top: 15px;
 }
+div#filters_wrapper {
+    margin-top: 15px;
+}
+
 
 .swal2-icon.swal2-warning.swal2-icon-show {
     margin-top: 20px;
