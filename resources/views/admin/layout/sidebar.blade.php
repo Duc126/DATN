@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a
             {{-- @if (Session::get('page') == 'dashboard') style="background: #4B49AC !important; color: #fff !important;" @endif --}}
-                class="nav-link" href="{{ url('admin/dashboard') }}">
+            class="nav-link menu-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('admin/dashboard') }}">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">{{ __('Trang Chủ') }}</span>
             </a>

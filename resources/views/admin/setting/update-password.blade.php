@@ -56,7 +56,7 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <button class="btn btn-light" href="{{ route('Ad-dashboard') }}">{{ __('Quay Lại') }}</button>
+                                    {{-- <a class="btn btn-danger" href="{{  url('admin/brands')  }}">{{ __('Quay lai ') }}</a> --}}
                                 </form>
                         </div>
                     </div>
