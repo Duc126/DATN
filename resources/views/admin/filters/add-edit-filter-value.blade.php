@@ -40,13 +40,12 @@
                                         <div class="form-group">
                                             <label for="filter_id">{{ __('Chọn Danh Mục ') }}</label>
                                             <select name="filter_id" id="filter_id" class="form-control"
-                                                style="color: #000;" >
+                                                style="color: #000;">
                                                 <option value="">{{ __('Chọn Danh Mục ') }}</option>
                                                 @foreach ($filters as $filter)
-                                                <option value="{{ $filter['id'] }}">
-                                                    {{ $filter['filter_name'] }}
-                                                </option>
-
+                                                    <option value="{{ $filter['id'] }}">
+                                                        {{ $filter['filter_name'] }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -54,7 +53,7 @@
                                             <label for="filter_value">{{ __('Tên Bộ Lọc') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="filter_value"
-                                                placeholder="Nhập Tên Sản Phẩm" name="filter_value"
+                                                placeholder="Nhập Tên Bộ Lọc" name="filter_value"
                                                 @if (!empty($filterValue['filter_value'])) value="{{ $filterValue['filter_value'] }}" @else value="{{ old('filter_value') }}" @endif>
                                         </div>
 

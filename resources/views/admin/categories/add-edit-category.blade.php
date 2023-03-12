@@ -41,7 +41,7 @@
                                             <label for="category_name">{{ __('Tên Danh Mục ') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="category_name"
-                                                placeholder="Nhập Tên Sản Phẩm" name="category_name"
+                                                placeholder="Nhập Tên Danh Mục" name="category_name"
                                                 @if (!empty($category['category_name'])) value="{{ $category['category_name'] }}" @else value="{{ old('category_name') }}" @endif>
                                         </div>
                                         <div class="form-group">
@@ -67,16 +67,16 @@
                                                 name="category_image">
                                                 @if(!empty($category['category_image']))
                                                 <a target="_blank" href="{{ url('front/images/category_images/'.$category['category_image']) }}">
-                                                Xem Ảnh</a>&nbsp;|&nbsp;
+                                                    {{ __('Xem Ảnh') }}</a>&nbsp;|&nbsp;
                                                 <a href="javascript:void(0)" class="confirmDelete" module="category-image"
-                                                moduleid="{{ $category['id'] }}">Delete Image</a>
+                                                moduleid="{{ $category['id'] }}">{{ __('Xóa Ảnh') }}</a>
                                                 @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="category_discount">{{ __('Danh Mục Giảm Giá') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="number" class="form-control" id="category_discount"
-                                                placeholder="Nhập Tên Sản Phẩm" name="category_discount"
+                                                placeholder="Nhập Danh Mục Giảm Giá" name="category_discount"
                                                 @if (!empty($category['category_discount'])) value="{{ $category['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif>
                                         </div>
                                         <div class="form-group">
@@ -90,21 +90,19 @@
                                             <label for="url">{{ __('URL') }}<span class="text-danger">*</span>
                                                 :</label>
                                             <input type="text" class="form-control" id="url"
-                                                placeholder="Nhập Tên Sản Phẩm" name="url"
+                                                placeholder="Nhập URL" name="url"
                                                 @if (!empty($category['url'])) value="{{ $category['url'] }}" @else value="{{ old('url') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="meta_title">{{ __('Tiêu Đề Meta') }}<span
-                                                    class="text-danger">*</span> :</label>
+                                            <label for="meta_title">{{ __('Tiêu Đề Meta') }} :</label>
                                             <input type="text" class="form-control" id="meta_title"
-                                                placeholder="Nhập Tên Sản Phẩm" name="meta_title"
+                                                placeholder="Nhập Tiêu Đề" name="meta_title"
                                                 @if (!empty($category['meta_title'])) value="{{ $category['meta_title'] }}" @else value="{{ old('meta_title') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="meta_description">{{ __('Mô Tả Meta') }}<span
-                                                    class="text-danger">*</span> :</label>
+                                            <label for="meta_description">{{ __('Mô Tả Meta') }} :</label>
                                             <input type="text" class="form-control" id="meta_description"
-                                                placeholder="Nhập Tên Sản Phẩm" name="meta_description"
+                                                placeholder="Nhập Mô Tả" name="meta_description"
                                                 @if (!empty($category['meta_description'])) value="{{ $category['meta_description'] }}" @else value="{{ old('meta_description') }}" @endif>
                                         </div>
                                         <div class="form-group">

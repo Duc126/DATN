@@ -17,9 +17,11 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Bộ Lọc') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-filter') }}" class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
-                                <a style="max-width: 175px;margin-top: 0px;display: inline-block;"
-                                href="{{ url('admin/filters-value') }}" class="btn btn-block btn-primary">{{ __('Xem Bộ Lọc') }}</a>
+                                href="{{ url('admin/add-edit-filter') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
+                            <a style="max-width: 175px;margin-top: 0px;display: inline-block;"
+                                href="{{ url('admin/filters-value') }}"
+                                class="btn btn-block btn-primary">{{ __('Xem Bộ Lọc') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -47,15 +49,14 @@
                                                 <td>{{ $filtersList['filter_name'] }} </td>
                                                 <td>{{ $filtersList['filter_column'] }} </td>
                                                 <td>
-                                                <?php
+                                                    <?php
 
-                                                    $catIds = explode(",",$filtersList['cat_ids']);
-                                                    foreach($catIds as $key => $catId){
+                                                    $catIds = explode(',', $filtersList['cat_ids']);
+                                                    foreach ($catIds as $key => $catId) {
                                                         $category_name = Category::getCategoryName($catId);
-                                                        echo $category_name. " ";
+                                                        echo $category_name . ' ';
                                                     }
                                                     ?></td>
-
                                                 <td>
                                                     @if ($filtersList['status'] == 1)
                                                         <a class="updateFilters" id="filter-{{ $filtersList['id'] }}"
@@ -64,7 +65,7 @@
                                                                 status="Active"></i></a>
                                                     @else
                                                         <a class="updateFilters" id="filter-{{ $filtersList['id'] }}"
-                                                        filter_id={{ $filtersList['id'] }} href="javascript:void(0)">
+                                                            filter_id={{ $filtersList['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()

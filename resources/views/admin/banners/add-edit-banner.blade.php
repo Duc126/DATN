@@ -38,9 +38,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="link"> type</label>
+                                            <label for="link"> {{ __('Kiểu') }}</label>
                                             <select class="form-control" id="type" name="type" required>
-                                                <option value="">Chon</option>
+                                                <option value="">{{ __('Chọn') }}</option>
                                                 <option @if (!empty($banner['type']) && $banner['type'] == "Slider")
                                                 selected="" @endif value="Slider">Slider</option>
                                                 <option @if (!empty($banner['type']) && $banner['type'] == "Fix")
@@ -56,31 +56,30 @@
                                                 name="image">
                                                 @if(!empty($banner['image']))
                                                 <a target="_blank" href="{{ url('front/images/banner_images/'.$banner['image']) }}">
-                                                Xem Ảnh</a>
+                                                    {{ __('Xem Ảnh') }}</a>
                                                 @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="link">{{ __('Link ') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="link"
-                                                placeholder="Nhập Tên Sản Phẩm" name="link"
+                                                placeholder="Nhập Link" name="link"
                                                 @if (!empty($banner['link'])) value="{{ $banner['link'] }}" @else value="{{ old('link') }}" @endif>
                                         </div>
 
 
                                         <div class="form-group">
-                                            <label for="title">{{ __('Tiêu Đề') }}<span
-                                                    class="text-danger">*</span> :</label>
+                                            <label for="title">{{ __('Tiêu Đề') }} :</label>
                                             <input type="text" class="form-control" id="title"
-                                                placeholder="Nhập Tên Sản Phẩm" name="title"
+                                                placeholder="Nhập Tiêu Đề" name="title"
                                                 @if (!empty($banner['title'])) value="{{ $banner['title'] }}" @else value="{{ old('title') }}" @endif>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="alt">{{ __('Văn bản thay thế biểu ngữ') }}<span class="text-danger">*</span>
+                                            <label for="alt">{{ __('Văn bản thay thế biểu ngữ') }}
                                                 :</label>
                                             <input type="text" class="form-control" id="alt"
-                                                placeholder="Nhập Tên Sản Phẩm" name="alt"
+                                                placeholder="Nhập Văn Bản" name="alt"
                                                 @if (!empty($banner['alt'])) value="{{ $banner['alt'] }}" @else value="{{ old('alt') }}" @endif>
                                         </div>
 

@@ -67,7 +67,7 @@
                 <?php $isProductNew = Product::isProductNew($product['id']); ?>
                 @if ($isProductNew == 'Yes')
                     <div class="tag new">
-                        <span>NEW</span>
+                        <span>{{ __('Mới') }}</span>
                     </div>
                 @endif
             </div>

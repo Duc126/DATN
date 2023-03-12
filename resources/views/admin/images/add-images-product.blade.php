@@ -55,7 +55,7 @@
                                         <div class="form-group">
                                             <label for="product_price">{{ __('Giá Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
-                                            &nbsp; {{ $imageProduct['product_price'] }}
+                                            &nbsp; {{ $imageProduct['product_price'] }}đ
                                         </div>
                                         <div class="form-group">
                                             @if (!empty($imageProduct['product_image']))

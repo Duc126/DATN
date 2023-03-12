@@ -16,8 +16,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Sản Phẩm') }}</h4>
                             <a style="max-width: 150px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-product') }}" class="btn btn-block btn-primary">Thêm Sản
-                                Phẩm</a>
+                                href="{{ url('admin/add-edit-product') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Sản Phẩm') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}

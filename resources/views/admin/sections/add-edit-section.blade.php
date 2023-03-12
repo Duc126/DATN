@@ -30,24 +30,25 @@
                                     @endforeach
                                 </div>
                             @endif
-                            <form class="forms-sample" @if(empty($section['id'])) action="{{ url('admin/add-edit-section') }}"
-                            @else action="{{ url('admin/add-edit-section/'.$section['id']) }}" @endif
-                             method="post" enctype="multipart/form-data">
+                            <form class="forms-sample"
+                                @if (empty($section['id'])) action="{{ url('admin/add-edit-section') }}"
+                            @else action="{{ url('admin/add-edit-section/' . $section['id']) }}" @endif
+                                method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="section_name">{{ __('Tên Sản Phẩm ') }}<span
-                                                class="text-danger">*</span> :</label>
-
-                                            <input type="text" class="form-control" id="section_name" placeholder="Nhập Tên Sản Phẩm" name="section_name"
-                                                @if(!empty($section['name'])) value="{{ $section['name']}}" @else value="{{ old('section_name') }}" @endif>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="section_name">{{ __('Tên Thể Loại') }}<span
+                                                    class="text-danger">*</span> :</label>
+                                            <input type="text" class="form-control" id="section_name"
+                                                placeholder="Nhập Tên Thể Loại" name="section_name"
+                                                @if (!empty($section['name'])) value="{{ $section['name'] }}" @else value="{{ old('section_name') }}" @endif>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                        <a class="btn btn-danger " href="{{  url('admin/sections')}}">{{ __('Quay lai ') }}</a>
+                                <a class="btn btn-danger " href="{{ url('admin/sections') }}">{{ __('Quay lai ') }}</a>
 
                             </form>
                         </div>

@@ -16,7 +16,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Thể Loại') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-section') }}" class="btn btn-block btn-primary">{{ __('Thêm Thể Loại') }}</a>
+                                href="{{ url('admin/add-edit-section') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Thể Loại') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}

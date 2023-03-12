@@ -9,8 +9,6 @@ $(document).ready(function () {
     $("#banners").DataTable();
     $("#filters").DataTable();
 
-
-
     //remove active side-bar
     $(".nav-item").removeClass("active");
     $(".nav-link").removeClass("active");
@@ -136,8 +134,7 @@ $(document).on("click", ".updateCategory", function () {
         },
     });
 });
-$(document).on("click",".confirmDelete", function () {
-
+$(document).on("click", ".confirmDelete", function () {
     var module = $(this).attr("module");
     var moduleid = $(this).attr("moduleid");
     Swal.fire({
@@ -408,6 +405,23 @@ $(document).on("click", ".updateFiltersValue", function () {
         },
         error: function () {
             alert("Error");
+        },
+    });
+});
+//show filter on selection category
+$("#category_id").on("change", function () {
+    var category_id = $(this).val();
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "category-filter",
+        data: {
+            category_id: category_id,
+        },
+        success: function (resp) {
+            $(".loadFilters").html(resp.view);
         },
     });
 });

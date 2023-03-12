@@ -118,5 +118,6 @@ ga('send', 'pageview')
 <!-- Main -->
 <script type="text/javascript" src="{{ url('front/js/app.js')  }}"></script>
 <script type="text/javascript" src="{{ url('front/js/custome-FE.js')  }}"></script>
+@include('front.layout.scripts')
 </body>
 </html>

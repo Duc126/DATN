@@ -34,4 +34,29 @@ class ProductsFilter extends Model
         }
         return $available;
     }
+    public static function getSizes($url)
+    {
+        $categoryDetails = Category::categoryDetails($url);
+        $getProductIds = Product::select('id')->whereIn('category_id', $categoryDetails['catIds'])->pluck('id')->toArray();
+        $getProductSizes = ProductsAttributes::select('size')->whereIn('product_id', $getProductIds)->groupBy('size')->pluck('size')->toArray();
+        // dd($getProductSizes);
+        return $getProductSizes;
+    }
+    public static function getColor($url)
+    {
+        $categoryDetails = Category::categoryDetails($url);
+        $getProductIds = Product::select('id')->whereIn('category_id', $categoryDetails['catIds'])->pluck('id')->toArray();
+        $getColor = Product::select('product_color')->whereIn('id', $getProductIds)->groupBy('product_color')->pluck('product_color')->toArray();
+        // dd($getColor);
+        return $getColor;
+    }
+    public static function getBrand($url)
+    {
+        $categoryDetails = Category::categoryDetails($url);
+        $getProductIds = Product::select('id')->whereIn('category_id', $categoryDetails['catIds'])->pluck('id')->toArray();
+        $brandIds = Product::select('brand_id')->whereIn('id', $getProductIds)->groupBy('brand_id')->pluck('brand_id')->toArray();
+        $brandDetails = Brand::select('id', 'name')->whereIn('id', $brandIds)->get()->toArray();
+        // dd($brandDetails);
+        return $brandDetails;
+    }
 }
