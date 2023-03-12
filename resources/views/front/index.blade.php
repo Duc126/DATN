@@ -131,7 +131,7 @@
 
                                              </div>
                                              <div class="tag new">
-                                                 <span>NEW</span>
+                                                 <span>{{ __('Mới') }}</span>
                                              </div>
                                          </div>
                                      @endforeach
@@ -206,7 +206,7 @@
 
                                              </div>
                                              <div class="tag new">
-                                                 <span>NEW</span>
+                                                 <span>{{ __('Mới') }}</span>
                                              </div>
                                          </div>
                                      @endforeach
@@ -281,7 +281,7 @@
 
                                              </div>
                                              <div class="tag new">
-                                                 <span>NEW</span>
+                                                 <span>{{ __('Mới') }}</span>
                                              </div>
                                          </div>
                                      @endforeach
@@ -356,7 +356,7 @@
 
                                              </div>
                                              <div class="tag new">
-                                                 <span>NEW</span>
+                                                 <span>{{ __('Mới') }}</span>
                                              </div>
                                          </div>
                                      @endforeach

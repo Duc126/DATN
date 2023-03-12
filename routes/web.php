@@ -118,7 +118,7 @@ Route::prefix('admin')->group(function () {
         Route::post('update-status-filterValue', [FilterController::class, 'updateStatusFilterValue']);
         Route::match(['get', 'post'], 'add-edit-filter/{id?}', [FilterController::class, 'addEditFilter']);
         Route::match(['get', 'post'], 'add-edit-filter-value/{id?}', [FilterController::class, 'addEditFilterValue']);
-
+        Route::post('category-filter',[FilterController::class, 'categoryFilter']);
 
 
 

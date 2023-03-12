@@ -16,7 +16,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Banner') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-banner') }}" class="btn btn-block btn-primary">{{__('Thêm Banner')}}</a>
+                                href="{{ url('admin/add-edit-banner') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Banner') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -43,7 +44,7 @@
                                             <tr>
                                                 <td>{{ $banner['id'] }}</td>
                                                 <td>
-                                                    <img src="{{ asset('front/images/banner_images/'.$banner['image']) }}">
+                                                    <img src="{{ asset('front/images/banner_images/' . $banner['image']) }}">
                                                 </td>
                                                 <td>{{ $banner['type'] }} </td>
                                                 <td>{{ $banner['link'] }} </td>
@@ -51,14 +52,12 @@
                                                 <td>
                                                     @if ($banner['status'] == 1)
                                                         <a class="updateBanner" id="banner-{{ $banner['id'] }}"
-                                                            banner_id={{ $banner['id'] }}
-                                                            href="javascript:void(0)">
+                                                            banner_id={{ $banner['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-check"
                                                                 status="Active"></i></a>
                                                     @else
                                                         <a class="updateBanner" id="banner-{{ $banner['id'] }}"
-                                                        banner_id={{ $banner['id'] }}
-                                                            href="javascript:void(0)">
+                                                            banner_id={{ $banner['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()

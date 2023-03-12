@@ -16,7 +16,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Danh Mục') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-category') }}" class="btn btn-block btn-primary">{{__('Thêm Danh Mục')}}</a>
+                                href="{{ url('admin/add-edit-category') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Danh Mục') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -50,20 +51,18 @@
                                                 <td>{{ $category['category_name'] }} </td>
                                                 <td>
                                                     {{ $parent_category }}
-                                                 </td>
+                                                </td>
                                                 <td>{{ $category['section']['name'] }} </td>
                                                 <td>{{ $category['url'] }} </td>
                                                 <td>
                                                     @if ($category['status'] == 1)
                                                         <a class="updateCategory" id="category-{{ $category['id'] }}"
-                                                            category_id={{ $category['id'] }}
-                                                            href="javascript:void(0)">
+                                                            category_id={{ $category['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-check"
                                                                 status="Active"></i></a>
                                                     @else
                                                         <a class="updateCategory" id="category-{{ $category['id'] }}"
-                                                            category_id={{ $category['id'] }}
-                                                            href="javascript:void(0)">
+                                                            category_id={{ $category['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()

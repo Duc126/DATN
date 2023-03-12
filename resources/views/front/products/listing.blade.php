@@ -54,20 +54,20 @@
                             <input type="hidden" name="url" id="url" value="{{ $url }}">
                             <div class="toolbar-sorter">
                                 <div class="select-box-wrapper">
-                                    <label class="sr-only" for="sort-by">Sort By</label>
+                                    <label class="sr-only" for="sort-by">{{ __('Sắp xếp theo') }}</label>
                                     <select name="sort" class="select-box" id="sort">
                                         {{-- <option selected="selected" value="">Sort By: Best Selling</option> --}}
-                                        <option selected="" value="">Select</option>
+                                        <option selected="" value="">{{ __('Chọn') }}</option>
                                         <option value="product_latest" @if (isset($_GET['sort']) && $_GET['sort'] == 'product_latest') selected="" @endif>
-                                            Sort By: Latest</option>
+                                            {{ __('Sắp xếp theo: Mới nhất') }}</option>
                                         <option value="price_lowest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_lowest') selected="" @endif>
-                                            Sort By: Lowest Price</option>
+                                            {{ __('Sắp xếp theo: Giá thấp nhất') }}</option>
                                         <option value="price_highest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_highest') selected="" @endif>
-                                            Sort By: Highest Price</option>
+                                           {{ __('Sắp xếp theo: Giá cao nhất') }}</option>
                                         <option value="name_a_z" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_a_z') selected="" @endif>Sort
-                                            By: Name A - Z</option>
+                                           {{ __('Sắp xếp theo:Tên từ A-Z') }}</option>
                                         <option value="name_z_a" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_z_a') selected="" @endif>Sort
-                                            By: Name Z - A</option>
+                                            {{ __('Sắp xếp theo:Tên từ Z-A') }}</option>
                                         {{-- <option value="">Sort By: Best Rating</option> --}}
                                     </select>
                                 </div>

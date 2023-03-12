@@ -46,16 +46,12 @@
                                             <tr>
                                                 <td>{{ $filterValue['id'] }}</td>
                                                 <td>{{ $filterValue['filter_id'] }}</td>
-
                                                 <td>
-                                                    {{-- {{ $filterValue['filter_id'] }} --}}
                                                     <?php
                                                     echo $getFilterName = ProductsFilter::getFilterName($filterValue['filter_id']);
                                                     ?>
                                                 </td>
                                                 <td>{{ $filterValue['filter_value'] }} </td>
-
-
                                                 <td>
                                                     @if ($filterValue['status'] == 1)
                                                         <a class="updateFiltersValue" id="filterValue-{{ $filterValue['id'] }}"

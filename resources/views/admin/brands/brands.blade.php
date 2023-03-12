@@ -16,7 +16,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Thương Hiệu') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-brand') }}" class="btn btn-block btn-primary">{{ __('Thêm Thương Hiệu') }}</a>
+                                href="{{ url('admin/add-edit-brand') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Thương Hiệu') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -48,7 +49,7 @@
                                                                 status="Active"></i></a>
                                                     @else
                                                         <a class="updateBrand" id="brand-{{ $brandList['id'] }}"
-                                                        brand_id={{ $brandList['id'] }} href="javascript:void(0)">
+                                                            brand_id={{ $brandList['id'] }} href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()

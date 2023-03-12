@@ -83,14 +83,14 @@
                                             value="{{ $vendor['vendor_personal']['city'] }}"readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="state">{{ __('State') }}<span class="text-danger">*</span>
+                                        <label for="state">{{ __('Tình Trạng') }}<span class="text-danger">*</span>
                                             :</label>
                                         <input type="text" id="state" class="form-control" name="state"
-                                            placeholder="Nhập Tên"
+                                            placeholder="Nhập Tình Trạng"
                                             value="{{ $vendor['vendor_personal']['state'] }}"readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="country">{{ __('Country') }}<span class="text-danger">*</span>
+                                        <label for="country">{{ __('Quôc Gia') }}<span class="text-danger">*</span>
                                             :</label>
                                         <input type="text" id="country" class="form-control" name="country"
                                             placeholder="Nhập Tên"value="{{ $vendor['vendor_personal']['country'] }}"readonly>
@@ -109,12 +109,13 @@
                                             placeholder="Số Điện Thoại"
                                             value="{{ $vendor['vendor_personal']['phone'] }}"readonly>
                                     </div>
-                                    @if(!empty($vendor['image']))
-                                    <div class="form-group">
-                                            <label for=""> Ảnh</label>
+                                    @if (!empty($vendor['image']))
+                                        <div class="form-group">
+                                            <label for="">{{ __('Ảnh') }}</label>
                                             <br>
-                                            <img style="width:200px; height:100px;" src="{{ url('admin/images/photos/'.$vendor['image']) }}">
-                                    </div>
+                                            <img style="width:200px; height:100px;"
+                                                src="{{ url('admin/images/photos/' . $vendor['image']) }}">
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -235,12 +236,13 @@
                                             value="{{ $vendor['vendor_business']['gst_number'] }}"id="gst_number"
                                             name="gst_number" placeholder="Số Điện Thoại" readonly>
                                     </div>
-                                    @if(!empty($vendor['vendor_business']['address_proof_images']))
-                                    <div class="form-group">
-                                            <label for=""> Ảnh</label>
+                                    @if (!empty($vendor['vendor_business']['address_proof_images']))
+                                        <div class="form-group">
+                                            <label for=""> {{ __('Ảnh') }}</label>
                                             <br>
-                                            <img style="width:200px; height:100px;" src="{{ url('admin/images/proofs/'.$vendor['vendor_business']['address_proof_images']) }}">
-                                    </div>
+                                            <img style="width:200px; height:100px;"
+                                                src="{{ url('admin/images/proofs/' . $vendor['vendor_business']['address_proof_images']) }}">
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -293,9 +295,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

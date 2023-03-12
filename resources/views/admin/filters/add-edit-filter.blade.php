@@ -40,7 +40,7 @@
                                         <div class="form-group">
                                             <label for="cat_ids">{{ __('Chọn Danh Mục ') }}</label>
                                             <select name="cat_ids[]" id="cat_ids" class="form-control"
-                                                style="color: #000; height:200px" multiple="" >
+                                                style="color: #000; height:200px" multiple="">
                                                 <option value="">{{ __('Chọn Danh Mục ') }}</option>
                                                 @foreach ($categories as $section)
                                                     <optgroup label="{{ $section['name'] }}"></optgroup>
@@ -63,7 +63,7 @@
                                             <label for="filter_name">{{ __('Tên Bộ Lọc') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="filter_name"
-                                                placeholder="Nhập Tên Sản Phẩm" name="filter_name"
+                                                placeholder="Nhập Tên Bộ Lọc" name="filter_name"
                                                 @if (!empty($filter['filter_name'])) value="{{ $filter['filter_name'] }}" @else value="{{ old('filter_name') }}" @endif>
                                         </div>
 
@@ -71,7 +71,7 @@
                                             <label for="filter_column">{{ __('filter_column') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="filter_column"
-                                                placeholder="Nhập Tên Sản Phẩm" name="filter_column"
+                                                placeholder="Nhập Cột Bộ Lọc" name="filter_column"
                                                 @if (!empty($filter['filter_column'])) value="{{ $filter['filter_column'] }}" @else value="{{ old('filter_column') }}" @endif>
                                         </div>
                                     </div>

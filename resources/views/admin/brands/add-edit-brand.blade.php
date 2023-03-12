@@ -37,7 +37,7 @@
                                 <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="brand_name">{{ __('Tên Sản Phẩm ') }}<span
+                                        <label for="brand_name">{{ __('Tên Tên Thương Hiệu ') }}<span
                                                 class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="brand_name" placeholder="Nhập Tên Thương Hiệu" name="brand_name"
                                                 @if(!empty($brand['name'])) value="{{ $brand['name']}}" @else value="{{ old('brand_name') }}" @endif>
