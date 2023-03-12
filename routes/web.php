@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductsViewController;
+use App\Http\Controllers\Front\VendorController as FrontVendorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
@@ -132,4 +133,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     foreach($catUrls as $key => $url){
         Route::match(['get','post'],'/'.$url, [ProductsViewController::class, 'listingIndex']);
     }
+
+    //Vendor Login/Register
+
+    Route::get('/vendor/login-register', [FrontVendorController::class, 'loginRegister'] );
+    Route::post('/vendor/register', [FrontVendorController::class, 'vendorRegister'] );
 });
