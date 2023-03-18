@@ -52,21 +52,22 @@
                     <div class="login-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">Login</h2>
                         <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
-                        <form>
+                        <form action="{{ url('admin/login') }}" method="post" >
+                            @csrf
                             <div class="u-s-m-b-30">
-                                <label for="user-name-email">Username or Email
+                                <label for="user-name-email">Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name-email" class="text-field"
+                                <input type="text" name="email" id="vendor-email"class="text-field"
                                     placeholder="Username / Email">
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="login-password">Password
+                                <label for="login-password">Mật Khẩu
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="login-password" class="text-field" placeholder="Password">
+                                <input type="password" id="vendor-password" name="password" class="text-field" placeholder="Password">
                             </div>
-                            <div class="group-inline u-s-m-b-30">
+                            {{-- <div class="group-inline u-s-m-b-30">
                                 <div class="group-1">
                                     <input type="checkbox" class="check-box" id="remember-me-token">
                                     <label class="label-text" for="remember-me-token">Remember me</label>
@@ -77,7 +78,7 @@
                                             <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Lost your password?</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="m-b-45">
                                 <button class="button button-outline-secondary w-100">Login</button>
                             </div>

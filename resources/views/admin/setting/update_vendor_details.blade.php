@@ -99,7 +99,10 @@
                                                 <label for="address">{{ __('Địa Chỉ') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="address" class="form-control" name="address"
-                                                    placeholder="Nhập Địa Chỉ" value="{{ $vendorDetail['address'] }}">
+                                                    placeholder="Nhập Địa Chỉ"
+                                                    value="{{ old('address', $vendorDetail['address'] ?? null) }}">
+
+                                                     {{-- value="{{ $vendorDetail['address'] }}"> --}}
                                             </div>
 
 
@@ -110,20 +113,26 @@
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="city" class="form-control" name="city"
-                                                    placeholder="Nhập Tên Thành Phố" value="{{ $vendorDetail['city'] }}">
+                                                    placeholder="Nhập Tên Thành Phố"
+                                                    value="{{ old('city', $vendorDetail['city'] ?? null) }}">
+
+                                                    {{-- value="{{ $vendorDetail['city'] }}"> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label for="state">{{ __('State') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="state" class="form-control" name="state"
-                                                    placeholder="Nhập Tên" value="{{ $vendorDetail['state'] }}">
+                                                    placeholder="Nhập Tên"
+                                                    {{-- value="{{ $vendorDetail['state'] }}"> --}}
+                                                    value="{{ old('state', $vendorDetail['state'] ?? null) }}">
+
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="country">{{ __('Country') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 {{-- <input type="text" id="country" class="form-control" name="country"
                                                     placeholder="Nhập Tên" value="{{ $vendorDetail['country'] }}"> --}}
-                                                <select class="form-control text-dark" id="country" name="country">
+                                                {{-- <select class="form-control text-dark" id="country" name="country">
                                                     <option value="">{{ __('Chọn Quốc Gia') }}</option>
                                                     @foreach ($countries as $country)
                                                         {
@@ -133,21 +142,49 @@
 
                                                         }
                                                     @endforeach
+                                                </select> --}}
+                                            {{-- </div> --}}
+                                            <div class="form-group">
+                                                <label for="country">{{ __('Quốc Gia') }}<span
+                                                        class="text-danger">*</span>
+                                                    :</label>
+                                                {{-- <input type="text" id="shop_country" class="form-control"
+                                                    name="shop_country" placeholder="Nhập Địa Chỉ"
+                                                    value="{{ $vendorDetail['shop_country'] }}"> --}}
+                                                 <select class="form-control text-dark" id="country"
+                                                    name="country">
+                                                    <option value="">{{ __('Chọn Quốc Gia') }}</option>
+                                                    @foreach ($countries as $country)
+
+                                                        <option value="{{ $country['country_name'] }}"
+                                                            @if (isset($vendorDetail['country']) && $country['country_name']==
+                                                            $vendorDetail['country']) selected @endif>
+                                                            {{ $country['country_name'] }} </option>
+
+
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="pincode">{{ __('PinCode') }}<span class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="pincode" class="form-control" name="pincode"
-                                                    placeholder="Nhập Tên" value="{{ $vendorDetail['pincode'] }}">
+                                                    placeholder="Nhập Tên"
+                                                    value="{{ old('pincode', $vendorDetail['pincode'] ?? null) }}">
+
+                                                    {{-- value="{{ $vendorDetail['pincode'] }}"> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label for="phone">{{ __('Số Điện Thoại') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $vendorDetail['phone'] }}" id="phone" name="phone"
-                                                    placeholder="Số Điện Thoại">
+                                                    {{-- value="{{ $vendorDetail['phone'] }}"  --}}
+
+                                                    id="phone" name="phone"
+                                                    placeholder="Số Điện Thoại"
+                                                    value="{{ old('phone', $vendorDetail['phone'] ?? null) }}">
+
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -228,13 +265,19 @@
                                                 <label for="shop_name">{{ __('Tên') }}<span
                                                         class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control" name="shop_name"
-                                                    id="shop_name" value="{{ $vendorDetail['shop_name'] }}">
+                                                    id="shop_name"
+                                                    value="{{ old('shop_name', $vendorDetail['shop_name'] ?? null) }}">
+
+                                                    {{-- value="{{ $vendorDetail['shop_name'] }}"> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_address">{{ __('Đường') }}
                                                     :</label>
                                                 <input type="text" class="form-control" id="shop_address"
-                                                    name="shop_address" value="{{ $vendorDetail['shop_address'] }}">
+                                                    name="shop_address"
+                                                    value="{{ old('shop_address', $vendorDetail['shop_address'] ?? null) }}">
+
+                                                    {{-- value="{{ $vendorDetail['shop_address'] }}"> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_city">{{ __('Thành Phố') }}<span
@@ -242,7 +285,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_city" class="form-control"
                                                     name="shop_city" placeholder="Nhập Họ"
-                                                    value="{{ $vendorDetail['shop_city'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_city'] }}"> --}}
+                                                    value="{{ old('shop_city', $vendorDetail['shop_city'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_state">{{ __('Tỉnh') }}<span
@@ -250,7 +295,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_state" class="form-control"
                                                     name="shop_state" placeholder="Nhập Tên"
-                                                    value="{{ $vendorDetail['shop_state'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_state'] }}"> --}}
+                                                    value="{{ old('shop_state', $vendorDetail['shop_state'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_country">{{ __('Quốc Gia') }}<span
@@ -259,16 +306,17 @@
                                                 {{-- <input type="text" id="shop_country" class="form-control"
                                                     name="shop_country" placeholder="Nhập Địa Chỉ"
                                                     value="{{ $vendorDetail['shop_country'] }}"> --}}
-                                                <select class="form-control text-dark" id="shop_country"
+                                                 <select class="form-control text-dark" id="shop_country"
                                                     name="shop_country">
                                                     <option value="">{{ __('Chọn Quốc Gia') }}</option>
                                                     @foreach ($countries as $country)
-                                                        {
-                                                        <option value={{ $country['country_name'] }}
-                                                            @if ($country['country_name'] == $vendorDetail['shop_country']) selected @endif>
+
+                                                        <option value="{{ $country['country_name'] }}"
+                                                            @if (isset($vendorDetail['shop_country']) && $country['country_name']==
+                                                            $vendorDetail['shop_country']) selected @endif>
                                                             {{ $country['country_name'] }} </option>
 
-                                                        }
+
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -278,7 +326,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_pincode" class="form-control"
                                                     name="shop_pincode" placeholder="Nhập Địa Chỉ"
-                                                    value="{{ $vendorDetail['shop_pincode'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_pincode'] }}"> --}}
+                                                    value="{{ old('shop_pincode', $vendorDetail['shop_pincode'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="address_proof_image">{{ __('Anh') }}<span
@@ -321,7 +371,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_mobile" class="form-control"
                                                     name="shop_mobile" placeholder="Nhập Tên Thành Phố"
-                                                    value="{{ $vendorDetail['shop_mobile'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_mobile'] }}"> --}}
+                                                    value="{{ old('shop_mobile', $vendorDetail['shop_mobile'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_website">{{ __('Website') }}<span
@@ -329,7 +381,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_website" class="form-control"
                                                     name="shop_website" placeholder="Nhập Tên"
-                                                    value="{{ $vendorDetail['shop_website'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_website'] }}"> --}}
+                                                    value="{{ old('shop_website', $vendorDetail['shop_website'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_email">{{ __('Địa Chỉ Email') }}<span
@@ -337,7 +391,9 @@
                                                     :</label>
                                                 <input type="text" id="shop_email" class="form-control"
                                                     name="shop_email" placeholder="Nhập Tên"
-                                                    value="{{ $vendorDetail['shop_email'] }}">
+                                                    {{-- value="{{ $vendorDetail['shop_email'] }}"> --}}
+                                                    value="{{ old('shop_email', $vendorDetail['shop_email'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label
@@ -346,29 +402,31 @@
                                                     :</label>
                                                 <input type="text" id="business_license_number" class="form-control"
                                                     name="business_license_number" placeholder="Nhập Tên"
-                                                    value="{{ $vendorDetail['business_license_number'] }}">
+                                                    {{-- value="{{ $vendorDetail['business_license_number'] }}"> --}}
+                                                    value="{{ old('business_license_number', $vendorDetail['business_license_number'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="address_proof">{{ __('Địa chỉ Proof') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <select class="form-control text-dark"
-                                                    value="{{ $vendorDetail['address_proof'] }}" name="address_proof"
+                                                    name="address_proof"
                                                     id="address_proof">
                                                     <option value="Passpost"
-                                                        @if ($vendorDetail['address_proof'] == 'Passpost') selected @endif>
+                                                        @if (isset($vendorDetail['address_proof']) && $vendorDetail['address_proof']  == 'Passpost') selected @endif>
                                                         {{ __('Passpost') }}</option>
                                                     <option
-                                                        value="Pan"@if ($vendorDetail['address_proof'] == 'Pan') selected @endif>
+                                                        value="Pan"@if (isset($vendorDetail['address_proof']) && $vendorDetail['address_proof'] == 'Pan') selected @endif>
                                                         {{ __('Pan') }}</option>
                                                     <option
-                                                        value="C"@if ($vendorDetail['address_proof'] == 'C') selected @endif>
+                                                        value="C"@if (isset($vendorDetail['address_proof']) && $vendorDetail['address_proof'] == 'C') selected @endif>
                                                         {{ __('C') }}</option>
                                                     <option
-                                                        value="D"@if ($vendorDetail['address_proof'] == 'D') selected @endif>
+                                                        value="D"@if (isset($vendorDetail['address_proof']) && $vendorDetail['address_proof'] == 'D') selected @endif>
                                                         {{ __('D') }}</option>
                                                     <option
-                                                        value="E"@if ($vendorDetail['address_proof'] == 'E') selected @endif>
+                                                        value="E"@if (isset($vendorDetail['address_proof']) && $vendorDetail['address_proof'] == 'E') selected @endif>
                                                         {{ __('E') }}</option>
 
                                                 </select>
@@ -378,7 +436,8 @@
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $vendorDetail['pan_number'] }}"id="pan_number"
+                                                value="{{ old('pan_number', $vendorDetail['pan_number'] ?? null) }}"
+                                                id="pan_number"
                                                     name="pan_number" placeholder="Số Điện Thoại">
                                             </div>
                                             <div class="form-group">
@@ -386,7 +445,10 @@
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $vendorDetail['gst_number'] }}"id="gst_number"
+                                                    {{-- value="{{ $vendorDetail['gst_number'] }}" --}}
+                                                value="{{ old('gst_number', $vendorDetail['gst_number'] ?? null) }}"
+
+                                                    id="gst_number"
                                                     name="gst_number" placeholder="Số Điện Thoại">
                                             </div>
                                         </div>
@@ -443,14 +505,19 @@
                                                         class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control" name="account_holder_name"
                                                     id="account_holder_name"
-                                                    value="{{ $vendorDetail['account_holder_name'] }}">
+                                                    {{-- value="{{ $vendorDetail['account_holder_name'] }}"> --}}
+                                                    value="{{ old('account_holder_name', $vendorDetail['account_holder_name'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="account_number">{{ __('Số Tài Khoản') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="account_number" class="form-control"
-                                                    name="account_number" value="{{ $vendorDetail['account_number'] }}">
+                                                    name="account_number"
+                                                    {{-- value="{{ $vendorDetail['account_number'] }}"> --}}
+                                                    value="{{ old('account_number', $vendorDetail['account_number'] ?? null) }}">
+
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -460,7 +527,9 @@
                                                     :</label>
                                                 <input type="text" id="bank_name" class="form-control"
                                                     name="bank_name" placeholder="Nhập Tên Thành Phố"
-                                                    value="{{ $vendorDetail['bank_name'] }}">
+                                                    {{-- value="{{ $vendorDetail['bank_name'] }}"> --}}
+                                                    value="{{ old('bank_name', $vendorDetail['bank_name'] ?? null) }}">
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="bank_ifsc_code">{{ __('Mã Code') }}<span
@@ -468,7 +537,9 @@
                                                     :</label>
                                                 <input type="text" id="bank_ifsc_code" class="form-control"
                                                     name="bank_ifsc_code" placeholder="Nhập Tên"
-                                                    value="{{ $vendorDetail['bank_ifsc_code'] }}">
+                                                    {{-- value="{{ $vendorDetail['bank_ifsc_code'] }}"> --}}
+                                                    value="{{ old('bank_ifsc_code', $vendorDetail['bank_ifsc_code'] ?? null) }}">
+
                                             </div>
                                         </div>
                                     </div>

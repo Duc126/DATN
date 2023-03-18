@@ -16,11 +16,29 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $adminType = Auth::guard('admin')->user()->type;
+        $vendor_id = Auth::guard('admin')->user()->vendor_id;
+        // dd($vendor_id);
+
+        if ($adminType == "vendor") {
+            $vendorStatus = Auth::guard('admin')->user()->status;
+            if ($vendorStatus == 0) {
+                return redirect("admin/update-vendor-details/personal")->with('error_message', 'Tài khoản nhà cung cấp của bạn chưa được phê duyệt.
+                 Vui lòng đảm bảo điền thông tin cá nhân, doanh nghiệp và ngân hàng hợp lệ của bạn');
+            }
+        }
         $products = Product::with(['section' => function ($query) {
             $query->select('id', 'name');
         }, 'category' => function ($query) {
             $query->select('id', 'category_name');
-        }])->get()->toArray();
+        }]);
+// dd($products);
+
+        if ($adminType == "vendor") {
+            $products = $products->where('vendor_id', $vendor_id);
+// dd($products->where('vendor_id', $vendor_id));
+        }
+        $products = $products->get()->toArray();
         // dd($products);
         return view('admin.products.products')->with(compact('products'));
     }

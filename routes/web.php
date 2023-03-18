@@ -103,7 +103,7 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'edit-attributes/{id}', [ProductAttributesController::class, 'editAttributesProduct']);
 
         //Image Product
-        Route::match(['get', 'post'], 'add-image-product/{id}',[ProductImageController::class,'addImageProduct']);
+        Route::match(['get', 'post'], 'add-image-product/{id}', [ProductImageController::class, 'addImageProduct']);
         Route::get('delete-image/{id}', [ProductImageController::class, 'deleteImagesProduct']);
         Route::post('update-status-images-product', [ProductImageController::class, 'updateStatusImagesProduct']);
         //Banner
@@ -119,23 +119,26 @@ Route::prefix('admin')->group(function () {
         Route::post('update-status-filterValue', [FilterController::class, 'updateStatusFilterValue']);
         Route::match(['get', 'post'], 'add-edit-filter/{id?}', [FilterController::class, 'addEditFilter']);
         Route::match(['get', 'post'], 'add-edit-filter-value/{id?}', [FilterController::class, 'addEditFilterValue']);
-        Route::post('category-filter',[FilterController::class, 'categoryFilter']);
-
-
-
+        Route::post('category-filter', [FilterController::class, 'categoryFilter']);
     });
 });
 
-Route::namespace('App\Http\Controllers\Front')->group(function(){
-    Route::get('/',[IndexController::class, 'index']);
+Route::namespace('App\Http\Controllers\Front')->group(function () {
+    Route::get('/', [IndexController::class, 'index']);
     $catUrls = Category::select('url')->where('status', 1)->get()->pluck('url')->toArray();
     // dd($catUrls);die;
-    foreach($catUrls as $key => $url){
-        Route::match(['get','post'],'/'.$url, [ProductsViewController::class, 'listingIndex']);
+    foreach ($catUrls as $key => $url) {
+        Route::match(['get', 'post'], '/' . $url, [ProductsViewController::class, 'listingIndex']);
     }
+    //Product Detail Page
+    Route::get('/product/{id}', [ProductsViewController::class, 'detail']);
+    //GET PRODUCT ATTRIBUTE PRICE
+
+    Route::post('get-product-price', [ProductsViewController::class, 'getProductPrice']);
 
     //Vendor Login/Register
 
-    Route::get('/vendor/login-register', [FrontVendorController::class, 'loginRegister'] );
-    Route::post('/vendor/register', [FrontVendorController::class, 'vendorRegister'] );
+    Route::get('/vendor/login-register', [FrontVendorController::class, 'loginRegister']);
+    Route::post('/vendor/register', [FrontVendorController::class, 'vendorRegister']);
+    Route::get('vendor/confirm/{code}', [FrontVendorController::class, 'confirmVendor']);
 });

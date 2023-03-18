@@ -29,7 +29,13 @@
                                                 <td>{{ $adminList['type'] }}</td>
                                                 <td>{{ $adminList['phone'] }}</td>
                                                 <td>{{ $adminList['email'] }}</td>
-                                                <td> <img src="{{ asset('admin/images/photos/' . $adminList['image']) }}">
+                                                <td>
+                                                    @if ($adminList['image'] != '')
+                                                        <img
+                                                            src="{{ asset('admin/images/photos/' . $adminList['image']) }}">
+                                                    @else
+                                                        <img src="{{ asset('admin/images/photos/no-image.png') }}">
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     @if ($adminList['status'] == 1)

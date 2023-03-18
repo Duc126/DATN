@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,12 +85,60 @@ class VendorController extends Controller
             $admin->updated_at = date("Y-m-d H:i:s");
             $admin->save();
 
-            DB::commit();
 
             //Send Confirm Email
+            $email = $data['email'];
+            $messageData = [
+                'email' => $data['email'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'code' => base64_encode($data['email']),
+
+            ];
+
+            Mail::send('emails.vendor_confirmation', $messageData, function ($message) use ($email) {
+                $message->to($email)->subject('Confirm your vendor Account');
+            });
+            DB::commit();
+
+            //Redirect back
             $message = "Cảm ơn bạn đã đăng ký làm nhà cung cấp. Chúng tôi sẽ xác nhận qua email sau khi tài khoản của bạn được phê duyệt.";
             return redirect()->back()->with('success_message', $message);
+        }
+    }
+    public function confirmVendor($email)
+    {
+        $email = base64_decode($email);
 
+        //Check vendor email exits
+        $vendorCount = Vendor::where('email', $email)->count();
+        if ($vendorCount > 0) {
+            $vendorDetails = Vendor::where('email', $email)->first();
+            if ($vendorDetails->confirm == "Yes") {
+                $message = "Your vendor account is already confirmed.You can login!!!!!!";
+                return redirect('vendor/login-register')->with('error_message', $message);
+            } else {
+                Admin::where('email', $email)->update(['confirm' => 'Yes']);
+                Vendor::where('email', $email)->update(['confirm' => 'Yes']);
+
+                //send register email
+                $messageData = [
+                    'email' => $email,
+                    'first_name' => $vendorDetails->first_name,
+                    'last_name' => $vendorDetails->last_name,
+                    'phone' => $vendorDetails->phone,
+
+                ];
+
+                Mail::send('emails.vendor_confirmation', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Your vendor Account Confirm');
+                });
+                // redirect to vendor đăng nhập in đăng xuất page success message
+                $message = "Email nhà cung cấp Acccout của bạn đã được xác nhận. Bạn có thể đăng nhập và thêm cá nhân của bạn";
+                return redirect('vendor/login-register')->with('success_message', $message);
+            }
+        } else {
+            abort(404);
         }
     }
 }

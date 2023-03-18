@@ -32,12 +32,28 @@ class AdminController extends Controller
                 'password.required' => 'Mật Khẩu là bắt buộc',
             ];
             $this->validate($request, $rules, $customMessages);
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
-                return redirect('admin/dashboard');
+            // if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
+            //     return redirect('admin/dashboard');
+            // } else {
+            //     return redirect()->back()->with('error_message', 'Email Hoặc Mật Khẩu Không Hợp Lệ');
+            // }
+
+            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+                if (Auth::guard('admin')->user()->type == "vendor" && Auth::guard('admin')->user()->confirm == "No") {
+                    return redirect()->back()->with('error_message', ' Vui lòng xác nhận email của bạn để kích hoạt Tài khoản nhà cung cấp của bạn');
+
+
+                    // return redirect('admin/dashboard');
+                } else if (Auth::guard('admin')->user()->type != "vendor" && Auth::guard('admin')->user()->status == "0") {
+                    return redirect()->back()->with('error_message', 'Tài khoản của bạn chưa được kích hoạt');
+                } else {
+                    return redirect('admin/dashboard');
+                }
             } else {
-                return redirect()->back()->with('error_message', 'Email Hoặc Mật Khẩu Không Hợp Lệ');
+                return redirect()->back()->with('error_message', 'Email hoặc mật khẩu không hợp lệ');
             }
         }
+
         return view('admin.login');
     }
     public function logout()
@@ -108,10 +124,10 @@ class AdminController extends Controller
                     $extension = $avatar->getClientOriginalExtension();
                     //Xuat ra anh moi
                     $imageName = rand(111, 99999) . '.' . $extension;
-                    $imagePath = 'admin/images/photos/'. $imageName;
+                    $imagePath = 'admin/images/photos/' . $imageName;
                     Image::make($avatar)->save($imagePath);
                 };
-            }else if (!empty($updateDetails['current-image'])) {
+            } else if (!empty($updateDetails['current-image'])) {
                 $imageName = $updateDetails['current-image'];
             } else {
                 $imageName = "";

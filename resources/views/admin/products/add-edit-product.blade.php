@@ -74,14 +74,14 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_name">{{ __('Tên Product ') }}<span
+                                            <label for="product_name">{{ __('Tên Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_name"
                                                 placeholder="Nhập Tên Sản Phẩm" name="product_name"
                                                 @if (!empty($product['product_name'])) value="{{ $product['product_name'] }}" @else value="{{ old('product_name') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_code">{{ __('Product Code ') }}<span
+                                            <label for="product_code">{{ __('Mã Sản Phẩm ') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_code"
                                                 placeholder="Nhập Mã Sản Phẩm" name="product_code"
