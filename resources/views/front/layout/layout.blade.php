@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Laravel Multi Vendor E-commerce Template - By Stack Developers Youtube Channel</title>
+    <title>Đa Cấp</title>
     <!-- Standard Favicon -->
     <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{ url('front/css/utility.css') }}">
     <!-- Main -->
     <link rel="stylesheet" href="{{ url('front/css/bundle.css') }}">
+        <!-- Main -->
+     <link rel="stylesheet" href="{{ url('front/css/easyzoom.css') }}">
 </head>
 
 <body>
@@ -118,6 +120,10 @@ ga('send', 'pageview')
 <!-- Main -->
 <script type="text/javascript" src="{{ url('front/js/app.js')  }}"></script>
 <script type="text/javascript" src="{{ url('front/js/custome-FE.js')  }}"></script>
+<!-- Zoom -->
+
+<script type="text/javascript" src="{{ url('front/js/easyzoom.js')  }}"></script>
+
 @include('front.layout.scripts')
 </body>
 </html>

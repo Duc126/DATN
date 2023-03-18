@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminManagerController extends Controller
 {
@@ -40,6 +41,23 @@ class AdminManagerController extends Controller
                 $status = 1;
             }
             Admin::where('id', $data['admin_id'])->update(['status' => $status]);
+            $adminDetails = Admin::where('id', $data['admin_id'])->first();
+            // $adminType=Auth::guard('admin')->user()->type;
+            if($adminDetails['type']=="vendor" && $status==1){
+                //send approval email
+                $email = $adminDetails['email'];
+                $messageData=[
+                    'email' => $adminDetails['email'],
+                    'first_name' => $adminDetails['first_name'],
+                    'last_name' => $adminDetails['last_name'],
+                    'phone' => $adminDetails['phone'],
+
+                ];
+            }
+            Mail::send('emails.vendor_approved', $messageData,function($message) use($email){
+                $message->to($email)->subject('Vendor Account is Approved');
+            });
+
             return response()->json(['status'=> $status, 'admin_id'=> $data['admin_id']]);
         }
     }

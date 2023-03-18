@@ -64,12 +64,13 @@ class VendorController extends Controller
                 Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->update([
                     'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
                     'city' => $updateDetails['city'], 'state' => $updateDetails['state'], 'country' => $updateDetails['country'],
-                    'phone' => $updateDetails['phone'], 'pincode' => $updateDetails['pincode'],
+                    'phone' => $updateDetails['phone'], 'pincode' => $updateDetails['pincode']
                     // 'image' => $updateDetails['image'],
                 ]);
                 return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
             }
-            $vendorDetail = Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            $vendorDetail = Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->first();
+            // dd($vendorDetail);
         } else if ($slug == "business") {
             if ($request->isMethod('post')) {
                 $updateDetails = $request->all();
@@ -114,18 +115,39 @@ class VendorController extends Controller
                 } else {
                     $imageName = "";
                 }
-                VendorsBusinessDetail::where('id', Auth::guard('admin')->user()->vendor_id)->update([
-                    'shop_name' => $updateDetails['shop_name'],'shop_address' => $updateDetails['shop_address'],
-                    'shop_city' => $updateDetails['shop_city'],'shop_state' => $updateDetails['shop_state'],
-                    'shop_country' => $updateDetails['shop_country'],'shop_pincode' => $updateDetails['shop_pincode'],
-                    'shop_mobile' => $updateDetails['shop_mobile'], 'shop_website' => $updateDetails['shop_website'],
-                    'shop_email' => $updateDetails['shop_email'], 'business_license_number' => $updateDetails['business_license_number'],
-                    'pan_number' => $updateDetails['pan_number'], 'gst_number' => $updateDetails['gst_number'],
-                    'address_proof' => $updateDetails['address_proof'], 'address_proof_image' => $imageName,
-                ]);
+                $vendorCount = VendorsBusinessDetail::where('id', Auth::guard('admin')->user()->vendor_id)->count();
+                if ($vendorCount > 0) {
+                    VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update([
+                        'shop_name' => $updateDetails['shop_name'], 'shop_address' => $updateDetails['shop_address'],
+                        'shop_city' => $updateDetails['shop_city'], 'shop_state' => $updateDetails['shop_state'],
+                        'shop_country' => $updateDetails['shop_country'], 'shop_pincode' => $updateDetails['shop_pincode'],
+                        'shop_mobile' => $updateDetails['shop_mobile'], 'shop_website' => $updateDetails['shop_website'],
+                        'shop_email' => $updateDetails['shop_email'], 'business_license_number' => $updateDetails['business_license_number'],
+                        'pan_number' => $updateDetails['pan_number'], 'gst_number' => $updateDetails['gst_number'],
+                        'address_proof' => $updateDetails['address_proof'], 'address_proof_image' => $imageName,
+                    ]);
+                } else {
+                    VendorsBusinessDetail::insert([
+                        'vendor_id', Auth::guard('admin')->user()->vendor_id,
+                        'shop_name' => $updateDetails['shop_name'], 'shop_address' => $updateDetails['shop_address'],
+                        'shop_city' => $updateDetails['shop_city'], 'shop_state' => $updateDetails['shop_state'],
+                        'shop_country' => $updateDetails['shop_country'], 'shop_pincode' => $updateDetails['shop_pincode'],
+                        'shop_mobile' => $updateDetails['shop_mobile'], 'shop_website' => $updateDetails['shop_website'],
+                        'shop_email' => $updateDetails['shop_email'], 'business_license_number' => $updateDetails['business_license_number'],
+                        'pan_number' => $updateDetails['pan_number'], 'gst_number' => $updateDetails['gst_number'],
+                        'address_proof' => $updateDetails['address_proof'], 'address_proof_image' => $imageName,
+                    ]);
+                }
+
+
                 return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
             }
-            $vendorDetail = VendorsBusinessDetail::where('id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            $vendorCount = VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->count();
+            if ($vendorCount > 0) {
+                $vendorDetail = VendorsBusinessDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            } else {
+                $vendorDetail = array();
+            }
             // dd($vendorDetail);
         } else if ($slug == "bank") {
             if ($request->isMethod('post')) {
@@ -150,14 +172,29 @@ class VendorController extends Controller
                 ];
 
                 $this->validate($request, $rules, $customMessages);
-                VendorsBankDetail::where('id', Auth::guard('admin')->user()->vendor_id)->update([
-                    'account_holder_name' => $updateDetails['account_holder_name'],'bank_name' => $updateDetails['bank_name'],
-                    'account_number' => $updateDetails['account_number'],'bank_ifsc_code' => $updateDetails['bank_ifsc_code'],
-                ]);
+                $vendorCount = VendorsBankDetail::where('id', Auth::guard('admin')->user()->vendor_id)->count();
+                if ($vendorCount > 0) {
+                    VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->update([
+                        'account_holder_name' => $updateDetails['account_holder_name'], 'bank_name' => $updateDetails['bank_name'],
+                        'account_number' => $updateDetails['account_number'], 'bank_ifsc_code' => $updateDetails['bank_ifsc_code'],
+                    ]);
+                } else {
+                    VendorsBankDetail::insert([
+                        'vendor_id', Auth::guard('admin')->user()->vendor_id,
+                        'account_holder_name' => $updateDetails['account_holder_name'], 'bank_name' => $updateDetails['bank_name'],
+                        'account_number' => $updateDetails['account_number'], 'bank_ifsc_code' => $updateDetails['bank_ifsc_code'],
+                    ]);
+                }
                 return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
             }
-            $vendorDetail = VendorsBankDetail::where('id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            // $vendorDetail = VendorsBankDetail::where('id', Auth::guard('admin')->user()->vendor_id)->first();
             // dd($vendorDetail);
+            $vendorCount = VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->count();
+            if ($vendorCount > 0) {
+                $vendorDetail = VendorsBankDetail::where('vendor_id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            } else {
+                $vendorDetail = array();
+            }
         }
         $countries = Countries::where('status', 1)->get()->toArray();
         return view('admin.setting.update_vendor_details')->with(compact('slug', 'vendorDetail', 'countries'));

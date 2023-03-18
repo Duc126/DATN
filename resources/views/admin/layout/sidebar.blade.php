@@ -30,7 +30,22 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false" aria-controls="ui-catalogue">
+                    <i class="icon-grid-2 menu-icon"></i>
+                    <span class="menu-title">{{ __('Quản lý danh mục') }}</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-catalogue">
+                    <ul class="nav flex-column sub-menu">
+
+                        <li class="nav-item"><a class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a></li>
+
+                    </ul>
+                </div>
+            </li>
     </ul>
+
 @else
     <li class="nav-item">
         <a
