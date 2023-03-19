@@ -114,6 +114,13 @@
                                                 placeholder="Nhập Trọng Lượng Sản Phẩm" name="product_weight"
                                                 @if (!empty($product['product_weight'])) value="{{ $product['product_weight'] }}" @else value="{{ old('product_weight') }}" @endif>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="group_code">{{ __('Mã Nhóm ') }}<span class="text-danger">*</span>
+                                                :</label>
+                                            <input type="text" class="form-control" id="group_code"
+                                                placeholder="Nhập Mã Nhóm" name="group_code"
+                                                @if (!empty($product['group_code'])) value="{{ $product['group_code'] }}" @else value="{{ old('group_code') }}" @endif>
+                                        </div>
                                         {{-- <div id="appendProductsLevel">
                                             @include('admin.products.append-product')
                                         </div> --}}

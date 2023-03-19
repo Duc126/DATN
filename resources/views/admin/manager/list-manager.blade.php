@@ -8,7 +8,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $title }}</h4>
                             <div class="table-responsive">
-                                <table class="table table-striped text-center">
+                                <table id="adminTable" class="table table-striped text-center">
                                     <thead>
                                         <tr>
                                             <th>#</th>

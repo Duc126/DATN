@@ -144,6 +144,8 @@
                                         <label for="shop_name">{{ __('Tên') }}<span class="text-danger">*</span>
                                             :</label>
                                         <input type="text" class="form-control" name="shop_name" id="shop_name"
+                                        {{-- @if(isset($vendor['shop_name']))
+                                        value="{{ $vendor['shop_name'] }}"@endif readonly> --}}
                                         value="{{ old('shop_name', $vendor['vendor_business']['shop_name'] ?? null) }}"readonly>
 
                                             {{-- value="{{ $vendor['vendor_business']['shop_name'] }}"readonly> --}}
