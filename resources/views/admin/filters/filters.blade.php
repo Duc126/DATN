@@ -37,7 +37,7 @@
                                             <th>#</th>
                                             <th>{{ __('Tên') }}</th>
                                             <th>{{ __('Cột') }}</th>
-                                            <th>{{ __('Category') }}</th>
+                                            <th>{{ __('Thể Loại') }}</th>
                                             <th>{{ __('Trang Thái') }}</th>
                                             <th>{{ __('Hoạt động') }}</th>
                                         </tr>

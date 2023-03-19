@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Front\AddProductController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\Front\VendorController as FrontVendorController;
@@ -143,4 +144,15 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('/vendor/login-register', [FrontVendorController::class, 'loginRegister']);
     Route::post('/vendor/register', [FrontVendorController::class, 'vendorRegister']);
     Route::get('vendor/confirm/{code}', [FrontVendorController::class, 'confirmVendor']);
+
+    //Add to card route
+    Route::post('cart/add', [AddProductController::class, 'cartAdd']);
+    Route::get('cart', [AddProductController::class, 'cart']);
+
+    //Update cart item quantity
+    Route::post('/cart/update',[AddProductController::class, 'cartUpdate']);
+
+    //delete cart item quantity
+    Route::post('/cart/delete',[AddProductController::class, 'cartDelete']);
+
 });
