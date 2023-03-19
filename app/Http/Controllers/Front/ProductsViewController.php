@@ -7,8 +7,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductsAttributes;
 use App\Models\ProductsFilter;
+use App\Models\RecentlyViewProducts;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductsViewController extends Controller
 {
@@ -115,15 +118,61 @@ class ProductsViewController extends Controller
             }
         }
     }
+
+    public function vendorListing($vendorId)
+    {
+
+        //vendor SHop
+        $getVendorShop = Vendor::getVendorShop($vendorId);
+        // dd($getVendorShop);
+        $vendorProducts = Product::with('brand')->where('vendor_id', $vendorId)->where('status', 1);
+        $vendorProducts = $vendorProducts->paginate(30);
+        // dd($vendorProducts);
+
+        // // dd($vendorProducts);
+        return view('front.products.vendor_listing')->with(compact('getVendorShop', 'vendorProducts'));
+    }
     public function detail($id)
     {
         $productDetails = Product::with(['section', 'category', 'brand', 'attributes' => function ($query) {
             $query->where('stock', '>', 0)->where('status', 1);
-        }, 'images'])->find($id)->toArray();
+        }, 'images', 'vendor'])->find($id)->toArray();
         $categoryDetails = Category::categoryDetails($productDetails['category']['url']);
+        // dd($productDetails);
+        //Hiển thị sản phẩm tương tự
+        $similarProducts = Product::with('brand')->where('category_id', $productDetails['category']['id'])->where('id', '!=', $id)->limit(6)->inRandomOrder()->get()->toArray();
+        // dd($similarProducts);
+
+        //set session for recenly view product
+
+        if (empty(Session::get('session_id'))) {
+            $session_id = md5(uniqid(rand(), true));
+        } else {
+            $session_id =  Session::get('session_id');
+        }
+        Session::put('session_id', $session_id);
+        //Insert product in table if not already exits
+
+        $countRecentlyViewProduct = RecentlyViewProducts::where(['product_id' => $id, 'session_id' => $session_id])->count();
+        if ($countRecentlyViewProduct == 0) {
+            RecentlyViewProducts::insert(['product_id' => $id, 'session_id' => $session_id]);
+        }
+        //get recently view products IDS
+        $recentProductsIds = RecentlyViewProducts::select('product_id')->where('product_id', '!=', $id)->where('session_id', $session_id)->inRandomOrder()->get()->take(4)
+            ->pluck('product_id');
+            // dd($recentProductsIds);
+                    //Hiển thị recently view Products
+        $recentlyViewProducts = Product::with('brand')->whereIn('id',$recentProductsIds)->get()->toArray();
+        // dd($similarProducts);
+        //get Group Product(Product Colors)
+        $groupProducts = array();
+        if(!empty($productDetails['group_code'])){
+            $groupProducts = Product::select('id','product_image')->where('id','!=', $id)->where(['group_code'=>$productDetails['group_code'],'status' =>1])->get()->toArray();
+            // dd($groupProducts);
+        }
         $totalStock = ProductsAttributes::where('product_id', $id)->sum('stock');
-        // dd($categoryDetails);
-        return view('front.products.detail')->with(compact('productDetails', 'categoryDetails', 'totalStock'));
+
+        return view('front.products.detail')->with(compact('productDetails', 'categoryDetails', 'totalStock', 'similarProducts','recentlyViewProducts','groupProducts'));
     }
 
     public function getProductPrice(Request $request)
@@ -132,7 +181,7 @@ class ProductsViewController extends Controller
             $data = $request->all();
             // dd($data);
             // echo "<pre>"; print_r($data);die;
-            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'],$data['size']);
+            $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'], $data['size']);
             return  $getDiscountAttributePrice;
         }
     }

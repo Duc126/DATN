@@ -26,6 +26,7 @@ class AdminManagerController extends Controller
     public function viewVendor($id){
         $vendor = Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id', $id)->first();
         $vendor = json_decode(json_encode($vendor), true);
+
         // dd($vendor);
         return view('admin/manager/view-vendor')->with(compact('vendor'));
 

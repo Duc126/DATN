@@ -34,17 +34,17 @@
                             </li>
                         </ul>
                         <h6 class="item-title">
-                            <a href="single-product.html">{{ $product['product_name'] }}</a>
+                            <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_name'] }}</a>
                         </h6>
                         <div class="item-description">
                             {{ $product['description'] }}
                         </div>
-                        <div class="item-stars">
+                        {{-- <div class="item-stars">
                             <div class='star' title="0 out of 5 - based on 0 Reviews">
                                 <span style='width:67px'></span>
                             </div>
                             <span>(0)</span>
-                        </div>
+                        </div> --}}
                     </div>
                     <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
                     @if ($getDiscountPrice > 0)

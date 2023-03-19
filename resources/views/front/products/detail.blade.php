@@ -135,6 +135,14 @@ $productFilters = ProductsFilter::productFilters();
                                 </div>
                             @endif
                         </div>
+
+                            @if(isset($productDetails['vendor']))
+                            <div ><strong>
+                                {{ __('Người Bán:') }}
+
+                                </strong>  <a href="/products/{{$productDetails['vendor']['id']}}">{{ $productDetails['vendor']['vendor_business_details']['shop_name']}}</a>
+                        </div>
+                        @endif
                         <div class="section-5-product-variants u-s-p-y-14">
                             {{-- <h6 class="information-heading u-s-m-b-8">Product Variants:</h6> --}}
                             {{-- <div class="color u-s-m-b-11">
@@ -147,7 +155,21 @@ $productFilters = ProductsFilter::productFilters();
                                     </select>
                                 </div>
                             </div> --}}
-                            <div class="sizes u-s-m-b-11">
+                            @if(count($groupProducts)>0)
+                            <div>
+                                <div>
+                                    <strong> {{ __('Màu Sản Phẩm') }}
+                                 </div>
+                                 <div>
+                                    @foreach($groupProducts as $product)
+                                    <a href="{{url('product/'.$product['id'])  }}">
+                                    <img style="width:80px;" src="{{ asset('front/images/product_images/small/'.$product['product_image']) }}">
+                                    </a>
+                                    @endforeach
+                                 </div>
+                            </div>
+                            @endif
+                            <div class="sizes u-s-m-b-11" style="margin-top: 20px;">
                                 <strong>{{ __('Kích Thước:') }}</strong>
                                 <div class="size-variant select-box-wrapper">
                                     <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}"
@@ -160,7 +182,21 @@ $productFilters = ProductsFilter::productFilters();
                                     </select>
                                 </div>
                             </div>
+                            {{-- <div class="sizes u-s-m-b-11">
+                                <strong>{{ __('Kích Thước:') }}</strong>
+                                <div class="size-variant select-box-wrapper">
+                                    <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}"
+                                        class="select-box product-size">
+                                        <option value="">{{ __('Chọn Kích Thước: ') }}</option>
+                                        @foreach ($productDetails['attributes'] as $attribute)
+                                            <option value="{{ $attribute['size'] }}">{{ $attribute['size'] }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div> --}}
                         </div>
+
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
                             <form action="#" class="post-form">
                                 <div class="quick-social-media-wrapper u-s-m-b-22">
@@ -529,15 +565,21 @@ $productFilters = ProductsFilter::productFilters();
                 <section class="section-maker">
                     <div class="container">
                         <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Similar Products</h3>
+                            <h3 class="sec-maker-h3">{{ __('Sản Phẩm Tương Tự') }}</h3>
                         </div>
                         <div class="slider-fouc">
                             <div class="products-slider owl-carousel" data-item="4">
+                                @foreach($similarProducts as $product)
                                 <div class="item">
                                     <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid"
-                                                src="{{ asset('front/images/product/product@4x.jpg') }}" alt="Product">
+                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$product['id']) }}">
+                                            <?php $product_image_path = 'front/images/product_images/small/' . $product['product_image']; ?>
+                                            @if (!empty($product['product_image']) && file_exists($product_image_path))
+                                                <img class="img-fluid" src="{{ asset($product_image_path) }}" alt="Product">
+                                            @else
+                                                <img class="img-fluid" src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                    alt="Product">
+                                            @endif
                                         </a>
                                         <div class="item-action-behaviors">
                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
@@ -551,165 +593,48 @@ $productFilters = ProductsFilter::productFilters();
                                         <div class="what-product-is">
                                             <ul class="bread-crumb">
                                                 <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Product Code</a>
+                                                    <a href="shop-v1-root-category.html">{{ $product['product_code'] }}</a>
+                                                </li>
+                                                <li class="has-separator">
+                                                    <a href="listing.html">{{ $product['product_color'] }}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop-v3-sub-sub-category.html">{{ $product['brand']['name'] }}</a>
                                                 </li>
                                             </ul>
                                             <h6 class="item-title">
-                                                <a href="single-product.html">Product Name</a>
+                                                <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_name'] }}</a>
                                             </h6>
-                                            <div class="item-stars">
+                                            {{-- <div class="item-stars">
                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
                                                     <span style='width:0'></span>
                                                 </div>
                                                 <span>(0)</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $100.00
+                                        <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
+                                        @if ($getDiscountPrice > 0)
+                                            <div class="price-template">
+                                                <div class="item-new-price">
+                                                    {{ $getDiscountPrice }}đ
+                                                </div>
+                                                <div class="item-old-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
                                             </div>
-                                            <div class="item-old-price">
-                                                $120.00
+                                        @else
+                                            <div class="price-template">
+                                                <div class="item-new-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                     <div class="tag new">
                                         <span>NEW</span>
                                     </div>
                                 </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid"
-                                                src="{{ asset('front/images/product/product@4x.jpg') }}"alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Product Code</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Fern Green Men's Jacket</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $100.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $120.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid"
-                                                src="{{ asset('front/images/product/product@4x.jpg') }}" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Product Code</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Brown Dark Tan Round Double Bridge
-                                                    Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $100.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $120.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid"
-                                                src="{{ asset('front/images/product/product@4x.jpg') }}" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
-                                                Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Product Code</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Black Round Double Bridge Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $100.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $120.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -719,15 +644,21 @@ $productFilters = ProductsFilter::productFilters();
                 <section class="section-maker">
                     <div class="container">
                         <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Recently View</h3>
+                            <h3 class="sec-maker-h3">{{ __('Sản Phẩm Xem Gần Đây') }}</h3>
                         </div>
                         <div class="slider-fouc">
                             <div class="products-slider owl-carousel" data-item="4">
+                                @foreach($recentlyViewProducts as $product)
                                 <div class="item">
                                     <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid"
-                                                src="{{ asset('front/images/product/product@4x.jpg') }}" alt="Product">
+                                        <a class="item-img-wrapper-link" href="{{ url('product/'.$product['id']) }}">
+                                            <?php $product_image_path = 'front/images/product_images/small/' . $product['product_image']; ?>
+                                            @if (!empty($product['product_image']) && file_exists($product_image_path))
+                                                <img class="img-fluid" src="{{ asset($product_image_path) }}" alt="Product">
+                                            @else
+                                                <img class="img-fluid" src="{{ asset('front/images/product_images/small/no-image.png') }}"
+                                                    alt="Product">
+                                            @endif
                                         </a>
                                         <div class="item-action-behaviors">
                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
@@ -741,32 +672,48 @@ $productFilters = ProductsFilter::productFilters();
                                         <div class="what-product-is">
                                             <ul class="bread-crumb">
                                                 <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Product Code</a>
+                                                    <a href="shop-v1-root-category.html">{{ $product['product_code'] }}</a>
+                                                </li>
+                                                <li class="has-separator">
+                                                    <a href="listing.html">{{ $product['product_color'] }}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop-v3-sub-sub-category.html">{{ $product['brand']['name'] }}</a>
                                                 </li>
                                             </ul>
                                             <h6 class="item-title">
-                                                <a href="single-product.html">Maire Battlefield Jeep Men's Jacket</a>
+                                                <a href="{{ url('product/'.$product['id']) }}">{{ $product['product_name'] }}</a>
                                             </h6>
-                                            <div class="item-stars">
+                                            {{-- <div class="item-stars">
                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
                                                     <span style='width:0'></span>
                                                 </div>
                                                 <span>(0)</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $100.00
+                                        <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
+                                        @if ($getDiscountPrice > 0)
+                                            <div class="price-template">
+                                                <div class="item-new-price">
+                                                    {{ $getDiscountPrice }}đ
+                                                </div>
+                                                <div class="item-old-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
                                             </div>
-                                            <div class="item-old-price">
-                                                $120.00
+                                        @else
+                                            <div class="price-template">
+                                                <div class="item-new-price">
+                                                    {{ $product['product_price'] }}đ
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
+                                    <div class="tag new">
+                                        <span>NEW</span>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

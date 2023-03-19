@@ -8,6 +8,7 @@ $(document).ready(function () {
     $("#brand").DataTable();
     $("#banners").DataTable();
     $("#filters").DataTable();
+    $("#adminTable").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");

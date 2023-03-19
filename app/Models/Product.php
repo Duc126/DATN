@@ -28,6 +28,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductsImage::class);
     }
+    public function vendor(){
+        return $this->belongsTo(Vendor::class, 'vendor_id')->with('vendorBusinessDetails');
+    }
     public static function getDiscountPrice($product_id)
     {
         $proDetails = Product::select('product_price', 'product_discount', 'category_id')->where('id', $product_id)->first();

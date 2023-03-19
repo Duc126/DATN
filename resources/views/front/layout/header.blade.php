@@ -92,9 +92,11 @@
                 <div class="row clearfix align-items-center">
                     <div class="col-lg-3 col-md-9 col-sm-6">
                         <div class="brand-logo text-lg-center">
-                            <a href="index.html">
-                                <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
-                                    alt="Stack Developers" class="app-brand-logo">
+                            <a href="{{ url('/') }}">
+                                {{-- <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
+                                    alt="Stack Developers" class="app-brand-logo"> --}}
+                                    <img width="200" height="60" src="{{ asset('front/images/main-logo/logo-FE.png') }}"
+                                    alt="Thương Mại Điện Tử" class="app-brand-logo">
                             </a>
                         </div>
                     </div>
@@ -219,7 +221,8 @@
                         <div class="v-menu v-close">
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
-                                All Categories
+                                {{ __('
+                                Tất cả danh mục') }}
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>

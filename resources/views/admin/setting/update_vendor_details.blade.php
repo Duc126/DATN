@@ -266,15 +266,18 @@
                                                         class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control" name="shop_name"
                                                     id="shop_name"
+                                                    {{-- @if(isset($vendorDetail['shop_name']))
+                                                    value="{{ $vendorDetail['shop_name'] }}"@endif > --}}
                                                     value="{{ old('shop_name', $vendorDetail['shop_name'] ?? null) }}">
 
-                                                    {{-- value="{{ $vendorDetail['shop_name'] }}"> --}}
                                             </div>
                                             <div class="form-group">
                                                 <label for="shop_address">{{ __('Đường') }}
                                                     :</label>
                                                 <input type="text" class="form-control" id="shop_address"
                                                     name="shop_address"
+                                                    {{-- @if(isset($vendorDetail['shop_address']))
+                                                    value="{{ $vendorDetail['shop_address'] }}"@endif > --}}
                                                     value="{{ old('shop_address', $vendorDetail['shop_address'] ?? null) }}">
 
                                                     {{-- value="{{ $vendorDetail['shop_address'] }}"> --}}
@@ -331,15 +334,14 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="address_proof_image">{{ __('Anh') }}<span
+                                                <label for="address_proof_image">{{ __('Ảnh') }}<span
                                                         class="text-danger">*</span>
                                                     :</label>
                                                 <input type="file" class="form-control" id="address_proof_image"
                                                     name="address_proof_image">
                                                 @if (!empty($vendorDetail['address_proof_image']))
                                                     <a target="_blank"
-                                                        href="{{ url('admin/images/proofs/' . $vendorDetail['address_proof_image']) }}">Xem
-                                                        Avatar
+                                                        href="{{ url('admin/images/proofs/' . $vendorDetail['address_proof_image']) }}">{{ __('Xem Ảnh') }}
                                                     </a>
                                                     <input type="hidden" name="current-address_proof"
                                                         value="{{ $vendorDetail['address_proof_image'] }}">
