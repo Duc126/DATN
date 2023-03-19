@@ -28,7 +28,8 @@ class Product extends Model
     {
         return $this->hasMany(ProductsImage::class);
     }
-    public function vendor(){
+    public function vendor()
+    {
         return $this->belongsTo(Vendor::class, 'vendor_id')->with('vendorBusinessDetails');
     }
     public static function getDiscountPrice($product_id)
@@ -50,7 +51,7 @@ class Product extends Model
 
     public static function getDiscountAttributePrice($product_id, $size)
     {
-        $proAttrPrice = ProductsAttributes::where(['product_id'=>$product_id, 'size' =>$size])->first()->toArray();
+        $proAttrPrice = ProductsAttributes::where(['product_id' => $product_id, 'size' => $size])->first()->toArray();
         $proDetails = Product::select('product_discount', 'category_id')->where('id', $product_id)->first();
         $proDetails = json_decode(json_encode($proDetails), true);
         $catDetails = Category::select('category_discount')->where('id', $proDetails['category_id'])->first();
@@ -62,13 +63,11 @@ class Product extends Model
         } else if ($catDetails['category_discount'] > 0) {
             $final_price = $proAttrPrice['price'] - ($proAttrPrice['price'] *  $catDetails['category_discount'] / 100);
             $discount = $proAttrPrice['price'] - $final_price;
-
         } else {
             $final_price = $proAttrPrice['price'];
             $discount = 0;
-
         }
-        return array('product_price'=>$proAttrPrice['price'], 'final_price'=>$final_price, 'discount' => $discount);
+        return array('product_price' => $proAttrPrice['price'], 'final_price' => $final_price, 'discount' => $discount);
     }
 
     public static function isProductNew($product_id)

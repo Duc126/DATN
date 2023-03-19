@@ -7,16 +7,16 @@
     <title>{{ __('Email') }} </title>
 </head>
 <body>
-<tr><td>{{ __('Chào') }} {{ $first_name.$last_name }}!</td></tr>
+<tr><td>{{ __('Chào') }} {{ $first_name}}!</td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td>{{ __('Your vendor account has been approved now you can login and add products') }}</td></tr>
+<tr><td>{{ __('Tài khoản nhà cung cấp của bạn đã được phê duyệt, bây giờ bạn có thể đăng nhập và thêm sản phẩm') }}</td></tr>
 
 {{-- <tr><td>{{ __('Email nhà cung cấp của bạn đã được xác nhận. Vui lòng đăng nhập và thêm thông tin cá nhân của bạn. chi tiết kinh doanh và ngân hàng để tài khoản của bạn sẽ được phê duyệt') }}</td></tr> --}}
 {{-- <tr><td><a href="{{ url('vendor/confirm/'.$code) }}">{{ url('vendor/confirm/'.$code) }}</a></td></tr> --}}
 <tr><td>&nbsp;</td></tr>
-<tr><td>{{ __('Your account vendor details are as below:-') }}</td></tr>
+<tr><td>{{ __('Chi tiết nhà cung cấp tài khoản của bạn như dưới đây:') }}</td></tr>
 <tr><td>&nbsp;<br></td></tr>
-<tr><td>{{ __('Chào') }} {{ $first_name.$last_name }}</td></tr>
+<tr><td>{{ __('Chào') }} {{ $first_name }}</td></tr>
 <tr><td>&nbsp;<br></td></tr>
 
 <tr><td>{{ __('Số điện thoại') }} {{ $phone }}</td></tr>
