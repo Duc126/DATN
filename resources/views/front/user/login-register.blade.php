@@ -52,20 +52,24 @@
                     <div class="login-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">{{ __('Đăng Nhập') }}</h2>
                         <h6 class="account-h6 u-s-m-b-30">{{ __('Chào mừng trở lại! đăng nhập vào tài khoản của bạn') }}.</h6>
-                        <form action="{{ url('admin/login') }}" method="post" >
+                        <p id="login-error"></p>
+                        <form id="loginForm" action="javascript:;" method="post" >
                             @csrf
                             <div class="u-s-m-b-30">
-                                <label for="user-name-email">{{ __('Email') }}
+                                <label for="users-email">{{ __('Email') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" name="email" id="vendor-email"class="text-field"
+                                <input type="text" name="email" id="users-email"class="text-field"
                                     placeholder="Username / Email">
+                                    <p id ="login-email"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="login-password">{{ __('Mật Khẩu') }}
+                                <label for="users-password">{{ __('Mật Khẩu') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="password" id="vendor-password" name="password" class="text-field" placeholder="Password">
+                                <input type="password" id="users-password" name="password" class="text-field" placeholder="Password">
+                                <p id ="login-password"></p>
+
                             </div>
                             {{-- <div class="group-inline u-s-m-b-30">
                                 <div class="group-1">
@@ -91,48 +95,52 @@
                     <div class="reg-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">{{ __('Đăng Ký') }}</h2>
                         <h6 class="account-h6 u-s-m-b-30">{{ __('Đăng ký cho trang web này cho phép bạn truy cập trạng thái và lịch sử đặt hàng của bạn.') }}</h6>
-                        <form id="vendorForm" action="{{ url('/vendor/register') }}" method="post">
+                        <p id="register-success"></p>
+
+                        <form id="registerForm" action="javascript:;" method="post">
                             @csrf
                             <div class="u-s-m-b-30">
-                                <label for="first_name">{{ __('Tên') }}
+                                <label for="user-name">{{ __('Họ Tên') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="first_name" name="first_name" class="text-field"
+                                <input type="text" id="user-name" name="name" class="text-field"
                                     placeholder="Nhập Tên">
+                                    <p id="register-name"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="last_name">{{ __('Họ') }}
+                                <label for="user-phone">{{ __('Số Điện Thoại') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="last_name" name="last_name" class="text-field"
-                                    placeholder="Nhập Họ">
-                            </div>
-                            <div class="u-s-m-b-30">
-                                <label for="phone">{{ __('Số Điện Thoại') }}
-                                    <span class="astk">*</span>
-                                </label>
-                                <input type="text" id="phone" name="phone" class="text-field"
+                                <input type="text" id="user-phone" name="phone" class="text-field"
                                     placeholder="Nhập Số Điện Thoại">
+                                    <p id="register-phone"></p>
+
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="email">{{ __('Email') }}
+                                <label for="user-email">{{ __('Email') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="email" id="email" name="email" class="text-field"
+                                <input type="email" id="user-email" name="email" class="text-field"
                                     placeholder="Nhập Email">
+                                    <p id="register-email"></p>
+
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="password">{{ __('Mật Khẩu') }}
+                                <label for="user-pass">{{ __('Mật Khẩu') }}
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="password" id="password" name="password" class="text-field"
+                                <input type="password" id="user-pass" name="password" class="text-field"
                                     placeholder="Nhập Mật Khẩu">
+                                    <p id="register-password"></p>
+
                             </div>
                             <div class="u-s-m-b-30">
                                 <input type="checkbox" class="check-box" name="accept" id="accept">
                                 <label class="label-text no-color" for="accept">{{ __('Tôi đã đọc và chấp nhận') }}
                                     <a href="terms-and-conditions.html" class="u-c-brand">{{ __('Điều khoản và điều kiện') }}</a>
                                 </label>
+                                <p id="register-accept"></p>
+
                             </div>
                             <div class="u-s-m-b-45">
                                 <button class="button button-primary w-100">{{ __('Đăng Ký') }}</button>

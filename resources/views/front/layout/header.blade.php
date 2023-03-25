@@ -25,10 +25,10 @@
                 <nav>
                     <ul class="secondary-nav g-nav">
                         <li>
-                            <a>My Account
+                            <a>@if(Auth::check()) {{ __('Tài Khoản Của Tôi') }} @else {{ __('Đăng Nhập/Đăng Ký') }} @endif
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
-                            <ul class="g-dropdown" style="width:200px">
+                            <ul class="g-dropdown" style="width:230px">
                                 <li>
                                     <a href="cart.html">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
@@ -39,21 +39,35 @@
                                         <i class="far fa-heart u-s-m-r-9"></i>
                                         My Wishlist</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="checkout.html">
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
                                         Checkout</a>
+                                </li> --}}
+                                @if(Auth::check())
+                                <li>
+                                    <a href="{{ url('user/account') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        {{ __('Tài Khoản Của Tôi') }}</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{ url('user/logout') }}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        Customer Login</a>
+                                        {{ __('Đăng Xuất') }}</a>
+                                </li>
+                                @else
+                                <li>
+                                    <a href="{{ url('user/login-register') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        {{ __('Khách Hàng Đăng Nhập') }}</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{ url('vendor/login-register') }}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        Vendor Login</a>
+                                        {{ __('Nhà Cung Cấp Đăng Nhập') }}</a>
+
                                 </li>
+                                @endif
                             </ul>
                         </li>
                         <li>

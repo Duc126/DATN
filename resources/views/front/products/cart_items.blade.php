@@ -23,7 +23,7 @@
                 <tr>
                     <td>
                         <div class="cart-anchor-image">
-                            <a href="{{ url('product/'.$item['product_id'])}}">
+                            <a href="{{ url('product/' . $item['product_id']) }}">
                                 <img src="{{ asset('front/images/product_images/small/' . $item['product']['product_image']) }}"
                                     alt="Product">
                                 <h6>
@@ -61,8 +61,10 @@
                         <div class="cart-quantity">
                             <div class="quantity">
                                 <input type="text" class="quantity-text-field" value="{{ $item['quantity'] }}">
-                                <a class="plus-a updateCartItem" data-cartid="{{ $item['id'] }}" data-qty="{{ $item['quantity'] }}" data-max="1000">&#43;</a>
-                                <a class="minus-a updateCartItem" data-cartid="{{ $item['id'] }}" data-qty="{{ $item['quantity'] }}" data-min="1">&#45;</a>
+                                <a class="plus-a updateCartItem" data-cartid="{{ $item['id'] }}"
+                                    data-qty="{{ $item['quantity'] }}" data-max="1000">&#43;</a>
+                                <a class="minus-a updateCartItem" data-cartid="{{ $item['id'] }}"
+                                    data-qty="{{ $item['quantity'] }}" data-min="1">&#45;</a>
                             </div>
                         </div>
                     </td>
@@ -74,7 +76,8 @@
                     <td>
                         <div class="action-wrapper">
                             {{-- <button class="button button-outline-secondary fas fa-sync"></button> --}}
-                            <button class="button button-outline-secondary fas fa-trash deleteCartItem" data-cartid="{{ $item['id'] }}"></button>
+                            <button class="button button-outline-secondary fas fa-trash deleteCartItem"
+                                data-cartid="{{ $item['id'] }}"></button>
                         </div>
                     </td>
                 </tr>

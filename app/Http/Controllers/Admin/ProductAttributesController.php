@@ -40,7 +40,7 @@ class ProductAttributesController extends Controller
                     $attribute->save();
                 }
             }
-            return redirect()->back()->with('success_message', 'Attributes added successfully');
+            return redirect()->back()->with('success_message', 'Thuộc tính sản phẩm được thêm thành công');
         };
 
         // dd($productAttributes);

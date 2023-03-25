@@ -79,7 +79,7 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <a class="btn btn-danger" href="{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
+                                <a class="btn btn-danger" href="{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
 
                             </form>
                             <br>
@@ -123,10 +123,10 @@
 
                                                         &nbsp;
                                                         <a href="javascript:void(0)" class="confirmDelete" module="image"
-                                                        moduleid="{{ $image['id'] }}">
-                                                        <i style="font-size: 25px" class="mdi mdi-delete-sweep"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Xóa Sản Phẩm"></i></a>
+                                                            moduleid="{{ $image['id'] }}">
+                                                            <i style="font-size: 25px" class="mdi mdi-delete-sweep"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Xóa Sản Phẩm"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -86,7 +86,7 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                    <a class="btn btn-danger" href="{{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
+                                <a class="btn btn-danger" href="{{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
 
                             </form>
                             <br>
@@ -94,8 +94,7 @@
                             <h5><strong>
                                     {{ _('Bảng thuộc tính') }}</strong></h5>
                             <div class="table-responsive">
-                                <form method="post"
-                                    action={{ url('admin/edit-attributes/' . $productAttributes['id']) }}>
+                                <form method="post" action={{ url('admin/edit-attributes/' . $productAttributes['id']) }}>
                                     @csrf
                                     <table id="attributes_Product" class="table table-striped display">
                                         <thead>
@@ -111,7 +110,8 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($productAttributes['attributes'] as $attributes)
-                                            <input class="d-none" type="text" name="attributeId[]" value="{{ $attributes['id'] }}">
+                                                <input class="d-none" type="text" name="attributeId[]"
+                                                    value="{{ $attributes['id'] }}">
                                                 <tr>
                                                     <td>{{ $attributes['id'] }}</td>
                                                     <td>{{ $attributes['size'] }} </td>
