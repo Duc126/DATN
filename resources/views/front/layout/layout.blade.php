@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Đa Cấp</title>
+    <title>{{ __('Thương Mại Điện Tử') }}</title>
     <!-- Standard Favicon -->
     <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
@@ -34,12 +34,19 @@
     <link rel="stylesheet" href="{{ url('front/css/utility.css') }}">
     <!-- Main -->
     <link rel="stylesheet" href="{{ url('front/css/bundle.css') }}">
+    <!-- logo -->
+    <link rel="shortcut icon" href="{{ url('admin/images/logol.jpeg') }}" />
+
         <!-- Main -->
      <link rel="stylesheet" href="{{ url('front/css/easyzoom.css') }}">
+     <link rel="stylesheet" href="{{ url('front/css/custome.css') }}">
+
 </head>
 
 <body>
-
+    <div class="loader">
+        <img src="{{ asset('front/images/loading/loading.gif') }}" alt="loading..." />
+     </div>
 <!-- app -->
 <div id="app">
 @include('front.layout.header')

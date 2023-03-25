@@ -26,11 +26,11 @@
 <tr><td>&nbsp;<br></td></tr>
 
 
-<tr><td>{{ __('Mật Khẩu: ***** (as chosen by you)') }} </td></tr>
+<tr><td>{{ __('Mật Khẩu: ***** (như bạn đã chọn)') }} </td></tr>
 
 <tr><td>&nbsp;<br></td></tr>
 
-<tr><td>{{ __('Thank') }}</td></tr>
+<tr><td>{{ __('Cảm Ơn') }}</td></tr>
 <tr><td>{{ __('Đức') }}</td></tr>
 
 

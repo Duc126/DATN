@@ -56,17 +56,18 @@ class VendorController extends Controller
             $vendor->phone = $data['phone'];
             $vendor->email = $data['email'];
             $vendor->status = 0;
-            $vendor->save();
+
 
             //Set default timezone
             date_default_timezone_set("Asia/Kolkata");
             $vendor->created_at = date("Y-m-d H:i:s");
             $vendor->updated_at = date("Y-m-d H:i:s");
             $vendor->save();
-
-
-
             $vendor_id = DB::getPdo()->lastInsertId();
+
+
+
+            // dd($vendor_id);
 
             //Insert the vendor details in admin table
             $admin = new Admin;
@@ -78,7 +79,7 @@ class VendorController extends Controller
             $admin->email = $data['email'];
             $admin->password = bcrypt($data['password']);
             $admin->status = 0;
-            $admin->save();
+            // dd($admin);
             //Set default timezone
             date_default_timezone_set("Asia/Kolkata");
             $admin->created_at = date("Y-m-d H:i:s");
@@ -97,7 +98,7 @@ class VendorController extends Controller
             ];
 
             Mail::send('emails.vendor_confirmation', $messageData, function ($message) use ($email) {
-                $message->to($email)->subject('Confirm your vendor Account');
+                $message->to($email)->subject('Xác nhận tài khoản nhà cung cấp của bạn');
             });
             DB::commit();
 
@@ -115,7 +116,7 @@ class VendorController extends Controller
         if ($vendorCount > 0) {
             $vendorDetails = Vendor::where('email', $email)->first();
             if ($vendorDetails->confirm == "Yes") {
-                $message = "Your vendor account is already confirmed.You can login!!!!!!";
+                $message = "Tài khoản nhà cung cấp của bạn đã được xác nhận. Bạn có thể đăng nhập!!!";
                 return redirect('vendor/login-register')->with('error_message', $message);
             } else {
                 Admin::where('email', $email)->update(['confirm' => 'Yes']);
@@ -130,8 +131,8 @@ class VendorController extends Controller
 
                 ];
 
-                Mail::send('emails.vendor_confirmation', $messageData, function ($message) use ($email) {
-                    $message->to($email)->subject('Your vendor Account Confirm');
+                Mail::send('emails.vendor_confirmed', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Xác nhận tài khoản nhà cung cấp của bạn');
                 });
                 // redirect to vendor đăng nhập in đăng xuất page success message
                 $message = "Email nhà cung cấp Acccout của bạn đã được xác nhận. Bạn có thể đăng nhập và thêm cá nhân của bạn";

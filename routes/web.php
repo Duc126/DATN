@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductsViewController;
+use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController as FrontVendorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -132,7 +133,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::match(['get', 'post'], '/' . $url, [ProductsViewController::class, 'listingIndex']);
     }
     //Vendor Products
-    Route::get('/products/{vendorId}',[ProductsViewController::class, 'vendorListing']);
+    Route::get('/products/{vendorId}', [ProductsViewController::class, 'vendorListing']);
     //Product Detail Page
     Route::get('/product/{id}', [ProductsViewController::class, 'detail']);
     //GET PRODUCT ATTRIBUTE PRICE
@@ -150,9 +151,18 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('cart', [AddProductController::class, 'cart']);
 
     //Update cart item quantity
-    Route::post('/cart/update',[AddProductController::class, 'cartUpdate']);
+    Route::post('/cart/update', [AddProductController::class, 'cartUpdate']);
 
     //delete cart item quantity
-    Route::post('/cart/delete',[AddProductController::class, 'cartDelete']);
-
+    Route::post('/cart/delete', [AddProductController::class, 'cartDelete']);
+    //use login
+    Route::get('user/login-register', [UserController::class, 'loginRegister']);
+    //User register
+    Route::post('user/register', [UserController::class, 'userRegister']);
+    //use logout
+    Route::get('user/logout', [UserController::class, 'userLogout']);
+    //login user
+    Route::post('user/login',[UserController::class, 'userLogin']);
+    //confirm user  account
+    Route::get('/user/confirm/{code}',[UserController::class, 'confirmAccountUser']);
 });

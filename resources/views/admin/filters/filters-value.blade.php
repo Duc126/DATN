@@ -18,7 +18,8 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Bộ Lọc Giá Trị') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
-                                href="{{ url('admin/add-edit-filter-value') }}" class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
+                                href="{{ url('admin/add-edit-filter-value') }}"
+                                class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -54,13 +55,17 @@
                                                 <td>{{ $filterValue['filter_value'] }} </td>
                                                 <td>
                                                     @if ($filterValue['status'] == 1)
-                                                        <a class="updateFiltersValue" id="filterValue-{{ $filterValue['id'] }}"
-                                                        filterValue_id={{ $filterValue['id'] }} href="javascript:void(0)">
+                                                        <a class="updateFiltersValue"
+                                                            id="filterValue-{{ $filterValue['id'] }}"
+                                                            filterValue_id={{ $filterValue['id'] }}
+                                                            href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-check"
                                                                 status="Active"></i></a>
                                                     @else
-                                                        <a class="updateFiltersValue" id="filterValue-{{ $filterValue['id'] }}"
-                                                        filterValue_id={{ $filterValue['id'] }} href="javascript:void(0)">
+                                                        <a class="updateFiltersValue"
+                                                            id="filterValue-{{ $filterValue['id'] }}"
+                                                            filterValue_id={{ $filterValue['id'] }}
+                                                            href="javascript:void(0)">
                                                             <i style="font-size: 25px" class="mdi mdi mdi-bookmark-outline"
                                                                 status="Inactive"></i></a>
                                                     @endif()
