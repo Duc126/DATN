@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Session;
 class SectionController extends Controller
 {
     public function index(){
+        Session::put('page', 'sections');
+
         $sections = Section::get()->toArray();
         // dd($sections);
         return view('admin.sections.sections')->with(compact('sections'));

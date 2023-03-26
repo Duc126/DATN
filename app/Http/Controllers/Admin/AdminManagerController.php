@@ -7,18 +7,26 @@ use App\Models\Admin;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AdminManagerController extends Controller
 {
     public function admins($type = null)
     {
+
         $admins = Admin::query();
         // dd($admins);
         if (!empty($type)) {
             $admin = $admins->where('type', $type);
-            $title = "Danh Sách" . " " . ucfirst($type);
+            // $title = "Danh Sách" . " " . ucfirst($type);
+            $title = ucfirst($type);
+
+        Session::put('page', 'view_'.strtolower($title));
+
         } else {
             $title = "Tất Cả";
+        Session::put('page', 'view_all');
+
         }
         $admin = $admins->get()->toArray();
         // dd($admin);
@@ -27,6 +35,8 @@ class AdminManagerController extends Controller
 
     public function viewVendor($id)
     {
+        Session::put('page', 'viewVendor');
+
         $vendor = Admin::with('vendorPersonal', 'vendorBusiness', 'vendorBank')->where('id', $id)->first();
         $vendor = json_decode(json_encode($vendor), true);
 

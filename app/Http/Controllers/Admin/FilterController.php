@@ -8,12 +8,14 @@ use App\Models\ProductsFiltersValue;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class FilterController extends Controller
 {
     public function index()
     {
+        Session::put('page', 'filters');
         $filters = ProductsFilter::get()->toArray();
         // dd($filters);
         return view('admin.filters.filters')->with(compact('filters'));

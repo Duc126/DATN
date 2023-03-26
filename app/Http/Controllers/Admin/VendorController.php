@@ -11,6 +11,7 @@ use App\Models\VendorsBusinessDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\Print_;
 use Intervention\Image\Facades\Image;
 
@@ -19,6 +20,7 @@ class VendorController extends Controller
     public function updateVendorsDetail($slug, Request $request)
     {
         if ($slug == "personal") {
+            Session::put('page','update-personal-details');
             if ($request->isMethod('post')) {
                 $updateDetails = $request->all();
                 // dd($updateDetails);
@@ -57,14 +59,19 @@ class VendorController extends Controller
                     $imageName = "";
                 }
                 Admin::where('id', Auth::guard('admin')->user()->id)->update([
-                    'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
+                    'first_name' => $updateDetails['first_name'],
+                    'last_name' => $updateDetails['last_name'],
                     'phone' => $updateDetails['phone'],
                     'image' => $imageName
                 ]);
                 Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->update([
-                    'first_name' => $updateDetails['first_name'],    'last_name' => $updateDetails['last_name'],
-                    'city' => $updateDetails['city'], 'state' => $updateDetails['state'], 'country' => $updateDetails['country'],
-                    'phone' => $updateDetails['phone'], 'pincode' => $updateDetails['pincode']
+                    'first_name' => $updateDetails['first_name'],
+                    'last_name' => $updateDetails['last_name'],
+                    'city' => $updateDetails['city'],
+                    'state' => $updateDetails['state'],
+                    'country' => $updateDetails['country'],
+                    'phone' => $updateDetails['phone'],
+                    'pincode' => $updateDetails['pincode']
                     // 'image' => $updateDetails['image'],
                 ]);
                 return redirect()->back()->with('success_message', 'Cập Nhật Thành Công');
@@ -73,6 +80,7 @@ class VendorController extends Controller
 
             // dd($vendorDetail);
         } else if ($slug == "business") {
+            Session::put('page','update-business-details');
             if ($request->isMethod('post')) {
                 $updateDetails = $request->all();
                 // dd($updateDetails);
@@ -153,6 +161,7 @@ class VendorController extends Controller
             }
             // dd($vendorDetail);
         } else if ($slug == "bank") {
+            Session::put('page','update-bank-details');
             if ($request->isMethod('post')) {
                 $updateDetails = $request->all();
                 // dd($updateDetails);

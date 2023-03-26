@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Banners;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BannerController extends Controller
 {
     public function index()
     {
+        Session::put('page', 'banner');
+
         $banners = Banners::get()->toArray();
         // dd($banner);die;
         return view('admin/banners/banners')->with(compact('banners'));

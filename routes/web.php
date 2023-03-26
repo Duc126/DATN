@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminManagerController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
@@ -122,6 +123,12 @@ Route::prefix('admin')->group(function () {
         Route::match(['get', 'post'], 'add-edit-filter/{id?}', [FilterController::class, 'addEditFilter']);
         Route::match(['get', 'post'], 'add-edit-filter-value/{id?}', [FilterController::class, 'addEditFilterValue']);
         Route::post('category-filter', [FilterController::class, 'categoryFilter']);
+
+        //Coupons
+        Route::get('coupons', [CouponController::class, 'coupons']);
+        Route::post('update-status-coupon', [CouponController::class, 'updateStatusCoupon']);
+        Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
+        Route::match(['get', 'post'], 'add-edit-coupon/{id?}', [CouponController::class, 'addEditCoupon']);
     });
 });
 
@@ -156,7 +163,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     //delete cart item quantity
     Route::post('/cart/delete', [AddProductController::class, 'cartDelete']);
     //use login
-    Route::get('user/login-register', ['as'=>'login','uses'=>'UserController@loginRegister']);
+    Route::get('user/login-register', ['as' => 'login', 'uses' => 'UserController@loginRegister']);
     //User register
     Route::post('user/register', [UserController::class, 'userRegister']);
     //use logout
