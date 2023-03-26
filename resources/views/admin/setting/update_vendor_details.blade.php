@@ -135,7 +135,7 @@
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country['country_name'] }}"
                                                             @if ($country['country_name'] == $vendorDetail['country']) selected @endif>
-                                                            {{ $country['country'] }}
+                                                            {{ $country['country_name'] }}
                                                     @endforeach
                                                 </select>
                                             </div>

@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
     public function index()
     {
+        Session::put('page', 'categories');
         $categories = Category::with(['section', 'parentcategory'])->get()->toArray();
         return view('admin.categories.categories')->with(compact('categories'));
     }

@@ -9,6 +9,7 @@ $(document).ready(function () {
     $("#banners").DataTable();
     $("#filters").DataTable();
     $("#adminTable").DataTable();
+    $("#coupon").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");
@@ -425,4 +426,43 @@ $("#category_id").on("change", function () {
             $(".loadFilters").html(resp.view);
         },
     });
+});
+//update Coupon status
+$(document).on("click", ".updateCoupon", function () {
+    var status = $(this).children("i").attr("status");
+    var coupon_id = $(this).attr("coupon_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-coupon",
+        data: {
+            status: status,
+            coupon_id: coupon_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#coupon-" + coupon_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#coupon-" + coupon_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+
+//show hide coupon field for Manual/Automatic
+
+$("#ManualCoupon").click(function () {
+    $("#couponField").show();
+});
+$("#AutomaticCoupon").click(function () {
+    $("#couponField").hide();
 });
