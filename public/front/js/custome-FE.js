@@ -60,10 +60,13 @@ $(document).ready(function () {
             url: "/cart/update",
             type: "post",
             success: function (resp) {
+                $(".totalCartItems").html(resp.totalCartItems);
                 if (resp.status == false) {
                     alert(resp.message);
                 }
                 $("#appendCartItems").html(resp.view);
+                $("#appendHeaderCartItems").html(resp.headerView);
+
             },
             error: function () {
                 alert("Error");
@@ -90,7 +93,10 @@ $(document).ready(function () {
                 url: "/cart/delete",
                 type: "post",
                 success: function (resp) {
+                    $(".totalCartItems").html(resp.totalCartItems);
                     $("#appendCartItems").html(resp.view);
+                    $("#appendHeaderCartItems").html(resp.headerView);
+
                 },
                 error: function () {
                     alert("Error");
@@ -103,11 +109,6 @@ $(document).ready(function () {
         $(".loader").show();
         var formData = $(this).serialize();
         $.ajax({
-            // headers: {
-            //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-            //         "content"
-            //     ),
-            // },
             url: "/user/register",
             type: "Post",
             data:formData,
@@ -139,6 +140,103 @@ $(document).ready(function () {
             }
         })
     });
+    //Account form
+    $("#accountForm").submit(function(){
+        $(".loader").show();
+        var formData = $(this).serialize();
+        $.ajax({
+            // headers: {
+            //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+            //         "content"
+            //     ),
+            // },
+            url: "/user/account",
+            type: "Post",
+            data:formData,
+            success: function(resp){
+                if(resp.type=="error"){
+                    $(".loader").hide();
+
+                    $.each(resp.errors, function(i,error){
+                    $("#account-"+i).attr('style', 'color:red');
+
+                    $("#account-"+i).html(error);
+                    setTimeout(function(){
+                        $("#account-"+i).css({
+                            'display':'none'
+                        });
+
+                    },3000);
+                });
+                }else if(resp.type=="success"){
+                    // alert(resp.message);
+                    $(".loader").hide();
+                    $("#account-success").attr('style', 'color:green');
+                    $("#account-success").html(resp.message);
+                    setTimeout(function(){
+                        $("#account-success").css({
+                            'display':'none'
+                        });
+
+                    },3000);
+
+                }
+            }, error:function(){
+                alert("Error");
+            }
+        })
+    });
+    //Update Password form
+    $("#passwordForm").submit(function(){
+        // $(".loader").show();
+        var formData = $(this).serialize();
+        $.ajax({
+            url: "/user/update-password",
+            type: "Post",
+            data:formData,
+            success: function(resp){
+                if(resp.type=="error"){
+                    $(".loader").hide();
+                    $.each(resp.errors, function(i,error){
+                    $("#password-"+i).attr('style', 'color:red');
+
+                    $("#password-"+i).html(error);
+                    setTimeout(function(){
+                        $("#password-"+i).css({
+                            'display':'none'
+                        });
+
+                    },3000);
+                });
+                }else if(resp.type=="incorrect"){
+                    $(".loader").hide();
+                    $("#password-error").attr('style', 'color:red');
+                    $("#password-error").html(resp.message);
+                    setTimeout(function(){
+                        $("#password-error").css({
+                            'display':'none'
+                        });
+
+                    },3000);
+                }else if(resp.type=="success"){
+                    // alert(resp.message);
+                    $(".loader").hide();
+                    $("#password-success").attr('style', 'color:green');
+                    $("#password-success").html(resp.message);
+                    setTimeout(function(){
+                        $("#password-success").css({
+                            'display':'none'
+                        });
+
+                    },3000);
+
+                }
+            }, error:function(){
+                alert("Error");
+            }
+        })
+    });
+    //login form
     $("#loginForm").submit(function(){
         var formData = $(this).serialize();
         $.ajax({
@@ -180,7 +278,47 @@ $(document).ready(function () {
             }
         })
     });
+  // forgot password Form validation
+    $("#forgotForm").submit(function(){
+    $(".loader").show();
+    var formData = $(this).serialize();
+    $.ajax({
+        // headers: {
+        //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+        //         "content"
+        //     ),
+        // },
+        url: "/user/forgot-password",
+        type: "Post",
+        data:formData,
+        success: function(resp){
+            if(resp.type=="error"){
+                $(".loader").hide();
 
+                $.each(resp.errors, function(i,error){
+                $("#forgot-"+i).attr('style', 'color:red');
+
+                $("#forgot-"+i).html(error);
+                setTimeout(function(){
+                    $("#forgot-"+i).css({
+                        'display':'none'
+                    });
+
+                },3000);
+            });
+            }else if(resp.type=="success"){
+                // alert(resp.message);
+                $(".loader").hide();
+                $("#forgot-success").attr('style', 'color:green');
+                $("#forgot-success").html(resp.message);
+                // window.location.href = resp.url;
+
+            }
+        }, error:function(){
+            alert("Error");
+        }
+    })
+});
 });
 
 function get_filter(class_name) {
