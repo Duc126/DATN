@@ -1,6 +1,7 @@
     <?php
     use App\Models\Section;
     $sections = Section::sections();
+    $totalCartItems = totalCartItems();
     ?>
     <!-- Header -->
     <header>
@@ -25,7 +26,12 @@
                 <nav>
                     <ul class="secondary-nav g-nav">
                         <li>
-                            <a>@if(Auth::check()) {{ __('Tài Khoản Của Tôi') }} @else {{ __('Đăng Nhập/Đăng Ký') }} @endif
+                            <a>
+                                @if (Auth::check())
+                                    {{ __('Tài Khoản Của Tôi') }}
+                                @else
+                                    {{ __('Đăng Nhập/Đăng Ký') }}
+                                @endif
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width:230px">
@@ -44,29 +50,29 @@
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
                                         Checkout</a>
                                 </li> --}}
-                                @if(Auth::check())
-                                <li>
-                                    <a href="{{ url('user/account') }}">
-                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        {{ __('Tài Khoản Của Tôi') }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('user/logout') }}">
-                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        {{ __('Đăng Xuất') }}</a>
-                                </li>
+                                @if (Auth::check())
+                                    <li>
+                                        <a href="{{ url('user/account') }}">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            {{ __('Tài Khoản Của Tôi') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('user/logout') }}">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            {{ __('Đăng Xuất') }}</a>
+                                    </li>
                                 @else
-                                <li>
-                                    <a href="{{ url('user/login-register') }}">
-                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        {{ __('Khách Hàng Đăng Nhập') }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('vendor/login-register') }}">
-                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        {{ __('Nhà Cung Cấp Đăng Nhập') }}</a>
+                                    <li>
+                                        <a href="{{ url('user/login-register') }}">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            {{ __('Khách Hàng Đăng Nhập') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('vendor/login-register') }}">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            {{ __('Nhà Cung Cấp Đăng Nhập') }}</a>
 
-                                </li>
+                                    </li>
                                 @endif
                             </ul>
                         </li>
@@ -109,8 +115,9 @@
                             <a href="{{ url('/') }}">
                                 {{-- <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
                                     alt="Stack Developers" class="app-brand-logo"> --}}
-                                    <img width="200" height="60" src="{{ asset('front/images/main-logo/logo-FE.png') }}"
-                                    alt="Thương Mại Điện Tử" class="app-brand-logo">
+                                <img width="200" height="60"
+                                    src="{{ asset('front/images/main-logo/logo-FE.png') }}" alt="Thương Mại Điện Tử"
+                                    class="app-brand-logo">
                             </a>
                         </div>
                     </div>
@@ -151,7 +158,7 @@
                                 <li>
                                     <a id="mini-cart-trigger">
                                         <i class="ion ion-md-basket"></i>
-                                        <span class="item-counter">4</span>
+                                        <span class="item-counter totalCartItems">{{ $totalCartItems }}</span>
                                         <span class="item-price">$220.00</span>
                                     </a>
                                 </li>
@@ -176,55 +183,9 @@
         </div>
         <!-- Responsive-Buttons /- -->
         <!-- Mini Cart -->
-        <div class="mini-cart-wrapper">
-            <div class="mini-cart">
-                <div class="mini-cart-header">
-                    YOUR CART
-                    <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
-                </div>
-                <ul class="mini-cart-list">
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="mini-shop-total clearfix">
-                    <span class="mini-total-heading float-left">Total:</span>
-                    <span class="mini-total-price float-right">$400.00</span>
-                </div>
-                <div class="mini-action-anchors">
-                    <a href="cart.html" class="cart-anchor">View Cart</a>
-                    <a href="checkout.html" class="checkout-anchor">Checkout</a>
-                </div>
-            </div>
+        <div id="appendHeaderCartItems">
+            @include('front.layout.header_cart')
+
         </div>
         <!-- Mini Cart /- -->
         <!-- Bottom-Header -->
@@ -236,45 +197,46 @@
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
                                 {{ __('
-                                Tất cả danh mục') }}
+                                                                Tất cả danh mục') }}
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
                                 <div class="v-wrapper">
                                     <ul class="v-list animated fadeIn">
                                         @foreach ($sections as $section)
-                                        @if(count($section['categories'])>0)
-                                            <li class="js-backdrop">
-                                                <a href="shop-v1-root-category.html">
-                                                    <i class="ion-ios-add-circle"></i>
-                                                    {{ $section['name'] }}
-                                                    <i class="ion ion-ios-arrow-forward"></i>
-                                                </a>
-                                                <button class="v-button ion ion-md-add"></button>
-                                                <div class="v-drop-right" style="width: 700px;">
-                                                    <div class="row">
-                                                        @foreach($section['categories'] as $category)
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="{{ url($category['url']) }}">{{ $category['category_name'] }}</a>
-                                                                    <ul>
-                                                                        @foreach ( $category['subcategories'] as $subcategory )
+                                            @if (count($section['categories']) > 0)
+                                                <li class="js-backdrop">
+                                                    <a href="shop-v1-root-category.html">
+                                                        <i class="ion-ios-add-circle"></i>
+                                                        {{ $section['name'] }}
+                                                        <i class="ion ion-ios-arrow-forward"></i>
+                                                    </a>
+                                                    <button class="v-button ion ion-md-add"></button>
+                                                    <div class="v-drop-right" style="width: 700px;">
+                                                        <div class="row">
+                                                            @foreach ($section['categories'] as $category)
+                                                                <div class="col-lg-4">
+                                                                    <ul class="v-level-2">
                                                                         <li>
                                                                             <a
-                                                                            href="{{ url($subcategory['url']) }}">{{ $subcategory['category_name'] }}</a>
+                                                                                href="{{ url($category['url']) }}">{{ $category['category_name'] }}</a>
+                                                                            <ul>
+                                                                                @foreach ($category['subcategories'] as $subcategory)
+                                                                                    <li>
+                                                                                        <a
+                                                                                            href="{{ url($subcategory['url']) }}">{{ $subcategory['category_name'] }}</a>
+                                                                                    </li>
+                                                                                @endforeach
+
+
+                                                                            </ul>
                                                                         </li>
-                                                                        @endforeach
-
-
                                                                     </ul>
-                                                                </li>
-                                                            </ul>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
-                                                        @endforeach
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
                                             @endif
                                         @endforeach
                                         <li>

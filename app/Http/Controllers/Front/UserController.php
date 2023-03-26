@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Countries;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -30,8 +33,6 @@ class UserController extends Controller
                     'email' => 'required|string|email|unique:users',
                     'password' => 'required|min:6',
                     'accept' => 'required',
-
-
                 ],
                 [
                     "name.required" => "Tên Là bắt buộc",
@@ -94,6 +95,140 @@ class UserController extends Controller
             }
         }
     }
+    public function userAccount(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            // dd($data);
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required|string|max:100',
+                    'city' => 'required|string|max:100',
+                    'state' => 'required|string|max:100',
+                    'address' => 'required|string|max:100',
+                    'country' => 'required|string|max:100',
+                    'phone' => 'required|numeric|digits:10',
+                    'pincode' => 'required|digits:6',
+                ],
+                [
+                    "name.required" => "Tên Là bắt buộc",
+                    "city.required" => "Trường Thành Phô Là bắt buộc",
+                    "state.required" => "Trường trạng thái Là bắt buộc",
+                    "address.required" => "Trường địa chỉ Là bắt buộc",
+                    "country.required" => "Trường quốc gia Là bắt buộc",
+                    "phone.digits" => "Số điện thoai phải là 10 số",
+                    "phone.numeric" => "Điện thoại phải là một số",
+                    "phone.required" => "Số điện thoai Là bắt buộc",
+                    "pincode.digits" => "Mã pin phải là 6 số",
+                    "pincode.required" => "Mã pin Là bắt buộc",
+
+                ]
+            );
+            if ($validator->passes()) {
+                //Update User Details
+                User::where('id', Auth::user()->id)->update([
+                    'name' => $data['name'], 'phone' => $data['phone'], 'city' => $data['city'],
+                    'state' => $data['state'], 'country' => $data['country'], 'pincode' => $data['pincode'], 'address' => $data['address']
+                ]);
+
+                //Redirect back user with success message
+                $redirectTo = url('user/account');
+                return response()->json(['type' => 'success', 'message' => 'Chi tiết liên hệ/thanh toán của bạn được cập nhật thành công']);
+            } else {
+                return response()->json(['type' => 'error', 'errors' => $validator->messages()]);
+            }
+        } else {
+            $countries = Countries::where('status', 1)->get()->toArray();
+
+            return view('front.user.user-account')->with(compact('countries'));
+        }
+    }
+    public function updatePasswordUser(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            // dd($data);
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'current_password' => 'required',
+                    'new_password' => 'required|min:6',
+                    'confirm_password' => 'required|min:6|same:new_password',
+                ],
+                [
+                    "current_password.required" => "Mật khẩu hiện tại Là bắt buộc",
+                    "new_password.required" => "Trường Thành Phô Là bắt buộc",
+                    "new_password.min" =>  "Mật Khẩu mới ít nhất phải 6 kí tự",
+                    "confirm_password.required" => "Trường trạng thái Là bắt buộc",
+                    "confirm_password.min" =>  "Mật Khẩu xác ít nhất phải 6 kí tự",
+                    "confirm_password.same" =>  "Mật khẩu xác nhận và mật khẩu mới phải khớp nhau.",
+                ]
+            );
+            if ($validator->passes()) {
+                $current_password = $data['current_password'];
+                $checkPassword = User::where('id', Auth::user()->id)->first();
+                if (Hash::check($current_password, $checkPassword->password)) {
+                    //update user current password
+                    $user = User::find(Auth::user()->id);
+                    $user->password = bcrypt($data['new_password']);
+                    $user->save();
+                    //Redirect back user with success message
+                    return response()->json(['type' => 'success', 'message' => 'Cập nhật mật khẩu thành công!']);
+                } else {
+                    //Redirect back user with error message
+                    return response()->json(['type' => 'incorrect', 'message' => 'Mật khẩu hiện tại của bạn không chính xác!']);
+                }
+            } else {
+                return response()->json(['type' => 'error', 'errors' => $validator->messages()]);
+            }
+
+            //Redirect back user with success message
+            return response()->json(['type' => 'success', 'message' => 'Chi tiết liên hệ/thanh toán của bạn được cập nhật thành công']);
+        } else {
+            $countries = Countries::where('status', 1)->get()->toArray();
+
+            return view('front.user.user-account')->with(compact('countries'));
+        }
+    }
+    public function forgotPassword(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            // echo "<pre>"; print_r($data);
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'required|string|email|exists:users',
+                ],
+                [
+                    "email.exists" => "Email không tồn tại!",
+                ]
+            );
+            if ($validator->passes()) {
+                // $userDetails = User::where('email', $data['email'])->first();
+                //generate new password
+                $new_password = Str::random(16);
+                //update new password
+                User::where('email', $data['email'])->update(['password' => bcrypt($new_password)]);
+                //get user details
+                $userDetails = User::where('email', $data['email'])->first()->toArray();
+
+                //send email to user
+                $email = $data['email'];
+                $messageData = ['name' => $userDetails['name'], 'email' => $email, 'password' => $new_password];
+                Mail::send('emails.user_forgot_password', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Mật Khẩu Mới - Thương Mại Điện Tử');
+                });
+                //show success message
+                return response()->json(['type' => 'success', 'message' => 'Mật khẩu mới được gửi đến email đăng ký của bạn.']);
+            } else {
+                return response()->json(['type' => 'error', 'errors' => $validator->messages()]);
+            }
+        } else {
+            return view('front.user.forgot-password');
+        }
+    }
 
     public function userLogin(Request $request)
     {
@@ -147,17 +282,17 @@ class UserController extends Controller
                 //Redirect the user to login register page with error message
                 return redirect('user/login-register')->with('error_message', 'Your account is already activated. You can login now.');
             } else {
-            // echo $userDetails->status;die;
+                // echo $userDetails->status;die;
 
                 User::where('email', $email)->update(['status' => 1]);
-                 //send welcome email
+                //send welcome email
 
                 $messageData = ['name' => $userDetails->name, 'phone' => $userDetails->phone, 'email' => $email];
                 Mail::send('emails.register', $messageData, function ($message) use ($email) {
                     $message->to($email)->subject('Chào Mừng Bạn Tới WebSite');
                 });
-                      //Redirect the user to login register page with success message
-                      return redirect('user/login-register')->with('success_message', 'Tài khoản của bạn đã được kích hoạt. Bạn có thể đăng nhập ngay bây giờ.');
+                //Redirect the user to login register page with success message
+                return redirect('user/login-register')->with('success_message', 'Tài khoản của bạn đã được kích hoạt. Bạn có thể đăng nhập ngay bây giờ.');
             }
         } else {
             abort(404);
