@@ -43,7 +43,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a @if (Session::get('page') == 'products') style="background: #4B49AC !important; color: #fff !important;" @endif
+                <a @if (Session::get('page') == 'products' || Session::get('page') == 'coupons') style="background: #4B49AC !important; color: #fff !important;" @endif
                     class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false"
                     aria-controls="ui-catalogue">
                     <i class="icon-grid-2 menu-icon"></i>
@@ -58,7 +58,15 @@
                                 @if (Session::get('page') == 'products') style="background:#4B49AC !important; color: #fff !important;"
                             @else style="background: #fff !important; color:#4B49AC !important;" @endif
                                 class="nav-link" href="{{ url('admin/products') }}">
-                                {{ __('Sản phẩm') }}</a></li>
+                                {{ __('Sản phẩm') }}</a>
+                        </li>
+                        <li class="nav-item"><a
+                                @if (Session::get('page') == 'coupons') style="background:#4B49AC !important; color: #fff !important;"
+                        @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                                class="nav-link" href="{{ url('admin/coupons') }}">
+                                {{ __('Phiếu Giảm Giá') }}</a>
+                        </li>
+
                     </ul>
                 </div>
             </li>
@@ -76,12 +84,12 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'update-password') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/update-password') }}">{{ __('Thể Loại') }}</a>
+                        class="nav-link" href="{{ url('admin/update-password') }}">{{ __('Cập nhật mật khẩu') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/update-details') }}">{{ __('Danh Mục') }}</a>
+                        class="nav-link" href="{{ url('admin/update-details') }}">{{ __('Cập nhật chi tiết') }}</a>
                 </li>
             </ul>
         </div>
@@ -182,7 +190,7 @@
         <div class="collapse" id="ui-user">
             <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
                 <li class="nav-item"><a
-                        @if (Session::get('page') == 'update-users') style="background:#4B49AC !important; color: #fff !important;"
+                        @if (Session::get('page') == 'users') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
                 </li>

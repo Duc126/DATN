@@ -46,6 +46,7 @@ class Product extends Model
         } else {
             $discounted_price = 0;
         }
+        // dd($catDetails);
         return $discounted_price;
     }
 

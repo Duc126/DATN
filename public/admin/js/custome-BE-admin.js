@@ -10,6 +10,7 @@ $(document).ready(function () {
     $("#filters").DataTable();
     $("#adminTable").DataTable();
     $("#coupon").DataTable();
+    $("#users").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");
@@ -465,4 +466,34 @@ $("#ManualCoupon").click(function () {
 });
 $("#AutomaticCoupon").click(function () {
     $("#couponField").hide();
+});
+//update status users
+$(document).on("click", ".updateUser", function () {
+    var status = $(this).children("i").attr("status");
+    var user_id = $(this).attr("user_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-user",
+        data: {
+            status: status,
+            user_id: user_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#user-" + user_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#user-" + user_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
 });

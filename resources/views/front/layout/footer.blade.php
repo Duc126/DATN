@@ -71,23 +71,21 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="footer-list">
-                        <h6>Contact</h6>
+                        <h6>{{ __('Liên Hệ') }}</h6>
                         <ul>
                             <li>
                                 <i class="fas fa-location-arrow u-s-m-r-9"></i>
-                                <span>Stack Developers Youtube Channel</span>
+                                <span>{{ __('Thương Mại Điện Tử') }}</span>
                             </li>
                             <li>
-                                <a href="tel:+111-222-333">
-                                    <i class="fas fa-phone u-s-m-r-9"></i>
-                                    <span>+111-222-333</span>
-                                </a>
+                                <a href="tel:+84 355913199">
+                                    <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
+                                    {{ __('Điện Thoại: +84 355913199') }}</a>
                             </li>
                             <li>
-                                <a href="mailto:info@sitemakers.in">
-                                    <i class="fas fa-envelope u-s-m-r-9"></i>
-                                    <span>
-                                        info@sitemakers.in</span>
+                                <a href="mailto:ducbui1211@gmail.com">
+                                    <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
+                                    {{ __('E-mail: ducbui1211@gmail.com') }}
                                 </a>
                             </li>
                         </ul>
@@ -137,8 +135,8 @@
                     </li>
                 </ul>
             </div>
-            <p class="copyright-text">Copyright &copy; 2022
-                <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers">Stack Developers</a> | All Right Reserved</p>
+            <p class="copyright-text">
+                <a target="_blank" rel="nofollow" href="">{{ __('Thương Mại Điện Tử') }}</a> </p>
         </div>
     </div>
     <!-- Bottom-Footer /- -->

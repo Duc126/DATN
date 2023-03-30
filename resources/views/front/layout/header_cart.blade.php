@@ -40,8 +40,8 @@ $getCartItems = getCartItems();
     </div>
 </div>
 <!-- Mini Cart /- -->
-<script>
+{{-- <script>
     $('#mini-cart-close').on('click', function() {
         $('.mini-cart-wrapper').removeClass('mini-cart-open');
     });
-</script>
+</script> --}}
