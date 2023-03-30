@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\UserPageAdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
@@ -129,6 +130,10 @@ Route::prefix('admin')->group(function () {
         Route::post('update-status-coupon', [CouponController::class, 'updateStatusCoupon']);
         Route::get('delete-coupon/{id}', [CouponController::class, 'deleteCoupon']);
         Route::match(['get', 'post'], 'add-edit-coupon/{id?}', [CouponController::class, 'addEditCoupon']);
+
+        //Users
+        Route::get('users', [UserPageAdminController::class, 'index']);
+        Route::post('update-status-user', [UserPageAdminController::class, 'updateStatusUser']);
     });
 });
 
@@ -180,5 +185,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::match(['get', 'post'], 'user/account', [UserController::class, 'userAccount']);
         //Update Password account User
         Route::post('user/update-password', [UserController::class, 'updatePasswordUser']);
+
+        //apply coupon
+
+        Route::post('/apply-coupon', [AddProductController::class, 'applyCoupon']);
     });
 });

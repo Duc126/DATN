@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Coupon;
+use App\Models\Product;
 use App\Models\ProductsAttributes;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -97,7 +100,8 @@ class AddProductController extends Controller
             Cart::where('id', $data['cartid'])->update(['quantity' => $data['qty']]);
             $getCartItems = Cart::getCartItems();
             $totalCartItems = totalCartItems();
-
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
             return response()->json([
                 'status' => true,
                 'totalCartItems' => $totalCartItems,
@@ -111,6 +115,8 @@ class AddProductController extends Controller
     {
 
         if ($request->isMethod('post')) {
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
             $data = $request->all();
             // dd( $data );
             Cart::where('id', $data['cartid'])->delete();
@@ -118,11 +124,124 @@ class AddProductController extends Controller
             $totalCartItems = totalCartItems();
 
             return response()->json([
-                'status' => true,
                 'totalCartItems' => $totalCartItems,
                 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                 'headerView' => (string)View::make('front.layout.header_cart')->with(compact('getCartItems'))
             ]);
+        }
+    }
+    public function applyCoupon(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
+            // dd($data);
+            $totalCartItems = totalCartItems();
+            $getCartItems = Cart::getCartItems();
+
+            $couponCount = Coupon::where('coupon_code', $data['code'])->count();
+            if ($couponCount == 0) {
+                return response()->json([
+                    'status' => false,
+                    'totalCartItems' => $totalCartItems,
+                    'message' => 'Phiếu giảm giá không hợp lệ!',
+                    'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                    'headerView' => (string)View::make('front.layout.header_cart')->with(compact('getCartItems'))
+                ]);
+            } else {
+                //check for other coupon conditions
+
+                //get Coupon Details
+                $couponDetails = Coupon::where('coupon_code', $data['code'])->first();
+                //check if coupon is active
+                if ($couponDetails->status == 0) {
+                    $message = "Phiếu giảm giá chưa được kích hoạt";
+                }
+                //check if coupon is expired
+                $expiry_date = $couponDetails->expiry_date;
+                $current_date = date('Y-m-d');
+                if ($expiry_date < $current_date) {
+                    $message = "Phiếu giảm giá đã hết hạn";
+                }
+                //check if coupon is from selected categories
+                $cartArr = explode(",", $couponDetails->categories);
+                //check if any cart item not belong to coupon category
+                $total_amount = 0;
+                foreach ($getCartItems as $key => $item) {
+                    if (!in_array($item['product']['category_id'], $cartArr)) {
+                        $message = "Mã phiếu giảm giá này không dành cho một trong những sản phẩm đã chọn.";
+                    }
+                    $attrPrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
+                    // var_dump($attrPrice);
+                    $total_amount = $total_amount + ($attrPrice['final_price'] * $item['quantity']);
+                }
+
+                //check if coupon is from selected user
+                //Get all selected users from coupon and convert to array
+                if (isset($couponDetails->users) && !empty($couponDetails->users)) {
+                    $userArr = explode(",", $couponDetails->users);
+                    if (count($userArr) > 0) {
+                        //get user id of all selected user
+                        foreach ($userArr as $key => $user) {
+                            $getUserId = User::select('id')->where('email', $user)->first()->toArray();
+                            $usersId[] = $getUserId['id'];
+                        }
+                        //check if any cart item not belong to coupon user
+                        foreach ($getCartItems as $item) {
+                            // if (count($userArr) > 0) {
+                            if (!in_array($item['user_id'], $usersId)) {
+                                $message = "Mã phiếu giảm giá này không dành cho bạn. Hãy thử với mã phiếu giảm giá hợp lệ!";
+                            }
+                            // }
+                        }
+                    }
+                }
+
+                if ($couponDetails->vendor_id > 0) {
+                    $productIds = Product::select('id')->where('vendor_id', $couponDetails->vendor_id)->pluck('id')->toArray();
+                    // dd($productIds);
+                    //check if coupon belongs to vendor products
+                    foreach ($getCartItems as $item) {
+                        if (!in_array($item['product']['id'], $productIds)) {
+                            $message = "Mã phiếu giảm giá này không dành cho bạn. Hãy thử với mã phiếu giảm giá hợp lệ!";
+                        }
+                    }
+                }
+
+                //if error message is there
+                if (isset($message)) {
+                    return response()->json([
+                        'status' => false,
+                        'totalCartItems' => $totalCartItems,
+                        'message' => $message,
+                        'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                        'headerView' => (string)View::make('front.layout.header_cart')->with(compact('getCartItems'))
+                    ]);
+                } else {
+                    //Coupon code is correct
+                    //check if coupon amount type is fixed or percentage
+                    if ($couponDetails->amount_type == "Fixed") {
+                        $couponAmount = $couponDetails->amount;
+                    } else {
+                        $couponAmount = $total_amount *  ($couponDetails->amount / 100);
+                    }
+                    $grand_total = $total_amount - $couponAmount;
+                    //Add coupon code & amout in session variables
+                    Session::put('couponAmount', $couponAmount);
+                    Session::put('couponCode', $data['code']);
+                    $message = "Mã phiếu giảm giá được áp dụng thành công. Bạn đang được giảm giá!";
+                    return response()->json([
+                        'status' => true,
+                        'totalCartItems' => $totalCartItems,
+                        'couponAmount' => $couponAmount,
+                        'grand_total' => $grand_total,
+                        'message' => $message,
+                        'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                        'headerView' => (string)View::make('front.layout.header_cart')->with(compact('getCartItems'))
+                    ]);
+                }
+            }
         }
     }
 }

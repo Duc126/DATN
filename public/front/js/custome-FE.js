@@ -11,13 +11,22 @@ $(document).ready(function () {
                 size: size,
                 product_id: product_id,
             },
-            type:'post',
-            success:function(resp){
-                if(resp['discount'] > 0){
-                    $(".getAttributePrice").html("<div class='price'><h4>"+resp['final_price']+".đ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>"+resp['product_price']+".đ</span></div>");
-                }else {
-                    $(".getAttributePrice").html("<div class='price'><h4>"+resp['final_price']+".đ</h4></div>");
-
+            type: "post",
+            success: function (resp) {
+                if (resp["discount"] > 0) {
+                    $(".getAttributePrice").html(
+                        "<div class='price'><h4>" +
+                            resp["final_price"] +
+                            ".đ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
+                            resp["product_price"] +
+                            ".đ</span></div>"
+                    );
+                } else {
+                    $(".getAttributePrice").html(
+                        "<div class='price'><h4>" +
+                            resp["final_price"] +
+                            ".đ</h4></div>"
+                    );
                 }
             },
             error: function () {
@@ -66,7 +75,6 @@ $(document).ready(function () {
                 }
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerView);
-
             },
             error: function () {
                 alert("Error");
@@ -96,7 +104,6 @@ $(document).ready(function () {
                     $(".totalCartItems").html(resp.totalCartItems);
                     $("#appendCartItems").html(resp.view);
                     $("#appendHeaderCartItems").html(resp.headerView);
-
                 },
                 error: function () {
                     alert("Error");
@@ -105,43 +112,42 @@ $(document).ready(function () {
         }
     });
     // Register Form validation
-    $("#registerForm").submit(function(){
+    $("#registerForm").submit(function () {
         $(".loader").show();
         var formData = $(this).serialize();
         $.ajax({
             url: "/user/register",
             type: "Post",
-            data:formData,
-            success: function(resp){
-                if(resp.type=="error"){
+            data: formData,
+            success: function (resp) {
+                if (resp.type == "error") {
                     $(".loader").hide();
 
-                    $.each(resp.errors, function(i,error){
-                    $("#register-"+i).attr('style', 'color:red');
+                    $.each(resp.errors, function (i, error) {
+                        $("#register-" + i).attr("style", "color:red");
 
-                    $("#register-"+i).html(error);
-                    setTimeout(function(){
-                        $("#register-"+i).css({
-                            'display':'none'
-                        });
-
-                    },3000);
-                });
-                }else if(resp.type=="success"){
+                        $("#register-" + i).html(error);
+                        setTimeout(function () {
+                            $("#register-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                } else if (resp.type == "success") {
                     // alert(resp.message);
                     $(".loader").hide();
-                    $("#register-success").attr('style', 'color:green');
+                    $("#register-success").attr("style", "color:green");
                     $("#register-success").html(resp.message);
                     // window.location.href = resp.url;
-
                 }
-            }, error:function(){
+            },
+            error: function () {
                 alert("Error");
-            }
-        })
+            },
+        });
     });
     //Account form
-    $("#accountForm").submit(function(){
+    $("#accountForm").submit(function () {
         $(".loader").show();
         var formData = $(this).serialize();
         $.ajax({
@@ -152,92 +158,87 @@ $(document).ready(function () {
             // },
             url: "/user/account",
             type: "Post",
-            data:formData,
-            success: function(resp){
-                if(resp.type=="error"){
+            data: formData,
+            success: function (resp) {
+                if (resp.type == "error") {
                     $(".loader").hide();
 
-                    $.each(resp.errors, function(i,error){
-                    $("#account-"+i).attr('style', 'color:red');
+                    $.each(resp.errors, function (i, error) {
+                        $("#account-" + i).attr("style", "color:red");
 
-                    $("#account-"+i).html(error);
-                    setTimeout(function(){
-                        $("#account-"+i).css({
-                            'display':'none'
-                        });
-
-                    },3000);
-                });
-                }else if(resp.type=="success"){
+                        $("#account-" + i).html(error);
+                        setTimeout(function () {
+                            $("#account-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                } else if (resp.type == "success") {
                     // alert(resp.message);
                     $(".loader").hide();
-                    $("#account-success").attr('style', 'color:green');
+                    $("#account-success").attr("style", "color:green");
                     $("#account-success").html(resp.message);
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#account-success").css({
-                            'display':'none'
+                            display: "none",
                         });
-
-                    },3000);
-
+                    }, 3000);
                 }
-            }, error:function(){
+            },
+            error: function () {
                 alert("Error");
-            }
-        })
+            },
+        });
     });
     //Update Password form
-    $("#passwordForm").submit(function(){
+    $("#passwordForm").submit(function () {
         // $(".loader").show();
         var formData = $(this).serialize();
         $.ajax({
             url: "/user/update-password",
             type: "Post",
-            data:formData,
-            success: function(resp){
-                if(resp.type=="error"){
+            data: formData,
+            success: function (resp) {
+                if (resp.type == "error") {
                     $(".loader").hide();
-                    $.each(resp.errors, function(i,error){
-                    $("#password-"+i).attr('style', 'color:red');
+                    $.each(resp.errors, function (i, error) {
+                        $("#password-" + i).attr("style", "color:red");
 
-                    $("#password-"+i).html(error);
-                    setTimeout(function(){
-                        $("#password-"+i).css({
-                            'display':'none'
-                        });
-
-                    },3000);
-                });
-                }else if(resp.type=="incorrect"){
+                        $("#password-" + i).html(error);
+                        setTimeout(function () {
+                            $("#password-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                } else if (resp.type == "incorrect") {
                     $(".loader").hide();
-                    $("#password-error").attr('style', 'color:red');
+                    $("#password-error").attr("style", "color:red");
                     $("#password-error").html(resp.message);
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#password-error").css({
-                            'display':'none'
+                            display: "none",
                         });
-
-                    },3000);
-                }else if(resp.type=="success"){
+                    }, 3000);
+                } else if (resp.type == "success") {
                     // alert(resp.message);
                     $(".loader").hide();
-                    $("#password-success").attr('style', 'color:green');
+                    $("#password-success").attr("style", "color:green");
                     $("#password-success").html(resp.message);
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#password-success").css({
-                            'display':'none'
+                            display: "none",
                         });
-
-                    },3000);
-
+                    }, 3000);
                 }
-            }, error:function(){
+            },
+            error: function () {
                 alert("Error");
-            }
-        })
+            },
+        });
     });
     //login form
-    $("#loginForm").submit(function(){
+    $("#loginForm").submit(function () {
         var formData = $(this).serialize();
         $.ajax({
             // headers: {
@@ -247,78 +248,120 @@ $(document).ready(function () {
             // },
             url: "/user/login",
             type: "Post",
-            data:formData,
-            success: function(resp){
-                if(resp.type=="error"){
-                    $.each(resp.errors, function(i,error){
-                    $("#login-"+i).attr('style', 'color:red');
+            data: formData,
+            success: function (resp) {
+                if (resp.type == "error") {
+                    $.each(resp.errors, function (i, error) {
+                        $("#login-" + i).attr("style", "color:red");
 
-                    $("#login-"+i).html(error);
-                    setTimeout(function(){
-                        $("#login-"+i).css({
-                            'display':'none'
-                        });
-
-                    },3000);
-                });
-                }else if(resp.type=="incorrect"){
+                        $("#login-" + i).html(error);
+                        setTimeout(function () {
+                            $("#login-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                } else if (resp.type == "incorrect") {
                     // alert(resp.message);
-                    $("#login-error").attr('style', 'color:red');
+                    $("#login-error").attr("style", "color:red");
                     $("#login-error").html(resp.message);
-                }else if(resp.type=="inactive"){
+                } else if (resp.type == "inactive") {
                     // alert(resp.message);
-                    $("#login-error").attr('style', 'color:red');
+                    $("#login-error").attr("style", "color:red");
                     $("#login-error").html(resp.message);
-                }else if(resp.type=="success"){
+                } else if (resp.type == "success") {
                     window.location.href = resp.url;
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+    // forgot password Form validation
+    $("#forgotForm").submit(function () {
+        $(".loader").show();
+        var formData = $(this).serialize();
+        $.ajax({
+            // headers: {
+            //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+            //         "content"
+            //     ),
+            // },
+            url: "/user/forgot-password",
+            type: "Post",
+            data: formData,
+            success: function (resp) {
+                if (resp.type == "error") {
+                    $(".loader").hide();
+
+                    $.each(resp.errors, function (i, error) {
+                        $("#forgot-" + i).attr("style", "color:red");
+
+                        $("#forgot-" + i).html(error);
+                        setTimeout(function () {
+                            $("#forgot-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                } else if (resp.type == "success") {
+                    // alert(resp.message);
+                    $(".loader").hide();
+                    $("#forgot-success").attr("style", "color:green");
+                    $("#forgot-success").html(resp.message);
+                    // window.location.href = resp.url;
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+    //apply coupon
+
+    $("#applyCoupon").submit(function () {
+        const user = $(this).attr("user");
+        // alert(user);
+        if (user == 1) {
+            //do nothing
+        } else {
+            alert("Vui lòng đăng nhập để áp dụng phiếu giảm giá!");
+            return false;
+        }
+        const code = $("#code").val();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            data: {
+                code: code,
+            },
+            url: "/apply-coupon",
+            success: function (resp) {
+                if (resp.message != "") {
+                    alert(resp.message);
+                }
+                $(".totalCartItems").html(resp.totalCartItems);
+                $("#appendCartItems").html(resp.view);
+                $("#appendHeaderCartItems").html(resp.headerView);
+                if(resp.couponAmount > 0){
+                    $(".couponAmount").text(resp.couponAmount + ".Đ");
+                }else{
+                    $(".couponAmount").text(  "0.Đ");
 
                 }
-            }, error:function(){
+                if(resp.grand_total > 0){
+                    $(".grand_total").text(resp.grand_total + ".Đ");
+
+                }
+            },
+            error: function () {
                 alert("Error");
-            }
-        })
+            },
+        });
     });
-  // forgot password Form validation
-    $("#forgotForm").submit(function(){
-    $(".loader").show();
-    var formData = $(this).serialize();
-    $.ajax({
-        // headers: {
-        //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-        //         "content"
-        //     ),
-        // },
-        url: "/user/forgot-password",
-        type: "Post",
-        data:formData,
-        success: function(resp){
-            if(resp.type=="error"){
-                $(".loader").hide();
-
-                $.each(resp.errors, function(i,error){
-                $("#forgot-"+i).attr('style', 'color:red');
-
-                $("#forgot-"+i).html(error);
-                setTimeout(function(){
-                    $("#forgot-"+i).css({
-                        'display':'none'
-                    });
-
-                },3000);
-            });
-            }else if(resp.type=="success"){
-                // alert(resp.message);
-                $(".loader").hide();
-                $("#forgot-success").attr('style', 'color:green');
-                $("#forgot-success").html(resp.message);
-                // window.location.href = resp.url;
-
-            }
-        }, error:function(){
-            alert("Error");
-        }
-    })
-});
 });
 
 function get_filter(class_name) {

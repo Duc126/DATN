@@ -91,11 +91,15 @@
 <!-- Coupon -->
 <div class="coupon-continue-checkout u-s-m-b-60">
     <div class="coupon-area">
-        <h6>Enter your coupon code if you have one.</h6>
+        <h6>{{ __('Nhập mã phiếu giảm giá của bạn nếu bạn có') }}</h6>
         <div class="coupon-field">
-            <label class="sr-only" for="coupon-code">Apply Coupon</label>
-            <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
-            <button type="submit" class="button">Apply Coupon</button>
+            <form id="applyCoupon" method="post" action="javascript:void(0);"
+            @if(Auth::check()) user="1" @endif>
+            @csrf
+                <label class="sr-only" for="coupon-code">{{ __('Áp dụng phiếu giảm giá') }}</label>
+                <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
+                <button type="submit" class="button">{{ __('Áp dụng phiếu giảm giá') }}</button>
+            </form>
         </div>
     </div>
     <div class="button-area">
@@ -128,7 +132,14 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Phiếu Giảm Giá') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text">0.đ</span>
+                        <span class="calc-text couponAmount">
+                            @if(Session::has('couponAmount'))
+                            {{ Session::get('couponAmount') }}.đ
+                            @else{
+                                0.đ
+                            }
+                            @endif
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -136,7 +147,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng Cộng') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{ $total_price }}.đ</span>
+                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.đ</span>
                     </td>
                 </tr>
             </tbody>

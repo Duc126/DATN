@@ -11,14 +11,14 @@
                 <nav>
                     <ul class="primary-nav g-nav">
                         <li>
-                            <a href="tel:+111222333">
+                            <a href="tel:+84 355913199">
                                 <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
-                                Telephone:+111-222-333</a>
+                                {{ __('Điện Thoại: +84 355913199') }}</a>
                         </li>
                         <li>
-                            <a href="mailto:info@sitemakers.in">
+                            <a href="mailto:ducbui1211@gmail.com">
                                 <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
-                                E-mail: info@sitemakers.in
+                                {{ __('E-mail: ducbui1211@gmail.com') }}
                             </a>
                         </li>
                     </ul>
@@ -76,7 +76,7 @@
                                 @endif
                             </ul>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a>USD
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
@@ -88,8 +88,8 @@
                                     <a href="#">(£) GBP</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a>ENG
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
@@ -100,7 +100,7 @@
                                 <li>
                                     <a href="#">ARB</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                     </ul>
                 </nav>
             </div>

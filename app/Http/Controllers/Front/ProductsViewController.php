@@ -69,12 +69,27 @@ class ProductsViewController extends Controller
                     $categoryProducts->whereIn('products.id', $productIds);
                 }
                 // checking for price filter
+                // if (isset($data['price']) && !empty($data['price'])) {
+                //     foreach ($data['price'] as $key => $price) {
+                //         $priceArr = explode("-", $price);
+                //         $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
+                //     }
+                //     $productIds = call_user_func_array('array_merge', $productIds);
+                //     $categoryProducts->whereIn('products.id', $productIds);
+                // }
+                //checking for price
+                $productIds = array();
                 if (isset($data['price']) && !empty($data['price'])) {
                     foreach ($data['price'] as $key => $price) {
                         $priceArr = explode("-", $price);
-                        $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
+                        if (isset($priceArr[0]) && isset($priceArr[1])) {
+                            $productIds[] = Product::select('id')->whereBetween(
+                                'product_price',
+                                [$priceArr[0], $priceArr[1]]
+                            )->pluck('id')->toArray();
+                        }
                     }
-                    $productIds = call_user_func_array('array_merge', $productIds);
+                    $productIds = array_unique(array_flatten($productIds));
                     $categoryProducts->whereIn('products.id', $productIds);
                 }
                 // checking for bránd filter
@@ -160,19 +175,19 @@ class ProductsViewController extends Controller
         //get recently view products IDS
         $recentProductsIds = RecentlyViewProducts::select('product_id')->where('product_id', '!=', $id)->where('session_id', $session_id)->inRandomOrder()->get()->take(4)
             ->pluck('product_id');
-            // dd($recentProductsIds);
-                    //Hiển thị recently view Products
-        $recentlyViewProducts = Product::with('brand')->whereIn('id',$recentProductsIds)->get()->toArray();
+        // dd($recentProductsIds);
+        //Hiển thị recently view Products
+        $recentlyViewProducts = Product::with('brand')->whereIn('id', $recentProductsIds)->get()->toArray();
         // dd($similarProducts);
         //get Group Product(Product Colors)
         $groupProducts = array();
-        if(!empty($productDetails['group_code'])){
-            $groupProducts = Product::select('id','product_image')->where('id','!=', $id)->where(['group_code'=>$productDetails['group_code'],'status' =>1])->get()->toArray();
+        if (!empty($productDetails['group_code'])) {
+            $groupProducts = Product::select('id', 'product_image')->where('id', '!=', $id)->where(['group_code' => $productDetails['group_code'], 'status' => 1])->get()->toArray();
             // dd($groupProducts);
         }
         $totalStock = ProductsAttributes::where('product_id', $id)->sum('stock');
 
-        return view('front.products.detail')->with(compact('productDetails', 'categoryDetails', 'totalStock', 'similarProducts','recentlyViewProducts','groupProducts'));
+        return view('front.products.detail')->with(compact('productDetails', 'categoryDetails', 'totalStock', 'similarProducts', 'recentlyViewProducts', 'groupProducts'));
     }
 
     public function getProductPrice(Request $request)
