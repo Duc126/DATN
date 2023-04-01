@@ -74,28 +74,28 @@ $productFilters = ProductsFilter::productFilters();
                     <!-- Product-details -->
                     <div class="all-information-wrapper">
                         @if (Session::has('error_message'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{{ __('Lỗi') }}:</strong><?php echo Session::get('error_message'); ?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                    @if (Session::has('success_message'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ __('Thành Công') }}:</strong> <?php echo Session::get('success_message'); ?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </div>
-                    @endif
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ __('Lỗi') }}:</strong><?php echo Session::get('error_message'); ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if (Session::has('success_message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ __('Thành Công') }}:</strong> <?php echo Session::get('success_message'); ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </div>
+                        @endif
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
@@ -127,15 +127,15 @@ $productFilters = ProductsFilter::productFilters();
                             <span class="getAttributePrice">
                                 @if ($getDiscountPrice > 0)
                                     <div class="price">
-                                        <h4>{{ $getDiscountPrice }}.đ</h4>
+                                        <h4>{{ $getDiscountPrice }}.Đ</h4>
                                     </div>
                                     <div class="original-price">
                                         <strong>{{ __('Giá Gốc:') }}</strong>
-                                        <span>{{ $productDetails['product_price'] }}.đ</span>
+                                        <span>{{ $productDetails['product_price'] }}.Đ</span>
                                     </div>
                                 @else
                                     <div class="price">
-                                        <h4>{{ $productDetails['product_price'] }}.đ</h4>
+                                        <h4>{{ $productDetails['product_price'] }}.Đ</h4>
                                     </div>
                                 @endif
                             </span>
@@ -209,7 +209,7 @@ $productFilters = ProductsFilter::productFilters();
                             </div>
 
                             <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                               <?php /* <div class="quick-social-media-wrapper u-s-m-b-22">
+                                <?php /* <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
                                         <li>
@@ -239,16 +239,19 @@ $productFilters = ProductsFilter::productFilters();
                                         </li>
                                     </ul>
                                 </div>
-                                */ ?>
+                                */
+                                ?>
                                 <div class="quantity-wrapper u-s-m-b-22">
                                     <span>{{ __('Số Lượng:') }}</span>
                                     <div class="quantity">
-                                        <input type="number" class="quantity-text-field" name="quantity" value="1">
+                                        <input type="number" class="quantity-text-field" name="quantity"
+                                            value="1">
 
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="button button-outline-secondary" type="submit">{{ __('Thêm vào giỏ hàng') }}</button>
+                                    <button class="button button-outline-secondary"
+                                        type="submit">{{ __('Thêm vào giỏ hàng') }}</button>
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
@@ -584,7 +587,8 @@ $productFilters = ProductsFilter::productFilters();
                                 @foreach ($similarProducts as $product)
                                     <div class="item">
                                         <div class="image-container">
-                                            <a class="item-img-wrapper-link" href="{{ url('product/' . $product['id']) }}">
+                                            <a class="item-img-wrapper-link"
+                                                href="{{ url('product/' . $product['id']) }}">
                                                 <?php $product_image_path = 'front/images/product_images/small/' . $product['product_image']; ?>
                                                 @if (!empty($product['product_image']) && file_exists($product_image_path))
                                                     <img class="img-fluid" src="{{ asset($product_image_path) }}"
@@ -668,7 +672,8 @@ $productFilters = ProductsFilter::productFilters();
                                 @foreach ($recentlyViewProducts as $product)
                                     <div class="item">
                                         <div class="image-container">
-                                            <a class="item-img-wrapper-link" href="{{ url('product/' . $product['id']) }}">
+                                            <a class="item-img-wrapper-link"
+                                                href="{{ url('product/' . $product['id']) }}">
                                                 <?php $product_image_path = 'front/images/product_images/small/' . $product['product_image']; ?>
                                                 @if (!empty($product['product_image']) && file_exists($product_image_path))
                                                     <img class="img-fluid" src="{{ asset($product_image_path) }}"

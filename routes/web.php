@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserPageAdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
+use App\Http\Controllers\Front\AddressController as FrontAddressController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\Front\UserController;
@@ -185,9 +186,16 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::match(['get', 'post'], 'user/account', [UserController::class, 'userAccount']);
         //Update Password account User
         Route::post('user/update-password', [UserController::class, 'updatePasswordUser']);
-
         //apply coupon
-
         Route::post('/apply-coupon', [AddProductController::class, 'applyCoupon']);
+        //checkout
+        Route::match(['get','post'],'/checkout',[ProductsViewController::class, 'checkout']);
+        //get delivery address
+        Route::post('get-delivery-address', [FrontAddressController::class, 'getDeliveryAddress']);
+        //save delivery address
+        Route::post('/save-delivery-address', [FrontAddressController::class, 'saveDeliveryAddress']);
+        //Remove delivery address
+        Route::post('/remove-delivery-address', [FrontAddressController::class, 'removeDeliveryAddress']);
+
     });
 });

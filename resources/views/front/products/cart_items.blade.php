@@ -89,13 +89,13 @@
 </div>
 <!-- Products-List-Wrapper /- -->
 <!-- Coupon -->
-<div class="coupon-continue-checkout u-s-m-b-60">
+{{-- <div class="coupon-continue-checkout u-s-m-b-60">
     <div class="coupon-area">
         <h6>{{ __('Nhập mã phiếu giảm giá của bạn nếu bạn có') }}</h6>
         <div class="coupon-field">
             <form id="applyCoupon" method="post" action="javascript:void(0);"
-            @if(Auth::check()) user="1" @endif>
-            @csrf
+                @if (Auth::check()) user="1" @endif>
+                @csrf
                 <label class="sr-only" for="coupon-code">{{ __('Áp dụng phiếu giảm giá') }}</label>
                 <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
                 <button type="submit" class="button">{{ __('Áp dụng phiếu giảm giá') }}</button>
@@ -103,10 +103,10 @@
         </div>
     </div>
     <div class="button-area">
-        <a href="shop-v1-root-category.html" class="continue">Continue Shopping</a>
-        <a href="checkout.html" class="checkout">Proceed to Checkout</a>
+        <a href="{{ url('/') }}" class="continue">{{ __('Tiếp tục mua sắm') }}</a>
+        <a href="{{ url('/checkout') }}" class="checkout">{{ __('Chuyển sang thanh toán') }}</a>
     </div>
-</div>
+</div> --}}
 <!-- Coupon /- -->
 
 <!-- Billing -->
@@ -124,7 +124,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng tiền chưa giảm') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{ $total_price }}.đ</span>
+                        <span class="calc-text">{{ $total_price }}.Đ</span>
                     </td>
                 </tr>
                 <tr>
@@ -133,11 +133,11 @@
                     </td>
                     <td>
                         <span class="calc-text couponAmount">
-                            @if(Session::has('couponAmount'))
-                            {{ Session::get('couponAmount') }}.đ
-                            @else{
-                                0.đ
-                            }
+                            @if (Session::has('couponAmount'))
+                                {{ Session::get('couponAmount') }}.Đ
+                            @else
+                                0.Đ
+
                             @endif
                         </span>
                     </td>
@@ -147,7 +147,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng Cộng') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.đ</span>
+                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.Đ</span>
                     </td>
                 </tr>
             </tbody>

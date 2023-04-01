@@ -17,15 +17,15 @@ $(document).ready(function () {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
                             resp["final_price"] +
-                            ".đ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
+                            ".Đ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
                             resp["product_price"] +
-                            ".đ</span></div>"
+                            ".Đ</span></div>"
                     );
                 } else {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
                             resp["final_price"] +
-                            ".đ</h4></div>"
+                            ".Đ</h4></div>"
                     );
                 }
             },
@@ -346,14 +346,75 @@ $(document).ready(function () {
                 $(".totalCartItems").html(resp.totalCartItems);
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerView);
-                if(resp.couponAmount > 0){
+                if (resp.couponAmount > 0) {
                     $(".couponAmount").text(resp.couponAmount + ".Đ");
-                }else{
-                    $(".couponAmount").text(  "0.Đ");
-
+                } else {
+                    $(".couponAmount").text("0.Đ");
                 }
-                if(resp.grand_total > 0){
+                if (resp.grand_total > 0) {
                     $(".grand_total").text(resp.grand_total + ".Đ");
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // edit delivery address
+    $(document).on("click", ".editAddress", function () {
+        var addressid = $(this).data("addressid");
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                addressid: addressid,
+            },
+            url: "/get-delivery-address",
+            type: "post",
+            success: function (resp) {
+                $("#showDifferent").removeClass("collapse");
+                $(".newAddress").hide();
+                $(".deliveryText").text("Chỉnh sửa địa chỉ giao hàng");
+                $("[name=delivery_id]").val(resp.address["id"]);
+                $("[name=delivery_name]").val(resp.address["name"]);
+                $("[name=delivery_address]").val(resp.address["address"]);
+                $("[name=delivery_city]").val(resp.address["city"]);
+                $("[name=delivery_state]").val(resp.address["state"]);
+                $("[name=delivery_country]").val(resp.address["country"]);
+                $("[name=delivery_pincode]").val(resp.address["pincode"]);
+                $("[name=delivery_phone]").val(resp.address["phone"]);
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    //save Delivery address
+    $(document).on("submit", "#addressAddEditForm", function () {
+        const formData = $("#addressAddEditForm").serialize();
+        $.ajax({
+            url: "/save-delivery-address",
+            type: "post",
+            data: formData,
+            success: function (data) {
+                if (data.type == "error") {
+                    $(".loader").hide();
+
+                    $.each(data.errors, function (i, error) {
+                        $("#delivery-" + i).attr("style", "color:red");
+
+                        $("#delivery-" + i).html(error);
+                        setTimeout(function () {
+                            $("#delivery-" + i).css({
+                                display: "none",
+                            });
+                        }, 3000);
+                    });
+                }else {
+                    $("#deliveryAddress").html(data.view);
 
                 }
             },
@@ -361,6 +422,31 @@ $(document).ready(function () {
                 alert("Error");
             },
         });
+    });
+
+    //Remove Delivery Address
+    $(document).on("click", ".removeAddress", function () {
+        if (confirm("Are you sure to remove this?")) {
+            const addressid = $(this).data("addressid");
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: "/remove-delivery-address",
+                type: "post",
+                data: {
+                    addressid: addressid,
+                },
+                success: function (resp) {
+                    $("#deliveryAddress").html(resp.view);
+                },
+                error: function () {
+                    alert("Error");
+                },
+            });
+        }
     });
 });
 
