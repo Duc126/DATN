@@ -60,7 +60,7 @@
 
                 </div>
                 <div class="group-2">
-                    <label for="delivery_state">{{ 'State' }}
+                    <label for="delivery_state">{{ 'Tình Trạng' }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" name="delivery_state" id="delivery_state" class="text-field">

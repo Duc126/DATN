@@ -7,6 +7,8 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Countries;
 use App\Models\DeliveryAddress;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductsAttributes;
 use App\Models\ProductsFilter;
@@ -14,6 +16,8 @@ use App\Models\RecentlyViewProducts;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ProductsViewController extends Controller
@@ -205,33 +209,122 @@ class ProductsViewController extends Controller
     }
     public function checkout(Request $request)
     {
+        $deliveryAddress = DeliveryAddress::deliveryAddress();
+        $countries = Countries::where('status', 1)->get()->toArray();
+        $getCartItems = Cart::getCartItems();
+        if (count($getCartItems) == 0) {
+            $message = "Giỏ hàng đang rỗng! Vui lòng thêm sản phẩm để thanh toán";
+            return redirect('cart')->with('error_message', $message);
+        }
         if ($request->isMethod('post')) {
             $data = $request->all();
             // dd($data);
             // echo "<pre>"; print_r($data);die;
 
             //select Delivery address validation
-            if(empty($data['address_id'])){
-                $message ="Vui lòng chọn Địa chỉ giao hàng";
+            if (empty($data['address_id'])) {
+                $message = "Vui lòng chọn Địa chỉ giao hàng";
                 return redirect()->back()->with('error_message', $message);
             }
 
             //payment method validation
-            if(empty($data['payment_gateway'])){
-                $message ="Vui lòng chọn hình thức thanh toán";
+            if (empty($data['payment_gateway'])) {
+                $message = "Vui lòng chọn hình thức thanh toán";
                 return redirect()->back()->with('error_message', $message);
             }
             //accept validation
-            if(empty($data['accept'])){
-                $message ="Vui lòng tích vào ô xác nhận";
+            if (empty($data['accept'])) {
+                $message = "Vui lòng tích vào ô xác nhận";
                 return redirect()->back()->with('error_message', $message);
             }
 
-        }
-        $deliveryAddress = DeliveryAddress::deliveryAddress();
-        $countries = Countries::where('status',1)->get()->toArray();
-        $getCartItems = Cart::getCartItems();
+            //GET Delivery Address from address_id
+            $addressDelivery = DeliveryAddress::where('id', $data['address_id'])->first()->toArray();
+            // dd($addressDelivery);
 
-        return view('front.products.checkout')->with(compact('deliveryAddress','countries','getCartItems'));
+            //set payment Method as COD if COD is selected from user otherwise set as prepaid
+
+            if ($data['payment_gateway'] == "COD") {
+                $payment_method = "COD";
+                $order_status = "New";
+            } else {
+                $payment_method = "Credit Card";
+                $order_status = "Pending";
+            }
+            DB::beginTransaction();
+            //fetch order total price
+            $total_price = 0;
+            foreach ($getCartItems as $item) {
+                $getDiscountAttributePrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
+                $total_price = $total_price + ($getDiscountAttributePrice['final_price'] * $item['quantity']);
+            }
+            //calculate shipping charges
+            $shipping_charges = 0;
+            //calculate grand total
+            $grand_total = $total_price + $shipping_charges - Session::get('couponAmount');
+
+            //insert grand total in session variable
+            Session::put('grand_total', $grand_total);
+
+            //insert order details
+
+            $order = new Order();
+            $order->user_id = Auth::user()->id;
+            $order->name = $addressDelivery['name'];
+            $order->address = $addressDelivery['address'];
+            $order->city = $addressDelivery['city'];
+            $order->state = $addressDelivery['state'];
+            $order->country = $addressDelivery['country'];
+            $order->pincode = $addressDelivery['pincode'];
+            $order->phone = $addressDelivery['phone'];
+            $order->email =  Auth::user()->email;
+            $order->shipping_charges = $shipping_charges;
+            $order->coupon_code = Session::get('couponCode');
+            $order->coupon_amount = Session::get('couponAmount');
+            $order->order_status = $order_status;
+            $order->payment_method = $payment_method;
+            $order->payment_gateway = $data['payment_gateway'];
+            $order->grand_total = $grand_total;
+            $order->save();
+            $order_id = DB::getPdo()->lastInsertId();
+
+
+            foreach ($getCartItems as $item) {
+                $cartItem = new OrderProduct();
+                $cartItem->order_id = $order_id;
+                $cartItem->user_id = Auth::user()->id;
+                $getProductDetails = Product::select('product_code', 'product_name', 'product_color', 'admin_id', 'vendor_id')
+                    ->where('id', $item['product_id'])->first()->toArray();
+                // dd($getProductDetails);
+                $cartItem->admin_id = $getProductDetails['admin_id'];
+                $cartItem->vendor_id = $getProductDetails['vendor_id'];
+                $cartItem->product_id = $item['product_id'];
+                $cartItem->product_code = $getProductDetails['product_code'];
+                $cartItem->product_name = $getProductDetails['product_name'];
+                $cartItem->product_color = $getProductDetails['product_color'];
+                $cartItem->product_size = $item['size'];
+                $getDiscountAttributePrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
+                $cartItem->product_price = $getDiscountAttributePrice['final_price'];
+                $cartItem->product_qty = $item['quantity'];
+                $cartItem->save();
+            }
+
+            //insert order id in session variable
+            Session::put('order_id', $order_id);
+            DB::commit();
+
+            return redirect('thanks');
+        }
+        return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'getCartItems'));
+    }
+    public function thanks()
+    {
+        if (Session::has('order_id')) {
+            //Empty the cart
+            Cart::where('user_id', Auth::user()->id)->delete();
+            return view('front.products.thanks');
+        } else {
+            return redirect('cart');
+        }
     }
 }
