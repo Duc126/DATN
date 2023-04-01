@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
 use App\Http\Controllers\Front\AddressController as FrontAddressController;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\OrderController;
 use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController as FrontVendorController;
@@ -135,6 +137,9 @@ Route::prefix('admin')->group(function () {
         //Users
         Route::get('users', [UserPageAdminController::class, 'index']);
         Route::post('update-status-user', [UserPageAdminController::class, 'updateStatusUser']);
+        //order
+        Route::get('order',[OrderAdminController::class, 'listOrder']);
+        Route::get('order/{id}',[OrderAdminController::class, 'orderDetails']);
     });
 });
 
@@ -196,6 +201,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::post('/save-delivery-address', [FrontAddressController::class, 'saveDeliveryAddress']);
         //Remove delivery address
         Route::post('/remove-delivery-address', [FrontAddressController::class, 'removeDeliveryAddress']);
+
+        //Thank
+        Route::get('thanks',[ProductsViewController::class, 'thanks']);
+        //user orders
+        Route::get('user/order/{id?}', [OrderController::class, 'order']);
 
     });
 });

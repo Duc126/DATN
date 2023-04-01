@@ -203,6 +203,23 @@
         </div>
     </li>
     <li class="nav-item">
+        <a @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;" @endif
+            class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-order">
+            <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/list_order') }}">{{ __('Đơn đặt hàng') }}</a>
+                </li>
+
+            </ul>
+        </div>
+    </li>
     <li class="nav-item">
         <a @if (Session::get('page') == 'banner') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-banner" aria-expanded="false"

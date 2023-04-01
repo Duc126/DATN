@@ -11,6 +11,7 @@ $(document).ready(function () {
     $("#adminTable").DataTable();
     $("#coupon").DataTable();
     $("#users").DataTable();
+    $("#orders").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");

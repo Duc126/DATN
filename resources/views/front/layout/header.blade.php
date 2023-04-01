@@ -52,10 +52,16 @@
                                 </li> --}}
                                 @if (Auth::check())
                                     <li>
+                                        <a href="{{ url('user/order') }}">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            {{ __('Đơn hàng của tôi') }}</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ url('user/account') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
                                             {{ __('Tài Khoản Của Tôi') }}</a>
                                     </li>
+
                                     <li>
                                         <a href="{{ url('user/logout') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
@@ -146,7 +152,7 @@
                         <nav>
                             <ul class="mid-nav g-nav">
                                 <li class="u-d-none-lg">
-                                    <a href="index.html">
+                                    <a href="{{ url('/') }}">
                                         <i class="ion ion-md-home u-c-brand"></i>
                                     </a>
                                 </li>
@@ -197,7 +203,7 @@
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
                                 {{ __('
-                                                                Tất cả danh mục') }}
+                                                                                                Tất cả danh mục') }}
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
