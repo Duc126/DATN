@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Countries;
+use App\Models\DeliveryAddress;
 use App\Models\Product;
 use App\Models\ProductsAttributes;
 use App\Models\ProductsFilter;
@@ -199,5 +202,36 @@ class ProductsViewController extends Controller
             $getDiscountAttributePrice = Product::getDiscountAttributePrice($data['product_id'], $data['size']);
             return  $getDiscountAttributePrice;
         }
+    }
+    public function checkout(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+            // dd($data);
+            // echo "<pre>"; print_r($data);die;
+
+            //select Delivery address validation
+            if(empty($data['address_id'])){
+                $message ="Vui lòng chọn Địa chỉ giao hàng";
+                return redirect()->back()->with('error_message', $message);
+            }
+
+            //payment method validation
+            if(empty($data['payment_gateway'])){
+                $message ="Vui lòng chọn hình thức thanh toán";
+                return redirect()->back()->with('error_message', $message);
+            }
+            //accept validation
+            if(empty($data['accept'])){
+                $message ="Vui lòng tích vào ô xác nhận";
+                return redirect()->back()->with('error_message', $message);
+            }
+
+        }
+        $deliveryAddress = DeliveryAddress::deliveryAddress();
+        $countries = Countries::where('status',1)->get()->toArray();
+        $getCartItems = Cart::getCartItems();
+
+        return view('front.products.checkout')->with(compact('deliveryAddress','countries','getCartItems'));
     }
 }

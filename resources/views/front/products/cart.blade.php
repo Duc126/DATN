@@ -28,7 +28,24 @@
                     <div id="appendCartItems">
                         @include('front.products.cart_items')
                     </div>
-
+                    <div class="coupon-continue-checkout u-s-m-b-60">
+                        <div class="coupon-area">
+                            <h6>{{ __('Nhập mã phiếu giảm giá của bạn nếu bạn có') }}</h6>
+                            <div class="coupon-field">
+                                <form id="applyCoupon" method="post" action="javascript:void(0);"
+                                    @if (Auth::check()) user="1" @endif>
+                                    @csrf
+                                    <label class="sr-only" for="coupon-code">{{ __('Áp dụng phiếu giảm giá') }}</label>
+                                    <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
+                                    <button type="submit" class="button">{{ __('Áp dụng phiếu giảm giá') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="button-area">
+                            <a href="{{ url('/') }}" class="continue">{{ __('Tiếp tục mua sắm') }}</a>
+                            <a href="{{ url('/checkout') }}" class="checkout">{{ __('Chuyển sang thanh toán') }}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

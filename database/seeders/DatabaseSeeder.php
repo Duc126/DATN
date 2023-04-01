@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(BannerSeeder::class);
         // $this->call(FilterSeeder::class);
         // $this->call(FiltersValueSeeder::class);
-        $this->call(CouponTable::class);
+        // $this->call(CouponTable::class);
+        $this->call(DeliveryAddressSeeder::class);
+
     }
 }
