@@ -140,6 +140,8 @@ Route::prefix('admin')->group(function () {
         //order
         Route::get('order',[OrderAdminController::class, 'listOrder']);
         Route::get('order/{id}',[OrderAdminController::class, 'orderDetails']);
+        Route::post('update-order-status',[OrderAdminController::class, 'updateOrderStatus']);
+        Route::post('update-order-item-status',[OrderAdminController::class, 'updateOrderItemStatus']);
     });
 });
 
