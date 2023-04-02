@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td>
-                {{ __('Trạng Thái Đơn Hàng')}} #{{ $order_id }} {{ ('Của Bạn Đã Được Cập Nhật Thành') }} {{ $order_status }}
+                {{ __('Trạng Thái Mặt Hàng')}} #{{ $order_id }} {{ ('Của Bạn Đã Được Cập Nhật Thành') }} {{ $order_status }}
             </td>
         </tr>
         <tr>
@@ -54,7 +54,7 @@
         @endif
         <tr>
             <td>
-                {{ __('Đơn đặt hàng chi tiết như dưới đây: -') }}
+                {{ __('Đơn mặt hàng chi tiết như dưới đây: -') }}
             </td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@
                             <td>{{ $order['product_price'] }}.VNĐ</td>
                         </tr>
                     @endforeach
-                    <tr>
+                    {{-- <tr>
                         <td colspan="5" align="right">{{ __('Chi phí vận chuyển') }}</td>
                         <td>  {{ $orderDetails['shipping_charges'] }}.VNĐ</td>
                     </tr>
@@ -100,7 +100,7 @@
                     <tr>
                         <td colspan="5" align="right">{{ __('Tổng cộng') }}</td>
                         <td>  {{ $orderDetails['grand_total'] }}.VNĐ</td>
-                    </tr>
+                    </tr> --}}
                 </table>
             </td>
         </tr>

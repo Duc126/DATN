@@ -1,4 +1,5 @@
-<?php use App\Models\Product; ?>
+<?php use App\Models\Product;
+use App\Models\OrderLogs; ?>
 
 @extends('admin.layout.layout')
 @section('content')
@@ -221,22 +222,60 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">{{ __(' Cập Nhật Trạng Thái Đơn Hàng') }}</h4>
-                            @if(Auth::guard('admin')->user()->type!="vendor")
-                            <form action="{{ url('admin/update-order-status') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="order_id" value="{{ $orderDetails['id'] }}">
-                                <select class="form-control text-dark" name="order_status" required>
-                                    <option value="">{{ __('Chọn') }}</option>
-                                    @foreach ($orderStatus as $status)
-                                        <option value="{{ $status['name'] }}"
-                                            @if (!empty($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) selected="" @endif>{{ $status['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-success mt-3">{{ __('Cập Nhật') }}</button>
-                            </form>
+                            @if (Auth::guard('admin')->user()->type != 'vendor')
+                                <form action="{{ url('admin/update-order-status') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="order_id" value="{{ $orderDetails['id'] }}">
+                                    <select class="form-control text-dark" name="order_status" id="order_status"
+                                        required>
+                                        <option value="" selected="">{{ __('Chọn') }}</option>
+                                        @foreach ($orderStatus as $status)
+                                            <option value="{{ $status['name'] }}"
+                                                @if (!empty($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) selected="" @endif>{{ $status['name'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <input class="form-group" type="text" name="courier_name" id="courier_name"
+                                        placeholder="Tên chuyển phát nhanh">
+                                    <input type="text" name="tracking_number" id="tracking_number"
+                                        placeholder="Số theo dõi">
+                                    <button type="submit" class="btn btn-success mt-3">{{ __('Cập Nhật') }}</button>
+                                </form>
+                                <br>
+                                @foreach ($orderLog as $key => $log)
+                                    <strong>{{ $log['order_status'] }}</strong>
+                                    {{-- @if ($log['order_status'] == 'Shipped') --}}
+                                    @if (isset($log['order_item_id']) && $log['order_item_id'] > 0)
+                                        @php $getItemDetails = OrderLogs::getItemDetails($log['order_item_id']) @endphp
+                                        {{ __('- Đối với mặt hàng') }}
+                                        {{ $getItemDetails['product_code'] }}<br>
+                                        @if (!empty($getItemDetails['courier_name']))
+                                            <br><strong>{{ __('Tên chuyển phát nhanh:') }}</strong><span>
+                                                {{ $getItemDetails['courier_name'] }}</span><br>
+                                        @endif
+                                        @if (!empty($getItemDetails['tracking_number']))
+                                            <strong>{{ __('Số theo dõi:') }}</strong><span>
+                                                {{ $getItemDetails['tracking_number'] }}</span><br>
+                                        @endif
+                                        {{-- @else
+                                            @if (!empty($orderDetails['courier_name']))
+                                                <br><strong>{{ __('Tên chuyển phát nhanh:') }}</strong><span>
+                                                    {{ $orderDetails['courier_name'] }}</span><br>
+                                            @endif
+                                            @if (!empty($orderDetails['tracking_number']))
+                                                <strong>{{ __('Số theo dõi:') }}</strong><span>
+                                                    {{ $orderDetails['tracking_number'] }}</span><br>
+                                            @endif
+                                        @endif --}}
+                                    @endif
+                                    {{-- @endif --}}
+
+                                    {{ date('Y-m-d h:i:s', strtotime($log['created_at'])) }}<br>
+                                    <hr>
+                                @endforeach
                             @else
-                               <h6>{{ __('Tính năng này bị hạn chế') }}</h6>
+                                <h6>{{ __('Tính năng này bị hạn chế') }}</h6>
                             @endif
                         </div>
                     </div>
@@ -274,15 +313,25 @@
                                             <form action="{{ url('admin/update-order-item-status') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="order_item_id" value="{{ $product['id'] }}">
-                                                <select class="py-2" name="order_item_status" required>
-                                                    <option value="">{{ __('Chọn') }}</option>
-                                                    @foreach ( $orderItemStatus as $statusItem )
-                                                    <option value="{{ $statusItem['name'] }}" @if(!empty($product['item_status'])
-                                                    && $product['item_status']== $statusItem['name']) selected="" @endif>{{ $statusItem['name'] }}</option>
-
+                                                <select class="py-2" name="order_item_status" id="order_item_status"
+                                                    required>
+                                                    <option value="" selected="">{{ __('Chọn') }}</option>
+                                                    @foreach ($orderItemStatus as $statusItem)
+                                                        <option value="{{ $statusItem['name'] }}"
+                                                            @if (!empty($product['item_status']) && $product['item_status'] == $statusItem['name']) selected="" @endif>
+                                                            {{ $statusItem['name'] }}</option>
                                                     @endforeach
                                                 </select>
-                                                <button type="submit" class="btn btn-success">{{ __('Cập Nhật') }}</button>
+                                                <input style="width:110px;" class="form-group" type="text"
+                                                    name="item_courier_name" id="item_courier_name"
+                                                    placeholder="Tên chuyển phát nhanh"
+                                                    @if (!empty($product['courier_name'])) value="{{ $product['courier_name'] }}" @endif>
+                                                <input style="width:110px;" class="form-group" type="text"
+                                                    name="item_tracking_number" id="item_tracking_number"
+                                                    placeholder="Số theo dõi"
+                                                    @if (!empty($product['tracking_number'])) value="{{ $product['tracking_number'] }}" @endif>
+                                                <button type="submit"
+                                                    class="btn btn-success">{{ __('Cập Nhật') }}</button>
                                             </form>
                                         </td>
 

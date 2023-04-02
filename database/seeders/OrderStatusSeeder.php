@@ -20,7 +20,7 @@ class OrderStatusSeeder extends Seeder
             ['name' => 'Pending','status' =>1],
             ['name' => 'Cancelled','status' =>1],
             ['name' => 'In Process','status' =>1],
-            ['name' => 'Shipper','status' =>1],
+            ['name' => 'Shipped','status' =>1],
             ['name' => 'Partially Shipped','status' =>1],
             ['name' => 'Delivered','status' =>1],
             ['name' => 'Partially Delivered','status' =>1],

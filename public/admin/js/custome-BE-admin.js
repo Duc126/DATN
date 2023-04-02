@@ -498,3 +498,28 @@ $(document).on("click", ".updateUser", function () {
         },
     });
 });
+
+//show courier name and tracking number in case of shipped order status
+$("#courier_name").hide();
+$("#tracking_number").hide();
+$("#order_status").on("change", function () {
+    if (this.value == "Shipped") {
+        $("#courier_name").show();
+        $("#tracking_number").show();
+    } else {
+        $("#courier_name").hide();
+        $("#tracking_number").hide();
+    }
+});
+//show courier name and tracking number item in case of shipped order status
+// $("#item_courier_name").hide();
+// $("#item_tracking_number").hide();
+// $("#order_item_status").on("change", function () {
+//     if (this.value == "Shipped") {
+//         $("#item_courier_name").show();
+//         $("#item_tracking_number").show();
+//     } else {
+//         $("#item_courier_name").hide();
+//         $("#item_tracking_number").hide();
+//     }
+// });

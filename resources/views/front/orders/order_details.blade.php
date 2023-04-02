@@ -26,7 +26,8 @@
             <div class="row">
                 <table class="table table-striped table-borderless">
                     <tr>
-                        <td colspan="2" style="color: #fff; background: red;"><strong>{{ __('Chi tiết đơn hàng') }}</strong></td>
+                        <td colspan="2" style="color: #fff; background: red;">
+                            <strong>{{ __('Chi tiết đơn hàng') }}</strong></td>
                     </tr>
                     <tr>
                         <td>{{ __('Ngày đặt hàng') }}</td>
@@ -60,6 +61,18 @@
                             </td>
                         </tr>
                     @endif
+                    @if ($orderDetails['courier_name'] != '')
+                        <tr>
+                            <td>{{ __('Tên Chyển Phát Nhanh') }}
+                            <td>{{ $orderDetails['courier_name'] }}</td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('Số Theo Dõi') }}
+                            <td>{{ $orderDetails['tracking_number'] }}</td>
+                            </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>{{ __('Payment Method') }}
                         <td>{{ $orderDetails['payment_method'] }}</td>
@@ -67,9 +80,10 @@
                     </tr>
 
                 </table>
-                <table class="table table-striped table-borderless" >
+                <table class="table table-striped table-borderless">
                     <tr>
-                        <td colspan="6" style="color: #fff; background: red;"><strong>{{ __('Chi tiết sản phẩm') }}</strong></td>
+                        <td colspan="6" style="color: #fff; background: red;">
+                            <strong>{{ __('Chi tiết sản phẩm') }}</strong></td>
                     </tr>
                     <tr>
                         <td>{{ __('Ảnh Sản Phẩm') }}</td>
@@ -80,44 +94,66 @@
                         <td>{{ __('Sô Lượng Sản Phẩm') }}</td>
                     </tr>
                     @foreach ($orderDetails['orders_products'] as $product)
-                    <tr>
-                        <td>
-                            @php $getProductImage = Product::getProductImage($product['product_id'])@endphp
-                            <a href="{{ url('product/'.$product['product_id']) }}">
-                            <img style="width:50px;" src="{{ asset('front/images/product_images/small/'.$getProductImage) }}"></a>
-                        </td>
-                        <td>{{ $product['product_code'] }}</td>
-                        <td>{{ $product['product_name'] }}</td>
-                        <td>{{ $product['product_size'] }}</td>
-                        <td>{{ $product['product_color'] }}</td>
-                        <td>{{ $product['product_qty'] }}</td>
+                        <tr>
+                            <td>
+                                @php $getProductImage = Product::getProductImage($product['product_id'])@endphp
+                                <a href="{{ url('product/' . $product['product_id']) }}">
+                                    <img style="width:50px;"
+                                        src="{{ asset('front/images/product_images/small/' . $getProductImage) }}"></a>
+                            </td>
+                            <td>{{ $product['product_code'] }}</td>
+                            <td>{{ $product['product_name'] }}</td>
+                            <td>{{ $product['product_size'] }}</td>
+                            <td>{{ $product['product_color'] }}</td>
+                            <td>{{ $product['product_qty'] }}</td>
                         </tr>
+                        @if ($product['courier_name'] != '')
+                            <tr>
+                                <td colspan="6">{{ __('Tên Chuyển Phát:') }} {{ $product['courier_name'] }},
+                                    {{ __('Số Theo Dõi:') }} {{ $product['tracking_number'] }}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </table>
                 <table class="table table-striped table-borderless">
                     <tr>
-                        <td colspan="2" style="color: #fff; background: red;"><strong>{{ __('Địa chỉ giao hàng') }}</strong></td>
+                        <td colspan="2" style="color: #fff; background: red;">
+                            <strong>{{ __('Địa chỉ giao hàng') }}</strong></td>
                     </tr>
                     <tr>
-                        <td>{{ __('Tên') }}<td>{{ $orderDetails['name'] }}</td></td>
+                        <td>{{ __('Tên') }}
+                        <td>{{ $orderDetails['name'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Địa Chỉ') }}<td>{{ $orderDetails['address'] }}</td></td>
+                        <td>{{ __('Địa Chỉ') }}
+                        <td>{{ $orderDetails['address'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Thành Phô') }}<td>{{ $orderDetails['city'] }}</td></td>
+                        <td>{{ __('Thành Phô') }}
+                        <td>{{ $orderDetails['city'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Tình Trạng') }}<td>{{ $orderDetails['state'] }}</td></td>
+                        <td>{{ __('Tình Trạng') }}
+                        <td>{{ $orderDetails['state'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Quốc Gia') }}<td>{{ $orderDetails['country'] }}</td></td>
+                        <td>{{ __('Quốc Gia') }}
+                        <td>{{ $orderDetails['country'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Mã Pin') }}<td>{{ $orderDetails['pincode'] }}</td></td>
+                        <td>{{ __('Mã Pin') }}
+                        <td>{{ $orderDetails['pincode'] }}</td>
+                        </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Số Điện Thoại') }}<td>{{ $orderDetails['phone'] }}</td></td>
+                        <td>{{ __('Số Điện Thoại') }}
+                        <td>{{ $orderDetails['phone'] }}</td>
+                        </td>
                     </tr>
 
 
