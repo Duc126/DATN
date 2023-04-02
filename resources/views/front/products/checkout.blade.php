@@ -10,10 +10,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="index.html">{{ __('Trang Chủ') }}</a>
+                        <a href="{{ url('/') }}">{{ __('Trang Chủ') }}</a>
                     </li>
                     <li class="is-marked">
-                        <a href="checkout.html">{{ __('Thanh Toán') }}</a>
+                        <a href="#">{{ __('Thanh Toán') }}</a>
                     </li>
                 </ul>
             </div>
@@ -124,21 +124,21 @@
                                     <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="cash-on-delivery"
                                             value="COD">
-                                        <label class="label-text" for="cash-on-delivery">Cash on Delivery</label>
+                                        <label class="label-text" for="cash-on-delivery">{{ __('Thanh Toán Khi Giao Hàng') }}</label>
                                     </div>
                                     <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="paypal"
                                             value="Paypal">
-                                        <label class="label-text" for="paypal">Paypal</label>
+                                        <label class="label-text" for="paypal">{{ __('Credit Card') }}</label>
                                     </div>
                                     <div class="u-s-m-b-13">
                                         <input type="checkbox" class="check-box" id="accept" name="accept"value="Yes"
                                               title="Vui lòng đồng ý với T&C">
-                                        <label class="label-text no-color" for="accept">I’ve read and accept the
-                                            <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
+                                        <label class="label-text no-color" for="accept">{{ __('Tôi Đã Đọc Và Chấp Nhận Các') }}
+                                            <a href="#" class="u-c-brand">{{ __('Điều Khoản Và Điều Kiện') }}</a>
                                         </label>
                                     </div>
-                                    <button type="submit" class="button button-outline-secondary">Place Order</button>
+                                    <button type="submit" class="button button-outline-secondary">{{ __('Đặt Hàng') }}</button>
                                 </div>
                             </div>
                             <!-- Checkout /- -->

@@ -73,21 +73,22 @@
                     @endforeach
                     <tr>
                         <td colspan="5" align="right">{{ __('Chi phí vận chuyển') }}</td>
-                        <td>  {{ $orderDetails['shipping_charges'] }}.VNĐ</td>
+                        <td> {{ $orderDetails['shipping_charges'] }}.VNĐ</td>
                     </tr>
                     <tr>
                         <td colspan="5" align="right">{{ __('Số tiền khi áp dụng phiếu giảm giá') }}</td>
                         <td>
-                            @if($orderDetails['coupon_amount'] > 0)
-                             {{ $orderDetails['coupon_amount'] }}
-                             @else
-                            0
-                             @endif
-                             .VNĐ</td>
+                            @if ($orderDetails['coupon_amount'] > 0)
+                                {{ $orderDetails['coupon_amount'] }}
+                            @else
+                                0
+                            @endif
+                            .VNĐ
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="5" align="right">{{ __('Tổng cộng') }}</td>
-                        <td>  {{ $orderDetails['grand_total'] }}.VNĐ</td>
+                        <td> {{ $orderDetails['grand_total'] }}.VNĐ</td>
                     </tr>
                 </table>
             </td>
@@ -101,44 +102,44 @@
             <td>
                 <table>
                     <tr>
-                       <td> <strong>{{ __('Địa chỉ giao hàng:') }}
-                        </strong></td>
-                    </tr>
-                    <tr>
-                       <td>
-                        {{ $orderDetails['name'] }}
-                       </td>
+                        <td> <strong>{{ __('Địa chỉ giao hàng:') }}
+                            </strong></td>
                     </tr>
                     <tr>
                         <td>
-                         {{ $orderDetails['address'] }}
+                            {{ $orderDetails['name'] }}
                         </td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                         <td>
-                         {{ $orderDetails['city'] }}
+                            {{ $orderDetails['address'] }}
                         </td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                         <td>
-                         {{ $orderDetails['state'] }}
+                            {{ $orderDetails['city'] }}
                         </td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                         <td>
-                         {{ $orderDetails['country'] }}
+                            {{ $orderDetails['state'] }}
                         </td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                         <td>
-                         {{ $orderDetails['pincode'] }}
+                            {{ $orderDetails['country'] }}
                         </td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                         <td>
-                         {{ $orderDetails['phone'] }}
+                            {{ $orderDetails['pincode'] }}
                         </td>
-                     </tr>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ $orderDetails['phone'] }}
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -148,10 +149,22 @@
             </td>
         </tr>
         <tr>
+            <td>{{ __('Tải xuống hóa đơn đặt hàng') }}
+                <a
+                    href="{{ url('order/invoice/download/' . $orderDetails['id'] . '') }}">{{ url('order/invoice/download/' . $orderDetails['id'] . '') }}</a>
+            </td>
+        </tr>
+        <tr>
             <td>
-               {{ __('Đối với bất kỳ truy vấn, bạn có thể liên hệ với chúng tôi tại') }} <a href="mailto:ducbui1211@gmail.com">
-                {{ __('ducbui1211@gmail.com') }}
-               </a>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ __('Đối với bất kỳ truy vấn, bạn có thể liên hệ với chúng tôi tại') }} <a
+                    href="mailto:ducbui1211@gmail.com">
+                    {{ __('ducbui1211@gmail.com') }}
+                </a>
             </td>
         </tr>
         <tr>

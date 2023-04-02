@@ -49,7 +49,18 @@
                                                 <td>{{ $orderList['payment_method'] }} </td>
                                                 <td>
                                                     <a title="{{ __('Xem chi tiết đơn đặt hàng') }}"
-                                                    href="{{ url('admin/order/'.$orderList['id']) }}"><i style="font-size:25px;" class="mdi mdi-file-document"></i>
+                                                        href="{{ url('admin/order/' . $orderList['id']) }}"><i
+                                                            style="font-size:25px;" class="mdi mdi-file-document"></i>
+                                                    </a>
+                                                    &nbsp;&nbsp;
+                                                    <a target="_blank" title="{{ __('Xem chi tiết hóa đơn') }}"
+                                                        href="{{ url('admin/order/invoice/' . $orderList['id']) }}"><i
+                                                            style="font-size:25px;" class="mdi mdi-printer"></i>
+                                                    </a>
+                                                    &nbsp;&nbsp;
+                                                    <a target="_blank" title="{{ __('In hóa đơn') }}"
+                                                        href="{{ url('admin/order/invoice/pdf/' . $orderList['id']) }}"><i
+                                                            style="font-size:25px;" class="mdi mdi-file-pdf"></i>
                                                     </a>
                                                 </td>
                                             </tr>

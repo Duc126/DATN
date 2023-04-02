@@ -142,8 +142,14 @@ Route::prefix('admin')->group(function () {
         Route::get('order/{id}',[OrderAdminController::class, 'orderDetails']);
         Route::post('update-order-status',[OrderAdminController::class, 'updateOrderStatus']);
         Route::post('update-order-item-status',[OrderAdminController::class, 'updateOrderItemStatus']);
+
+        //order invoices
+        Route::get('order/invoice/{id}',[OrderAdminController::class, 'viewInvoice']);
+        Route::get('order/invoice/pdf/{id}',[OrderAdminController::class, 'viewPDFInvoice']);
+
     });
 });
+Route::get('order/invoice/download/{id}','App\Http\Controllers\Admin\OrderAdminController@viewPDFInvoice');
 
 Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
