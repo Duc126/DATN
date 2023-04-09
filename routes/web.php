@@ -6,22 +6,27 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\InvoicePdfController;
 use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\UserPageAdminController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
 use App\Http\Controllers\Front\AddressController as FrontAddressController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\OrderController;
+use App\Http\Controllers\Front\PaypalController;
 use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController as FrontVendorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchProductController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 
@@ -55,7 +60,7 @@ Route::prefix('admin')->group(function () {
     //admin Login
     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('Ad-dashboard');
+        Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('Ad-dashboard');
         //Update Password
         Route::match(['get', 'post'], 'update-password', [AdminController::class, 'updatePassword'])->name('update-password');
         Route::post('check-admin-password', [AdminController::class, 'checkPassword']);
@@ -138,18 +143,24 @@ Route::prefix('admin')->group(function () {
         Route::get('users', [UserPageAdminController::class, 'index']);
         Route::post('update-status-user', [UserPageAdminController::class, 'updateStatusUser']);
         //order
-        Route::get('order',[OrderAdminController::class, 'listOrder']);
-        Route::get('order/{id}',[OrderAdminController::class, 'orderDetails']);
-        Route::post('update-order-status',[OrderAdminController::class, 'updateOrderStatus']);
-        Route::post('update-order-item-status',[OrderAdminController::class, 'updateOrderItemStatus']);
+        Route::get('order', [OrderAdminController::class, 'listOrder']);
+        Route::get('order/{id}', [OrderAdminController::class, 'orderDetails']);
+        Route::post('update-order-status', [OrderAdminController::class, 'updateOrderStatus']);
+        Route::post('update-order-item-status', [OrderAdminController::class, 'updateOrderItemStatus']);
 
         //order invoices
-        Route::get('order/invoice/{id}',[OrderAdminController::class, 'viewInvoice']);
-        Route::get('order/invoice/pdf/{id}',[OrderAdminController::class, 'viewPDFInvoice']);
+        Route::get('order/invoice/{id}', [OrderAdminController::class, 'viewInvoice']);
+        Route::get('order/invoice/pdf/{id}', [InvoicePdfController::class, 'viewPDFInvoice']);
 
+
+        //SHIPPING
+        Route::get('shipping', [ShippingController::class, 'shipping']);
+        Route::post('update-status-shipping', [ShippingController::class, 'updateStatusShipping']);
+
+        Route::match(['get', 'post'], 'add-edit-shipping/{id?}', [ShippingController::class, 'addEditShipping']);
     });
 });
-Route::get('order/invoice/download/{id}','App\Http\Controllers\Admin\OrderAdminController@viewPDFInvoice');
+Route::get('order/invoice/download/{id}', 'App\Http\Controllers\Admin\InvoicePdfController@viewPDFInvoice');
 
 Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
@@ -189,10 +200,15 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('user/logout', [UserController::class, 'userLogout']);
     //login user
     Route::post('user/login', [UserController::class, 'userLogin']);
+
+
+
     //confirm user  account
     Route::get('/user/confirm/{code}', [UserController::class, 'confirmAccountUser']);
     //user forgot password
     Route::match(['get', 'post'], 'user/forgot-password', [UserController::class, 'forgotPassword']);
+    //search products
+    Route::get('search-products', [ProductsViewController::class, 'listingIndex']);
 
     Route::group(['middleware' => ['auth']], function () {
         //user account
@@ -202,7 +218,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         //apply coupon
         Route::post('/apply-coupon', [AddProductController::class, 'applyCoupon']);
         //checkout
-        Route::match(['get','post'],'/checkout',[ProductsViewController::class, 'checkout']);
+        Route::match(['get', 'post'], '/checkout', [ProductsViewController::class, 'checkout']);
         //get delivery address
         Route::post('get-delivery-address', [FrontAddressController::class, 'getDeliveryAddress']);
         //save delivery address
@@ -211,9 +227,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
         Route::post('/remove-delivery-address', [FrontAddressController::class, 'removeDeliveryAddress']);
 
         //Thank
-        Route::get('thanks',[ProductsViewController::class, 'thanks']);
+        Route::get('thanks', [ProductsViewController::class, 'thanks']);
         //user orders
         Route::get('user/order/{id?}', [OrderController::class, 'order']);
 
+        //paypal
+        Route::get('paypal', [PaypalController::class, 'paypal']);
     });
 });

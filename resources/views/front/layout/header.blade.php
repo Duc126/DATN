@@ -35,7 +35,7 @@
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width:230px">
-                                <li>
+                                {{-- <li>
                                     <a href="cart.html">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
                                         My Cart</a>
@@ -44,7 +44,7 @@
                                     <a href="wishlist.html">
                                         <i class="far fa-heart u-s-m-r-9"></i>
                                         My Wishlist</a>
-                                </li>
+                                </li> --}}
                                 {{-- <li>
                                     <a href="checkout.html">
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
@@ -128,19 +128,22 @@
                         </div>
                     </div>
                     <div class="col-lg-6 u-d-none-lg">
-                        <form class="form-searchbox">
-                            <label class="sr-only" for="search-landscape">Search</label>
-                            <input id="search-landscape" type="text" class="text-field"
-                                placeholder="Search everything">
+                        <form class="form-searchbox" action="{{ url('/search-products') }}" method="get">
+                            <label class="sr-only" for="search-landscape">{{ __('Tìm Kiếm') }}</label>
+                            <input name="search" id="search-landscape" type="text" class="text-field"
+                                placeholder="Tìm Kiếm"
+                                @if (isset($_REQUEST['search']) && !empty($_REQUEST['search'])) value="{{ $_REQUEST['search'] }}" @endif>
                             <div class="select-box-position">
                                 <div class="select-box-wrapper select-hide">
-                                    <label class="sr-only" for="select-category">Choose category for search</label>
-                                    <select class="select-box" id="select-category">
+                                    <label class="sr-only"
+                                        for="select-category">{{ __('Chọn danh mục để tìm kiếm') }}</label>
+                                    <select class="select-box" id="select-category" name="section_id">
                                         <option selected="selected" value="">
-                                            All
+                                            {{ __('Tất Cả') }}
                                         </option>
                                         @foreach ($sections as $section)
-                                            <option value="">{{ $section['name'] }}</option>
+                                            <option @if (isset($_REQUEST['section_id']) && !empty($_REQUEST['section_id']) && $_REQUEST['section_id'] == $section['id']) selected ="" @endif
+                                                value="{{ $section['id'] }}">{{ $section['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -156,16 +159,16 @@
                                         <i class="ion ion-md-home u-c-brand"></i>
                                     </a>
                                 </li>
-                                <li class="u-d-none-lg">
+                                {{-- <li class="u-d-none-lg">
                                     <a href="wishlist.html">
                                         <i class="far fa-heart"></i>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a id="mini-cart-trigger">
                                         <i class="ion ion-md-basket"></i>
                                         <span class="item-counter totalCartItems">{{ $totalCartItems }}</span>
-                                        <span class="item-price">$220.00</span>
+                                        {{-- <span class="item-price">0 VNĐ</span> --}}
                                     </a>
                                 </li>
                             </ul>
@@ -203,7 +206,7 @@
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
                                 {{ __('
-                                                                                                Tất cả danh mục') }}
+                                                                                                                                                                                                Tất cả danh mục') }}
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
@@ -212,7 +215,7 @@
                                         @foreach ($sections as $section)
                                             @if (count($section['categories']) > 0)
                                                 <li class="js-backdrop">
-                                                    <a href="shop-v1-root-category.html">
+                                                    <a href="#">
                                                         <i class="ion-ios-add-circle"></i>
                                                         {{ $section['name'] }}
                                                         <i class="ion ion-ios-arrow-forward"></i>
@@ -259,25 +262,25 @@
                     <div class="col-lg-9">
                         <ul class="bottom-nav g-nav u-d-none-lg">
                             <li>
-                                <a href="listing-without-filters.html">New Arrivals
+                                <a href="#men-latest-products">{{ __('Sản Phẩm Mới') }}
                                     <span class="superscript-label-new">NEW</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Best Seller
+                                <a href="#men-best-selling-products">{{ __('Sản Phẩm Bán Chạy Nhất') }}
                                     <span class="superscript-label-hot">HOT</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Featured
+                                <a href="#men-featured-products">{{ __('Sản Phẩm Nổi Bật') }}
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Discounted
+                                <a href="#discounted-products">{{ __('Sản Phẩm Giảm Giá') }}
                                     <span class="superscript-label-discount">-30%</span>
                                 </a>
                             </li>
-                            <li class="mega-position">
+                            {{-- <li class="mega-position">
                                 <a>More
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
@@ -320,7 +323,7 @@
 
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>

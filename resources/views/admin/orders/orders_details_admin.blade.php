@@ -61,17 +61,38 @@ use App\Models\OrderLogs; ?>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Tình trạng đặt hàng:') }}</strong></label>
-                                        <label>{{ $orderDetails['order_status'] }}</label>
+                                        <label>
+                                            @if ($orderDetails['order_status'] == 'Shipped')
+                                                <span class="badge bg-info color-white"
+                                                    style="color: #fff;">{{ __('Vận Chuyển:') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'New')
+                                                <span class="badge bg-dark" style="color: #fff;">{{ __('Mới') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'Cancelled')
+                                                <span class="badge bg-warning"
+                                                    style="color: #fff;">{{ __('Đã Hủy') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'In Process')
+                                                <span class="badge bg-info"
+                                                    style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'Pending')
+                                                <span class="badge bg-info"
+                                                    style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'Delivered')
+                                                <span class="badge bg-primary"
+                                                    style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
+                                            @else
+                                                <span class="badge bg-info" style="color: #fff;">{{ __('Trả') }}</span>
+                                            @endif
+                                        </label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Tổng số tiền đặt hàng:') }}</strong></label>
-                                        <label>{{ $orderDetails['grand_total'] }}.đ</label>
+                                        <label>{{ $orderDetails['grand_total'] }}.VNĐ</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Phí vận chuyển:') }}</strong></label>
-                                        <label>{{ $orderDetails['shipping_charges'] }}.đ</label>
+                                        <label>{{ $orderDetails['shipping_charges'] }}.VNĐ</label>
                                     </div>
                                     @if (!empty($orderDetails['coupon_code']))
                                         <div class="form-group" style="height: 15px;">
@@ -88,12 +109,40 @@ use App\Models\OrderLogs; ?>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Phương thức thanh toán:') }}</strong></label>
-                                        <label>{{ $orderDetails['payment_method'] }}</label>
+
+                                        <label>
+
+                                            @if ($orderDetails['payment_method'] == 'COD')
+                                                <span class="badge bg-info color-white"
+                                                    style="color: #fff;">{{ __('COD') }}</span>
+                                            @elseif($orderDetails['payment_method'] == 'Paypal')
+                                                <span class="badge bg-warning"
+                                                    style="color: #fff;">{{ __('Paypal') }}</span>
+                                            @else
+                                                <span class="badge bg-success"
+                                                    style="color: #fff;">{{ __('Credit Card') }}</span>
+                                            @endif
+                                        </label>
+
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Cổng thanh toán:') }}</strong></label>
-                                        <label>{{ $orderDetails['payment_gateway'] }}</label>
+
+                                        <label>
+
+                                            @if ($orderDetails['payment_gateway'] == 'COD')
+                                                <span class="badge bg-info color-white"
+                                                    style="color: #fff;">{{ __('COD') }}</span>
+                                            @elseif($orderDetails['payment_gateway'] == 'Paypal')
+                                                <span class="badge bg-warning"
+                                                    style="color: #fff;">{{ __('Paypal') }}</span>
+                                            @else
+                                                <span class="badge bg-success"
+                                                    style="color: #fff;">{{ __('Credit Card') }}</span>
+                                            @endif
+                                        </label>
+
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +182,8 @@ use App\Models\OrderLogs; ?>
                                     @endif
                                     @if (!empty($userDetails['country']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
+                                            <label
+                                                style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
                                             <label>{{ $userDetails['country'] }}</label>
                                         </div>
                                     @endif
@@ -312,7 +362,8 @@ use App\Models\OrderLogs; ?>
                                         <td>
                                             <form action="{{ url('admin/update-order-item-status') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="order_item_id" value="{{ $product['id'] }}">
+                                                <input type="hidden" name="order_item_id"
+                                                    value="{{ $product['id'] }}">
                                                 <select class="py-2" name="order_item_status" id="order_item_status"
                                                     required>
                                                     <option value="" selected="">{{ __('Chọn') }}</option>

@@ -11,4 +11,8 @@ class Order extends Model
     public function orders_products(){
         return $this->hasMany(OrderProduct::class, 'order_id');
     }
+    public function creditCard()
+    {
+        return $this->belongsTo(CreditCard::class,'crd_id','order_card_id');
+    }
 }

@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="filter_column">{{ __('filter_column') }}<span
+                                            <label for="filter_column">{{ __('Cột Lọc') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="filter_column"
                                                 placeholder="Nhập Cột Bộ Lọc" name="filter_column"

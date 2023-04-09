@@ -27,7 +27,8 @@
                 <table class="table table-striped table-borderless">
                     <tr>
                         <td colspan="2" style="color: #fff; background: red;">
-                            <strong>{{ __('Chi tiết đơn hàng') }}</strong></td>
+                            <strong>{{ __('Chi tiết đơn hàng') }}</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{ __('Ngày đặt hàng') }}</td>
@@ -36,17 +37,35 @@
                     </tr>
                     <tr>
                         <td>{{ __('Tình Trạng Đơn') }}
-                        <td>{{ $orderDetails['order_status'] }}</td>
+                        <td>
+                            {{-- {{ $orderDetails['order_status'] }} --}}
+                            @if ($orderDetails['order_status'] == 'Shipped')
+                                <span class="badge bg-info" style="color: #fff;">{{ __('Vận Chuyển:') }}</span>
+                            @elseif($orderDetails['order_status'] == 'New')
+                                <span class="badge bg-danger" style="color: #fff;">{{ __('Mới') }}</span>
+                            @elseif($orderDetails['order_status'] == 'Cancelled')
+                                <span class="badge bg-warning" style="color: #fff;">{{ __('Đã Hủy') }}</span>
+                            @elseif($orderDetails['order_status'] == 'In Process')
+                                <span class="badge bg-success" style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
+                            @elseif($orderDetails['order_status'] == 'Pending')
+                                <span class="badge bg-info" style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
+                            @elseif($orderDetails['order_status'] == 'Delivered')
+                                <span class="badge bg-primary" style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
+                            @else
+                                <span class="badge bg-info" style="color: #fff;">{{ __('Trả') }}</span>
+                            @endif
+
+                        </td>
                         </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Order Total') }}
-                        <td>{{ $orderDetails['grand_total'] }}</td>
+                        <td>{{ __('Tổng số  tiền đơn đặt hàng') }}
+                        <td>{{ $orderDetails['grand_total'] }}.VNĐ</td>
                         </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Shipping Charges') }}
-                        <td>{{ $orderDetails['shipping_charges'] }}</td>
+                        <td>{{ __('Chi phí vận chuyển') }}
+                        <td>{{ $orderDetails['shipping_charges'] }}.VNĐ</td>
                         </td>
                     </tr>
                     @if ($orderDetails['coupon_code'] != '')
@@ -74,8 +93,17 @@
                         </tr>
                     @endif
                     <tr>
-                        <td>{{ __('Payment Method') }}
-                        <td>{{ $orderDetails['payment_method'] }}</td>
+                        <td>{{ __('Hình Thức Thanh Toán') }}
+                        <td>
+
+                            @if ($orderDetails['payment_method'] == 'COD')
+                                <span class="badge bg-info color-white" style="color: #fff;">{{ __('COD') }}</span>
+                            @elseif($orderDetails['payment_method'] == 'Paypal')
+                                <span class="badge bg-warning" style="color: #fff;">{{ __('Paypal') }}</span>
+                            @else
+                                <span class="badge bg-success" style="color: #fff;">{{ __('Credit Card') }}</span>
+                            @endif
+                        </td>
                         </td>
                     </tr>
 
@@ -83,7 +111,8 @@
                 <table class="table table-striped table-borderless">
                     <tr>
                         <td colspan="6" style="color: #fff; background: red;">
-                            <strong>{{ __('Chi tiết sản phẩm') }}</strong></td>
+                            <strong>{{ __('Chi tiết sản phẩm') }}</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{ __('Ảnh Sản Phẩm') }}</td>
@@ -118,7 +147,8 @@
                 <table class="table table-striped table-borderless">
                     <tr>
                         <td colspan="2" style="color: #fff; background: red;">
-                            <strong>{{ __('Địa chỉ giao hàng') }}</strong></td>
+                            <strong>{{ __('Địa chỉ giao hàng') }}</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{ __('Tên') }}

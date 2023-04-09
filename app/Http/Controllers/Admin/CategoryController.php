@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
     public function addEditCategory(Request $request, $id = null)
     {
-        // Session::put('page', 'sections);
+        Session::put('page', 'categories');
         if ($id == "") {
             $title = "Thêm Sản Phẩm";
             $category = new Category;

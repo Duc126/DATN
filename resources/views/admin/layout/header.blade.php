@@ -80,10 +80,7 @@
                         <img src="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}"
                             alt="profile" />
                     @else
-                        {
                         <img src="{{ url('admin/images/photos/no-image.png') }}" alt="profile" />
-
-                        }
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

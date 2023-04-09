@@ -82,7 +82,7 @@
                                                              alt="Product">
                                                      @endif
                                                  </a>
-                                                 <div class="item-action-behaviors">
+                                                 {{-- <div class="item-action-behaviors">
                                                      <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick
                                                          Look
                                                      </a>
@@ -90,7 +90,7 @@
                                                      <a class="item-addwishlist" href="javascript:void(0)">Add to
                                                          Wishlist</a>
                                                      <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                                 </div>
+                                                 </div> --}}
                                              </div>
                                              <div class="item-content">
                                                  <div class="what-product-is">
@@ -115,24 +115,27 @@
                                                  @if ($getDiscountPrice > 0)
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $getDiscountPrice }}đ
+                                                             {{ $getDiscountPrice }}.VNĐ
                                                          </div>
                                                          <div class="item-old-price">
-                                                             {{ $product['product_price'] }}đ
+                                                             {{ $product['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @else
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $product['product_price'] }}đ
+                                                             {{ $product['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @endif
 
                                              </div>
-                                             <div class="tag new">
-                                                 <span>{{ __('Mới') }}</span>
-                                             </div>
+                                             <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                                             @if ($isProductNew == 'Yes')
+                                                 <div class="tag new">
+                                                     <span>{{ __('Mới') }}</span>
+                                                 </div>
+                                             @endif
                                          </div>
                                      @endforeach
                                  </div>
@@ -156,7 +159,7 @@
                                                              alt="Product">
                                                      @endif
                                                  </a>
-                                                 <div class="item-action-behaviors">
+                                                 {{-- <div class="item-action-behaviors">
                                                      <a class="item-quick-look" data-toggle="modal"
                                                          href="#quick-view">Quick
                                                          Look
@@ -165,7 +168,7 @@
                                                      <a class="item-addwishlist" href="javascript:void(0)">Add to
                                                          Wishlist</a>
                                                      <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                                 </div>
+                                                 </div> --}}
                                              </div>
                                              <div class="item-content">
                                                  <div class="what-product-is">
@@ -190,24 +193,27 @@
                                                  @if ($getDiscountPrice > 0)
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $getDiscountPrice }}đ
+                                                             {{ $getDiscountPrice }}.VNĐ
                                                          </div>
                                                          <div class="item-old-price">
-                                                             {{ $productBest['product_price'] }}đ
+                                                             {{ $productBest['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @else
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $productBest['product_price'] }}đ
+                                                             {{ $productBest['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @endif
 
                                              </div>
-                                             <div class="tag new">
-                                                 <span>{{ __('Mới') }}</span>
-                                             </div>
+                                             <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                                             @if ($isProductNew == 'Yes')
+                                                 <div class="tag new">
+                                                     <span>{{ __('Mới') }}</span>
+                                                 </div>
+                                             @endif
                                          </div>
                                      @endforeach
                                  </div>
@@ -231,7 +237,7 @@
                                                              alt="Product">
                                                      @endif
                                                  </a>
-                                                 <div class="item-action-behaviors">
+                                                 {{-- <div class="item-action-behaviors">
                                                      <a class="item-quick-look" data-toggle="modal"
                                                          href="#quick-view">Quick
                                                          Look
@@ -240,7 +246,7 @@
                                                      <a class="item-addwishlist" href="javascript:void(0)">Add to
                                                          Wishlist</a>
                                                      <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                                 </div>
+                                                 </div> --}}
                                              </div>
                                              <div class="item-content">
                                                  <div class="what-product-is">
@@ -265,24 +271,27 @@
                                                  @if ($getDiscountPrice > 0)
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $getDiscountPrice }}đ
+                                                             {{ $getDiscountPrice }}.VNĐ
                                                          </div>
                                                          <div class="item-old-price">
-                                                             {{ $productDiscount['product_price'] }}đ
+                                                             {{ $productDiscount['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @else
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $productDiscount['product_price'] }}đ
+                                                             {{ $productDiscount['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @endif
 
                                              </div>
-                                             <div class="tag new">
-                                                 <span>{{ __('Mới') }}</span>
-                                             </div>
+                                             <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                                             @if ($isProductNew == 'Yes')
+                                                 <div class="tag new">
+                                                     <span>{{ __('Mới') }}</span>
+                                                 </div>
+                                             @endif
                                          </div>
                                      @endforeach
                                  </div>
@@ -306,7 +315,7 @@
                                                              alt="Product">
                                                      @endif
                                                  </a>
-                                                 <div class="item-action-behaviors">
+                                                 {{-- <div class="item-action-behaviors">
                                                      <a class="item-quick-look" data-toggle="modal"
                                                          href="#quick-view">Quick
                                                          Look
@@ -315,7 +324,7 @@
                                                      <a class="item-addwishlist" href="javascript:void(0)">Add to
                                                          Wishlist</a>
                                                      <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                                 </div>
+                                                 </div> --}}
                                              </div>
                                              <div class="item-content">
                                                  <div class="what-product-is">
@@ -340,24 +349,27 @@
                                                  @if ($getDiscountPrice > 0)
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $getDiscountPrice }}đ
+                                                             {{ $getDiscountPrice }}.VNĐ
                                                          </div>
                                                          <div class="item-old-price">
-                                                             {{ $productFeature['product_price'] }}đ
+                                                             {{ $productFeature['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @else
                                                      <div class="price-template">
                                                          <div class="item-new-price">
-                                                             {{ $productFeature['product_price'] }}đ
+                                                             {{ $productFeature['product_price'] }}.VNĐ
                                                          </div>
                                                      </div>
                                                  @endif
 
                                              </div>
-                                             <div class="tag new">
-                                                 <span>{{ __('Mới') }}</span>
-                                             </div>
+                                             <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                                             @if ($isProductNew == 'Yes')
+                                                 <div class="tag new">
+                                                     <span>{{ __('Mới') }}</span>
+                                                 </div>
+                                             @endif
                                          </div>
                                      @endforeach
                                  </div>
@@ -398,9 +410,9 @@
                                  <i class="ion ion-md-star"></i>
                              </div>
                              <h2>
-                                 Great Value
+                                 {{ __('Giá trị lớn') }}
                              </h2>
-                             <p>We offer competitive prices on our 100 million plus product range</p>
+                             <p>{{ __('Chúng tôi cung cấp giá cả cạnh tranh trên phạm vi sản phẩm hơn 100 triệu của chúng tôi') }}</p>
                          </div>
                      </div>
                      <div class="col-lg-3 col-md-3 col-sm-3">
@@ -409,9 +421,9 @@
                                  <i class="ion ion-md-cash"></i>
                              </div>
                              <h2>
-                                 Shop with Confidence
+                                 {{ __('Mua sắm với sự tự tin') }}
                              </h2>
-                             <p>Our Protection covers your purchase from click to delivery</p>
+                             <p>{{ __('Bảo vệ của chúng tôi bao gồm mua hàng của bạn từ nhấp chuột để giao hàng') }}</p>
                          </div>
                      </div>
                      <div class="col-lg-3 col-md-3 col-sm-3">
@@ -420,9 +432,9 @@
                                  <i class="ion ion-ios-card"></i>
                              </div>
                              <h2>
-                                 Safe Payment
+                                 {{ __('Thanh toán an toàn') }}
                              </h2>
-                             <p>Pay with the world’s most popular and secure payment methods</p>
+                             <p>{{ __('Thanh toán bằng các phương thức thanh toán an toàn và phổ biến nhất thế giới') }}</p>
                          </div>
                      </div>
                      <div class="col-lg-3 col-md-3 col-sm-3">
@@ -431,9 +443,9 @@
                                  <i class="ion ion-md-contacts"></i>
                              </div>
                              <h2>
-                                 24/7 Help Center
+                                 {{ __('Trung tâm trợ giúp 24/7') }}
                              </h2>
-                             <p>Round-the-clock assistance for a smooth shopping experience</p>
+                             <p>{{ __('Hỗ trợ 24/24 để có trải nghiệm mua sắm suôn sẻ') }}</p>
                          </div>
                      </div>
                  </div>

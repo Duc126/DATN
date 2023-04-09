@@ -31,7 +31,7 @@ $getCartItems = getCartItems();
         </ul>
         <div class="mini-shop-total clearfix">
             <span class="mini-total-heading float-left">{{ __('Tổng Cộng:') }}</span>
-            <span class="mini-total-price float-right">{{ $total_price }}.Đ</span>
+            <span class="mini-total-price float-right">{{ $total_price }}.VNĐ</span>
         </div>
         <div class="mini-action-anchors">
             <a href="{{ url('cart') }}" class="cart-anchor">{{ __('Xem Giỏ Hàng') }}</a>

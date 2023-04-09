@@ -13,21 +13,21 @@
                                 alt="Product">
                         @endif
                     </a>
-                    <div class="item-action-behaviors">
+                    {{-- <div class="item-action-behaviors">
                         <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
                         <a class="item-mail" href="javascript:void(0)">Mail</a>
                         <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
                         <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="item-content">
                     <div class="what-product-is">
                         <ul class="bread-crumb">
                             <li class="has-separator">
-                                <a href="shop-v1-root-category.html">{{ $product['product_code'] }}</a>
+                                <a href="#">{{ $product['product_code'] }}</a>
                             </li>
                             <li class="has-separator">
-                                <a href="listing.html">{{ $product['product_color'] }}</a>
+                                <a href="#">{{ $product['product_color'] }}</a>
                             </li>
                             <li>
                                 <a href="shop-v3-sub-sub-category.html">{{ $product['brand']['name'] }}</a>
@@ -50,16 +50,16 @@
                     @if ($getDiscountPrice > 0)
                         <div class="price-template">
                             <div class="item-new-price">
-                                {{ $getDiscountPrice }}đ
+                                {{ $getDiscountPrice }}.VNĐ
                             </div>
                             <div class="item-old-price">
-                                {{ $product['product_price'] }}đ
+                                {{ $product['product_price'] }}.VNĐ
                             </div>
                         </div>
                     @else
                         <div class="price-template">
                             <div class="item-new-price">
-                                {{ $product['product_price'] }}đ
+                                {{ $product['product_price'] }}.VNĐ
                             </div>
                         </div>
                     @endif

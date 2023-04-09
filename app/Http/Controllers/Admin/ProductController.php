@@ -69,6 +69,8 @@ class ProductController extends Controller
     }
     public function addEditProduct(Request $request, $id = null)
     {
+        Session::put('page', 'products');
+
         if ($id == "") {
             $title = "Thêm Sản Phẩm";
             $product = new Product;

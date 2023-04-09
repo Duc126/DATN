@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductsAttributes;
 use App\Models\User;
@@ -20,6 +21,11 @@ class AddProductController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
             // dd($data);
+
+            if ($data['quantity'] <= 0) {
+                $data['quantity'] = 1;
+            }
+
             //check product stock is available or not
             $getProductStock = ProductsAttributes::getProductStock($data['product_id'], $data['size']);
             if ($getProductStock < $data['quantity']) {
@@ -164,6 +170,15 @@ class AddProductController extends Controller
                 if ($expiry_date < $current_date) {
                     $message = "Phiếu giảm giá đã hết hạn";
                 }
+
+                //check if coupon is for single time
+                if ($couponDetails->coupon_type == "Single Time") {
+                    $couponCount = Order::where(['coupon_code' => $data['code'], 'user_id' => Auth::user()->id])->count();
+                    if ($couponCount >= 1) {
+                        $message = "Mã phiếu giảm giá này đã được bạn sử dụng!";
+                    }
+                }
+
                 //check if coupon is from selected categories
                 $cartArr = explode(",", $couponDetails->categories);
                 //check if any cart item not belong to coupon category

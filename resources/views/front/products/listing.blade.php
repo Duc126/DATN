@@ -49,30 +49,37 @@
                                 <i class="fas fa-th"></i>
                             </a>
                         </div> --}}
-                        <!-- Toolbar Sorter 1  -->
-                        <form name="sortProducts" id="sortProducts">
-                            <input type="hidden" name="url" id="url" value="{{ $url }}">
-                            <div class="toolbar-sorter">
-                                <div class="select-box-wrapper">
-                                    <label class="sr-only" for="sort-by">{{ __('Sắp xếp theo') }}</label>
-                                    <select name="sort" class="select-box" id="sort">
-                                        {{-- <option selected="selected" value="">Sort By: Best Selling</option> --}}
-                                        <option selected="" value="">{{ __('Chọn') }}</option>
-                                        <option value="product_latest" @if (isset($_GET['sort']) && $_GET['sort'] == 'product_latest') selected="" @endif>
-                                            {{ __('Sắp xếp theo: Mới nhất') }}</option>
-                                        <option value="price_lowest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_lowest') selected="" @endif>
-                                            {{ __('Sắp xếp theo: Giá thấp nhất') }}</option>
-                                        <option value="price_highest" @if (isset($_GET['sort']) && $_GET['sort'] == 'price_highest') selected="" @endif>
-                                           {{ __('Sắp xếp theo: Giá cao nhất') }}</option>
-                                        <option value="name_a_z" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_a_z') selected="" @endif>Sort
-                                           {{ __('Sắp xếp theo:Tên từ A-Z') }}</option>
-                                        <option value="name_z_a" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_z_a') selected="" @endif>Sort
-                                            {{ __('Sắp xếp theo:Tên từ Z-A') }}</option>
-                                        {{-- <option value="">Sort By: Best Rating</option> --}}
-                                    </select>
+                        @if (!isset($_REQUEST['search']))
+                            <!-- Toolbar Sorter 1  -->
+                            <form name="sortProducts" id="sortProducts">
+                                <input type="hidden" name="url" id="url" value="{{ $url }}">
+                                <div class="toolbar-sorter">
+                                    <div class="select-box-wrapper">
+                                        <label class="sr-only" for="sort-by">{{ __('Sắp xếp theo') }}</label>
+                                        <select name="sort" class="select-box" id="sort">
+                                            {{-- <option selected="selected" value="">Sort By: Best Selling</option> --}}
+                                            <option selected="" value="">{{ __('Chọn') }}</option>
+                                            <option value="product_latest"
+                                                @if (isset($_GET['sort']) && $_GET['sort'] == 'product_latest') selected="" @endif>
+                                                {{ __('Sắp xếp theo: Mới nhất') }}</option>
+                                            <option value="price_lowest"
+                                                @if (isset($_GET['sort']) && $_GET['sort'] == 'price_lowest') selected="" @endif>
+                                                {{ __('Sắp xếp theo: Giá thấp nhất') }}</option>
+                                            <option value="price_highest"
+                                                @if (isset($_GET['sort']) && $_GET['sort'] == 'price_highest') selected="" @endif>
+                                                {{ __('Sắp xếp theo: Giá cao nhất') }}</option>
+                                            <option value="name_a_z" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_a_z') selected="" @endif>
+                                                Sort
+                                                {{ __('Sắp xếp theo:Tên từ A-Z') }}</option>
+                                            <option value="name_z_a" @if (isset($_GET['sort']) && $_GET['sort'] == 'name_z_a') selected="" @endif>
+                                                Sort
+                                                {{ __('Sắp xếp theo:Tên từ Z-A') }}</option>
+                                            {{-- <option value="">Sort By: Best Rating</option> --}}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endif
                         <!-- //end Toolbar Sorter 1  -->
                         <!-- Toolbar Sorter 2  -->
                         {{-- <div class="toolbar-sorter-2">
@@ -91,11 +98,13 @@
                     <div class="filter_products">
                         @include('front.products.products_listing')
                     </div>
-                    <!-- Row-of-Product-Container /- -->
-                    @if (isset($_GET['sort']))
-                        <div>{{ $categoryProducts->appends(['sort' => $_GET['sort']])->links() }}</div>
-                    @else
-                        <div>{{ $categoryProducts->links() }}</div>
+                    @if (!isset($_REQUEST['search']))
+                        <!-- Row-of-Product-Container /- -->
+                        @if (isset($_GET['sort']))
+                            <div>{{ $categoryProducts->appends(['sort' => $_GET['sort']])->links() }}</div>
+                        @else
+                            <div>{{ $categoryProducts->links() }}</div>
+                        @endif
                     @endif
                     <div>&nbsp;</div>
                     <div>{{ $categoryDetails['categoryDetails']['description'] }}</div>

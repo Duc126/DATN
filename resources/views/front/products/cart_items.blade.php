@@ -124,7 +124,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng tiền chưa giảm') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text">{{ $total_price }}.Đ</span>
+                        <span class="calc-text">{{ $total_price }}.VNĐ</span>
                     </td>
                 </tr>
                 <tr>
@@ -134,9 +134,9 @@
                     <td>
                         <span class="calc-text couponAmount">
                             @if (Session::has('couponAmount'))
-                                {{ Session::get('couponAmount') }}.Đ
+                                {{ Session::get('couponAmount') }}.VNĐ
                             @else
-                                0.Đ
+                                0.VNĐ
 
                             @endif
                         </span>
@@ -147,7 +147,7 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng Cộng') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.Đ</span>
+                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.VNĐ</span>
                     </td>
                 </tr>
             </tbody>

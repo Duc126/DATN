@@ -47,6 +47,8 @@ class BannerController extends Controller
     }
     public function addEditBanner(Request $request, $id = null)
     {
+        Session::put('page', 'banner');
+
         if ($id == "") {
             $title = "Thêm Sản Phẩm";
             $banner = new Banners;

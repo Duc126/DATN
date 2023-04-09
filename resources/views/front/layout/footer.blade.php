@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="container">
         <!-- Outer-Footer -->
-        <div class="outer-footer-wrapper u-s-p-y-80">
+        {{-- <div class="outer-footer-wrapper u-s-p-y-80">
             <h6>
                 For special offers and other discount information
             </h6>
@@ -16,60 +16,40 @@
                 <input type="text" id="newsletter-field" placeholder="Your Email Address">
                 <button type="submit" class="button">SUBMIT</button>
             </form>
-        </div>
+        </div> --}}
         <!-- Outer-Footer /- -->
         <!-- Mid-Footer -->
         <div class="mid-footer-wrapper u-s-p-b-80">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="footer-list">
-                        <h6>COMPANY</h6>
+                        <h6>{{ __('CÔNG TY') }}</h6>
                         <ul>
                             <li>
-                                <a href="about.html">About Us</a>
+                                <a href="about.html">{{ __('Về chúng tôi') }}</a>
                             </li>
                             <li>
-                                <a href="contact.html">Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="faq.html">FAQ</a>
+                                <a href="contact.html">{{ __('Liên hệ chúng tôi') }}</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-12">
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="footer-list">
-                        <h6>COLLECTION</h6>
+                        <h6>{{ __('TÀI KHOẢN') }}</h6>
                         <ul>
                             <li>
-                                <a href="cart.html">Men Clothing</a>
+                                <a href="{{ url('user/account') }}">{{ __('Tài khoản của tôi') }}</a>
                             </li>
+
                             <li>
-                                <a href="checkout.html">Women Clothing</a>
-                            </li>
-                            <li>
-                                <a href="account.html">Kids Clothing</a>
+                                <a href="{{ url('user/order') }}">{{ __('Đơn đặt hàng của tôi') }}    </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="footer-list">
-                        <h6>ACCOUNT</h6>
-                        <ul>
-                            <li>
-                                <a href="shop-v1-root-category.html">My Account</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html">My Profile</a>
-                            </li>
-                            <li>
-                                <a href="listing.html">My Orders</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="footer-list">
                         <h6>{{ __('Liên Hệ') }}</h6>
                         <ul>

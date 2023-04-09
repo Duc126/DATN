@@ -12,11 +12,11 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    public function dashboard()
-    {
-        Session::put('page', 'dashboard');
-        return view('admin.dashboard');
-    }
+    // public function dashboard()
+    // {
+    //     Session::put('page', 'dashboard');
+    //     return view('admin.dashboard');
+    // }
     public function login(Request $request)
     {
         if ($request->isMethod('post')) {
