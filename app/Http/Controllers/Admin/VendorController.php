@@ -83,7 +83,7 @@ class VendorController extends Controller
             Session::put('page','update-business-details');
             if ($request->isMethod('post')) {
                 $updateDetails = $request->all();
-                // dd($updateDetails);
+                dd($updateDetails);
                 $rules = [
                     'shop_name' => 'required|min:2',
                     'shop_name' => 'required|min:6',
@@ -109,8 +109,8 @@ class VendorController extends Controller
                 $this->validate($request, $rules, $customMessages);
 
                 //update Image
-                if ($request->hasFile('image')) {
-                    $avatar = $request->file('image');
+                if ($request->hasFile('address_proof')) {
+                    $avatar = $request->file('address_proof');
                     if ($avatar->isValid()) {
                         //Lấy ảnh từ extension
                         $extension = $avatar->getClientOriginalExtension();
@@ -119,8 +119,8 @@ class VendorController extends Controller
                         $imagePath = 'admin/images/proofs/' . $imageName;
                         Image::make($avatar)->save($imagePath);
                     };
-                } else if (!empty($updateDetails['current-address_proof'])) {
-                    $imageName = $updateDetails['current-address_proof'];
+                } else if (!empty($updateDetails['current_shop_proof'])) {
+                    $imageName = $updateDetails['current_shop_proof'];
                 } else {
                     $imageName = "";
                 }

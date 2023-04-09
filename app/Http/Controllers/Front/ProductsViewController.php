@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Countries;
+use App\Models\CreditCard;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -13,6 +14,7 @@ use App\Models\Product;
 use App\Models\ProductsAttributes;
 use App\Models\ProductsFilter;
 use App\Models\RecentlyViewProducts;
+use App\Models\ShippingCharges;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -113,31 +115,67 @@ class ProductsViewController extends Controller
                 abort(404);
             }
         } else {
-            $url = Route::getFacadeRoot()->current()->uri();
-            $categoryCount = Category::where(['url' => $url, 'status' => 1])->count();
-            if ($categoryCount > 0) {
-                $categoryDetails = Category::categoryDetails($url);
-                $categoryProducts = Product::with('brand')->whereIn('category_id', $categoryDetails['catIds'])->where('status', 1);
-                //check for sort
-                if (isset($_GET['sort']) && !empty($_GET['sort'])) {
-                    if ($_GET['sort'] == "product_latest") {
-                        $categoryProducts->orderBy('products.id', 'Desc');
-                    } else if ($_GET['sort'] == "price_lowest") {
-                        $categoryProducts->orderBy('products.product_price', 'Asc');
-                    } else if ($_GET['sort'] == "price_highest") {
-                        $categoryProducts->orderBy('products.product_price', 'Desc');
-                    } else if ($_GET['sort'] == "name_z_a") {
-                        $categoryProducts->orderBy('products.product_name', 'Desc');
-                    } else if ($_GET['sort'] == "name_a_z") {
-                        $categoryProducts->orderBy('products.product_name', 'Asc');
-                    }
+            if (isset($_REQUEST['search']) && !empty($_REQUEST['search'])) {
+                $search_product = $_REQUEST['search'];
+                $categoryDetails['breandCrumbs'] = $search_product;
+                $categoryDetails['categoryDetails']['category_name'] = $search_product;
+                $categoryDetails['categoryDetails']['description'] = "Tìm kiếm sản phẩm " . $search_product;
+                $categoryProducts = Product::select(
+                    'products.id',
+                    'products.section_id',
+                    'products.product_name',
+                    'products.brand_id',
+                    'products.vendor_id',
+                    'products.product_name',
+                    'products.product_code',
+                    'products.product_color',
+                    'products.product_price',
+                    'products.product_discount',
+                    'products.product_image',
+                    'products.description'
+                )->with('brand')
+                    ->join('categories', 'categories.id', '=', 'products.category_id')
+                    ->where(function ($query) use ($search_product) {
+                        $query->where('products.product_name', 'like', '%' . $search_product . '%')
+                            ->orWhere('products.product_code', 'like', '%' . $search_product . '%')
+                            ->orWhere('products.product_color', 'like', '%' . $search_product . '%')
+                            ->orWhere('products.description', 'like', '%' . $search_product . '%')
+                            ->orWhere('categories.category_name', 'like', '%' . $search_product . '%');
+                    })
+                    ->where('products.status', 1);
+                if (isset($_REQUEST['section_id']) && !empty($_REQUEST['section_id'])) {
+                    $categoryProducts = $categoryProducts->where('products.section_id', $_REQUEST['section_id']);
                 }
-                $categoryProducts = $categoryProducts->paginate(10);
-                // dd($categoryDetails);
-                return view('front.products.listing')->with(compact('categoryDetails', 'categoryProducts', 'url'));
-                // echo "Category exits"; die;
+                $categoryProducts =  $categoryProducts->get();
+                // dd($categoryProducts);
+                return view('front.products.listing')->with(compact('categoryDetails', 'categoryProducts'));
             } else {
-                abort(404);
+                $url = Route::getFacadeRoot()->current()->uri();
+                $categoryCount = Category::where(['url' => $url, 'status' => 1])->count();
+                if ($categoryCount > 0) {
+                    $categoryDetails = Category::categoryDetails($url);
+                    $categoryProducts = Product::with('brand')->whereIn('category_id', $categoryDetails['catIds'])->where('status', 1);
+                    //check for sort
+                    if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+                        if ($_GET['sort'] == "product_latest") {
+                            $categoryProducts->orderBy('products.id', 'Desc');
+                        } else if ($_GET['sort'] == "price_lowest") {
+                            $categoryProducts->orderBy('products.product_price', 'Asc');
+                        } else if ($_GET['sort'] == "price_highest") {
+                            $categoryProducts->orderBy('products.product_price', 'Desc');
+                        } else if ($_GET['sort'] == "name_z_a") {
+                            $categoryProducts->orderBy('products.product_name', 'Desc');
+                        } else if ($_GET['sort'] == "name_a_z") {
+                            $categoryProducts->orderBy('products.product_name', 'Asc');
+                        }
+                    }
+                    $categoryProducts = $categoryProducts->paginate(10);
+                    // dd($categoryDetails);
+                    return view('front.products.listing')->with(compact('categoryDetails', 'categoryProducts', 'url'));
+                    // echo "Category exits"; die;
+                } else {
+                    abort(404);
+                }
             }
         }
     }
@@ -211,6 +249,14 @@ class ProductsViewController extends Controller
     public function checkout(Request $request)
     {
         $deliveryAddress = DeliveryAddress::deliveryAddress();
+
+        foreach ($deliveryAddress as $key => $value) {
+            $shippingCharges = ShippingCharges::getShippingCharges($value['state']);
+            $deliveryAddress[$key]['shipping_charges'] = $shippingCharges;
+        }
+        // dd($deliveryAddress);
+
+
         $countries = Countries::where('status', 1)->get()->toArray();
         $getCartItems = Cart::getCartItems();
         if (count($getCartItems) == 0) {
@@ -221,6 +267,49 @@ class ProductsViewController extends Controller
             $data = $request->all();
             // dd($data);
             // echo "<pre>"; print_r($data);die;
+
+
+            //webstie security
+            foreach ($getCartItems as $item) {
+                $product_status = Product::getProductStatus($item['product_id']);
+                if ($product_status == 0) {
+                    Product::deleteCartProduct($item['product_id']);
+                    $message = "Một trong những sản phẩm bị vô hiệu hóa! Vui lòng thử lại.";
+                    // $message = $item['product']['product_name']. " và " .$item['size']." Size Không có sẵn.
+                    // Vui lòng xóa khỏi giỏ hàng và chọn sản phẩm khác!";
+                    return redirect('/cart')->with('error_message', $message);
+                }
+
+                //prevent sold out products to order
+                $getProductStock = ProductsAttributes::getProductStock($item['product_id'], $item['size']);
+                if ($getProductStock == 0) {
+                    Product::deleteCartProduct($item['product_id']);
+                    $message = "Một trong những sản phẩm đã hết hàng! Vui lòng thử lại.";
+                    // $message = $item['product']['product_name']. " và " .$item['size']." Size Không có sẵn.
+                    // Vui lòng xóa khỏi giỏ hàng và chọn sản phẩm khác!";
+                    return redirect('/cart')->with('error_message', $message);
+                }
+
+                //Prevent Disable Product to order
+                $getAttributeStatus = ProductsAttributes::getAttributeStatus($item['product_id'], $item['size']);
+                if ($getAttributeStatus == 0) {
+                    Product::deleteCartProduct($item['product_id']);
+                    $message = "Một trong những thuộc tính của sản phẩm bị vô hiệu hóa! Vui lòng thử lại.";
+                    // $message = $item['product']['product_name']. " và " .$item['size']." Size Không có sẵn.
+                    // Vui lòng xóa khỏi giỏ hàng và chọn sản phẩm khác!";
+                    return redirect('/cart')->with('error_message', $message);
+                }
+
+                //Prevent disable Categories Products to Order
+                $getCategoryStatus = Category::getCategoryStatus($item['product']['category_id']);
+                if ($getCategoryStatus == 0) {
+                    Product::deleteCartProduct($item['product_id']);
+                    $message = "Một trong những sản phẩm đã hết hàng! Vui lòng thử lại.";
+                    // $message = $item['product']['product_name']. " và " .$item['size']." Size Không có sẵn.
+                    // Vui lòng xóa khỏi giỏ hàng và chọn sản phẩm khác!";
+                    return redirect('/cart')->with('error_message', $message);
+                }
+            }
 
             //select Delivery address validation
             if (empty($data['address_id'])) {
@@ -248,8 +337,11 @@ class ProductsViewController extends Controller
             if ($data['payment_gateway'] == "COD") {
                 $payment_method = "COD";
                 $order_status = "New";
-            } else {
+            } elseif ($data['payment_gateway'] == "Credit_Card") {
                 $payment_method = "Credit Card";
+                $order_status = "In Process";
+            } else {
+                $payment_method = "PayPal";
                 $order_status = "Pending";
             }
             DB::beginTransaction();
@@ -261,12 +353,27 @@ class ProductsViewController extends Controller
             }
             //calculate shipping charges
             $shipping_charges = 0;
+
+            //get shipping charges
+            $shipping_charges = ShippingCharges::getShippingCharges($addressDelivery['state']);
+            // dd($deliveryAddress['state']);
             //calculate grand total
             $grand_total = $total_price + $shipping_charges - Session::get('couponAmount');
 
             //insert grand total in session variable
             Session::put('grand_total', $grand_total);
+            //insert credit card
 
+            $creditCard = new CreditCard();
+            $creditCard->name = $data['name'];
+            $creditCard->ccd = $data['ccd'];
+            $creditCard->expriation_date = $data['expriation_date'];
+            $creditCard->card_number = $data['card_number'];
+
+            $creditCard->save();
+            $creditCardID = DB::getPdo()->lastInsertId();
+
+            // dd($creditCard);
             //insert order details
 
             $order = new Order();
@@ -284,11 +391,12 @@ class ProductsViewController extends Controller
             $order->coupon_amount = Session::get('couponAmount');
             $order->order_status = $order_status;
             $order->payment_method = $payment_method;
+            $order->order_card_id =  $creditCard['crd_id'];
             $order->payment_gateway = $data['payment_gateway'];
             $order->grand_total = $grand_total;
             $order->save();
             $order_id = DB::getPdo()->lastInsertId();
-
+            // dd($order);
 
             foreach ($getCartItems as $item) {
                 $cartItem = new OrderProduct();
@@ -308,12 +416,22 @@ class ProductsViewController extends Controller
                 $cartItem->product_price = $getDiscountAttributePrice['final_price'];
                 $cartItem->product_qty = $item['quantity'];
                 $cartItem->save();
+                // dd($cartItem);s
+
+                //recduce stock script starts
+
+                $getProductStock = ProductsAttributes::getProductStock($item['product_id'], $item['size']);
+                $newStock = $getProductStock - $item['quantity'];
+                ProductsAttributes::where(['product_id' => $item['product_id'], 'size' => $item['size']])->update(['stock' => $newStock]);
             }
 
             //insert order id in session variable
             Session::put('order_id', $order_id);
+            // Session::put('crd_id', $creditCardID);
             DB::commit();
             $orderDetails = Order::with('orders_products')->where('id', $order_id)->first()->toArray();
+            // dd($orderDetails);
+
             if ($data['payment_gateway'] == "COD") {
                 //send order email
                 $email = Auth::user()->email;
@@ -326,14 +444,38 @@ class ProductsViewController extends Controller
                 Mail::send('emails.notification_order', $messageData, function ($message) use ($email) {
                     $message->to($email)->subject('Đơn Đặt Hàng');
                 });
+
+                //recduce stock script starts
+
+                foreach ($orderDetails['orders_products'] as $key => $order) {
+
+
+                    $getProductStock = ProductsAttributes::getProductStock($order['product_id'], $order['product_size']);
+                    $newStock = $getProductStock - $order['product_qty'];
+                    ProductsAttributes::where(['product_id' => $order['product_id'], 'size' => $order['product_size']])->update(['stock' => $newStock]);
+                }
+            }
+
+
+            if ($data['payment_gateway'] == "Paypal") {
+                //Paypal -Redirect user to paypal page after saving order
+                return redirect('/paypal');
             } else {
-                echo "prepaid payment methods coming soon";
+                echo "Sắp có các phương thức thanh toán trả trước khác";
             }
 
 
             return redirect('thanks');
         }
-        return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'getCartItems'));
+
+        $total_price = 0;
+        foreach ($getCartItems as $item) {
+            $attrPrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
+
+            $total_price = $total_price  + ($attrPrice['final_price'] * $item['quantity']);
+        }
+        // echo $total_price;die;
+        return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'getCartItems', 'total_price'));
     }
     public function thanks()
     {

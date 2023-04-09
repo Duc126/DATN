@@ -37,7 +37,7 @@ class SectionController extends Controller
     }
 
     public function addEditSection(Request $request, $id=null){
-        // Session::put('page', 'sections);
+        Session::put('page', 'sections');
         if($id==""){
             $title = "Thêm Sản Phẩm";
             $section = new Section;

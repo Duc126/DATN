@@ -44,9 +44,47 @@
                                                         {{ $product['product_code'] }} ({{ $product['product_qty'] }})<br>
                                                     @endforeach()
                                                 </td>
-                                                <td>{{ $orderList['grand_total'] }}.đ </td>
-                                                <td>{{ $orderList['order_status'] }} </td>
-                                                <td>{{ $orderList['payment_method'] }} </td>
+                                                <td>{{ $orderList['grand_total'] }}.VNĐ </td>
+                                                {{-- <td>{{ $orderList['order_status'] }} </td>  --}}
+                                                <td>
+                                                    <label>
+                                                        @if ($orderList['order_status'] == 'Shipped')
+                                                            <span class="badge bg-info"
+                                                                style="color: #fff;">{{ __('Vận Chuyển:') }}</span>
+                                                        @elseif($orderList['order_status'] == 'New')
+                                                            <span class="badge bg-danger"
+                                                                style="color: #fff;">{{ __('Mới') }}</span>
+                                                        @elseif($orderList['order_status'] == 'Cancelled')
+                                                            <span class="badge bg-warning"
+                                                                style="color: #fff;">{{ __('Đã Hủy') }}</span>
+                                                        @elseif($orderList['order_status'] == 'In Process')
+                                                            <span class="badge bg-info"
+                                                                style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
+                                                        @elseif($orderList['order_status'] == 'Pending')
+                                                            <span class="badge bg-info"
+                                                                style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
+                                                        @elseif($orderList['order_status'] == 'Delivered')
+                                                            <span class="badge bg-primary"
+                                                                style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
+                                                        @else
+                                                            <span class="badge bg-info"
+                                                                style="color: #fff;">{{ __('Trả') }}</span>
+                                                        @endif
+                                                    </label>
+                                                </td>
+                                                {{-- <td>{{ $orderList['payment_method'] }} </td> --}}
+                                                <td>
+                                                    @if ($orderList['payment_method'] == 'COD')
+                                                        <span class="badge bg-info"
+                                                            style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                                    @elseif ($orderList['payment_method'] == 'Paypal')
+                                                        <span class="badge bg-warning "
+                                                            style="color: #fff;">{{ __('Paypal') }}</span>
+                                                    @else
+                                                        <span class="badge bg-success"
+                                                            style="color: #fff;">{{ __('Credit Card') }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a title="{{ __('Xem chi tiết đơn đặt hàng') }}"
                                                         href="{{ url('admin/order/' . $orderList['id']) }}"><i

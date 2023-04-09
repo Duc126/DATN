@@ -42,6 +42,8 @@ class FilterController extends Controller
     }
     public function updateStatusFilterValue(Request $request)
     {
+        Session::put('page', 'filters');
+
         if ($request->ajax()) {
             $data = $request->all();
             if ($data['status'] == "Active") {

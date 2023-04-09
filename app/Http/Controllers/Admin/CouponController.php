@@ -55,6 +55,8 @@ class CouponController extends Controller
     }
     public function addEditCoupon(Request $request, $id = null)
     {
+        Session::put('page', 'coupons');
+
         if ($id == "") {
             //add coupon
             $title = "Thêm Phiếu Giảm Giá";

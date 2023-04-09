@@ -116,7 +116,7 @@
     <li class="nav-item">
         <a @if (Session::get('page') == 'view_admin' ||
                 Session::get('page') == 'view_vendor' ||
-                Session::get('page') == 'view_subadmin' ||
+                // Session::get('page') == 'view_subadmin' ||sub
                 Session::get('page') == 'view_all') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin">
             {{-- <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin"> --}}
@@ -131,12 +131,12 @@
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('Quản Trị Viên') }}</a>
                 </li>
-                <li class="nav-item"><a
+                {{-- <li class="nav-item"><a
                         @if (Session::get('page') == 'view_subadmin') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link"
                         href="{{ url('admin/list-admin/subadmin') }}">{{ __('Quản trị viên phụ') }}</a>
-                </li>
+                </li> --}}
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'view_vendor') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
@@ -212,11 +212,11 @@
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
                 </li>
-                <li class="nav-item"><a
+                {{-- <li class="nav-item"><a
                         @if (Session::get('page') == 'subscribers') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/subscribers') }}">{{ __('subscribers') }}</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </li>
@@ -252,6 +252,24 @@
                         @if (Session::get('page') == 'banner') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/banner') }}">{{ __('Slider Banner') }}</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a @if (Session::get('page') == 'shipping') style="background:#4B49AC !important; color: #fff !important;" @endif
+            class="nav-link" data-toggle="collapse" href="#ui-shipping" aria-expanded="false"
+            aria-controls="ui-shipping">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Quản lý Chi Phí Vận Chuyển') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-shipping">
+            <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'shipping') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/shipping') }}">{{ __('Quản Lý Chi Phí Vận Chuyển') }}</a>
                 </li>
             </ul>
         </div>

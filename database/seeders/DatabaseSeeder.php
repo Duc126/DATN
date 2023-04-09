@@ -30,7 +30,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(CouponTable::class);
         // $this->call(DeliveryAddressSeeder::class);
         // $this->call(OrderStatusSeeder::class);
-        $this->call(OrderItemStatusSeeder::class);
+        // $this->call(OrderItemStatusSeeder::class);
+        $this->call(ShippingChargesSeeder::class);
+
 
     }
 }

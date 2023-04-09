@@ -104,6 +104,18 @@
 
                                                 {{-- value="{{ $vendorDetail['address'] }}"> --}}
                                             </div>
+                                            <div class="form-group">
+                                                <label for="image">{{ __('Ảnh') }}<span class="text-danger">*</span>
+                                                    :</label>
+                                                <input type="file" class="form-control" id="image" name="image">
+                                                @if (!empty(Auth::guard('admin')->user()->image))
+                                                    <a target="_blank"
+                                                        href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">{{ __('Xem Ảnh Đại Diện') }}
+                                                    </a>
+                                                    <input type="hidden" name="current-image"
+                                                        value="{{ Auth::guard('admin')->user()->image }}">
+                                                @endif
+                                            </div>
 
 
                                         </div>
@@ -140,7 +152,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="pincode">{{ __('PinCode') }}<span class="text-danger">*</span>
+                                                <label for="pincode">{{ __('PinCode') }}<span
+                                                        class="text-danger">*</span>
                                                     :</label>
                                                 <input type="text" id="pincode" class="form-control" name="pincode"
                                                     placeholder="Nhập Tên"
@@ -158,36 +171,6 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="image">{{ __('Ảnh') }}<span class="text-danger">*</span>
-                                                :</label>
-                                            <input type="file" class="form-control" id="image" name="image">
-                                            @if (!empty(Auth::guard('admin')->user()->image))
-                                                <a target="_blank"
-                                                    href="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}">Xem
-                                                    Avatar
-                                                </a>
-                                                <input type="hidden" name="current-image"
-                                                    value="{{ Auth::guard('admin')->user()->image }}">
-                                            @endif
-                                        </div>
-                                        {{-- <div class="col-md-12">
-                                            <div class="d-flex justify-content-center mb-4">
-                                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                                    class="rounded-circle" alt="example placeholder"
-                                                    style="width: 200px;" /> --}}
-                                        {{-- <img src="{{ Auth::guard('admin')->user()->image }}"
-                                        class="rounded-circle" alt="example placeholder" style="width: 200px;" /> --}}
-                                        {{-- </div>
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <label class="btn btn-primary btn-rounded"
-                                                        for="image">{{ __('Chọn Ảnh') }}</label>
-                                                    <input type="file" class="form-control d-none" value=""
-                                                        id="image" name="image" />
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                     <button type="submit"
                                         class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
@@ -296,6 +279,8 @@
                                                     value="{{ old('shop_pincode', $vendorDetail['shop_pincode'] ?? null) }}">
 
                                             </div>
+
+
                                             <div class="form-group">
                                                 <label for="address_proof_image">{{ __('Ảnh') }}<span
                                                         class="text-danger">*</span>
@@ -306,10 +291,11 @@
                                                     <a target="_blank"
                                                         href="{{ url('admin/images/proofs/' . $vendorDetail['address_proof_image']) }}">{{ __('Xem Ảnh') }}
                                                     </a>
-                                                    <input type="hidden" name="current-address_proof"
+                                                    <input type="hidden" name="current_shop_proof"
                                                         value="{{ $vendorDetail['address_proof_image'] }}">
                                                 @endif
                                             </div>
+
                                             {{-- <div class="form-group">
                                                 <div class="d-flex justify-content-center mb-4">
                                                     <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"

@@ -42,7 +42,7 @@
                             </td>
 
                             <td>{{ $orderList['payment_method'] }}</td>
-                            <td>{{ $orderList['grand_total'] }}.Đ</td>
+                            <td>{{ $orderList['grand_total'] }}.VNĐ</td>
                             <td>{{ date('Y-m-d h:i:s', strtotime($orderList['created_at'])) }}</td>
                         </tr>
                     @endforeach

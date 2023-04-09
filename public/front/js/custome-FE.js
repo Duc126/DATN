@@ -17,15 +17,15 @@ $(document).ready(function () {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
                             resp["final_price"] +
-                            ".Đ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
+                            ".VNĐ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
                             resp["product_price"] +
-                            ".Đ</span></div>"
+                            ".VNĐ</span></div>"
                     );
                 } else {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
                             resp["final_price"] +
-                            ".Đ</h4></div>"
+                            ".VNĐ</h4></div>"
                     );
                 }
             },
@@ -111,6 +111,12 @@ $(document).ready(function () {
             });
         }
     });
+
+    //đặt hàng show loader at the time
+    $(document).on("click", "#placeOrder", function () {
+        $(".loader").show();
+    });
+
     // Register Form validation
     $("#registerForm").submit(function () {
         $(".loader").show();
@@ -347,12 +353,12 @@ $(document).ready(function () {
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerView);
                 if (resp.couponAmount > 0) {
-                    $(".couponAmount").text(resp.couponAmount + ".Đ");
+                    $(".couponAmount").text(resp.couponAmount + ".VNĐ");
                 } else {
-                    $(".couponAmount").text("0.Đ");
+                    $(".couponAmount").text("0.VNĐ");
                 }
                 if (resp.grand_total > 0) {
-                    $(".grand_total").text(resp.grand_total + ".Đ");
+                    $(".grand_total").text(resp.grand_total + ".VNĐ");
                 }
             },
             error: function () {
@@ -413,9 +419,9 @@ $(document).ready(function () {
                             });
                         }, 3000);
                     });
-                }else {
+                } else {
                     $("#deliveryAddress").html(data.view);
-
+                    window.location.href = "checkout";
                 }
             },
             error: function () {
@@ -441,12 +447,34 @@ $(document).ready(function () {
                 },
                 success: function (resp) {
                     $("#deliveryAddress").html(resp.view);
+                    window.location.href = "checkout";
                 },
                 error: function () {
                     alert("Error");
                 },
             });
         }
+    });
+
+    //
+    $("input[name=address_id").bind("change", function () {
+        var shipping_charges = $(this).attr("shipping_charges");
+        var total_price = $(this).attr("total_price");
+        var coupon_amount = $(this).attr("coupon_amount");
+        $(".shipping_charges").html(shipping_charges + ".Vnđ");
+        if (coupon_amount == "") {
+            coupon_amount = 0;
+        }
+
+        $(".couponAmount").html(coupon_amount + ".Vnđ");
+
+        var grand_total =
+            parseInt(total_price) +
+            parseInt(shipping_charges) -
+            parseInt(coupon_amount);
+            // alert(grand_total);
+        $(".grand_total").html(grand_total + ".Vnđ");
+
     });
 });
 
@@ -457,3 +485,13 @@ function get_filter(class_name) {
     });
     return filter;
 }
+const myCheckbox = document.getElementById('credit_card');
+const myDiv = document.getElementById('myDiv');
+
+myCheckbox.addEventListener('change', function() {
+  if(this.checked) {
+    myDiv.style.display = 'block';
+  } else {
+    myDiv.style.display = 'none';
+  }
+});

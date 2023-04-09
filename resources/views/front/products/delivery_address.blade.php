@@ -1,4 +1,4 @@
-    @if (count($deliveryAddress) > 0)
+    {{-- @if (count($deliveryAddress) > 0)
         <h4 class="section-h4">{{ __('Địa Chỉ giao hàng') }}</h4>
         @foreach ($deliveryAddress as $address)
             <div class="control-group" style="float:left; margin-right: 5px;">
@@ -17,14 +17,20 @@
 
             </div>
         @endforeach <br>
-    @endif
+    @endif --}}
     <h4 class="section-h4 deliveryText">{{ __('Thêm địa chỉ giao hàng mới') }}</h4>
     <div class="u-s-m-b-24">
         <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse"
             data-target="#showDifferent">
+    @if (count($deliveryAddress) > 0)
+
         <label class="label-text newAddress"
             for="ship-to-different-address">{{ __('Vận chuyển đến một địa chỉ khác?') }}</label>
-    </div>
+        @else
+        <label class="label-text newAddress"
+        for="ship-to-different-address">{{ __('Kiểm tra để thêm địa chỉ giao hàng') }}</label>
+        @endif
+        </div>
     <div class="collapse" id="showDifferent">
         <!-- Form-Fields -->
         <p id="delivery-error"></p>

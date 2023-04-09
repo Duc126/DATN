@@ -133,15 +133,15 @@ $productFilters = ProductsFilter::productFilters();
                             <span class="getAttributePrice">
                                 @if ($getDiscountPrice > 0)
                                     <div class="price">
-                                        <h4>{{ $getDiscountPrice }}.Đ</h4>
+                                        <h4>{{ $getDiscountPrice }}.VNĐ</h4>
                                     </div>
                                     <div class="original-price">
                                         <strong>{{ __('Giá Gốc:') }}</strong>
-                                        <span>{{ $productDetails['product_price'] }}.Đ</span>
+                                        <span>{{ $productDetails['product_price'] }}.VNĐ</span>
                                     </div>
                                 @else
                                     <div class="price">
-                                        <h4>{{ $productDetails['product_price'] }}.Đ</h4>
+                                        <h4>{{ $productDetails['product_price'] }}.VNĐ</h4>
                                     </div>
                                 @endif
                             </span>
