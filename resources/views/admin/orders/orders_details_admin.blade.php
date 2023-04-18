@@ -13,7 +13,7 @@ use App\Models\OrderLogs; ?>
                     </button>
                 </div>
             @endif
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -41,7 +41,7 @@ use App\Models\OrderLogs; ?>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col-md-6 grid-margin stretch-card">
@@ -62,25 +62,24 @@ use App\Models\OrderLogs; ?>
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Tình trạng đặt hàng:') }}</strong></label>
                                         <label>
-                                            @if ($orderDetails['order_status'] == 'Shipped')
-                                                <span class="badge bg-info color-white"
-                                                    style="color: #fff;">{{ __('Vận Chuyển:') }}</span>
-                                            @elseif($orderDetails['order_status'] == 'New')
-                                                <span class="badge bg-dark" style="color: #fff;">{{ __('Mới') }}</span>
-                                            @elseif($orderDetails['order_status'] == 'Cancelled')
+                                            @if ($orderDetails['order_status'] == 'Van Chuyen')
+                                                <span class="badge color-white"
+                                                    style="color: #fff; background: #CE044E !important;">{{ __('Vận Chuyển') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'Moi')
+                                                <span class="badge bg-danger"
+                                                    style="color: #fff;">{{ __('Mới') }}</span>
+                                            @elseif($orderDetails['order_status'] == 'Da Huy')
                                                 <span class="badge bg-warning"
                                                     style="color: #fff;">{{ __('Đã Hủy') }}</span>
-                                            @elseif($orderDetails['order_status'] == 'In Process')
-                                                <span class="badge bg-info"
+                                            @elseif($orderDetails['order_status'] == 'Dang Tien Hanh')
+                                                <span class="badge bg-success"
                                                     style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
-                                            @elseif($orderDetails['order_status'] == 'Pending')
-                                                <span class="badge bg-info"
-                                                    style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
-                                            @elseif($orderDetails['order_status'] == 'Delivered')
+                                            @elseif($orderDetails['order_status'] == 'Da Giao Hang')
                                                 <span class="badge bg-primary"
                                                     style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
                                             @else
-                                                <span class="badge bg-info" style="color: #fff;">{{ __('Trả') }}</span>
+                                                <span class="badge bg-info"
+                                                    style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
                                             @endif
                                         </label>
                                     </div>
@@ -114,13 +113,13 @@ use App\Models\OrderLogs; ?>
 
                                             @if ($orderDetails['payment_method'] == 'COD')
                                                 <span class="badge bg-info color-white"
-                                                    style="color: #fff;">{{ __('COD') }}</span>
-                                            @elseif($orderDetails['payment_method'] == 'Paypal')
+                                                    style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                            {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
                                                 <span class="badge bg-warning"
-                                                    style="color: #fff;">{{ __('Paypal') }}</span>
+                                                    style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
                                                 <span class="badge bg-success"
-                                                    style="color: #fff;">{{ __('Credit Card') }}</span>
+                                                    style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
                                             @endif
                                         </label>
 
@@ -133,13 +132,13 @@ use App\Models\OrderLogs; ?>
 
                                             @if ($orderDetails['payment_gateway'] == 'COD')
                                                 <span class="badge bg-info color-white"
-                                                    style="color: #fff;">{{ __('COD') }}</span>
-                                            @elseif($orderDetails['payment_gateway'] == 'Paypal')
+                                                    style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                            {{-- @elseif($orderDetails['payment_gateway'] == 'Paypal')
                                                 <span class="badge bg-warning"
-                                                    style="color: #fff;">{{ __('Paypal') }}</span>
+                                                    style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
                                                 <span class="badge bg-success"
-                                                    style="color: #fff;">{{ __('Credit Card') }}</span>
+                                                    style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
                                             @endif
                                         </label>
 
@@ -182,8 +181,7 @@ use App\Models\OrderLogs; ?>
                                     @endif
                                     @if (!empty($userDetails['country']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label
-                                                style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
+                                            <label style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
                                             <label>{{ $userDetails['country'] }}</label>
                                         </div>
                                     @endif
@@ -295,7 +293,6 @@ use App\Models\OrderLogs; ?>
                                 <br>
                                 @foreach ($orderLog as $key => $log)
                                     <strong>{{ $log['order_status'] }}</strong>
-                                    {{-- @if ($log['order_status'] == 'Shipped') --}}
                                     @if (isset($log['order_item_id']) && $log['order_item_id'] > 0)
                                         @php $getItemDetails = OrderLogs::getItemDetails($log['order_item_id']) @endphp
                                         {{ __('- Đối với mặt hàng') }}
@@ -344,7 +341,7 @@ use App\Models\OrderLogs; ?>
                                     <td>{{ __('Kích Thước Sản Phẩm') }}</td>
                                     <td>{{ __('Màu Sản Phẩm') }}</td>
                                     <td>{{ __('Sô Lượng Sản Phẩm') }}</td>
-                                    <td>{{ __('Item Status') }}</td>
+                                    {{-- <td>{{ __('Trạng Thái Mặt Hàng') }}</td> --}}
                                 </tr>
                                 @foreach ($orderDetails['orders_products'] as $product)
                                     <tr>
@@ -359,11 +356,10 @@ use App\Models\OrderLogs; ?>
                                         <td>{{ $product['product_size'] }}</td>
                                         <td>{{ $product['product_color'] }}</td>
                                         <td>{{ $product['product_qty'] }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <form action="{{ url('admin/update-order-item-status') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="order_item_id"
-                                                    value="{{ $product['id'] }}">
+                                                <input type="hidden" name="order_item_id" value="{{ $product['id'] }}">
                                                 <select class="py-2" name="order_item_status" id="order_item_status"
                                                     required>
                                                     <option value="" selected="">{{ __('Chọn') }}</option>
@@ -384,7 +380,7 @@ use App\Models\OrderLogs; ?>
                                                 <button type="submit"
                                                     class="btn btn-success">{{ __('Cập Nhật') }}</button>
                                             </form>
-                                        </td>
+                                        </td> --}}
 
                                     </tr>
                                 @endforeach

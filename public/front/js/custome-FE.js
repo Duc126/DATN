@@ -113,9 +113,9 @@ $(document).ready(function () {
     });
 
     //đặt hàng show loader at the time
-    $(document).on("click", "#placeOrder", function () {
-        $(".loader").show();
-    });
+    // $(document).on("click", "#placeOrder", function () {
+    //     $(".loader").show();
+    // });
 
     // Register Form validation
     $("#registerForm").submit(function () {
@@ -485,13 +485,83 @@ function get_filter(class_name) {
     });
     return filter;
 }
-const myCheckbox = document.getElementById('credit_card');
-const myDiv = document.getElementById('myDiv');
+//show hide credit card
+// const myCheckbox = document.getElementById('credit_card');
+// const myDiv = document.getElementById('myDiv');
 
-myCheckbox.addEventListener('change', function() {
-  if(this.checked) {
-    myDiv.style.display = 'block';
-  } else {
-    myDiv.style.display = 'none';
-  }
-});
+// myCheckbox.addEventListener('change', function() {
+//   if(this.checked) {
+//     myDiv.style.display = 'block';
+//   } else {
+//     myDiv.style.display = 'none';
+//   }
+// });
+
+
+// var form = document.getElementById("myForm");
+// var creditCard = document.getElementById("credit_card");
+// var myDiv = document.getElementById("myDiv");
+
+// creditCard.addEventListener("click", function() {
+//     if (creditCard.checked) {
+//         myDiv.style.display = "block";
+//         var inputs = myDiv.getElementsByTagName("input");
+//         for (var i = 0; i < inputs.length; i++) {
+//             if (inputs[i].name === "ccd") {
+//                 // Validate CCD format (3 digits)
+//                 inputs[i].setAttribute("pattern", "[0-9]{3}");
+//                 inputs[i].setAttribute("title", "CCD must be a 3-digit number");
+//             } else if (inputs[i].name === "card_number") {
+//                 // Validate card number format (16 digits)
+//                 inputs[i].setAttribute("pattern", "[0-9]{16}");
+//                 inputs[i].setAttribute("title", "Card number must be a 16-digit number");
+//             } else if (inputs[i].name === "expriation_date") {
+//                 // Validate expiration date format (MM/YY)
+//                 inputs[i].setAttribute("pattern", "(0[1-9]|1[0-2])/[0-9]{2}");
+//                 inputs[i].setAttribute("title", "Expiration date must be in the format MM/YY");
+//             }
+//             inputs[i].setAttribute("required", "");
+//         }
+//     } else {
+//         myDiv.style.display = "none";
+//         var inputs = myDiv.getElementsByTagName("input");
+//         for (var i = 0; i < inputs.length; i++) {
+//             inputs[i].removeAttribute("required");
+//             inputs[i].removeAttribute("pattern");
+//             inputs[i].removeAttribute("title");
+//         }
+//     }
+// });
+
+// form.addEventListener("submit", function(event) {
+//     var inputs = myDiv.getElementsByTagName("input");
+//     for (var i = 0; i < inputs.length; i++) {
+//         if (!inputs[i].checkValidity()) {
+//             event.preventDefault();
+//             var error = document.createElement("div");
+//             error.className = "error-message";
+//             error.textContent = inputs[i].title;
+//             inputs[i].parentNode.appendChild(error);
+//         }
+//     }
+// });
+const paymentGateway = document.getElementsByName('payment_gateway');
+
+    paymentGateway.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (radio.value === 'Credit_Card') {
+                document.getElementById('myDiv').style.display = 'block';
+                document.getElementById('name').setAttribute('required', '');
+                document.getElementById('ccd').setAttribute('required', '');
+                document.getElementById('card_number').setAttribute('required', '');
+                document.getElementById('expiration_date').setAttribute('required', '');
+            } else {
+                document.getElementById('myDiv').style.display = 'none';
+                document.getElementById('name').removeAttribute('required');
+                document.getElementById('ccd').removeAttribute('required');
+                document.getElementById('card_number').removeAttribute('required');
+                document.getElementById('expiration_date').removeAttribute('required');
+            }
+        });
+    });
+

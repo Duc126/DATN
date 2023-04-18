@@ -79,7 +79,7 @@
                                 </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <a class="btn btn-danger" href="{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
+                                <a class="btn btn-danger" href="{{ url('admin/products') }}">{{ __('Quay lai ') }}</a>
 
                             </form>
                             <br>

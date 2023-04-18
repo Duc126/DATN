@@ -34,7 +34,9 @@ class ProductController extends Controller
             $query->select('id', 'name');
         }, 'category' => function ($query) {
             $query->select('id', 'category_name');
-        }]);
+        }, 'attributes' =>function ($query) {
+            $query->select('product_id', 'stock');
+    }]);
 // dd($products);
 
         if ($adminType == "vendor") {

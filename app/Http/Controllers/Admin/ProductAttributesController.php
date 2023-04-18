@@ -36,8 +36,10 @@ class ProductAttributesController extends Controller
                     $attribute->size = $data['size'][$key];
                     $attribute->price = $data['price'][$key];
                     $attribute->stock = $data['stock'][$key];
+                    $attribute->total = $data['stock'][$key];
                     $attribute->status = 1;
                     $attribute->save();
+                    // dd($attribute);
                 }
             }
             return redirect()->back()->with('success_message', 'Thuộc tính sản phẩm được thêm thành công');

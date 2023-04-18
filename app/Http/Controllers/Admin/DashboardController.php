@@ -19,20 +19,55 @@ class DashboardController extends Controller
     {
         Session::put('page', 'dashboard');
         $totalUser = User::where('status', 1)->count('*');
-        $totalProduct = Product::where('status',1)->count('*');
-        $totalBrands = Brand::where('status',1)->count('*');
+        $totalProduct = Product::where('status', 1)->count('*');
+        $totalBrands = Brand::where('status', 1)->count('*');
         $totalOrder = Order::count('*');
         $totalVendors = Vendor::count('*');
-        $totalOrderCount = DB::table('orders')
-        ->select( 'user_id', DB::raw('COUNT(*) AS count_id'))
-        ->groupBy( 'user_id')
-        ->orderByDesc('count_id')
-        ->get();
+
+        $totalOrderCount = DB::table('users')
+            ->select(DB::raw('users.*, COUNT(orders.id) AS count_id'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->groupBy(
+                'users.id',
+                'users.name',
+                'users.email',
+                'users.address',
+                'users.city',
+                'users.state',
+                'users.country',
+                'users.pincode',
+                'users.phone',
+                'users.email_verified_at',
+                'users.password',
+                'users.status',
+                'users.remember_token',
+                'users.created_at',
+                'users.updated_at'
+            ) // Thêm tên tất cả các cột trong bảng users vào đây
+            ->orderByDesc('count_id')
+            ->get();
+
+
+
+        // dd($totalOrderCount);
+
+        // $orders = DB::table('orders')
+        //     ->orderBy('id', 'desc')
+        //     ->limit(10)
+        //     ->get();
         $orders = DB::table('orders')
-                    ->orderBy('id', 'desc')
-                    ->limit(10)
-                    ->get();
-                // dd($orders);
-        return view('admin.dashboard')->with(compact('totalUser','totalProduct','totalOrder','totalBrands','totalVendors','totalOrderCount','orders'));
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->select('orders.*', 'users.name')
+            ->orderBy('orders.id', 'desc')
+            ->limit(10)
+            ->get();
+        // dd($orders);
+
+        $result = DB::table('orders')
+            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SUM(grand_total) as revenue")
+            ->groupBy('month')
+            ->get();
+        // dd($result);
+        return view('admin.dashboard')->with(compact('totalUser', 'totalProduct', 'totalOrder', 'totalBrands', 'totalVendors', 'totalOrderCount', 'orders', 'result'));
     }
 }

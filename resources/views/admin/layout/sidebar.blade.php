@@ -199,7 +199,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a @if (Session::get('page') == 'users' || Session::get('page') == 'subscribers') style="background:#4B49AC !important; color: #fff !important;" @endif
+        <a @if (Session::get('page') == 'users' || Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-user">
             <i class="icon-grid-2 menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý Người Dùng') }}</span>
@@ -212,11 +212,11 @@
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
                 </li>
-                {{-- <li class="nav-item"><a
-                        @if (Session::get('page') == 'subscribers') style="background:#4B49AC !important; color: #fff !important;"
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/subscribers') }}">{{ __('subscribers') }}</a>
-                </li> --}}
+                        class="nav-link" href="{{ url('admin/staff') }}">{{ __('Nhân Viên') }}</a>
+                </li>
             </ul>
         </div>
     </li>
@@ -243,7 +243,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-banner" aria-expanded="false"
             aria-controls="ui-banner">
             <i class="icon-grid-2 menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý Banners') }}</span>
+            <span class="menu-title">{{ __('Quản lý Slider Banners') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-banner">
@@ -251,7 +251,7 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'banner') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/banner') }}">{{ __('Slider Banner') }}</a>
+                        class="nav-link" href="{{ url('admin/banner') }}">{{ __('Quản Lý Slider Banner') }}</a>
                 </li>
             </ul>
         </div>
@@ -274,6 +274,29 @@
             </ul>
         </div>
     </li>
+    <li class="nav-item">
+        <a @if (Session::get('page') == 'order-product'|| Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;" @endif
+            class="nav-link" data-toggle="collapse" href="#ui-order-product" aria-expanded="false"
+            aria-controls="ui-order-product">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Quản lý và thống kê sản phẩm') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-order-product">
+            <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'order-product') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/order-product/search') }}">{{ __('Thống Kê Sản Phẩm') }}</a>
+                </li>
+                <li class="nav-item"><a
+                    @if (Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;"
+                @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                    class="nav-link" href="{{ url('admin/order-product') }}">{{ __('Quản Lý Số Lượng') }}</a>
+            </li>
+            </ul>
+        </div>
+    </li>
     @endif
     {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
@@ -286,8 +309,8 @@
             <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
           </ul>
         </div>
-      </li>
-      <li class="nav-item">
+      </li> --}}
+      {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <i class="icon-head menu-icon"></i>
           <span class="menu-title">User Pages</span>

@@ -16,10 +16,10 @@ class OrderItemStatusSeeder extends Seeder
     public function run()
     {
         OrderItemStatus::insert([
-            ['name' => 'Pending','status' =>1],
-            ['name' => 'In Process','status' =>1],
-            ['name' => 'Shipped','status' =>1],
-            ['name' => 'Delivered','status' =>1],
+            ['name' => 'Chua Giai Quyet','status' =>1],
+            ['name' => 'Dang Tien Hanh','status' =>1],
+            ['name' => 'Van Chuyen','status' =>1],
+            ['name' => 'Da Giao Hang','status' =>1],
         ]);
     }
 }

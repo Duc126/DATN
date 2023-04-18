@@ -113,7 +113,7 @@
         </div>
         <!-- Top-Header /- -->
         <!-- Mid-Header -->
-        <div class="full-layer-mid-header">
+        <div class="full-layer-mid-header" style="padding: 20px 0 !important">
             <div class="container">
                 <div class="row clearfix align-items-center">
                     <div class="col-lg-3 col-md-9 col-sm-6">
@@ -121,8 +121,8 @@
                             <a href="{{ url('/') }}">
                                 {{-- <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
                                     alt="Stack Developers" class="app-brand-logo"> --}}
-                                <img width="200" height="60"
-                                    src="{{ asset('front/images/main-logo/logo-FE.png') }}" alt="Thương Mại Điện Tử"
+                                <img height="60"
+                                    src="{{ asset('front/images/main-logo/TechHub.png') }}" alt="Fashion TechHub"
                                     class="app-brand-logo">
                             </a>
                         </div>
@@ -280,50 +280,7 @@
                                     <span class="superscript-label-discount">-30%</span>
                                 </a>
                             </li>
-                            {{-- <li class="mega-position">
-                                <a>More
-                                    <i class="fas fa-chevron-down u-s-m-l-9"></i>
-                                </a>
-                                <div class="mega-menu mega-3-colm">
-                                    <ul>
-                                        <li class="menu-title">COMPANY</li>
-                                        <li>
-                                            <a href="about.html" class="u-c-brand">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="faq.html">FAQ</a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li class="menu-title">COLLECTION</li>
-                                        <li>
-                                            <a href="cart.html">Men Clothing</a>
-                                        </li>
-                                        <li>
-                                            <a href="checkout.html">Women Clothing</a>
-                                        </li>
-                                        <li>
-                                            <a href="account.html">Kids Clothing</a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li class="menu-title">ACCOUNT</li>
-                                        <li>
-                                            <a href="shop-v1-root-category.html">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-v1-root-category.html">My Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="listing.html">My Orders</a>
-                                        </li>
 
-                                    </ul>
-                                </div>
-                            </li> --}}
                         </ul>
                     </div>
                 </div>

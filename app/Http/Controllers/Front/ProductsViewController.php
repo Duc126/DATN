@@ -248,21 +248,33 @@ class ProductsViewController extends Controller
     }
     public function checkout(Request $request)
     {
-        $deliveryAddress = DeliveryAddress::deliveryAddress();
-
-        foreach ($deliveryAddress as $key => $value) {
-            $shippingCharges = ShippingCharges::getShippingCharges($value['state']);
-            $deliveryAddress[$key]['shipping_charges'] = $shippingCharges;
-        }
-        // dd($deliveryAddress);
-
-
         $countries = Countries::where('status', 1)->get()->toArray();
         $getCartItems = Cart::getCartItems();
         if (count($getCartItems) == 0) {
             $message = "Giỏ hàng đang rỗng! Vui lòng thêm sản phẩm để thanh toán";
             return redirect('cart')->with('error_message', $message);
         }
+        $total_price = 0;
+        $total_weight = 0;
+        foreach ($getCartItems as $item) {
+            $attrPrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
+
+            $total_price = $total_price  + ($attrPrice['final_price'] * $item['quantity']);
+            $product_weight = $item['product']['product_weight'];
+            $total_weight = $total_weight + $product_weight;
+        }
+
+
+        $deliveryAddress = DeliveryAddress::deliveryAddress();
+
+        foreach ($deliveryAddress as $key => $value) {
+            $shippingCharges = ShippingCharges::getShippingCharges($total_weight,$value['state']);
+            $deliveryAddress[$key]['shipping_charges'] = $shippingCharges;
+        }
+        // dd($deliveryAddress);
+
+
+
         if ($request->isMethod('post')) {
             $data = $request->all();
             // dd($data);
@@ -336,14 +348,15 @@ class ProductsViewController extends Controller
 
             if ($data['payment_gateway'] == "COD") {
                 $payment_method = "COD";
-                $order_status = "New";
-            } elseif ($data['payment_gateway'] == "Credit_Card") {
-                $payment_method = "Credit Card";
-                $order_status = "In Process";
+                $order_status = "Moi";
             } else {
-                $payment_method = "PayPal";
-                $order_status = "Pending";
+                $payment_method = "Credit Card";
+                $order_status = "Chua Giai Quyet";
             }
+            // else {
+            //     $payment_method = "PayPal";
+            //     $order_status = "Chua Giai Quyet";
+            // }
             DB::beginTransaction();
             //fetch order total price
             $total_price = 0;
@@ -355,7 +368,7 @@ class ProductsViewController extends Controller
             $shipping_charges = 0;
 
             //get shipping charges
-            $shipping_charges = ShippingCharges::getShippingCharges($addressDelivery['state']);
+            $shipping_charges = ShippingCharges::getShippingCharges($total_weight,$addressDelivery['state']);
             // dd($deliveryAddress['state']);
             //calculate grand total
             $grand_total = $total_price + $shipping_charges - Session::get('couponAmount');
@@ -415,13 +428,17 @@ class ProductsViewController extends Controller
                 $getDiscountAttributePrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
                 $cartItem->product_price = $getDiscountAttributePrice['final_price'];
                 $cartItem->product_qty = $item['quantity'];
+                // dd($cartItem);
                 $cartItem->save();
                 // dd($cartItem);s
 
                 //recduce stock script starts
 
                 $getProductStock = ProductsAttributes::getProductStock($item['product_id'], $item['size']);
+                // dd($getProductStock);
                 $newStock = $getProductStock - $item['quantity'];
+                // dd($newStock);
+
                 ProductsAttributes::where(['product_id' => $item['product_id'], 'size' => $item['size']])->update(['stock' => $newStock]);
             }
 
@@ -453,27 +470,23 @@ class ProductsViewController extends Controller
                     $getProductStock = ProductsAttributes::getProductStock($order['product_id'], $order['product_size']);
                     $newStock = $getProductStock - $order['product_qty'];
                     ProductsAttributes::where(['product_id' => $order['product_id'], 'size' => $order['product_size']])->update(['stock' => $newStock]);
+                    // dd($getProductStock);
                 }
             }
 
 
-            if ($data['payment_gateway'] == "Paypal") {
-                //Paypal -Redirect user to paypal page after saving order
-                return redirect('/paypal');
-            } else {
-                echo "Sắp có các phương thức thanh toán trả trước khác";
-            }
+            // if ($data['payment_gateway'] == "Paypal") {
+            //     //Paypal -Redirect user to paypal page after saving order
+            //     return redirect('/paypal');
+            // } else {
+            //     echo "Sắp có các phương thức thanh toán trả trước khác";
+            // }
 
 
             return redirect('thanks');
         }
 
-        $total_price = 0;
-        foreach ($getCartItems as $item) {
-            $attrPrice = Product::getDiscountAttributePrice($item['product_id'], $item['size']);
 
-            $total_price = $total_price  + ($attrPrice['final_price'] * $item['quantity']);
-        }
         // echo $total_price;die;
         return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'getCartItems', 'total_price'));
     }

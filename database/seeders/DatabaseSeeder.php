@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(DeliveryAddressSeeder::class);
         // $this->call(OrderStatusSeeder::class);
         // $this->call(OrderItemStatusSeeder::class);
-        $this->call(ShippingChargesSeeder::class);
+        // $this->call(ShippingChargesSeeder::class);
+        $this->call(StaffSeeder::class);
 
 
     }

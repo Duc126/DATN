@@ -30,8 +30,12 @@
                                         <tr>
                                             <th>#</th>
                                             <th>{{ __('Tỉnh') }}</th>
-                                            <th>{{ __('Quốc gia') }}</th>
-                                            <th>{{ __('Giá') }}</th>
+                                            {{-- <th>{{ __('Quốc gia') }}</th> --}}
+                                            <th>{{ __('Giá Từ 0g-500g') }}</th>
+                                            <th>{{ __('Giá Từ 501g-1000g') }}</th>
+                                            <th>{{ __('Giá Từ 1001g-2000g') }}</th>
+                                            <th>{{ __('Giá Từ 2001g-5000g') }}</th>
+                                            <th>{{ __('Giá Trên 5000g') }}</th>
                                             <th>{{ __('Trang Thái') }}</th>
                                             <th>{{ __('Hoạt động') }}</th>
                                         </tr>
@@ -41,8 +45,12 @@
                                             <tr>
                                                 <td>{{ $shipping['id'] }}</td>
                                                 <td>{{ $shipping['state'] }}</td>
-                                                <td>{{ $shipping['country'] }} </td>
-                                                <td>{{ $shipping['rate'] }} </td>
+                                                {{-- <td>{{ $shipping['country'] }} </td> --}}
+                                                <td>{{ $shipping['0_500g'] }}.VNĐ </td>
+                                                <td>{{ $shipping['501_1000g'] }}.VNĐ </td>
+                                                <td>{{ $shipping['1001_2000g'] }}.VNĐ </td>
+                                                <td>{{ $shipping['2001_5000g'] }}.VNĐ </td>
+                                                <td>{{ $shipping['above_5000g'] }}.VNĐ </td>
                                                 <td>
                                                     @if ($shipping['status'] == 1)
                                                         <a class="updateShipping" id="shipping-{{ $shipping['id'] }}"

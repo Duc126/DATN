@@ -26,10 +26,10 @@
                         <h6>{{ __('CÔNG TY') }}</h6>
                         <ul>
                             <li>
-                                <a href="about.html">{{ __('Về chúng tôi') }}</a>
+                                <a href="#">{{ __('Về chúng tôi') }}</a>
                             </li>
                             <li>
-                                <a href="contact.html">{{ __('Liên hệ chúng tôi') }}</a>
+                                <a href="#">{{ __('Liên hệ chúng tôi') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -55,7 +55,7 @@
                         <ul>
                             <li>
                                 <i class="fas fa-location-arrow u-s-m-r-9"></i>
-                                <span>{{ __('Thương Mại Điện Tử') }}</span>
+                                <span>{{ __('TechHub') }}</span>
                             </li>
                             <li>
                                 <a href="tel:+84 355913199">
