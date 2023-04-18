@@ -130,12 +130,15 @@
                                                  @endif
 
                                              </div>
-                                             <?php $isProductNew = Product::isProductNew($product['id']); ?>
+                                             <div class="tag new">
+                                                <span>{{ __('Mới') }}</span>
+                                            </div>
+                                             {{-- <?php $isProductNew = Product::isProductNew($product['id']); ?>
                                              @if ($isProductNew == 'Yes')
                                                  <div class="tag new">
                                                      <span>{{ __('Mới') }}</span>
                                                  </div>
-                                             @endif
+                                             @endif --}}
                                          </div>
                                      @endforeach
                                  </div>

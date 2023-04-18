@@ -10,12 +10,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\InvoicePdfController;
 use App\Http\Controllers\Admin\OrderAdminController;
+use App\Http\Controllers\Admin\OrderProductController;
 use App\Http\Controllers\Admin\ProductAttributesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\UserPageAdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Front\AddProductController;
 use App\Http\Controllers\Front\AddressController as FrontAddressController;
@@ -152,6 +154,21 @@ Route::prefix('admin')->group(function () {
         Route::get('order/invoice/{id}', [OrderAdminController::class, 'viewInvoice']);
         Route::get('order/invoice/pdf/{id}', [InvoicePdfController::class, 'viewPDFInvoice']);
 
+
+        Route::post('/update-staff',[OrderAdminController::class, 'assignStaff'])->name('assignStaff');
+
+        //Staff
+        Route::get('staff', [StaffController::class, 'listStaff']);
+        Route::match(['get', 'post'], 'add-edit-staff/{id?}', [StaffController::class, 'addEditStaff']);
+        Route::post('update-status-staff', [StaffController::class, 'updateStatusStaff']);
+        Route::get('delete-staff/{id}', [StaffController::class, 'deleteStaff']);
+
+
+        //order product
+        Route::get('order-product', [OrderProductController::class, 'OrderProduct']);
+        Route::get('/search-products', [OrderProductController::class, 'OrderProduct'])->name('search_products');
+
+        Route::get('order-product/search', [OrderProductController::class, 'searchProducts'])->name('search_products');
 
         //SHIPPING
         Route::get('shipping', [ShippingController::class, 'shipping']);

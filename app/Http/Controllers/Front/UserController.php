@@ -218,7 +218,7 @@ class UserController extends Controller
                 $email = $data['email'];
                 $messageData = ['name' => $userDetails['name'], 'email' => $email, 'password' => $new_password];
                 Mail::send('emails.user_forgot_password', $messageData, function ($message) use ($email) {
-                    $message->to($email)->subject('Mật Khẩu Mới - Thương Mại Điện Tử');
+                    $message->to($email)->subject('Mật Khẩu Mới - Website Bán Hàng Công Ty TechHub');
                 });
                 //show success message
                 return response()->json(['type' => 'success', 'message' => 'Mật khẩu mới được gửi đến email đăng ký của bạn.']);

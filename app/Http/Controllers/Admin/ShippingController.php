@@ -15,35 +15,58 @@ class ShippingController extends Controller
         $shippingCharges = ShippingCharges::get()->toArray();
         return view('admin.shipping.shipping_charges')->with(compact('shippingCharges'));
     }
-    public function updateStatusShipping(Request $request){
-        if($request->ajax())
-        {
+    public function updateStatusShipping(Request $request)
+    {
+        if ($request->ajax()) {
             $data = $request->all();
-            if($data['status']=="Active"){
+            if ($data['status'] == "Active") {
                 $status = 0;
-            }
-            else  {
+            } else {
                 $status = 1;
             }
             ShippingCharges::where('id', $data['shipping_id'])->update(['status' => $status]);
-            return response()->json(['status'=> $status, 'shipping_id'=> $data['shipping_id']]);
+            return response()->json(['status' => $status, 'shipping_id' => $data['shipping_id']]);
         }
     }
 
-    public function addEditShipping($id, Request $request){
+    public function addEditShipping($id, Request $request)
+    {
         Session::put('page', 'shipping');
 
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             $data = $request->all();
-            ShippingCharges::where('id', $id)->update(['rate'=> $data['rate']]);
+            $rules = [
+                '0_500g' => 'required|numeric|min:0',
+                '501_1000g' => 'required|numeric|min:0',
+                '1001_2000g' => 'required|numeric|min:0',
+                '2001_5000g' => 'required|numeric|min:0',
+                'above_5000g' => 'required|numeric|min:0',
+
+
+            ];
+            $customMessages = [
+                '0_500g.required' => 'Giá tiền từ 0 - 500g là bắt buộc',
+                '0_500g.min' => 'Giá tiền từ 0 - 500g không được nhỏ hơn 0',
+                '501_1000g.required' => 'Giá tiền từ 501 - 1000g là bắt buộc',
+                '501_1000g.min' => 'Giá tiền từ 501 - 1000g không được nhỏ hơn 0',
+                '1001_2000g.required' => 'Giá tiền từ 1001 - 2000g là bắt buộc',
+                '1001_2000g.min' => 'Giá tiền từ 1001 - 2000g không được nhỏ hơn 0',
+                '2001_5000g.required' => 'Giá tiền từ 2001 - 5000g là bắt buộc',
+                '2001_5000g.min' => 'Giá tiền từ 2001 - 5000g không được nhỏ hơn 0',
+                'above_5000g.required' => 'Giá tiền trên 5000g là bắt buộc',
+                'above_5000g.min' => 'Giá tiền trên 5000g không được nhỏ hơn 0',
+            ];
+            $this->validate($request, $rules, $customMessages);
+            ShippingCharges::where('id', $id)->update([
+                '0_500g' => $data['0_500g'], '501_1000g' => $data['501_1000g'], '1001_2000g' => $data['1001_2000g'],
+                '2001_5000g' => $data['2001_5000g'], 'above_5000g' => $data['above_5000g']
+            ]);
             $message = "Chỉnh Sửa Đơn Giá Vận Chuyển Thành Công";
             return redirect()->back()->with('success_message', $message);
         }
 
         $shippingDetails = ShippingCharges::Where('id', $id)->first();
         $title = 'Chỉnh Sửa Đơn Gía Vận Chuyển';
-        return view('admin.shipping.edit_shipping')->with(compact('shippingDetails','title'));
-
-
+        return view('admin.shipping.edit_shipping')->with(compact('shippingDetails', 'title'));
     }
 }

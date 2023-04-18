@@ -8,7 +8,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $title }}</h4>
                             <div class="table-responsive">
-                                <table id="adminTable" class="table table-striped text-center">
+                                <table id="adminTable" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -26,7 +26,14 @@
                                             <tr>
                                                 <td>{{ $adminList['id'] }}</td>
                                                 <td>{{ $adminList['first_name'] }} {{ $adminList['last_name'] }} </td>
-                                                <td>{{ $adminList['type'] }}</td>
+                                                <td>
+                                                    @if($adminList['type'] =="admin" )
+                                                    <p>Admin</p>
+                                                    @else
+                                                    <p> Nhân Viên</p>
+                                                    @endif
+
+                                                </td>
                                                 <td>{{ $adminList['phone'] }}</td>
                                                 <td>{{ $adminList['email'] }}</td>
                                                 <td>

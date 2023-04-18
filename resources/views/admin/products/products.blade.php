@@ -37,7 +37,7 @@
                                             <th>{{ __('Ảnh') }}</th>
                                             <th>{{ __('Thuộc Loại') }}</th>
                                             <th>{{ __('Thuộc Phần') }}</th>
-                                            <th>{{ __('Thêm Bởi') }}</th>
+                                            {{-- <th>{{ __('Thêm Bởi') }}</th> --}}
                                             <th>{{ __('Trang Thái') }}</th>
                                             <th>{{ __('Hoạt động') }}</th>
                                         </tr>
@@ -60,7 +60,11 @@
                                                 </td>
                                                 <td>{{ $product['category']['category_name'] }} </td>
                                                 <td>{{ $product['section']['name'] }} </td>
-                                                <td>
+                                                {{-- <td>{{ $product->attributes[0]->stock }}</td> --}}
+                                                {{-- <td>{{ $product['attributes']['stock'] }} </td> --}}
+
+
+                                                {{-- <td>
                                                     @if ($product['admin_type'] == 'vendor')
                                                         <a target="_blank"
                                                             href="{{ url('admin/view-vendor/' . $product['admin_id']) }}">
@@ -69,7 +73,7 @@
                                                     @else
                                                         {{ ucfirst($product['admin_type']) }}
                                                     @endif
-                                                </td>
+                                                </td> --}}
 
                                                 <td>
                                                     @if ($product['status'] == 1)

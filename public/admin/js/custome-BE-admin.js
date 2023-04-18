@@ -13,6 +13,7 @@ $(document).ready(function () {
     $("#users").DataTable();
     $("#orders").DataTable();
     $("#shipping").DataTable();
+    $("#staff").DataTable();
 
     //remove active side-bar
     $(".nav-item").removeClass("active");
@@ -504,7 +505,7 @@ $(document).on("click", ".updateUser", function () {
 $("#courier_name").hide();
 $("#tracking_number").hide();
 $("#order_status").on("change", function () {
-    if (this.value == "Shipped") {
+    if (this.value == "Van Chuyen") {
         $("#courier_name").show();
         $("#tracking_number").show();
     } else {
@@ -556,3 +557,75 @@ $(document).on("click", ".updateShipping", function () {
         },
     });
 });
+
+//update status section
+$(document).on("click", ".updateStaff", function () {
+    var status = $(this).children("i").attr("status");
+    var staff_id = $(this).attr("staff_id");
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        type: "post",
+        url: "/admin/update-status-staff",
+        data: {
+            status: status,
+            staff_id: staff_id,
+        },
+        success: function (resp) {
+            if (resp["status"] == 0) {
+                $("#staff-" + staff_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-outline' status='Inactive'></i>"
+                );
+            } else if (resp["status"] == 1) {
+                $("#staff-" + staff_id).html(
+                    "<i style='font-size: 25px' class='mdi mdi mdi-bookmark-check' status='Active'></i>"
+                );
+            }
+        },
+        error: function () {
+            alert("Error");
+        },
+    });
+});
+$(document).ready(function(){
+    $('#select-all').click(function(event) {
+        if(this.checked) {
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+});
+function addToSelectedOrders(checkbox) {
+    if (checkbox.checked) {
+        var orderId = checkbox.id.split('-')[1];
+        var tbody = document.getElementById('selected-orders');
+        console.log(tbody);
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'selected_orders[]');
+        input.setAttribute('value', orderId);
+        td.appendChild(input);
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    } else {
+        var orderId = checkbox.id.split('-')[1];
+        var tbody = document.getElementById('selected-orders');
+        var tr = tbody.querySelector('[value="' + orderId + '"]').parentNode.parentNode;
+        tbody.removeChild(tr);
+    }
+}
+function setSelectedOrderId() {
+    // Get the selected order checkbox element
+    var selectedOrderCheckbox = document.querySelector('input[name="order_ids[]"]:checked');
+
+    // Set the value of the hidden input field to the id of the selected order
+    document.getElementById('order-id-input').value = selectedOrderCheckbox.value;
+}

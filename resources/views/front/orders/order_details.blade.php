@@ -38,21 +38,19 @@
                     <tr>
                         <td>{{ __('Tình Trạng Đơn') }}
                         <td>
-                            {{-- {{ $orderDetails['order_status'] }} --}}
-                            @if ($orderDetails['order_status'] == 'Shipped')
-                                <span class="badge bg-info" style="color: #fff;">{{ __('Vận Chuyển:') }}</span>
-                            @elseif($orderDetails['order_status'] == 'New')
+                            @if ($orderDetails['order_status'] == 'Van Chuyen')
+                                <span class="badge bg-secondary color-white"
+                                    style="color: #fff; background: #CE044E !important;">{{ __('Vận Chuyển') }}</span>
+                            @elseif($orderDetails['order_status'] == 'Moi')
                                 <span class="badge bg-danger" style="color: #fff;">{{ __('Mới') }}</span>
-                            @elseif($orderDetails['order_status'] == 'Cancelled')
+                            @elseif($orderDetails['order_status'] == 'Da Huy')
                                 <span class="badge bg-warning" style="color: #fff;">{{ __('Đã Hủy') }}</span>
-                            @elseif($orderDetails['order_status'] == 'In Process')
+                            @elseif($orderDetails['order_status'] == 'Dang Tien Hanh')
                                 <span class="badge bg-success" style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
-                            @elseif($orderDetails['order_status'] == 'Pending')
-                                <span class="badge bg-info" style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
-                            @elseif($orderDetails['order_status'] == 'Delivered')
+                            @elseif($orderDetails['order_status'] == 'Da Giao Hang')
                                 <span class="badge bg-primary" style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
                             @else
-                                <span class="badge bg-info" style="color: #fff;">{{ __('Trả') }}</span>
+                                <span class="badge bg-info" style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
                             @endif
 
                         </td>
@@ -98,10 +96,10 @@
 
                             @if ($orderDetails['payment_method'] == 'COD')
                                 <span class="badge bg-info color-white" style="color: #fff;">{{ __('COD') }}</span>
-                            @elseif($orderDetails['payment_method'] == 'Paypal')
-                                <span class="badge bg-warning" style="color: #fff;">{{ __('Paypal') }}</span>
+                            {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
+                                <span class="badge bg-warning" style="color: #fff;">{{ __('Paypal') }}</span> --}}
                             @else
-                                <span class="badge bg-success" style="color: #fff;">{{ __('Credit Card') }}</span>
+                                <span class="badge bg-success" style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
                             @endif
                         </td>
                         </td>

@@ -17,9 +17,10 @@ class ProductsAttributes extends Model
         if ($getProductStock) {
             return $getProductStock->stock;
         } else {
-            // handle the case where the $getProductStock is null
-            return 0; // or any other value that makes sense for your use case
+            return 0;
         }
+        // dd($getProductStock);
+
     }
     public static function getAttributeStatus($product_id, $size)
     {

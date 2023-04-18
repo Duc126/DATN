@@ -43,26 +43,58 @@
                                              value="{{ $shippingDetails['state']}}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="country">{{ __('Tên Quốc Gia') }}<span
                                                 class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control" id="country" placeholder="" name="country" readonly
                                                 value="{{ $shippingDetails['country']}}">
                                     </div>
+                                </div> --}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="rate">{{ __('Giá Từ 0 - 500g') }}<span
+                                                class="text-danger">*</span> :</label>
+                                                <input type="text" class="form-control" id="0_500g" placeholder="" name="0_500g"
+                                                value="{{ $shippingDetails['0_500g']}}">
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="rate">{{ __('Tiền Giao Hàng') }}<span
+                                        <label for="rate">{{ __('Giá Từ 501 - 1000g') }}<span
                                                 class="text-danger">*</span> :</label>
-                                                <input type="number" class="form-control" id="rate" placeholder="" name="rate"
-                                                value="{{ $shippingDetails['rate']}}">
+                                                <input type="text" class="form-control" id="501_1000g" placeholder="" name="501_1000g"
+                                                value="{{ $shippingDetails['501_1000g']}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="rate">{{ __('Giá Từ 1001 - 2000g') }}<span
+                                                class="text-danger">*</span> :</label>
+                                                <input type="text" class="form-control" id="1001_2000g" placeholder="" name="1001_2000g"
+                                                value="{{ $shippingDetails['1001_2000g']}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="rate">{{ __('Giá Từ 2001 - 5000g') }}<span
+                                                class="text-danger">*</span> :</label>
+                                                <input type="text" class="form-control" id="2001_5000g" placeholder="" name="2001_5000g"
+                                                value="{{ $shippingDetails['2001_5000g']}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="rate">{{ __('Giá Trên 5000g') }}<span
+                                                class="text-danger">*</span> :</label>
+                                                <input type="text" class="form-control" id="above_5000g" placeholder="" name="above_5000g"
+                                                value="{{ $shippingDetails['above_5000g']}}">
                                     </div>
                                 </div>
                             </div>
                                 <button type="submit"
                                     class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <a class="btn btn-danger" href="{{  url('admin/brands')  }}">{{ __('Quay lai ') }}</a>
+                                <a class="btn btn-danger" href="{{  url('admin/shipping')  }}">{{ __('Quay lai ') }}</a>
 
                             </form>
                         </div>

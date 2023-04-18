@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>
-                <img style="width:250px; height: 100px;" src="{{ asset('front/images/main-logo/logo-FE.png') }}">
+                <img style="width:250px; height: 100px;" src="{{ asset('front/images/main-logo/TechHub.png') }}">
             </td>
         </tr>
         <tr>

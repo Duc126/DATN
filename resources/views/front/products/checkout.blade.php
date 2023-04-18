@@ -165,28 +165,39 @@
                                         <label class="label-text"
                                             for="cash-on-delivery">{{ __('Thanh Toán Khi Giao Hàng') }}</label>
                                     </div>
-                                    <div class="u-s-m-b-13">
+                                    {{-- <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="paypal"
                                             value="Paypal">
                                         <label class="label-text" for="paypal">{{ __('Paypal') }}</label>
-                                    </div>
+                                    </div> --}}
                                     <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="credit_card"
                                             value="Credit_Card">
-                                        <label class="label-text" for="credit_card">{{ __('Credit Card') }}</label>
+                                        <label class="label-text" for="credit_card">{{ __('Thẻ Ngân Hàng') }}</label>
                                     </div>
                                     <div id="myDiv" style="display:none;">
-                                        <div class="row">
-                                            <input typpe="text" name="name" id="name" class="form-group" placeholder="Tên Chủ Thẻ">
-                                            <input typpe="number" name="ccd" id="ccd" class="form-group" placeholder="CCD">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="name">Tên Chủ Thẻ</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên chủ thẻ">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="ccd">CCD</label>
+                                                <input type="number" class="form-control" id="ccd" name="ccd" placeholder="Nhập CCD">
+                                            </div>
                                         </div>
-                                 <div class="row">
-                                    <input typpe="number" name="card_number" id="card_number" class="form-group" placeholder="xxxx xxxx xxxx xxxx">
-                                    <input typpe="number" name="expriation_date" id="expriation_date"  class="form-group" placeholder="XX/XX">
-                                 </div>
-
-
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="card_number">Số Thẻ</label>
+                                                <input type="number" class="form-control" id="card_number" name="card_number" placeholder="Nhập số thẻ">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="expriation_date">Ngày Hết Hạn</label>
+                                                <input type="number" class="form-control" id="expriation_date" name="expriation_date" placeholder="Nhập ngày hết hạn">
+                                            </div>
+                                        </div>
                                     </div>
+
 
                                     <div class="u-s-m-b-13">
                                         <input type="checkbox" class="check-box" id="accept" name="accept"value="Yes"

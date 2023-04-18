@@ -15,4 +15,8 @@ class Order extends Model
     {
         return $this->belongsTo(CreditCard::class,'crd_id','order_card_id');
     }
+    public function orderNhanVien()
+    {
+        return $this->hasMany(NhanVien::class,'id_nhanvien','id_NV');
+    }
 }
