@@ -21,14 +21,16 @@
                                 <div class="form-group d-flex col-md-12">
                                     <div class="col-md-5">
                                         <label for="start_date">Ngày bắt đầu:</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                        <input type="date" class="form-control" id="start_date" name="start_date"
+                                            value={{ $start_date }} required>
                                     </div>
                                     <div class="col-md-5">
                                         <label for="end_date">Ngày kết thúc:</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                        <input type="date" class="form-control" id="end_date" name="end_date"
+                                            value={{ $end_date }} required>
                                     </div>
                                     <div class="col-md-2 mt-4">
-                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('Tìm Kiếm') }}</button>
 
                                     </div>
 
@@ -36,30 +38,30 @@
 
                             </form>
                             <div class="row">
-                            <div class="table-responsive col-md-7">
-                                <table id="brand" class="table table-striped display">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('Tên Sản Phẩm') }}</th>
-                                            <th>{{ __('Tháng Bán Được') }}</th>
-                                            <th>{{ __('Tổng Số Lượng') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($product as $orderProduct)
+                                <div class="table-responsive col-md-7">
+                                    <table id="brand" class="table table-striped display">
+                                        <thead>
                                             <tr>
-                                                <td>{{$orderProduct->product_name}}</td>
-                                                <td>{{$orderProduct->month}}</td>
-                                                <td>{{ $orderProduct->total_quantity }} </td>
+                                                <th>{{ __('Tên Sản Phẩm') }}</th>
+                                                <th>{{ __('Tháng Bán Được') }}</th>
+                                                <th>{{ __('Tổng Số Lượng') }}</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($product as $orderProduct)
+                                                <tr>
+                                                    <td>{{ $orderProduct->product_name }}</td>
+                                                    <td>{{ $orderProduct->month }}</td>
+                                                    <td>{{ $orderProduct->total_quantity }} </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-5">
+                                    <canvas style="margin-top: 90px !important;" id="areaChart"></canvas>
+                                </div>
                             </div>
-                            <div class="col-md-5" >
-                                <canvas style="margin-top: 90px !important;" id="areaChart"></canvas>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +109,7 @@
             data: chartData,
             options: options
         });
-      </script>
+    </script>
 @endsection
 
 @section('script')
@@ -117,17 +119,4 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Tính toán thời gian 30 ngày gần nhất
-            var now = moment();
-            var start = now.clone().subtract(30, 'days').format('YYYY-MM-DD');
-            var end = now.format('YYYY-MM-DD');
-
-            // Set giá trị cho input
-            document.getElementById('start_date').value = start;
-            document.getElementById('end_date').value = end;
-        });
-    </script>
 @endsection

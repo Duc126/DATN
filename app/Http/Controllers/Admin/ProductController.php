@@ -90,7 +90,7 @@ class ProductController extends Controller
                 // 'product_name' => 'required|regex:/^[\pL\s-]+$/u',
                 'product_name' => 'required',
                 'category_id' => 'required',
-                'product_code' => 'required|regex:/^\w+$/',
+                'product_code' => 'required',
                 'product_price' => 'required|numeric',
                 'product_color' => 'required|regex:/^[\pL\s-]+$/u',
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
                 'product_name.regex' => 'Tên đúng định dạng',
                 'category_id.required' => 'category là bắt buộc',
                 'product_code.required' => ' Code là bắt buộc',
-                'product_code.regex' => 'Code phải đúng định dạng',
+                // 'product_code.regex' => 'Code phải đúng định dạng',
                 'product_price' => 'Giá là bắt buộc',
                 'product_color.required' => 'Màu là bắt buộc',
                 'product_color.regex' => 'Màu phải đúng định dạng',

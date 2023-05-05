@@ -42,16 +42,22 @@
                             @if ($getDiscountAttributePrice['discount'] > 0)
                                 <div class="price-template">
                                     <div class="item-new-price">
-                                        {{ $getDiscountAttributePrice['final_price'] }}đ
+                                        {{-- {{ $getDiscountAttributePrice['final_price'] }}đ --}}
+                                        {{ number_format($getDiscountAttributePrice['final_price'], 0, '.', '.') }} VNĐ
+
                                     </div>
                                     <div class="item-old-price" style="margin-left:-40px;">
                                         {{ $getDiscountAttributePrice['product_price'] }}đ
+                                        {{ number_format($getDiscountAttributePrice['product_price'], 0, '.', '.') }} VNĐ
+
                                     </div>
                                 </div>
                             @else
                                 <div class="price-template">
                                     <div class="item-new-price">
-                                        {{ $getDiscountAttributePrice['final_price'] }}đ
+                                        {{-- {{ $getDiscountAttributePrice['final_price'] }}đ --}}
+                                        {{ number_format($getDiscountAttributePrice['final_price'], 0, '.', '.') }} VNĐ
+
                                     </div>
                                 </div>
                             @endif
@@ -122,9 +128,11 @@
                 <tr>
                     <td>
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng tiền chưa giảm') }}</h3>
+                        {{-- {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ --}}
+
                     </td>
                     <td>
-                        <span class="calc-text">{{ $total_price }}.VNĐ</span>
+                        <span class="calc-text">{{ number_format($total_price, 0, '.', '.') }} VNĐ</span>
                     </td>
                 </tr>
                 <tr>
@@ -147,7 +155,11 @@
                         <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng Cộng') }}</h3>
                     </td>
                     <td>
-                        <span class="calc-text grand_total">{{ $total_price - Session::get('couponAmount') }}.VNĐ</span>
+                        <span class="calc-text grand_total">
+
+                            {{ number_format($total_price - Session::get('couponAmount'), 0, '.', '.') }} VNĐ
+                            {{-- {{ $total_price - Session::get('couponAmount') }}.VNĐ --}}
+                        </span>
                     </td>
                 </tr>
             </tbody>

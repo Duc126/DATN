@@ -41,8 +41,21 @@
                                 @endforeach()
                             </td>
 
-                            <td>{{ $orderList['payment_method'] }}</td>
-                            <td>{{ $orderList['grand_total'] }}.VNĐ</td>
+                            {{-- <td>{{ $orderList['payment_method'] }}</td> --}}
+                            <td>
+                                @if ($orderList['payment_method'] == 'COD')
+                                <span class="badge bg-info"
+                                    style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                            @else
+                                <span class="badge bg-success"
+                                    style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
+                            @endif
+                            </td>
+                            <td>
+                                {{ number_format($orderList['grand_total'], 0, '.', '.') }} VNĐ
+
+                                {{-- {{ $orderList['grand_total'] }}.VNĐ --}}
+                            </td>
                             <td>{{ date('Y-m-d h:i:s', strtotime($orderList['created_at'])) }}</td>
                         </tr>
                     @endforeach

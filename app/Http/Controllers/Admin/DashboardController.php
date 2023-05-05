@@ -47,14 +47,6 @@ class DashboardController extends Controller
             ->orderByDesc('count_id')
             ->get();
 
-
-
-        // dd($totalOrderCount);
-
-        // $orders = DB::table('orders')
-        //     ->orderBy('id', 'desc')
-        //     ->limit(10)
-        //     ->get();
         $orders = DB::table('orders')
             ->join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.*', 'users.name')
@@ -67,7 +59,16 @@ class DashboardController extends Controller
             ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SUM(grand_total) as revenue")
             ->groupBy('month')
             ->get();
-        // dd($result);
+            // $week = DB::table('orders')
+            // ->selectRaw("CONCAT(YEAR(created_at), '-', WEEK(created_at)) as week, SUM(grand_total) as revenue")
+            // ->groupBy('week')
+            // ->get();
+            // $date = DB::table('orders')
+            // ->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d') as date, SUM(grand_total) as revenue")
+            // ->groupBy('date')
+            // ->get();
+        // dd($date);
+
         return view('admin.dashboard')->with(compact('totalUser', 'totalProduct', 'totalOrder', 'totalBrands', 'totalVendors', 'totalOrderCount', 'orders', 'result'));
     }
 }

@@ -86,12 +86,21 @@ use App\Models\OrderLogs; ?>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Tổng số tiền đặt hàng:') }}</strong></label>
-                                        <label>{{ $orderDetails['grand_total'] }}.VNĐ</label>
+                                        <label>
+                                            {{ number_format($orderDetails['grand_total'], 0, '.', '.') }} VNĐ
+
+                                            {{-- {{ $orderDetails['grand_total'] }}.VNĐ --}}
+
+                                        </label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
                                             style="font-weight: 550;"><strong>{{ __('Phí vận chuyển:') }}</strong></label>
-                                        <label>{{ $orderDetails['shipping_charges'] }}.VNĐ</label>
+                                        <label>
+                                            {{ number_format($orderDetails['shipping_charges'], 0, '.', '.') }} VNĐ
+
+                                            {{-- {{ $orderDetails['shipping_charges'] }}.VNĐ --}}
+                                        </label>
                                     </div>
                                     @if (!empty($orderDetails['coupon_code']))
                                         <div class="form-group" style="height: 15px;">
@@ -175,7 +184,7 @@ use App\Models\OrderLogs; ?>
                                     @if (!empty($userDetails['state']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Tình Trạng:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('Tỉnh:') }}</strong></label>
                                             <label>{{ $userDetails['state'] }}</label>
                                         </div>
                                     @endif
@@ -287,7 +296,7 @@ use App\Models\OrderLogs; ?>
                                     <input class="form-group" type="text" name="courier_name" id="courier_name"
                                         placeholder="Tên chuyển phát nhanh">
                                     <input type="text" name="tracking_number" id="tracking_number"
-                                        placeholder="Số theo dõi">
+                                        placeholder="Số Vận Chuyển">
                                     <button type="submit" class="btn btn-success mt-3">{{ __('Cập Nhật') }}</button>
                                 </form>
                                 <br>
@@ -298,11 +307,11 @@ use App\Models\OrderLogs; ?>
                                         {{ __('- Đối với mặt hàng') }}
                                         {{ $getItemDetails['product_code'] }}<br>
                                         @if (!empty($getItemDetails['courier_name']))
-                                            <br><strong>{{ __('Tên chuyển phát nhanh:') }}</strong><span>
+                                            <br><strong>{{ __('Tên đơn vị chuyển phát nhanh:') }}</strong><span>
                                                 {{ $getItemDetails['courier_name'] }}</span><br>
                                         @endif
                                         @if (!empty($getItemDetails['tracking_number']))
-                                            <strong>{{ __('Số theo dõi:') }}</strong><span>
+                                            <strong>{{ __('Số Vận Chuyển:') }}</strong><span>
                                                 {{ $getItemDetails['tracking_number'] }}</span><br>
                                         @endif
                                         {{-- @else
@@ -311,7 +320,7 @@ use App\Models\OrderLogs; ?>
                                                     {{ $orderDetails['courier_name'] }}</span><br>
                                             @endif
                                             @if (!empty($orderDetails['tracking_number']))
-                                                <strong>{{ __('Số theo dõi:') }}</strong><span>
+                                                <strong>{{ __('Số Vận Chuyển:') }}</strong><span>
                                                     {{ $orderDetails['tracking_number'] }}</span><br>
                                             @endif
                                         @endif --}}

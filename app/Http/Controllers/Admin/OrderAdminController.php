@@ -233,12 +233,17 @@ class OrderAdminController extends Controller
     }
     public function assignStaff(Request $request){
         $orderIds = $request->input('order_ids');
-        // dd($orderIds);
         $employeeId = Auth::id();
 
         foreach ($orderIds as $orderId) {
-            Order::where('id', $orderId)
-                ->update(['id_NV' => $employeeId]);
+            $order = Order::find($orderId);
+
+            if ($order) {
+            $order->id_NV = $employeeId;
+                $order->save();
+            } else {
+                return response()->json(['error' => 'Order not found.']);
+            }
         }
 
         return redirect()->back();

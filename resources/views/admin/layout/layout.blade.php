@@ -22,7 +22,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ url('admin/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ url('admin/images/logol.jpeg') }}" />
+    <link rel="shortcut icon" href="{{ url('admin/images/logo.png') }}" />
     {{-- datatable --}}
     <link rel="stylesheet" href="{{ url('admin/css/bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ url('admin/css/dataTables.bootstrap4.min.css') }}" />

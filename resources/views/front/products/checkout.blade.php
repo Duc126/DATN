@@ -64,9 +64,16 @@
                                                 {{ $address['state'] }},{{ $address['country'] }},
                                                 ({{ $address['phone'] }})
                                             </label>
-                                            <a style="float:right;margin-left: 5px;" href="javascript:;"
+                                            {{-- <a style="float:right;margin-left: 5px;" href="javascript:;"
                                                 data-addressid="{{ $address['id'] }}" class="removeAddress">
                                                 {{ __('Xóa') }}</a> &nbsp;&nbsp;
+                                            <a style="float:right;" href="javascript:;"
+                                                data-addressid="{{ $address['id'] }}" class="editAddress">
+                                                {{ __('Chỉnh sửa') }}</a> --}}
+
+                                                <a style="float:right;margin-left: 5px;" href="javascript:;"
+                                                data-addressid="{{ $address['id'] }}" class="removeAddress">
+                                                <i class="ion-md-remove-circle" style="font-size: 24px;"></i></a> &nbsp;&nbsp;
                                             <a style="float:right;" href="javascript:;"
                                                 data-addressid="{{ $address['id'] }}" class="editAddress">
                                                 {{ __('Chỉnh sửa') }}</a>
@@ -104,7 +111,9 @@
                                                     </td>
                                                     <td>
                                                         <h6 class="order-h6">
-                                                            {{ $getDiscountAttributePrice['final_price'] * $item['quantity'] }}đ
+                                                        {{ number_format($getDiscountAttributePrice['final_price'] * $item['quantity'], 0, '.', '.') }} VNĐ
+
+                                                            {{-- {{ $getDiscountAttributePrice['final_price'] * $item['quantity'] }}đ --}}
                                                         </h6>
                                                     </td>
                                                 </tr>
@@ -115,7 +124,10 @@
                                                     <h3 class="order-h3">{{ __('Tổng Tiền') }}</h3>
                                                 </td>
                                                 <td>
-                                                    <h3 class="order-h3">{{ $total_price }}.VNĐ</h3>
+                                                    <h3 class="order-h3">
+                                                        {{ number_format($total_price, 0, '.', '.') }} VNĐ
+                                                        {{-- {{ $total_price }}.VNĐ --}}
+                                                    </h3>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -152,7 +164,8 @@
                                                 <td>
                                                     <h3 class="order-h3">
                                                         <strong class="grand_total">
-                                                            {{ $total_price - Session::get('couponAmount') }}.VNĐ
+                                                            {{ number_format($total_price - Session::get('couponAmount'), 0, '.', '.') }} VNĐ
+                                                            {{-- {{ $total_price - Session::get('couponAmount') }}.VNĐ --}}
                                                         </strong>
                                                     </h3>
                                                 </td>
@@ -179,29 +192,33 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="name">Tên Chủ Thẻ</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên chủ thẻ">
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    placeholder="Nhập tên chủ thẻ">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="ccd">CCD</label>
-                                                <input type="number" class="form-control" id="ccd" name="ccd" placeholder="Nhập CCD">
+                                                <input type="text" class="form-control" id="ccd" name="ccd"
+                                                    placeholder="Nhập CCD">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="card_number">Số Thẻ</label>
-                                                <input type="number" class="form-control" id="card_number" name="card_number" placeholder="Nhập số thẻ">
+                                                <input type="text" class="form-control" id="card_number"
+                                                    name="card_number" placeholder="Nhập số thẻ">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="expriation_date">Ngày Hết Hạn</label>
-                                                <input type="number" class="form-control" id="expriation_date" name="expriation_date" placeholder="Nhập ngày hết hạn">
+                                                <input type="text" class="form-control" id="expriation_date"
+                                                    name="expriation_date" placeholder="Nhập ngày hết hạn">
                                             </div>
                                         </div>
                                     </div>
 
 
                                     <div class="u-s-m-b-13">
-                                        <input type="checkbox" class="check-box" id="accept" name="accept"value="Yes"
-                                            title="Vui lòng đồng ý với T&C">
+                                        <input type="checkbox" class="check-box" id="accept"
+                                            name="accept"value="Yes" title="Vui lòng đồng ý với T&C">
                                         <label class="label-text no-color"
                                             for="accept">{{ __('Tôi Đã Đọc Và Chấp Nhận Các') }}
                                             <a href="#" class="u-c-brand">{{ __('Điều Khoản Và Điều Kiện') }}</a>

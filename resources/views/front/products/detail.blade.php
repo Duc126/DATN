@@ -32,7 +32,7 @@ $productFilters = ProductsFilter::productFilters();
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
                     <div class="zoom-area">
-                             <img id="zoom-pro"  width="500" height="500" class="img-fluid"
+                        <img id="zoom-pro" width="500" height="500" class="img-fluid"
                             src="{{ asset('front/images/product_images/large/' . $productDetails['product_image']) }}"
                             data-zoom-image="{{ asset('front/images/product_images/large/' . $productDetails['product_image']) }}"
                             alt="Zoom Image">
@@ -133,15 +133,25 @@ $productFilters = ProductsFilter::productFilters();
                             <span class="getAttributePrice">
                                 @if ($getDiscountPrice > 0)
                                     <div class="price">
-                                        <h4>{{ $getDiscountPrice }}.VNĐ</h4>
+                                        <h4>
+                                            {{-- {{ $getDiscountPrice }}.VNĐ --}}
+                                            {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ
+
+                                        </h4>
                                     </div>
                                     <div class="original-price">
                                         <strong>{{ __('Giá Gốc:') }}</strong>
-                                        <span>{{ $productDetails['product_price'] }}.VNĐ</span>
+                                        <span>
+                                            {{-- {{ $productDetails['product_price'] }}.VNĐ --}}
+                                            {{ number_format($productDetails['product_price'], 0, '.', '.') }} VNĐ
+
+                                        </span>
                                     </div>
                                 @else
                                     <div class="price">
-                                        <h4>{{ $productDetails['product_price'] }}.VNĐ</h4>
+                                        <h4>
+                                            {{ number_format($productDetails['product_price'], 0, '.', '.') }} VNĐ
+                                        </h4>
                                     </div>
                                 @endif
                             </span>
@@ -284,7 +294,7 @@ $productFilters = ProductsFilter::productFilters();
                                         href="#detail">{{ __('Chi Tiết Sản Phẩm') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
+                                    <a class="nav-link" data-toggle="tab" href="#review">{{ __('Đánh Giá') }} (15)</a>
                                 </li>
                             </ul>
                         </div>
@@ -433,7 +443,7 @@ $productFilters = ProductsFilter::productFilters();
                                         <!-- Review-Options -->
                                         <div class="review-options u-s-m-b-16">
                                             <div class="review-option-heading">
-                                                <h6>Reviews
+                                                <h6>{{ __('Đánh Giá') }}
                                                     <span> (15) </span>
                                                 </h6>
                                             </div>
@@ -538,7 +548,7 @@ $productFilters = ProductsFilter::productFilters();
                                         </div>
                                         <!-- All-Reviews /- -->
                                         <!-- Pagination-Review -->
-                                        <div class="pagination-review-area">
+                                        {{-- <div class="pagination-review-area">
                                             <div class="pagination-review-number">
                                                 <ul>
                                                     <li style="display: none">
@@ -568,7 +578,7 @@ $productFilters = ProductsFilter::productFilters();
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- Pagination-Review /- -->
                                     </div>
                                     <!-- Get-Reviews /- -->
@@ -643,16 +653,22 @@ $productFilters = ProductsFilter::productFilters();
                                             @if ($getDiscountPrice > 0)
                                                 <div class="price-template">
                                                     <div class="item-new-price">
-                                                        {{ $getDiscountPrice }}đ
+                                                        {{-- {{ $getDiscountPrice }}đ --}}
+                                                        {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                     <div class="item-old-price">
-                                                        {{ $product['product_price'] }}đ
+                                                        {{-- {{ $product['product_price'] }}đ --}}
+                                                        {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                 </div>
                                             @else
                                                 <div class="price-template">
                                                     <div class="item-new-price">
-                                                        {{ $product['product_price'] }}đ
+                                                        {{-- {{ $product['product_price'] }}đ --}}
+                                                        {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                 </div>
                                             @endif
@@ -728,16 +744,22 @@ $productFilters = ProductsFilter::productFilters();
                                             @if ($getDiscountPrice > 0)
                                                 <div class="price-template">
                                                     <div class="item-new-price">
-                                                        {{ $getDiscountPrice }}đ
+                                                        {{-- {{ $getDiscountPrice }}đ --}}
+                                                        {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                     <div class="item-old-price">
-                                                        {{ $product['product_price'] }}đ
+                                                        {{-- {{ $product['product_price'] }}đ --}}
+                                                        {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                 </div>
                                             @else
                                                 <div class="price-template">
                                                     <div class="item-new-price">
-                                                        {{ $product['product_price'] }}đ
+                                                        {{-- {{ $product['product_price'] }}đ --}}
+                                                        {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                                                     </div>
                                                 </div>
                                             @endif

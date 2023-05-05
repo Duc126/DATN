@@ -26,7 +26,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h3 style="color:green;">{{ __('ĐƠN HÀNG CỦA BẠN ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG') }}</h3>
-                    <p>{{ __('Số đơn đặt hàng của bạn là') }} {{Session::get('order_id')}} {{ __('và Tổng cộng là') }} {{ Session::get('grand_total') }}.VNĐ</p>
+                    <p>{{ __('Số đơn đặt hàng của bạn có id là') }} {{Session::get('order_id')}} {{ __('và Tổng cộng là') }} {{ number_format(Session::get('grand_total'), 0, '.', '.') }} VNĐ
+                    </p>
                 </div>
             </div>
         </div>

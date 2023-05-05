@@ -27,7 +27,7 @@
                                   </div>
                                 </div>
                               </div> --}}
-                            <div class="table-responsive col-md-7">
+                            <div class="table-responsive col-md-12">
                                 <table id="brand" class="table table-striped display">
                                     <thead>
                                         <tr>

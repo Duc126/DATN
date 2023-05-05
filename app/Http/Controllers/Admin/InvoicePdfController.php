@@ -298,7 +298,7 @@ class InvoicePdfController extends Controller
                 <div class="container">
 
                     <div class="company-address">
-                        <h2 class="title">Trung Tam Thuong Mai</h2>
+                        <h2 class="title">TẸCHHUB</h2>
                         <p>
                             Vinh,<br>
                            Nghe An, Viet Nam
@@ -328,7 +328,7 @@ class InvoicePdfController extends Controller
                             <a href="mailto:'.$orderDetails['email'].'">'.$orderDetails['email'].'</a>
                         </div>
                         <div class="data right">
-                            <div class="title">Order ID: '.$orderDetails['id'].' </div>
+                            <div class="title">Don Hang So: '.$orderDetails['id'].' </div>
                             <div class="date">
                                Ngay Dat Hang: '.date('Y-m-d h:i:s', strtotime($orderDetails['created_at'])).'<br>
                                So Tien: '.$orderDetails['grand_total'].'.VND <br>
