@@ -38,13 +38,13 @@
 
                             </form>
                             <div class="row">
-                                <div class="table-responsive col-md-7">
+                                <div class="table-responsive col-md-12">
                                     <table id="brand" class="table table-striped display">
                                         <thead>
                                             <tr>
                                                 <th>{{ __('Tên Sản Phẩm') }}</th>
                                                 <th>{{ __('Tháng Bán Được') }}</th>
-                                                <th>{{ __('Tổng Số Lượng') }}</th>
+                                                <th>{{ __('Tổng Số Lượng Bán Ra') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,9 +58,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-md-5">
-                                    <canvas style="margin-top: 90px !important;" id="areaChart"></canvas>
-                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <canvas width="800" height="400" style="margin-top: 90px !important;"
+                                    id="columnChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -71,7 +73,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <script>
+    {{-- <script>
         var ctx = document.getElementById('areaChart').getContext('2d');
         var chartData = JSON.parse('{!! $chart_data_json !!}'); // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
 
@@ -105,6 +107,52 @@
 
         // Khởi tạo biểu đồ
         var areaChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: options
+        });
+    </script> --}}
+    <script>
+        var ctx = document.getElementById('columnChart').getContext('2d');
+        var chartData = JSON.parse('{!! $chart_data_json !!}'); // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
+
+
+        // Tùy chọn của biểu đồ
+        var options = {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Column Chart'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Month'
+                    },
+                    // sử dụng labels thay vì cứng set như '04-2023' và '05-2023'
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+
+
+        // Khởi tạo biểu đồ
+        var columnChart = new Chart(ctx, {
             type: 'bar',
             data: chartData,
             options: options

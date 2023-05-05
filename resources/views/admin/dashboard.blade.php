@@ -356,7 +356,11 @@
                                                             style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $ordersLimit->grand_total }}.VNĐ</td>
+                                                <td>
+                                                    {{ number_format($ordersLimit->grand_total, 0, '.', '.') }} VNĐ
+
+                                                    {{-- {{ $ordersLimit->grand_total }}.VNĐ --}}
+                                                </td>
 
 
                                             </tr>
