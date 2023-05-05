@@ -63,13 +63,13 @@ use App\Models\OrderLogs; ?>
                                             style="font-weight: 550;"><strong>{{ __('Tình trạng đặt hàng:') }}</strong></label>
                                         <label>
                                             @if ($orderDetails['order_status'] == 'Van Chuyen')
-                                                <span class="badge color-white"
-                                                    style="color: #fff; background: #CE044E !important;">{{ __('Vận Chuyển') }}</span>
+                                                <span class="badge bg-secondary color-white"
+                                                    style="color: #fff; background: #0633ED !important;">{{ __('Vận Chuyển') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Moi')
                                                 <span class="badge bg-danger"
-                                                    style="color: #fff;">{{ __('Mới') }}</span>
+                                                    style="color: #fff; background: #E6B912 !important">{{ __('Mới') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Da Huy')
-                                                <span class="badge bg-warning"
+                                                <span class="badge bg-danger"
                                                     style="color: #fff;">{{ __('Đã Hủy') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Dang Tien Hanh')
                                                 <span class="badge bg-success"
@@ -81,6 +81,7 @@ use App\Models\OrderLogs; ?>
                                                 <span class="badge bg-info"
                                                     style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
                                             @endif
+
                                         </label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
@@ -123,7 +124,7 @@ use App\Models\OrderLogs; ?>
                                             @if ($orderDetails['payment_method'] == 'COD')
                                                 <span class="badge bg-info color-white"
                                                     style="color: #fff;">{{ __('Tiền Mặt') }}</span>
-                                            {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
+                                                {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
                                                 <span class="badge bg-warning"
                                                     style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
@@ -142,7 +143,7 @@ use App\Models\OrderLogs; ?>
                                             @if ($orderDetails['payment_gateway'] == 'COD')
                                                 <span class="badge bg-info color-white"
                                                     style="color: #fff;">{{ __('Tiền Mặt') }}</span>
-                                            {{-- @elseif($orderDetails['payment_gateway'] == 'Paypal')
+                                                {{-- @elseif($orderDetails['payment_gateway'] == 'Paypal')
                                                 <span class="badge bg-warning"
                                                     style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
@@ -183,8 +184,7 @@ use App\Models\OrderLogs; ?>
                                     @endif
                                     @if (!empty($userDetails['state']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label
-                                                style="font-weight: 550;"><strong>{{ __('Tỉnh:') }}</strong></label>
+                                            <label style="font-weight: 550;"><strong>{{ __('Tỉnh:') }}</strong></label>
                                             <label>{{ $userDetails['state'] }}</label>
                                         </div>
                                     @endif

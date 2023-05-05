@@ -69,31 +69,25 @@
                                 <table id="orders" class="table table-striped display">
                                     <thead>
                                         <tr>
-                                            {{-- <th><input type="checkbox" id="select-all"></th> --}}
                                             <th>#</th>
                                             <th>{{ __('Tên khách hàng') }}</th>
                                             <th>{{ __('Email khách hàng') }}</th>
                                             <th>{{ __('Ngày Đặt Hàng') }}</th>
-
                                             <th>{{ __('Mã Sản phẩm khách hàng đặt') }}</th>
                                             <th>{{ __('	Số tiền đơn đặt hàng') }}</th>
                                             <th>{{ __('Tình trạng đặt hàng') }}</th>
                                             <th>{{ __('Phương thức thanh toán') }}</th>
-                                            <th>{{ __('Hành Động') }}</th>
+                                            <th data-orderable="false">{{ __('Hành Động') }}</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $orderList)
                                             <tr>
-                                                {{-- <td><input type="checkbox" name="order_ids[]"
-                                                        value="{{ $orderList['id'] }}"></td> --}}
-                                                {{-- <td><input type="checkbox" name="order_ids[]"
-                                                        value="{{ $orderList['id'] }}" id="order-{{ $orderList['id'] }}"
-                                                        onchange="addToSelectedOrders(this)"></td> --}}
+                                                <td>
+                                                    <a href="{{ url('admin/order/' . $orderList['id']) }}">{{ $orderList['id'] }}</a>
+                                                </td>
 
-
-                                                <td>{{ $orderList['id'] }}</td>
                                                 <td>{{ $orderList['name'] }} </td>
                                                 <td>{{ $orderList['email'] }} </td>
 
@@ -110,18 +104,16 @@
                                                 <td>
                                                     {{ number_format($orderList['grand_total'], 0, '.', '.') }} VNĐ
                                                  </td>
-                                                {{-- <td>{{ $orderList['grand_total'] }}.VNĐ </td> --}}
-                                                {{-- <td>{{ $orderList['order_status'] }} </td>  --}}
                                                 <td>
                                                     <label>
                                                         @if ($orderList['order_status'] == 'Van Chuyen')
                                                             <span class="badge bg-secondary color-white"
-                                                                style="color: #fff; background: #CE044E !important;">{{ __('Vận Chuyển') }}</span>
+                                                                style="color: #fff; background: #0633ED !important;">{{ __('Vận Chuyển') }}</span>
                                                         @elseif($orderList['order_status'] == 'Moi')
                                                             <span class="badge bg-danger"
-                                                                style="color: #fff;">{{ __('Mới') }}</span>
+                                                                style="color: #fff; background: #E6B912 !important">{{ __('Mới') }}</span>
                                                         @elseif($orderList['order_status'] == 'Da Huy')
-                                                            <span class="badge bg-warning"
+                                                            <span class="badge bg-danger"
                                                                 style="color: #fff;">{{ __('Đã Hủy') }}</span>
                                                         @elseif($orderList['order_status'] == 'Dang Tien Hanh')
                                                             <span class="badge bg-success"
@@ -135,14 +127,10 @@
                                                         @endif
                                                     </label>
                                                 </td>
-                                                {{-- <td>{{ $orderList['payment_method'] }} </td> --}}
                                                 <td>
                                                     @if ($orderList['payment_method'] == 'COD')
                                                         <span class="badge bg-info"
                                                             style="color: #fff;">{{ __('Tiền Mặt') }}</span>
-                                                        {{-- @elseif ($orderList['payment_method'] == 'Paypal')
-                                                        <span class="badge bg-warning "
-                                                            style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                                     @else
                                                         <span class="badge bg-success"
                                                             style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
@@ -167,7 +155,6 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <tbody id="selected-orders"></tbody>
 
                                 </table>
                             </div>

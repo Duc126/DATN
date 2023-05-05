@@ -55,6 +55,9 @@
                                                 placeholder="Nhập Họ"
                                                 value="{{ Auth::guard('admin')->user()->first_name }}">
                                         </div>
+
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="last_name">{{ __('Tên') }}<span class="text-danger">*</span>
                                                 :</label>
@@ -70,6 +73,7 @@
                                                 value="{{ Auth::guard('admin')->user()->phone }}" id="phone"
                                                 name="phone" placeholder="Số Điện Thoại">
                                         </div>
+
                                         <div class="form-group">
                                             <label for="image">{{ __('Số Điện Thoại') }}<span
                                                     class="text-danger">*</span>

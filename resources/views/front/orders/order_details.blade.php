@@ -38,13 +38,15 @@
                     <tr>
                         <td>{{ __('Tình Trạng Đơn') }}
                         <td>
+
                             @if ($orderDetails['order_status'] == 'Van Chuyen')
                                 <span class="badge bg-secondary color-white"
-                                    style="color: #fff; background: #CE044E !important;">{{ __('Vận Chuyển') }}</span>
+                                    style="color: #fff; background: #0633ED !important;">{{ __('Vận Chuyển') }}</span>
                             @elseif($orderDetails['order_status'] == 'Moi')
-                                <span class="badge bg-danger" style="color: #fff;">{{ __('Mới') }}</span>
+                                <span class="badge bg-danger"
+                                    style="color: #fff; background: #E6B912 !important">{{ __('Mới') }}</span>
                             @elseif($orderDetails['order_status'] == 'Da Huy')
-                                <span class="badge bg-warning" style="color: #fff;">{{ __('Đã Hủy') }}</span>
+                                <span class="badge bg-danger" style="color: #fff;">{{ __('Đã Hủy') }}</span>
                             @elseif($orderDetails['order_status'] == 'Dang Tien Hanh')
                                 <span class="badge bg-success" style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
                             @elseif($orderDetails['order_status'] == 'Da Giao Hang')
@@ -71,7 +73,7 @@
                             {{ number_format($orderDetails['shipping_charges'], 0, '.', '.') }} VNĐ
 
                             {{-- {{ $orderDetails['shipping_charges'] }}.VNĐ --}}
-                            </td>
+                        </td>
                         </td>
                     </tr>
                     @if ($orderDetails['coupon_code'] != '')

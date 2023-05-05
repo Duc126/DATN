@@ -37,8 +37,8 @@
                                     <thead>
                                         <tr>
                                             <th>{{ __('Tên Sản Phẩm') }}</th>
-                                            <th>{{ __('Tổng Sản Phẩm Lúc Thêm Vào') }}</th>
-                                            <th>{{ __('Tổng Còn Lại Trong Kho') }}</th>
+                                            <th>{{ __('Ngày Bán Ra') }}</th>
+                                            <th>{{ __('Tổng Số Tiền') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

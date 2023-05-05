@@ -34,7 +34,9 @@
                     </tr>
                     @foreach ($orders as $orderList)
                         <tr>
-                            <td><a href="{{ url('user/order/'.$orderList['id']) }}">{{ $orderList['id'] }}</a></td>
+
+                            <td><a style="text-decoration: revert;
+                                color: #007bff;" href="{{ url('user/order/'.$orderList['id']) }}">{{ $orderList['id'] }}</a></td>
                             <td>
                                 @foreach ($orderList['orders_products'] as $product)
                                     {{ $product['product_code'] }}<br>
