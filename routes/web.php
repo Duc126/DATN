@@ -166,7 +166,10 @@ Route::prefix('admin')->group(function () {
 
         //order product
         Route::get('order-product', [OrderProductController::class, 'OrderProduct']);
+        // Route::get('order-date', [OrderProductController::class, 'orderDate']);
+
         Route::get('/search-products', [OrderProductController::class, 'OrderProduct'])->name('search_products');
+        Route::get('/order-date', [OrderProductController::class, 'orderDate'])->name('sales.index');
 
         Route::get('order-product/search', [OrderProductController::class, 'searchProducts'])->name('search_products');
 

@@ -209,7 +209,7 @@
                         <div class="col-md-6 mb-4 stretch-card transparent">
                             <div class="card card-tale">
                                 <div class="card-body">
-                                    <p class="mb-4">{{ __('Tổng Người Dùng Đã Được Kích Hoạt ') }}</p>
+                                    <p class="mb-4">{{ __('Tổng Khách Hàng Đã Được Kích Hoạt ') }}</p>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <p class="fs-30 mb-2">{{ $totalUser }}</p>
                                         <a href="{{ url('admin/users') }}">
@@ -263,7 +263,7 @@
                         </div>
 
                     </div>
-                    <div class="row mt-4">
+                    {{-- <div class="row mt-4">
                         <div class="col-md-6  mb-lg-0 stretch-card transparent">
                             <div class="card" style="background: brown; color: #fff">
                                 <div class="card-body">
@@ -277,7 +277,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light" style="background: darkcyan; color: #fff;">
                                 <div class="card-body">
@@ -291,7 +291,7 @@
                             </div>
                         </div> --}}
 
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
             <div class="row">

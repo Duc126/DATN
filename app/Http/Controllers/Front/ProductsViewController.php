@@ -434,12 +434,10 @@ class ProductsViewController extends Controller
 
                 //recduce stock script starts
 
-                $getProductStock = ProductsAttributes::getProductStock($item['product_id'], $item['size']);
-                // dd($getProductStock);
-                $newStock = $getProductStock - $item['quantity'];
-                // dd($newStock);
+                // $getProductStock = ProductsAttributes::getProductStock($item['product_id'], $item['size']);
+                // $newStock = $getProductStock - $item['quantity'];
 
-                ProductsAttributes::where(['product_id' => $item['product_id'], 'size' => $item['size']])->update(['stock' => $newStock]);
+                // ProductsAttributes::where(['product_id' => $item['product_id'], 'size' => $item['size']])->update(['stock' => $newStock]);
             }
 
             //insert order id in session variable
@@ -473,6 +471,31 @@ class ProductsViewController extends Controller
                     // dd($getProductStock);
                 }
             }
+            if ($data['payment_gateway'] == "Credit_Card") {
+                //send order email
+                $email = Auth::user()->email;
+                $messageData = [
+                    'email' => $email,
+                    'name' => Auth::user()->name,
+                    'order_id' => $order_id,
+                    'orderDetails' => $orderDetails
+                ];
+                Mail::send('emails.notification_order', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Đơn Đặt Hàng');
+                });
+
+                //recduce stock script starts
+
+                foreach ($orderDetails['orders_products'] as $key => $order) {
+
+
+                    $getProductStock = ProductsAttributes::getProductStock($order['product_id'], $order['product_size']);
+                    $newStock = $getProductStock - $order['product_qty'];
+                    ProductsAttributes::where(['product_id' => $order['product_id'], 'size' => $order['product_size']])->update(['stock' => $newStock]);
+                    // dd($getProductStock);
+                }
+            }
+
 
 
             // if ($data['payment_gateway'] == "Paypal") {

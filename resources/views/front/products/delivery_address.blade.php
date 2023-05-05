@@ -36,7 +36,7 @@
         <p id="delivery-error"></p>
         <p id="delivery-success"></p>
 
-        <form id="addressAddEditForm" action="javasctipt:;" method="post">
+        <form id="addressAddEditForm" action="javascript:;" method="post">
             @csrf
             <input type="hidden" name="delivery_id">
             <div class="group-inline u-s-m-b-13">
@@ -66,7 +66,7 @@
 
                 </div>
                 <div class="group-2">
-                    <label for="delivery_state">{{ 'Tình Trạng' }}
+                    <label for="delivery_state">{{ 'Tỉnh' }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" name="delivery_state" id="delivery_state" class="text-field">
@@ -117,10 +117,10 @@
         </form>
         <!-- Form-Fields /- -->
     </div>
-    <div>
+    {{-- <div>
         <label for="order-notes">Order Notes</label>
         <textarea class="text-area" id="order-notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-    </div>
+    </div> --}}
     {{-- <div class="u-s-m-b-24">
             <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse"
                 data-target="#showDifferent">

@@ -50,16 +50,22 @@
                     @if ($getDiscountPrice > 0)
                         <div class="price-template">
                             <div class="item-new-price">
-                                {{ $getDiscountPrice }}.VNĐ
+                                {{-- {{ $getDiscountPrice }}.VNĐ --}}
+                                {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ
+
                             </div>
                             <div class="item-old-price">
-                                {{ $product['product_price'] }}.VNĐ
+                                {{-- {{ $product['product_price'] }}.VNĐ --}}
+                                {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                             </div>
                         </div>
                     @else
                         <div class="price-template">
                             <div class="item-new-price">
-                                {{ $product['product_price'] }}.VNĐ
+                                {{-- {{ $product['product_price'] }}.VNĐ --}}
+                                {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+
                             </div>
                         </div>
                     @endif

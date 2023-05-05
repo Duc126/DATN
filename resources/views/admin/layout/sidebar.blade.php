@@ -90,7 +90,7 @@
             </li>
     </ul>
 @else
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a @if (Session::get('page') == 'update-password' || Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-setting" aria-expanded="false" aria-controls="ui-setting">
             <i class="icon-grid-2 menu-icon"></i>
@@ -111,44 +111,9 @@
                 </li>
             </ul>
         </div>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
-        <a @if (Session::get('page') == 'view_admin' ||
-                Session::get('page') == 'view_vendor' ||
-                // Session::get('page') == 'view_subadmin' ||sub
-                Session::get('page') == 'view_all') style="background:#4B49AC !important; color: #fff !important;" @endif
-            class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin">
-            {{-- <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin"> --}}
-            <i class="icon-bar-graph menu-icon"></i>
-            <span class="menu-title">{{ __('Quản Lý Tài Khoản Admin') }}</span>
-            <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="ui-admin">
-            <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
-                <li class="nav-item"><a
-                        @if (Session::get('page') == 'view_admin') style="background:#4B49AC !important; color: #fff !important;"
-                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('Quản Trị Viên') }}</a>
-                </li>
-                {{-- <li class="nav-item"><a
-                        @if (Session::get('page') == 'view_subadmin') style="background:#4B49AC !important; color: #fff !important;"
-                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link"
-                        href="{{ url('admin/list-admin/subadmin') }}">{{ __('Quản trị viên phụ') }}</a>
-                </li> --}}
-                <li class="nav-item"><a
-                        @if (Session::get('page') == 'view_vendor') style="background:#4B49AC !important; color: #fff !important;"
-                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/list-admin/vendor') }}">{{ __('Nhân Viên') }}</a>
-                <li class="nav-item"><a
-                        @if (Session::get('page') == 'view_all') style="background:#4B49AC !important; color: #fff !important;"
-                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/list-admin') }}">{{ __('Tất Cả') }}</a>
 
-            </ul>
-        </div>
-    </li>
     <li class="nav-item">
         <a @if (Session::get('page') == 'sections' ||
                 Session::get('page') == 'categories' ||
@@ -201,7 +166,7 @@
     <li class="nav-item">
         <a @if (Session::get('page') == 'users' || Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-user">
-            <i class="icon-grid-2 menu-icon"></i>
+            <i class="mdi mdi-account-circle menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý Người Dùng') }}</span>
             <i class="menu-arrow"></i>
         </a>
@@ -212,18 +177,18 @@
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
                 </li>
-                <li class="nav-item"><a
+                {{-- <li class="nav-item"><a
                         @if (Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link" href="{{ url('admin/staff') }}">{{ __('Nhân Viên') }}</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </li>
     <li class="nav-item">
         <a @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
-            <i class="icon-grid-2 menu-icon"></i>
+            <i class="mdi mdi-cart-plus menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
             <i class="menu-arrow"></i>
         </a>
@@ -260,7 +225,7 @@
         <a @if (Session::get('page') == 'shipping') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-shipping" aria-expanded="false"
             aria-controls="ui-shipping">
-            <i class="icon-grid-2 menu-icon"></i>
+            <i class="mdi mdi-truck-delivery menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý Chi Phí Vận Chuyển') }}</span>
             <i class="menu-arrow"></i>
         </a>
@@ -275,10 +240,10 @@
         </div>
     </li>
     <li class="nav-item">
-        <a @if (Session::get('page') == 'order-product'|| Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;" @endif
+        <a @if (Session::get('page') == 'order-product'|| Session::get('page') == 'order-product-total'|| Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-order-product" aria-expanded="false"
             aria-controls="ui-order-product">
-            <i class="icon-grid-2 menu-icon"></i>
+            <i class="icon-bar-graph menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý và thống kê sản phẩm') }}</span>
             <i class="menu-arrow"></i>
         </a>
@@ -294,53 +259,75 @@
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
                     class="nav-link" href="{{ url('admin/order-product') }}">{{ __('Quản Lý Số Lượng') }}</a>
             </li>
+            <li class="nav-item"><a
+                @if (Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;"
+            @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                class="nav-link" href="{{ url('admin/order-date') }}">{{ __('Doanh Thu Theo Ngày') }}</a>
+        </li>
             </ul>
         </div>
     </li>
+    <li class="nav-item">
+        <a @if (Session::get('page') == 'view_admin' ||
+                // Session::get('page') == 'view_vendor' ||
+                // Session::get('page') == 'view_subadmin' ||sub
+                Session::get('page') == 'view_all') style="background:#4B49AC !important; color: #fff !important;" @endif
+            class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin">
+            {{-- <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin"> --}}
+            <i class="icon-bar-graph menu-icon"></i>
+            <span class="menu-title">{{ __('Quản Lý Tài Khoản Admin') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-admin">
+            <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
+                {{-- <li class="nav-item"><a
+                        @if (Session::get('page') == 'view_admin') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('Quản Trị Viên') }}</a>
+                </li> --}}
+                {{-- <li class="nav-item"><a
+                        @if (Session::get('page') == 'view_subadmin') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link"
+                        href="{{ url('admin/list-admin/subadmin') }}">{{ __('Quản trị viên phụ') }}</a>
+                </li> --}}
+                {{-- <li class="nav-item"><a
+                        @if (Session::get('page') == 'view_vendor') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/list-admin/vendor') }}">{{ __('Nhân Viên') }}</a> --}}
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'view_admin') style="background:#4B49AC !important; color: #fff !important;"
+                    @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('Tất Cả') }}</a>
+                </li>
+
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a @if (Session::get('page') == 'update-password' || Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;" @endif
+            class="nav-link" data-toggle="collapse" href="#ui-setting" aria-expanded="false" aria-controls="ui-setting">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">{{ __('Cài Đặt') }}</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-setting">
+            <ul class="nav flex-column sub-menu" style="background: #fff !important; color: #4B49AC !important;">
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'update-password') style="background:#4B49AC !important; color: #fff !important;"
+                @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/update-password') }}">{{ __('Cập nhật mật khẩu') }}</a>
+                </li>
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;"
+                @else style="background: #fff !important; color:#4B49AC !important;" @endif
+                        class="nav-link" href="{{ url('admin/update-details') }}">{{ __('Cập nhật chi tiết') }}</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
     @endif
-    {{-- <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-          <i class="icon-contract menu-icon"></i>
-          <span class="menu-title">Icons</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="icons">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
-          </ul>
-        </div>
-      </li> --}}
-      {{-- <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-          <i class="icon-head menu-icon"></i>
-          <span class="menu-title">User Pages</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="auth">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-          <i class="icon-ban menu-icon"></i>
-          <span class="menu-title">Error pages</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="error">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="pages/documentation/documentation.html">
-          <i class="icon-paper menu-icon"></i>
-          <span class="menu-title">Documentation</span>
-        </a>
-      </li> --}}
+
     </ul>
 </nav>

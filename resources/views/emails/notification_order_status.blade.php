@@ -43,7 +43,7 @@
         @if(!empty($courier_name) && !empty($tracking_number))
         <tr>
             <td>
-                {{ __('Tên Chuyển Phát là') }} {{$courier_name}} {{ __('và Số Theo Dõi là') }} {{$tracking_number}}
+                {{ __('Tên Đơn Vị Vận Chuyển là') }} {{$courier_name}} {{ __('và Số Vận CHuyển là') }} {{$tracking_number}}
             </td>
         </tr>
         <tr>
@@ -80,7 +80,9 @@
                             <td>{{ $order['product_size'] }}</td>
                             <td>{{ $order['product_color'] }}</td>
                             <td>{{ $order['product_qty'] }}</td>
-                            <td>{{ $order['product_price'] }}.VNĐ</td>
+                            <td>
+                                {{ number_format($order['product_price'], 0, '.', '.') }} VNĐ
+                            </td>
                         </tr>
                     @endforeach
                     <tr>

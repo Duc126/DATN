@@ -80,7 +80,9 @@
                             <td>{{ $order['product_size'] }}</td>
                             <td>{{ $order['product_color'] }}</td>
                             <td>{{ $order['product_qty'] }}</td>
-                            <td>{{ $order['product_price'] }}.VNĐ</td>
+                            <td>
+                                {{ number_format($order['product_price'], 0, '.', '.') }} VNĐ
+                            </td>
                         </tr>
                     @endforeach
                     {{-- <tr>

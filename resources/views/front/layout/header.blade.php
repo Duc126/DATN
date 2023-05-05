@@ -76,7 +76,7 @@
                                     <li>
                                         <a href="{{ url('vendor/login-register') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Nhà Cung Cấp Đăng Nhập') }}</a>
+                                            {{ __('Quản Trị Viên Đăng Nhập') }}</a>
 
                                     </li>
                                 @endif
@@ -122,7 +122,7 @@
                                 {{-- <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
                                     alt="Stack Developers" class="app-brand-logo"> --}}
                                 <img height="60"
-                                    src="{{ asset('front/images/main-logo/TechHub.png') }}" alt="Fashion TechHub"
+                                    src="{{ asset('front/images/main-logo/TechHub.png') }}" alt="TechHub"
                                     class="app-brand-logo">
                             </a>
                         </div>

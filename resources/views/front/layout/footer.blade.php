@@ -79,7 +79,7 @@
             <div class="social-media-wrapper">
                 <ul class="social-media-list">
                     <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com/ducbui1206">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
@@ -104,7 +104,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.linkedin.com/in/%C4%91%C3%ACnh-%C4%91%E1%BB%A9c-b%C3%B9i-b62289245/">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </li>
@@ -116,7 +116,7 @@
                 </ul>
             </div>
             <p class="copyright-text">
-                <a target="_blank" rel="nofollow" href="">{{ __('Thương Mại Điện Tử') }}</a> </p>
+                <a target="_blank" rel="nofollow" href="">{{ __('Website Bán Hàng Thuộc Công Ty TechHub') }}</a> </p>
         </div>
     </div>
     <!-- Bottom-Footer /- -->

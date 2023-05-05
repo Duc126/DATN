@@ -16,12 +16,16 @@ class AdminManagerController extends Controller
 
         $admins = Admin::query();
         // dd($admins);
+        // dd($admins);
         if (!empty($type)) {
             $admin = $admins->where('type', $type);
             // $title = "Danh Sách" . " " . ucfirst($type);
             $title = ucfirst($type);
+            // dd($title);
+            // dd('view_'.strtolower($title));
 
         Session::put('page', 'view_'.strtolower($title));
+
 
         } else {
             $title = "Tất Cả";

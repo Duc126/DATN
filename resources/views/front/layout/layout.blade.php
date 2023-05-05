@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>{{ __('TechHub') }}</title>
+    <title>{{ __('TECHHUB') }}</title>
     <!-- Standard Favicon -->
     <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
@@ -35,7 +35,7 @@
     <!-- Main -->
     <link rel="stylesheet" href="{{ url('front/css/bundle.css') }}">
     <!-- logo -->
-    <link rel="shortcut icon" href="{{ url('admin/images/logol.jpeg') }}" />
+    <link rel="shortcut icon" href="{{ url('admin/images/logo.png') }}" />
 
         <!-- Main -->
      <link rel="stylesheet" href="{{ url('front/css/easyzoom.css') }}">

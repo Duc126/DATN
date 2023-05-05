@@ -1,4 +1,39 @@
 $(document).ready(function () {
+    // $("#getPrice").change(function () {
+    //     var size = $(this).val();
+    //     var product_id = $(this).attr("product-id");
+    //     $.ajax({
+    //         headers: {
+    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //         },
+    //         url: "/get-product-price",
+    //         data: {
+    //             size: size,
+    //             product_id: product_id,
+    //         },
+    //         type: "post",
+    //         success: function (resp) {
+    //             if (resp["discount"] > 0) {
+    //                 $(".getAttributePrice").html(
+    //                     "<div class='price'><h4>" +
+    //                         resp["final_price"] +
+    //                         ".VNĐ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
+    //                         resp["product_price"] +
+    //                         ".VNĐ</span></div>"
+    //                 );
+    //             } else {
+    //                 $(".getAttributePrice").html(
+    //                     "<div class='price'><h4>" +
+    //                         resp["final_price"] +
+    //                         ".VNĐ</h4></div>"
+    //                 );
+    //             }
+    //         },
+    //         error: function () {
+    //             alert("Error");
+    //         },
+    //     });
+    // });
     $("#getPrice").change(function () {
         var size = $(this).val();
         var product_id = $(this).attr("product-id");
@@ -16,16 +51,16 @@ $(document).ready(function () {
                 if (resp["discount"] > 0) {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
-                            resp["final_price"] +
-                            ".VNĐ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
-                            resp["product_price"] +
-                            ".VNĐ</span></div>"
+                            formatNumber(resp["final_price"]) +
+                            " VNĐ</h4></div><div class='original-price'><strong>Giá Gốc: </strong><span>" +
+                            formatNumber(resp["product_price"]) +
+                            " VNĐ</span></div>"
                     );
                 } else {
                     $(".getAttributePrice").html(
                         "<div class='price'><h4>" +
-                            resp["final_price"] +
-                            ".VNĐ</h4></div>"
+                            formatNumber(resp["final_price"]) +
+                            " VNĐ</h4></div>"
                     );
                 }
             },
@@ -35,6 +70,9 @@ $(document).ready(function () {
         });
     });
 
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    }
     //update cart item quantity
     $(document).on("click", ".updateCartItem", function () {
         if ($(this).hasClass("plus-a")) {
@@ -457,25 +495,42 @@ $(document).ready(function () {
     });
 
     //
-    $("input[name=address_id").bind("change", function () {
+    // $("input[name=address_id").bind("change", function () {
+    //     var shipping_charges = $(this).attr("shipping_charges");
+    //     var total_price = $(this).attr("total_price");
+    //     var coupon_amount = $(this).attr("coupon_amount");
+    //     $(".shipping_charges").html(shipping_charges + ".VNĐ");
+    //     if (coupon_amount == "") {
+    //         coupon_amount = 0;
+    //     }
+
+    //     $(".couponAmount").html(coupon_amount + ".VNĐ");
+
+    //     var grand_total =
+    //         parseInt(total_price) +
+    //         parseInt(shipping_charges) -
+    //         parseInt(coupon_amount);
+    //         // alert(grand_total);
+    //     $(".grand_total").html(grand_total + ".VNĐ");
+
+    // });
+    $("input[name=address_id]").bind("change", function () {
         var shipping_charges = $(this).attr("shipping_charges");
         var total_price = $(this).attr("total_price");
-        var coupon_amount = $(this).attr("coupon_amount");
-        $(".shipping_charges").html(shipping_charges + ".Vnđ");
-        if (coupon_amount == "") {
-            coupon_amount = 0;
-        }
+        var coupon_amount = $(this).attr("coupon_amount") || 0;
 
-        $(".couponAmount").html(coupon_amount + ".Vnđ");
+        var formatted_shipping_charges = parseInt(shipping_charges).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        var formatted_total_price = parseInt(total_price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        var formatted_coupon_amount = parseInt(coupon_amount).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
 
-        var grand_total =
-            parseInt(total_price) +
-            parseInt(shipping_charges) -
-            parseInt(coupon_amount);
-            // alert(grand_total);
-        $(".grand_total").html(grand_total + ".Vnđ");
+        $(".shipping_charges").html(formatted_shipping_charges);
+        $(".couponAmount").html(formatted_coupon_amount);
 
+        var grand_total = parseInt(total_price) + parseInt(shipping_charges) - parseInt(coupon_amount);
+        var formatted_grand_total = grand_total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        $(".grand_total").html(formatted_grand_total);
     });
+
 });
 
 function get_filter(class_name) {

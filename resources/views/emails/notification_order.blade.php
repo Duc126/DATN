@@ -68,12 +68,19 @@
                             <td>{{ $order['product_size'] }}</td>
                             <td>{{ $order['product_color'] }}</td>
                             <td>{{ $order['product_qty'] }}</td>
-                            <td>{{ $order['product_price'] }}.VNĐ</td>
+                            <td>
+                                {{-- {{$order['product_price'] }}.VNĐ --}}
+                                {{ number_format($order['product_price'], 0, '.', '.') }} VNĐ
+
+                            </td>
                         </tr>
                     @endforeach
                     <tr>
                         <td colspan="5" align="right">{{ __('Chi phí vận chuyển') }}</td>
-                        <td> {{ $orderDetails['shipping_charges'] }}.VNĐ</td>
+                        <td>
+                            {{ number_format($orderDetails['shipping_charges'], 0, '.', '.') }} VNĐ
+                            {{-- {{ $orderDetails['shipping_charges'] }}.VNĐ --}}
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="5" align="right">{{ __('Số tiền khi áp dụng phiếu giảm giá') }}</td>
@@ -88,7 +95,11 @@
                     </tr>
                     <tr>
                         <td colspan="5" align="right">{{ __('Tổng cộng') }}</td>
-                        <td> {{ $orderDetails['grand_total'] }}.VNĐ</td>
+                        <td>
+                            {{ number_format($orderDetails['grand_total'], 0, '.', '.') }} VNĐ
+
+                            {{-- {{ $orderDetails['grand_total'] }}.VNĐ --}}
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -130,11 +141,11 @@
                             {{ $orderDetails['country'] }}
                         </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>
                             {{ $orderDetails['pincode'] }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td>
                             {{ $orderDetails['phone'] }}
@@ -174,7 +185,7 @@
         </tr>
         <tr>
             <td>
-                {{ __('Trân Trọng') }}, {{ __('Trung Tâm Thương Mại') }} <br>
+                {{ __('Trân Trọng') }}, {{ __('TechHub') }} <br>
             </td>
         </tr>
         <tr>

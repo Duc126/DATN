@@ -64,7 +64,15 @@
                 <div class="col-xs-6">
                     <address>
                         <strong>{{ __('Phương thức thanh toán:') }}</strong><br>
-                        {{ $orderDetails['payment_method'] }}
+                        @if($orderDetails['payment_method'] == "Credit Card")
+                        <span class="badge"
+                        style="color: #fff; background: green;">{{ __('Thanh Toán Thẻ') }}</span>
+                        @else
+                        <span class="badge "
+                        style="color: #fff; background: cadetblue;">{{ __('Tiền Mặt') }}</span>
+                        @endif
+
+                        {{-- {{ $orderDetails['payment_method'] == "Credit Card" }} --}}
                     </address>
                 </div>
                 <div class="col-xs-6 text-right">
@@ -109,10 +117,15 @@
                                         </td>
                                         <td class="text-center">{{ $product['product_size'] }}</td>
                                         <td class="text-center">{{ $product['product_color'] }}</td>
-                                        <td class="text-right">{{ $product['product_price'] }}.VNĐ</td>
+                                        <td class="text-right">
+                                            {{ number_format($product['product_price'], 0, '.', '.') }} VNĐ
+                                        </td>
                                         <td class="text-center">{{ $product['product_qty'] }}</td>
                                         <td class="text-right">
-                                            {{ $product['product_price'] * $product['product_qty'] }}.VNĐ</td>
+                                            {{ number_format($product['product_price'] * $product['product_qty'], 0, '.', '.') }} VNĐ
+
+                                            {{-- {{ $product['product_price'] * $product['product_qty'] }}.VNĐ --}}
+                                        </td>
                                     </tr>
                                     @php $subTotal = $subTotal + ($product['product_price'] * $product['product_qty']) @endphp
                                 @endforeach
@@ -125,7 +138,11 @@
                                     <td class="thick-line"></td>
                                     <td class="thick-line text-right"><strong>{{ __('Tổng chưa áp dụng mã') }}</strong>
                                     </td>
-                                    <td class="thick-line text-right">{{ $subTotal }}.VNĐ</td>
+                                    <td class="thick-line text-right">
+                                        {{ number_format($subTotal, 0, '.', '.') }} VNĐ
+
+                                        {{-- {{ $subTotal }}.VNĐ --}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="no-line"></td>
@@ -142,9 +159,14 @@
                                     <td class="no-line"></td>
                                     <td class="no-line text-right"><strong>{{ __('Tổng Cộng') }}</strong></td>
                                     <td class="no-line text-right">
-                                        <strong>{{ $orderDetails['grand_total'] }}.VNĐ</strong>
+                                        <strong>
+                                        {{ number_format($orderDetails['grand_total'], 0, '.', '.') }} VNĐ
+
+                                            {{-- {{ $orderDetails['grand_total'] }}.VNĐ --}}
+                                        </strong>
                                         <br>
-                                        @if ($orderDetails['payment_method'] == 'COD')
+
+                                        @if ($orderDetails['payment_method'] == 'Credit Card')
                                             <font color="red">{{ __('(Đã thanh toán)') }}</font>
                                         @endif
                                     </td>

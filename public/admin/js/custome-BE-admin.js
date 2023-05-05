@@ -622,10 +622,34 @@ function addToSelectedOrders(checkbox) {
         tbody.removeChild(tr);
     }
 }
-function setSelectedOrderId() {
-    // Get the selected order checkbox element
-    var selectedOrderCheckbox = document.querySelector('input[name="order_ids[]"]:checked');
+// function setSelectedOrderId() {
+//     // Get the selected order checkbox element
+//     var selectedOrderCheckbox = document.querySelector('input[name="order_ids[]"]:checked');
 
-    // Set the value of the hidden input field to the id of the selected order
-    document.getElementById('order-id-input').value = selectedOrderCheckbox.value;
-}
+//     // Set the value of the hidden input field to the id of the selected order
+//     document.getElementById('order-id-input').value = selectedOrderCheckbox.value;
+// }
+// // Lấy thông tin người được gán và danh sách đơn hàng từ form
+// const assigneeId = document.getElementById('assignee-select').value;
+// const orderCheckboxes = document.querySelectorAll('input[type="checkbox"][name="order_ids[]"]:checked');
+// const orderIds = Array.from(orderCheckboxes).map((checkbox) => checkbox.value);
+
+// // Tạo đối tượng chứa thông tin người được gán và danh sách đơn hàng
+// const data = {
+//   assignee: assigneeId,
+//   orderIds: orderIds
+// };
+
+// Sử dụng AJAX để gửi đối tượng lên server
+// const xhr = new XMLHttpRequest();
+// xhr.open('POST', '/assign-staff');
+// xhr.setRequestHeader('Content-Type', 'application/json');
+// xhr.onload = function() {
+//   if (xhr.status === 200) {
+//     alert('Gán nhân viên thành công');
+//     location.reload();
+//   } else {
+//     alert('Đã có lỗi xảy ra');
+//   }
+// };
+// xhr.send(JSON.stringify(data));

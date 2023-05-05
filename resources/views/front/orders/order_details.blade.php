@@ -58,12 +58,20 @@
                     </tr>
                     <tr>
                         <td>{{ __('Tổng số  tiền đơn đặt hàng') }}
-                        <td>{{ $orderDetails['grand_total'] }}.VNĐ</td>
+                        <td>
+                            {{ number_format($orderDetails['grand_total'], 0, '.', '.') }} VNĐ
+
+                            {{-- {{ $orderDetails['grand_total'] }}.VNĐ --}}
+                        </td>
                         </td>
                     </tr>
                     <tr>
                         <td>{{ __('Chi phí vận chuyển') }}
-                        <td>{{ $orderDetails['shipping_charges'] }}.VNĐ</td>
+                        <td>
+                            {{ number_format($orderDetails['shipping_charges'], 0, '.', '.') }} VNĐ
+
+                            {{-- {{ $orderDetails['shipping_charges'] }}.VNĐ --}}
+                            </td>
                         </td>
                     </tr>
                     @if ($orderDetails['coupon_code'] != '')
@@ -80,12 +88,12 @@
                     @endif
                     @if ($orderDetails['courier_name'] != '')
                         <tr>
-                            <td>{{ __('Tên Chyển Phát Nhanh') }}
+                            <td>{{ __('Tên Đơn Vị Chyển Phát Nhanh') }}
                             <td>{{ $orderDetails['courier_name'] }}</td>
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ __('Số Theo Dõi') }}
+                            <td>{{ __('Số Vận Chuyển') }}
                             <td>{{ $orderDetails['tracking_number'] }}</td>
                             </td>
                         </tr>
@@ -96,7 +104,7 @@
 
                             @if ($orderDetails['payment_method'] == 'COD')
                                 <span class="badge bg-info color-white" style="color: #fff;">{{ __('COD') }}</span>
-                            {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
+                                {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
                                 <span class="badge bg-warning" style="color: #fff;">{{ __('Paypal') }}</span> --}}
                             @else
                                 <span class="badge bg-success" style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
@@ -164,7 +172,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Tình Trạng') }}
+                        <td>{{ __('Tỉnh') }}
                         <td>{{ $orderDetails['state'] }}</td>
                         </td>
                     </tr>
