@@ -30,7 +30,7 @@
                         <th>{{ __('Sản phẩm đã đặt hàng') }}</th>
                         <th>{{ __('Phương thức thanh toán') }}</th>
                         <th>{{ __('Tổng cộng') }}</th>
-                        <th>{{ __('Ngày Đặt') }}</th>
+                        <th>{{ __('Ngày Đặt Hàng') }}</th>
                     </tr>
                     @foreach ($orders as $orderList)
                         <tr>
@@ -58,7 +58,7 @@
 
                                 {{-- {{ $orderList['grand_total'] }}.VNĐ --}}
                             </td>
-                            <td>{{ date('Y-m-d h:i:s', strtotime($orderList['created_at'])) }}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($orderList['created_at'])) }}</td>
                         </tr>
                     @endforeach
                 </table>

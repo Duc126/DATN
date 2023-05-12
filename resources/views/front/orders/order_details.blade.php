@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                         <td>{{ __('Ngày đặt hàng') }}</td>
-                        <td>{{ date('Y-m-d h:i:s', strtotime($orderDetails['created_at'])) }}</td>
+                        <td>{{ date('d/m/Y H:i:s', strtotime($orderDetails['created_at'])) }}</td>
 
                     </tr>
                     <tr>
@@ -95,7 +95,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ __('Số Vận Chuyển') }}
+                            <td>{{ __('Mã Vận Chuyển') }}
                             <td>{{ $orderDetails['tracking_number'] }}</td>
                             </td>
                         </tr>
@@ -105,7 +105,7 @@
                         <td>
 
                             @if ($orderDetails['payment_method'] == 'COD')
-                                <span class="badge bg-info color-white" style="color: #fff;">{{ __('COD') }}</span>
+                                <span class="badge bg-info color-white" style="color: #fff;">{{ __('Tiền Mặt') }}</span>
                                 {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
                                 <span class="badge bg-warning" style="color: #fff;">{{ __('Paypal') }}</span> --}}
                             @else
@@ -178,7 +178,7 @@
                         <td>{{ $orderDetails['state'] }}</td>
                         </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>{{ __('Quốc Gia') }}
                         <td>{{ $orderDetails['country'] }}</td>
                         </td>
@@ -187,7 +187,7 @@
                         <td>{{ __('Mã Pin') }}
                         <td>{{ $orderDetails['pincode'] }}</td>
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td>{{ __('Số Điện Thoại') }}
                         <td>{{ $orderDetails['phone'] }}</td>

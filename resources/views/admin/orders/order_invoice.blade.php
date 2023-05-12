@@ -78,7 +78,7 @@
                 <div class="col-xs-6 text-right">
                     <address>
                         <strong>{{ __('Ngày đặt hàng:') }}</strong><br>
-                        {{ date('Y-m-d h:i:s', strtotime($orderDetails['created_at'])) }}
+                        {{ date('d/m/Y H:i:s', strtotime($orderDetails['created_at'])) }}
 
                         <br><br>
                     </address>

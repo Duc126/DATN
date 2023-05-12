@@ -81,7 +81,6 @@ class OrderAdminController extends Controller
 
             //Update order status
             Order::where('id', $data['order_id'])->update(['order_status' => $data['order_status']]);
-
             //update courier name & tracking number
             if (!empty($data['courier_name']) && !empty($data['tracking_number'])) {
                 Order::where('id', $data['order_id'])->update([

@@ -31,11 +31,11 @@
                                             <th>{{ __('Tên Người Dùng') }}</th>
                                             <th>{{ __('Địa Chỉ') }}</th>
                                             <th>{{ __('Thành Phố') }}</th>
-                                            <th>{{ __('Quốc Gia') }}</th>
+                                            {{-- <th>{{ __('Quốc Gia') }}</th> --}}
                                             <th>{{ __('Số Điện Thoại') }}</th>
                                             <th>{{ __('Email') }}</th>
                                             <th>{{ __('Trang Thái') }}</th>
-                                            {{-- <th>{{ __('Hoạt Động') }}</th> --}}
+                                            <th>{{ __('Hoạt Động') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,7 +45,7 @@
                                                 <td>{{ $userList['name'] }} </td>
                                                 <td>{{ $userList['address'] }} </td>
                                                 <td>{{ $userList['city'] }} </td>
-                                                <td>{{ $userList['country'] }} </td>
+                                                {{-- <td>{{ $userList['country'] }} </td> --}}
                                                 <td>{{ $userList['phone'] }} </td>
                                                 <td>{{ $userList['email'] }} </td>
 
@@ -62,13 +62,13 @@
                                                                 status="Inactive"></i></a>
                                                     @endif()
                                                 </td>
-                                                {{-- <th>
-                                                    <a href={{ url('admin/add-edit-category/' . $userList['id']) }}>
-                                                        <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
-                                                    <a href="javascript:void(0)" class="confirmDelete" module="category"
+                                                <th>
+                                                    {{-- <a href={{ url('admin/add-edit-category/' . $userList['id']) }}>
+                                                        <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a> --}}
+                                                    <a href="javascript:void(0)" class="confirmDelete" module="user"
                                                         moduleid="{{ $userList['id'] }}">
                                                         <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
-                                                </th> --}}
+                                                </th>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -15,18 +15,60 @@ class OrderProductController extends Controller
     {
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
-    public function OrderProduct()
-    {
+    // public function OrderProduct()
+    // {
 
+    //     Session::put('page', 'order-product-total');
+
+    //     $productTotal = ProductsAttributes::join('products', 'products_attributes.product_id', 'products.id')
+    //         ->select('products_attributes.product_id', 'products.product_name', 'products.product_price', DB::raw('SUM(products_attributes.stock) AS total_stock'), DB::raw('SUM(products_attributes.total) AS total_price'))
+    //         ->groupBy('products_attributes.product_id', 'products.product_name', 'products.product_price')
+    //         ->get();
+    //     $productTotalJson = $productTotal->toJson();
+
+    //     return view('admin.order-product.order-product-total')->with(compact('productTotal', 'productTotalJson'));
+    // }
+    // public function OrderProduct(Request $request)
+    // {
+    //     Session::put('page', 'order-product-total');
+
+    //     $productTotal = ProductsAttributes::join('products', 'products_attributes.product_id', 'products.id')
+    //         ->select('products_attributes.product_id', 'products.product_name', 'products.product_price', DB::raw('SUM(products_attributes.stock) AS total_stock'), DB::raw('SUM(products_attributes.total) AS total_price'))
+    //         ->groupBy('products_attributes.product_id', 'products.product_name', 'products.product_price');
+
+    //     // Lấy giá trị của select
+    //     $productSelected = $request->input('product-select');
+
+    //     // Nếu có giá trị được chọn, thực hiện truy vấn lại database với điều kiện lọc theo tên sản phẩm được chọn
+    //     if($productSelected){
+    //         $productTotal = $productTotal->where('products.product_name', '=', $productSelected);
+    //     }
+
+    //     $productTotal = $productTotal->get();
+    //     $productTotalJson = $productTotal->toJson();
+
+    //     return view('admin.order-product.order-product-total')->with(compact('productTotal', 'productTotalJson', 'productSelected'));
+    // }
+    public function OrderProduct(Request $request)
+    {
         Session::put('page', 'order-product-total');
 
         $productTotal = ProductsAttributes::join('products', 'products_attributes.product_id', 'products.id')
-            ->select('products_attributes.product_id', 'products.product_name', 'products.product_price', DB::raw('SUM(products_attributes.stock) AS total_stock'), DB::raw('SUM(products_attributes.total) AS total_price'))
-            ->groupBy('products_attributes.product_id', 'products.product_name', 'products.product_price')
-            ->get();
+            ->select('products_attributes.product_id', 'products.product_name', 'products.product_code', 'products.product_price', DB::raw('SUM(products_attributes.stock) AS total_stock'), DB::raw('SUM(products_attributes.total) AS total_price'))
+            ->groupBy('products_attributes.product_id', 'products.product_name', 'products.product_code',  'products.product_price');
+
+        // Lấy giá trị của select
+        $productSelected = $request->input('product-select');
+
+        // Nếu có giá trị được chọn, thực hiện truy vấn lại database với điều kiện lọc theo tên sản phẩm được chọn
+        if ($productSelected !== null) {
+            $productTotal = $productTotal->where('products.product_name', '=', $productSelected);
+        }
+
+        $productTotal = $productTotal->get();
         $productTotalJson = $productTotal->toJson();
 
-        return view('admin.order-product.order-product-total')->with(compact('productTotal', 'productTotalJson'));
+        return view('admin.order-product.order-product-total')->with(compact('productTotal', 'productTotalJson', 'productSelected'));
     }
 
     public function searchProducts(Request $request)
@@ -83,30 +125,61 @@ class OrderProductController extends Controller
         return view('admin.order-product.order-product', compact('product', 'start_date', 'end_date', 'chart_data_json'));
     }
 
-
     public function orderDate(Request $request)
     {
         Session::put('page', 'order-date');
 
         $date = $request->input('month') ?? date('Y-m');
+        $firstDayOfMonth = date('Y-m-01', strtotime($date));
+        $lastDayOfMonth = date('Y-m-t', strtotime($date));
 
-        $week = DB::table('orders')
-            ->selectRaw("CONCAT(YEAR(created_at), '-', WEEK(created_at)) as week, SUM(grand_total) as revenue")
-            ->whereRaw("YEAR(created_at) = ? AND MONTH(created_at) = ?", [substr($date, 0, 4), substr($date, 5)])
-            ->groupBy('week')
-            ->get();
-        // dd($week);
+        $daysInMonth = [];
+        $currentDay = $firstDayOfMonth;
+        while ($currentDay <= $lastDayOfMonth) {
+            $daysInMonth[] = $currentDay;
+            $currentDay = date('Y-m-d', strtotime($currentDay . ' +1 day'));
+        }
 
         $dateAndRevenue = DB::table('orders')
-            ->selectRaw("DATE_FORMAT(orders.created_at, '%d-%m-%Y') as date, SUM(orders.grand_total) as revenue,
-        SUBSTRING_INDEX(GROUP_CONCAT(products.product_name ORDER BY orders_products.product_qty DESC SEPARATOR '|'), '|', 1) as best_selling_product")
+            ->selectRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') as date, SUM(orders.grand_total) as revenue,
+            SUBSTRING_INDEX(GROUP_CONCAT(products.product_name ORDER BY orders_products.product_qty DESC SEPARATOR '|'), '|', 1) as best_selling_product")
             ->join('orders_products', 'orders.id', '=', 'orders_products.order_id')
             ->join('products', 'orders_products.product_id', '=', 'products.id')
-            ->whereRaw("YEAR(orders.created_at) = ? AND MONTH(orders.created_at) = ?", [substr($date, 0, 4), substr($date, 5)])
+            ->whereRaw("orders.created_at >= ? AND orders.created_at <= ?", [$firstDayOfMonth, $lastDayOfMonth])
             ->groupBy('date')
             ->get();
-        $productTotalJson = $dateAndRevenue->toJson();
 
-        return view('admin.order-product.order-date', compact('dateAndRevenue', 'productTotalJson', 'date'));
+        $revenue = array();
+        foreach ($daysInMonth as $day) {
+            $found = false;
+            foreach ($dateAndRevenue as $item) {
+                // dd($day, $item->date);
+                if (strtotime($item->date) == strtotime($day)) {
+                    $found = true;
+                    $revenue[] = [
+                        'date' => $item->date,
+                        'revenueSales' => $item->revenue,
+                        'bestSellingProduct' => $item->best_selling_product ?? null,
+                    ];
+
+                    break;
+                }
+            }
+            // dd($revenue);
+
+            // dd($dateAndRevenue);
+
+            if (!$found) {
+                $revenue[] = [
+                    'date' => $day,
+                    'revenueSales' => 0,
+                    'bestSellingProduct' => null,
+                ];
+            }
+        }
+
+        $productTotalJson = json_encode($revenue);
+        // dd($productTotalJson);
+        return view('admin.order-product.order-date', compact('revenue', 'productTotalJson', 'date', 'dateAndRevenue'));
     }
 }

@@ -19,19 +19,49 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">{{ __('Quản Lý Số Lượng') }}</h4>
-                            {{-- <div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <h4 class="card-title">Pie chart</h4>
-                                    <canvas id="pieChart"></canvas>
-                                  </div>
-                                </div>
-                              </div> --}}
+                                <form method="GET" action="{{ route('order-product') }}">
+                                    <div class="form-group row">
+                                        <label for="product-select" style="margin-left: 60px;margin-top: 8px;">{{ __('Chọn sản phẩm') }}</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control month-input text-dark" id="product-select" name="product-select">
+                                                <option value="">{{ __('Tất Cả Sản Phẩm') }}</option>
+                                                @foreach($productTotal as $product)
+                                                    <option value="{{ $product->product_name }}" @if ($productSelected == $product->product_name) selected @endif>{{ $product->product_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit"
+                                                class="btn btn-primary button-class">{{ __('Tìm kiếm') }}</button>
+                                        </div>
+                                        <style>
+                                            .month-input {
+                                                border: 2px solid whitesmoke;
+                                                border-radius: 20px;
+                                                padding: 10px 10px;
+                                                width: 100%;
+                                            }
+
+                                            .button-class {
+                                                border: 2px solid whitesmoke;
+                                                border-radius: 20px;
+                                                padding: 6px 10px;
+                                                text-align: center;
+                                                width: 110px;
+                                                /* margin-bottom: 0px; */
+                                                margin-top: -2px;
+
+                                            }
+                                        </style>
+                                    </div>
+                                </form>
+
                             <div class="table-responsive col-md-12">
                                 <table id="brand" class="table table-striped display">
                                     <thead>
                                         <tr>
                                             <th>{{ __('Tên Sản Phẩm') }}</th>
+                                            <th>{{ __('Mã Sản Phẩm') }}</th>
                                             <th>{{ __('Tổng Sản Phẩm Lúc Thêm Vào') }}</th>
                                             <th>{{ __('Tổng Còn Lại Trong Kho') }}</th>
                                         </tr>
@@ -40,8 +70,9 @@
                                         @foreach ($productTotal as $total)
                                             <tr>
                                                 <td>{{$total->product_name}}</td>
-                                                <td>{{ $total->total_price }} Sản Phẩm </td>
-                                                <td>{{$total->total_stock}} Sản Phẩm</td>
+                                                <td>{{$total->product_code}}</td>
+                                                <td>{{ $total->total_price }} {{ __('Sản Phẩm') }} </td>
+                                                <td>{{$total->total_stock}} {{ __('Sản Phẩm') }}</td>
 
                                             </tr>
                                         @endforeach
@@ -62,6 +93,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var productTotal = {!! $productTotalJson !!}; // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
+        console.log("🚀 ~ file: order-product-total.blade.php:94 ~ productTotal:", productTotal)
+
 
         var ctx = document.getElementById('areaChart').getContext('2d');
         var areaChart = new Chart(ctx, {
@@ -116,6 +149,7 @@
             }
         });
       </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @endsection
 
