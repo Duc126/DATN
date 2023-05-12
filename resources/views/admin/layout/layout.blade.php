@@ -26,7 +26,8 @@
     {{-- datatable --}}
     <link rel="stylesheet" href="{{ url('admin/css/bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ url('admin/css/dataTables.bootstrap4.min.css') }}" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
 </head>
 
 <body>

@@ -17,3 +17,6 @@
     top: 50%;
     width: 300px;
 }
+.item-new-price, .item-old-price {
+    font-size: 15px !important;
+}

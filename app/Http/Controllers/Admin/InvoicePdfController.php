@@ -298,7 +298,7 @@ class InvoicePdfController extends Controller
                 <div class="container">
 
                     <div class="company-address">
-                        <h2 class="title">TẸCHHUB</h2>
+                        <h2 class="title">TechHub</h2>
                         <p>
                             Vinh,<br>
                            Nghe An, Viet Nam
@@ -330,8 +330,8 @@ class InvoicePdfController extends Controller
                         <div class="data right">
                             <div class="title">Don Hang So: '.$orderDetails['id'].' </div>
                             <div class="date">
-                               Ngay Dat Hang: '.date('Y-m-d h:i:s', strtotime($orderDetails['created_at'])).'<br>
-                               So Tien: '.$orderDetails['grand_total'].'.VND <br>
+                               Ngay Dat Hang: '.date('d-m-Y', strtotime($orderDetails['created_at'])).'<br>
+                               So Tien: '.number_format($orderDetails['grand_total'], 0, '.', '.').' VND <br>
                                Tinh Trang Dat Hang: '.$orderDetails['order_status'].'  <br>
                                Phuong Thuc Thanh Toan: '.$orderDetails['payment_method'].'
                             </div>
@@ -358,8 +358,10 @@ class InvoicePdfController extends Controller
                                 <td class="qty">'.$product['product_size'].'</td>
                                 <td class="qty">'.$product['product_color'].'</td>
                                 <td class="qty">'.$product['product_qty'].'</td>
-                                <td class="unit">'.$product['product_price'].'.VND</td>
-                                <td class="total">'.$product['product_price'] * $product['product_qty'].'.VND</td>
+                                <td class="unit">'.number_format($product['product_price'], 0, '.', '.').' VND</td>
+                                <td class="total">'.number_format($product['product_price'] * $product['product_qty'], 0, '.', '.').' VND</td>
+
+
                             </tr>';
                             $subTotal = $subTotal + ($product['product_price'] * $product['product_qty']);
                         }
@@ -373,7 +375,8 @@ class InvoicePdfController extends Controller
                                     <td class="desc"></td>
                                     <td class="desc"></td>
                                     <td class="total" colspan=4>TONG CHUA GIAM:</td>
-                                    <td class="total">'.$subTotal.'.VND</td>
+                                    <td class="total">'.number_format($subTotal, 0, '.', '.').' VND</td>
+
                                 </tr>
                                 <tr>
                                     <td class="desc"></td>
@@ -388,7 +391,7 @@ class InvoicePdfController extends Controller
                                 <td class="desc"></td>
                                 <td class="total" colspan=4>PHIEU GIAM GIA:</td>';
                                 if($orderDetails['coupon_amount'] > 0){
-                                    $invoiceHTML .='<td class="total">'.$orderDetails['coupon_amount'].'.VND</td>';
+                                    $invoiceHTML .= '<td class="total">' . number_format($orderDetails['coupon_amount'], 0, '.', '.') . ' VNĐ</td>';
                                 }else {
                                     $invoiceHTML .='<td class="total">0.VND</td>';
 
@@ -400,7 +403,7 @@ class InvoicePdfController extends Controller
                                     <td class="desc"></td>
                                     <td class="desc"></td>
                                     <td class="total" colspan=4>TONG:</td>
-                                    <td class="total">'.$orderDetails['grand_total'].'.VND</td>
+                                    <td class="total">'.number_format($orderDetails['grand_total'], 0, '.', '.') .'.VND</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -413,7 +416,7 @@ class InvoicePdfController extends Controller
                     <div class="thanks">Thank you!</div>
                     <div class="notice">
                         <div>NOTICE:</div>
-                        <div>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                        <div></div>
                     </div>
                     <div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
                 </div>

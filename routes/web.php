@@ -144,6 +144,7 @@ Route::prefix('admin')->group(function () {
         //Users
         Route::get('users', [UserPageAdminController::class, 'index']);
         Route::post('update-status-user', [UserPageAdminController::class, 'updateStatusUser']);
+        Route::get('delete-user/{id}', [UserPageAdminController::class, 'deleteUser']);
         //order
         Route::get('order', [OrderAdminController::class, 'listOrder']);
         Route::get('order/{id}', [OrderAdminController::class, 'orderDetails']);
@@ -155,7 +156,7 @@ Route::prefix('admin')->group(function () {
         Route::get('order/invoice/pdf/{id}', [InvoicePdfController::class, 'viewPDFInvoice']);
 
 
-        Route::post('/update-staff',[OrderAdminController::class, 'assignStaff'])->name('assignStaff');
+        Route::post('/update-staff', [OrderAdminController::class, 'assignStaff'])->name('assignStaff');
 
         //Staff
         Route::get('staff', [StaffController::class, 'listStaff']);
@@ -165,8 +166,11 @@ Route::prefix('admin')->group(function () {
 
 
         //order product
-        Route::get('order-product', [OrderProductController::class, 'OrderProduct']);
+        // Route::get('order-product', [OrderProductController::class, 'OrderProduct']);
         // Route::get('order-date', [OrderProductController::class, 'orderDate']);
+        Route::get('/order-product', [OrderProductController::class, 'OrderProduct'])->name('order-product');
+
+        Route::get('/order-product-total/search', [OrderProductController::class, 'searchByProduct'])->name('admin.order-product-total.search');
 
         Route::get('/search-products', [OrderProductController::class, 'OrderProduct'])->name('search_products');
         Route::get('/order-date', [OrderProductController::class, 'orderDate'])->name('sales.index');

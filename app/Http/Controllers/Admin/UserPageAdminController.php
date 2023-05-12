@@ -30,4 +30,9 @@ class UserPageAdminController extends Controller
             return response()->json(['status' => $status, 'user_id' => $data['user_id']]);
         }
     }
+    public function deleteUser($id){
+        User::where('id',$id)->delete();
+        $message = "Đã Xóa Thành Công!";
+        return redirect()->back()->with('success_message', $message);
+    }
 }

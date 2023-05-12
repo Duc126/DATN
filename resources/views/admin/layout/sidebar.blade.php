@@ -72,7 +72,8 @@
             </li>
             <li class="nav-item">
                 <a @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;" @endif
-                    class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
+                    class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false"
+                    aria-controls="ui-order">
                     <i class="icon-grid-2 menu-icon"></i>
                     <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
                     <i class="menu-arrow"></i>
@@ -187,7 +188,8 @@
     </li>
     <li class="nav-item">
         <a @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;" @endif
-            class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
+            class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false"
+            aria-controls="ui-order">
             <i class="mdi mdi-cart-plus menu-icon"></i>
             <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
             <i class="menu-arrow"></i>
@@ -234,13 +236,16 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'shipping') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/shipping') }}">{{ __('Quản Lý Chi Phí Vận Chuyển') }}</a>
+                        class="nav-link"
+                        href="{{ url('admin/shipping') }}">{{ __('Quản Lý Chi Phí Vận Chuyển') }}</a>
                 </li>
             </ul>
         </div>
     </li>
     <li class="nav-item">
-        <a @if (Session::get('page') == 'order-product'|| Session::get('page') == 'order-product-total'|| Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;" @endif
+        <a @if (Session::get('page') == 'order-product' ||
+                Session::get('page') == 'order-product-total' ||
+                Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-order-product" aria-expanded="false"
             aria-controls="ui-order-product">
             <i class="icon-bar-graph menu-icon"></i>
@@ -252,18 +257,21 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'order-product') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/order-product/search') }}">{{ __('Thống Kê Sản Phẩm') }}</a>
+                        class="nav-link"
+                        href="{{ url('admin/order-product/search') }}">{{ __('Thống Kê Sản Phẩm') }}</a>
                 </li>
                 <li class="nav-item"><a
-                    @if (Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;"
+                        @if (Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                    class="nav-link" href="{{ url('admin/order-product') }}">{{ __('Quản Lý Số Lượng') }}</a>
-            </li>
-            <li class="nav-item"><a
-                @if (Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;"
+                        class="nav-link" href="{{ url('admin/order-product') }}">{{ __('Quản Lý Số Lượng') }}</a>
+                        {{-- class="nav-link" href="{{ url('admin/order-product-total/search') }}">{{ __('Quản Lý Số Lượng') }}</a> --}}
+
+                </li>
+                <li class="nav-item"><a
+                        @if (Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;"
             @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                class="nav-link" href="{{ url('admin/order-date') }}">{{ __('Doanh Thu Theo Ngày') }}</a>
-        </li>
+                        class="nav-link" href="{{ url('admin/order-date') }}">{{ __('Doanh Thu Theo Ngày') }}</a>
+                </li>
             </ul>
         </div>
     </li>
@@ -272,7 +280,8 @@
                 // Session::get('page') == 'view_vendor' ||
                 // Session::get('page') == 'view_subadmin' ||sub
                 Session::get('page') == 'view_all') style="background:#4B49AC !important; color: #fff !important;" @endif
-            class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin">
+            class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false"
+            aria-controls="ui-admin">
             {{-- <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin"> --}}
             <i class="icon-bar-graph menu-icon"></i>
             <span class="menu-title">{{ __('Quản Lý Tài Khoản Admin') }}</span>
@@ -306,7 +315,8 @@
     </li>
     <li class="nav-item">
         <a @if (Session::get('page') == 'update-password' || Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;" @endif
-            class="nav-link" data-toggle="collapse" href="#ui-setting" aria-expanded="false" aria-controls="ui-setting">
+            class="nav-link" data-toggle="collapse" href="#ui-setting" aria-expanded="false"
+            aria-controls="ui-setting">
             <i class="icon-grid-2 menu-icon"></i>
             <span class="menu-title">{{ __('Cài Đặt') }}</span>
             <i class="menu-arrow"></i>
@@ -326,7 +336,6 @@
             </ul>
         </div>
     </li>
-
     @endif
 
     </ul>

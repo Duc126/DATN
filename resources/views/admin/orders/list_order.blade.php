@@ -91,7 +91,7 @@
                                                 <td>{{ $orderList['name'] }} </td>
                                                 <td>{{ $orderList['email'] }} </td>
 
-                                                <td>{{ date('Y-m-d h:i:s', strtotime($orderList['created_at'])) }}
+                                                <td>{{ date('d/m/Y H:i:s', strtotime($orderList['created_at'])) }}
                                                 </td>
 
                                                 <td>

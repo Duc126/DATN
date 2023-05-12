@@ -56,7 +56,7 @@ use App\Models\OrderLogs; ?>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label style="font-weight: 550;"><strong>{{ __('Ngày Đặt Hàng:') }}</strong></label>
-                                        <label>{{ date('Y-m-d h:i:s', strtotime($orderDetails['created_at'])) }}</label>
+                                        <label>{{ date('d/m/Y H:i:s', strtotime($orderDetails['created_at'])) }}</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
@@ -301,9 +301,26 @@ use App\Models\OrderLogs; ?>
                                 </form>
                                 <br>
                                 @foreach ($orderLog as $key => $log)
-                                    <strong>{{ $log['order_status'] }}</strong>
+                                {{-- <?php var_dump($orderLog); ?> --}}
+                                    {{-- <strong>{{ $log['order_status'] }}</strong> --}}
+                                    @if($log['order_status'] == "Van Chuyen")
+                                    <strong> {{ __('Vận Chuyển: ') }}</strong>
+                                    @elseif($log['order_status'] == "Moi")
+                                    <strong> {{ __('Mới: ') }}</strong>
+                                    @elseif($log['order_status'] == "Chua Giai Quyet")
+                                    <strong> {{ __('Chưa Giải Quyết: ') }}</strong>
+                                    @elseif($log['order_status'] == "Da Huy")
+                                    <strong> {{ __('Đã Hủy: ') }}</strong>
+                                    @elseif($log['order_status'] == "Dang Tien Hanh")
+                                    <strong> {{ __('Đang Tiến Hành: ') }}</strong>
+                                    @elseif($log['order_status'] == "Da Giao Hang")
+                                    <strong> {{ __('Đã Giao Hàng: ') }}</strong>
+                                    @endif
+
                                     @if (isset($log['order_item_id']) && $log['order_item_id'] > 0)
                                         @php $getItemDetails = OrderLogs::getItemDetails($log['order_item_id']) @endphp
+                                    <?php var_dump($getItemDetails); ?>
+
                                         {{ __('- Đối với mặt hàng') }}
                                         {{ $getItemDetails['product_code'] }}<br>
                                         @if (!empty($getItemDetails['courier_name']))
@@ -327,7 +344,7 @@ use App\Models\OrderLogs; ?>
                                     @endif
                                     {{-- @endif --}}
 
-                                    {{ date('Y-m-d h:i:s', strtotime($log['created_at'])) }}<br>
+                                    {{ date('d/m/Y H:i:s', strtotime($log['created_at'])) }}<br>
                                     <hr>
                                 @endforeach
                             @else
