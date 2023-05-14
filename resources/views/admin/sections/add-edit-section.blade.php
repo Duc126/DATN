@@ -9,7 +9,7 @@
                             <h4 class="card-title">{{ $title }}</h4>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                    <strong>{{ __('messages.error') }}:</strong> {{ Session::get('error_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -17,7 +17,7 @@
                             @endif
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -38,7 +38,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="section_name">{{ __('Tên Thể Loại') }}<span
+                                            <label for="section_name">{{ __('messages.add-section.name') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="section_name"
                                                 placeholder="Nhập Tên Thể Loại" name="section_name"
@@ -47,8 +47,8 @@
                                     </div>
                                 </div>
                                 <button type="submit"
-                                    class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <a class="btn btn-danger " href="{{ url('admin/sections') }}">{{ __('Quay lai ') }}</a>
+                                    class="btn btn-primary mr-2 float-right">{{ __('messages.save') }}</button>
+                                <a class="btn btn-danger " href="{{ url('admin/sections') }}">{{ __('messages.back') }}</a>
 
                             </form>
                         </div>

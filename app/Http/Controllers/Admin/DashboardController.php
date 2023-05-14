@@ -56,7 +56,7 @@ class DashboardController extends Controller
         // dd($orders);
 
         $result = DB::table('orders')
-            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SUM(grand_total) as revenue")
+            ->selectRaw("DATE_FORMAT(created_at, '%m-%Y') as month, SUM(grand_total) as revenue")
             ->groupBy('month')
             ->get();
             // $week = DB::table('orders')

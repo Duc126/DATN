@@ -35,5 +35,6 @@ class ShippingCharges extends Model
             $rate = 0;
         }
         return $rate;
+        // dd($rate);
     }
 }

@@ -42,3 +42,9 @@ div#staff_wrapper {
 select.custom-select.custom-select-sm.form-control.form-control-sm {
     height: 35px;
 }
+.dropdown-menu.show {
+    position: absolute !important;
+}
+/* nav#sidebar {
+    width: 335px !important;
+} */

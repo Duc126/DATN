@@ -189,7 +189,7 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">{{ __('Chào Mừng') }}
+                            <h3 class="font-weight-bold">{{ __('messages.welcome') }}
                                 {{ Auth::guard('admin')->user()->first_name }}
                                 {{ Auth::guard('admin')->user()->last_name }}</h3>
                             {{-- <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have
@@ -209,7 +209,7 @@
                         <div class="col-md-6 mb-4 stretch-card transparent">
                             <div class="card card-tale">
                                 <div class="card-body">
-                                    <p class="mb-4">{{ __('Tổng Khách Hàng Đã Được Kích Hoạt ') }}</p>
+                                    <p class="mb-4">{{ __('messages.dashboard-list.total-customer-action') }}</p>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <p class="fs-30 mb-2">{{ $totalUser }}</p>
                                         <a href="{{ url('admin/users') }}">
@@ -222,7 +222,7 @@
                         <div class="col-md-6 mb-4 stretch-card transparent">
                             <div class="card" style="background: #E9B406 ; color: #fff;">
                                 <div class="card-body">
-                                    <p class="mb-4">{{ __('Tổng Số Sản Phẩm Đã Được Kích Hoạt ') }}</p>
+                                    <p class="mb-4">{{ __('messages.dashboard-list.total-product-action') }}</p>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <p class="fs-30 mb-2">{{ $totalProduct }}</p>
                                         <a href="{{ url('admin/products') }}">
@@ -237,7 +237,7 @@
                         <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                             <div class="card" style="background: #f7efdd !important">
                                 <div class="card-body">
-                                    <p class="mb-4">{{ __('Tổng Số Thương Hiệu Đã Được Kích Hoạt ') }}</p>
+                                    <p class="mb-4">{{ __('messages.dashboard-list.total-brand-action') }}</p>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <p class="fs-30 mb-2">{{ $totalBrands }}</p>
                                         <a href="{{ url('admin/brands') }}">
@@ -250,7 +250,7 @@
                         <div class="col-md-6 stretch-card transparent">
                             <div class="card card-light-danger">
                                 <div class="card-body">
-                                    <p class="mb-4">{{ 'Tổng Số Đơn Hàng' }}</p>
+                                    <p class="mb-4">{{ __('messages.dashboard-list.total-orders') }}</p>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <p class="fs-30 mb-2">{{ $totalOrder }}</p>
                                         <a href="{{ url('admin/order') }}">
@@ -263,50 +263,21 @@
                         </div>
 
                     </div>
-                    {{-- <div class="row mt-4">
-                        <div class="col-md-6  mb-lg-0 stretch-card transparent">
-                            <div class="card" style="background: brown; color: #fff">
-                                <div class="card-body">
-                                    <p class="mb-4">{{ __('Tổng Số Nhà Cung Cấp Đã Được Kích Hoạt ') }}</p>
-                                    <div class="d-flex align-items-end justify-content-between mt-4">
-                                        <p class="fs-30 mb-2">{{ $totalVendors }}</p>
-                                        <a href="{{ url('admin/list-admin/vendor') }}">
-                                        <i class="mdi mdi-account-multiple" style="font-size: 25px;"></i>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-md-6 stretch-card transparent">
-                            <div class="card card-light" style="background: darkcyan; color: #fff;">
-                                <div class="card-body">
-                                    <p class="mb-4">{{ 'Tổng Số Đơn Hàng' }}</p>
-                                    <div class="d-flex align-items-end justify-content-between mt-4">
-                                        <p class="fs-30 mb-2">{{ $totalOrder }}</p>
-                                        <i class="mdi mdi-cart" style="font-size: 25px;"></i>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                    {{-- </div> --}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-title mb-0">{{ __('Danh sách khách hàng mua hàng nhiều nhất') }}</p>
+                            <p class="card-title mb-0">{{ __('messages.dashboard-list.list-custome-buy-the-most') }}</p>
                             <div class="table-responsive">
                                 <table class="table table-striped table-borderless">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Tên Khách Hàng') }}</th>
-                                            <th>{{ __('Số Điện Thoại') }}</th>
-                                            <th>{{ __('Email') }}</th>
-                                            <th>{{ __('Tổng Đơn Hàng') }}</th>
+                                            <th>{{ __('messages.table.name-customer') }}</th>
+                                            <th>{{ __('messages.table.phone') }}</th>
+                                            <th>{{ __('messages.table.email') }}</th>
+                                            <th>{{ __('messages.table.total-order') }}</th>
 
                                         </tr>
                                     </thead>
@@ -328,16 +299,17 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-title mb-0">{{ __('Danh sách đơn mua hàng gần đây nhất') }}</p>
+                            <p class="card-title mb-0">{{ __('messages.dashboard-list.list-recent-purchase-order') }}</p>
                             <div class="table-responsive">
                                 <table class="table table-striped table-borderless">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Tên Khách Hàng') }}</th>
-                                            <th>{{ __('Số Điện Thoại') }}</th>
-                                            <th>{{ __('Ngày Mua') }}</th>
-                                            <th>{{ __('Thanh Toán') }}</th>
-                                            <th>{{ __('Giá Tiền') }}</th>
+                                            <th>{{ __('messages.table.name-customer') }}</th>
+                                            <th>{{ __('messages.table.phone') }}</th>
+                                            <th>{{ __('messages.table.date-purchase') }}</th>
+                                            <th>{{ __('messages.table.payment') }}</th>
+                                            <th>{{ __('messages.table.price') }}</th>
+
 
                                         </tr>
                                     </thead>
@@ -346,14 +318,16 @@
                                             <tr>
                                                 <td>{{ $ordersLimit->name }}</td>
                                                 <td>{{ $ordersLimit->phone }}</td>
-                                                <td>{{ $ordersLimit->created_at }}</td>
+                                                <td>{{ date('d/m/Y', strtotime($ordersLimit->created_at)) }}<br>
+                                                </td>
+                                                {{-- <td>{{ $ordersLimit->created_at }}</td> --}}
                                                 <td>
                                                     @if ($ordersLimit->payment_method == 'COD')
                                                         <span class="badge bg-info"
-                                                            style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                                            style="color: #fff;">{{ __('messages.table.cod') }}</span>
                                                     @else
                                                         <span class="badge bg-success"
-                                                            style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
+                                                            style="color: #fff;">{{ __('messages.table.credit_card') }}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -373,67 +347,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-md-5 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">To Do Lists</h4>
-                            <div class="list-wrapper pt-2">
-                                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                Meeting with Urban Team
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked>
-                                                Duplicate a project for new customer
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                Project meeting with CEO
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked>
-                                                Follow up of team zilla
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                Level up for Antony
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-items d-flex mb-0 mt-2">
-                                <input type="text" class="form-control todo-list-input" placeholder="Add new task">
-                                <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
-                                        class="icon-circle-plus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
         <!-- content-wrapper ends -->

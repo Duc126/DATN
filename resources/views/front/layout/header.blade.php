@@ -28,9 +28,9 @@
                         <li>
                             <a>
                                 @if (Auth::check())
-                                    {{ __('Tài Khoản Của Tôi') }}
+                                    {{ __('messages.front.my_account') }}
                                 @else
-                                    {{ __('Đăng Nhập/Đăng Ký') }}
+                                    {{ __('messages.front.login_register') }}
                                 @endif
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
@@ -54,59 +54,58 @@
                                     <li>
                                         <a href="{{ url('user/order') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Đơn hàng của tôi') }}</a>
+                                            {{ __('messages.front.my_order') }}</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('user/account') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Tài Khoản Của Tôi') }}</a>
+                                            {{ __('messages.front.my_account') }}</a>
                                     </li>
 
                                     <li>
                                         <a href="{{ url('user/logout') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Đăng Xuất') }}</a>
+                                            {{ __('messages.front.logout') }}</a>
                                     </li>
                                 @else
                                     <li>
                                         <a href="{{ url('user/login-register') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Khách Hàng Đăng Nhập') }}</a>
+                                            {{ __('messages.front.user_login') }}</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('vendor/login-register') }}">
                                             <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                            {{ __('Quản Trị Viên Đăng Nhập') }}</a>
+                                            {{ __('messages.front.admin_login') }}</a>
 
                                     </li>
                                 @endif
                             </ul>
                         </li>
-                        {{-- <li>
-                            <a>USD
-                                <i class="fas fa-chevron-down u-s-m-l-9"></i>
+
+                    </ul>
+                </nav>
+                <nav>
+                    <ul class="secondary-nav g-nav">
+                        <li>
+                            <a>
+                                <i class="fa fa-globe" aria-hidden="true"></i>
+
+
+                                {{-- <i class="fas fa-chevron-down u-s-m-l-9"></i> --}}
                             </a>
-                            <ul class="g-dropdown" style="width:90px">
+                            <ul class="g-dropdown" style="width:230px">
                                 <li>
-                                    <a href="#" class="u-c-brand">($) USD</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('lang.switch', 'en') }}">{{ __('messages.en') }}</a>
                                 </li>
                                 <li>
-                                    <a href="#">(£) GBP</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('lang.switch', 'vi') }}">{{ __('messages.vi') }}</a>
                                 </li>
                             </ul>
-                        </li> --}}
-                        {{-- <li>
-                            <a>ENG
-                                <i class="fas fa-chevron-down u-s-m-l-9"></i>
-                            </a>
-                            <ul class="g-dropdown" style="width:70px">
-                                <li>
-                                    <a href="#" class="u-c-brand">ENG</a>
-                                </li>
-                                <li>
-                                    <a href="#">ARB</a>
-                                </li>
-                            </ul> --}}
+                        </li>
+
                     </ul>
                 </nav>
             </div>
@@ -121,17 +120,16 @@
                             <a href="{{ url('/') }}">
                                 {{-- <img src="{{ asset('front/images/main-logo/stack-developers-logo.png') }}"
                                     alt="Stack Developers" class="app-brand-logo"> --}}
-                                <img height="60"
-                                    src="{{ asset('front/images/main-logo/TechHub.png') }}" alt="TechHub"
-                                    class="app-brand-logo">
+                                <img height="60" src="{{ asset('front/images/main-logo/TechHub.png') }}"
+                                    alt="TechHub" class="app-brand-logo">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6 u-d-none-lg">
                         <form class="form-searchbox" action="{{ url('/search-products') }}" method="get">
-                            <label class="sr-only" for="search-landscape">{{ __('Tìm Kiếm') }}</label>
+                            <label class="sr-only" for="search-landscape">{{ __('messages.front.search') }}</label>
                             <input name="search" id="search-landscape" type="text" class="text-field"
-                                placeholder="Tìm Kiếm"
+                                placeholder="{{ __('messages.front.search') }}"
                                 @if (isset($_REQUEST['search']) && !empty($_REQUEST['search'])) value="{{ $_REQUEST['search'] }}" @endif>
                             <div class="select-box-position">
                                 <div class="select-box-wrapper select-hide">
@@ -139,7 +137,7 @@
                                         for="select-category">{{ __('Chọn danh mục để tìm kiếm') }}</label>
                                     <select class="select-box" id="select-category" name="section_id">
                                         <option selected="selected" value="">
-                                            {{ __('Tất Cả') }}
+                                            {{ __('messages.front.all') }}
                                         </option>
                                         @foreach ($sections as $section)
                                             <option @if (isset($_REQUEST['section_id']) && !empty($_REQUEST['section_id']) && $_REQUEST['section_id'] == $section['id']) selected ="" @endif
@@ -205,8 +203,7 @@
                         <div class="v-menu v-close">
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
-                                {{ __('
-                                                                                                                                                                                                Tất cả danh mục') }}
+                                {{ __('messages.front.all_file') }}
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
@@ -248,18 +245,18 @@
                                                 </li>
                                             @endif
                                         @endforeach
-                                        <li>
+                                        {{-- <li>
                                             <a class="v-more">
                                                 <i class="ion ion-md-add"></i>
                                                 <span>View More</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
                             </nav>
                         </div>
                     </div>
-                    <div class="col-lg-9">
+                    {{-- <div class="col-lg-9">
                         <ul class="bottom-nav g-nav u-d-none-lg">
                             <li>
                                 <a href="#men-latest-products">{{ __('Sản Phẩm Mới') }}
@@ -282,7 +279,7 @@
                             </li>
 
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

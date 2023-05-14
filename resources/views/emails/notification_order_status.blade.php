@@ -32,7 +32,19 @@
         </tr>
         <tr>
             <td>
-                {{ __('Trạng Thái Đơn Hàng')}} #{{ $order_id }} {{ ('Của Bạn Đã Được Cập Nhật Thành') }} {{ $order_status }}
+                {{ __('Trạng Thái Đơn Hàng')}} #{{ $order_id }} {{ ('Của Bạn Đã Được Cập Nhật Thành') }} @if($order_status == 'Dang Tien Hanh')
+                                                                                                        {{ __('Đang Tiến Hành') }}
+                                                                                                        @elseif($order_status == 'Da Huy')
+                                                                                                        {{ __('Đã Hủy') }}
+                                                                                                        @elseif($order_status == 'Chua Giai Quyet')
+                                                                                                        {{ __('Chưa Giải Quyết') }}
+                                                                                                        @elseif($order_status == 'Da Giao Hang')
+                                                                                                        {{ __('Đã Giao Hàng') }}
+                                                                                                        @elseif($order_status == 'Da Huy')
+                                                                                                        {{ __('Đã Hủy') }}
+                                                                                                        @elseif($order_status == 'Van Chuyen')
+                                                                                                        {{ __('Vận Chuyển') }}
+                                                                                                        @endif
             </td>
         </tr>
         <tr>

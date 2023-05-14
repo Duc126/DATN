@@ -15,16 +15,16 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Bộ Lọc') }}</h4>
+                            <h4 class="card-title">{{ __('messages.filter.filter') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-filter') }}"
-                                class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.filter.add-filter') }}</a>
                             <a style="max-width: 175px;margin-top: 0px;display: inline-block;"
                                 href="{{ url('admin/filters-value') }}"
-                                class="btn btn-block btn-primary">{{ __('Xem Bộ Lọc') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.filter.view-value-filter') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -35,11 +35,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên') }}</th>
-                                            <th>{{ __('Cột') }}</th>
-                                            <th>{{ __('Thể Loại') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('messages.filter.name') }}</th>
+                                            <th>{{ __('messages.filter.column_value_filter') }}</th>
+                                            <th>{{ __('messages.category.category') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

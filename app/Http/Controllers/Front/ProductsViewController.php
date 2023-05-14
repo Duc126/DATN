@@ -249,6 +249,7 @@ class ProductsViewController extends Controller
     public function checkout(Request $request)
     {
         $countries = Countries::where('status', 1)->get()->toArray();
+        $shippingState = ShippingCharges::where('status', 1)->get()->toArray();
         $getCartItems = Cart::getCartItems();
         if (count($getCartItems) == 0) {
             $message = "Giỏ hàng đang rỗng! Vui lòng thêm sản phẩm để thanh toán";
@@ -268,7 +269,7 @@ class ProductsViewController extends Controller
         $deliveryAddress = DeliveryAddress::deliveryAddress();
 
         foreach ($deliveryAddress as $key => $value) {
-            $shippingCharges = ShippingCharges::getShippingCharges($total_weight,$value['state']);
+            $shippingCharges = ShippingCharges::getShippingCharges($total_weight, $value['state']);
             $deliveryAddress[$key]['shipping_charges'] = $shippingCharges;
         }
         // dd($deliveryAddress);
@@ -368,7 +369,7 @@ class ProductsViewController extends Controller
             $shipping_charges = 0;
 
             //get shipping charges
-            $shipping_charges = ShippingCharges::getShippingCharges($total_weight,$addressDelivery['state']);
+            $shipping_charges = ShippingCharges::getShippingCharges($total_weight, $addressDelivery['state']);
             // dd($deliveryAddress['state']);
             //calculate grand total
             $grand_total = $total_price + $shipping_charges - Session::get('couponAmount');
@@ -511,7 +512,7 @@ class ProductsViewController extends Controller
 
 
         // echo $total_price;die;
-        return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'getCartItems', 'total_price'));
+        return view('front.products.checkout')->with(compact('deliveryAddress', 'countries', 'shippingState', 'getCartItems', 'total_price'));
     }
     public function thanks()
     {

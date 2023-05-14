@@ -39,23 +39,24 @@ class SectionController extends Controller
     public function addEditSection(Request $request, $id=null){
         Session::put('page', 'sections');
         if($id==""){
-            $title = "Thêm Sản Phẩm";
+            $title = __('messages.add-section.add-section');
             $section = new Section;
-            $message = "Thêm sản phẩm thành công!";
+            $message =  __('messages.add-section.add-section-success');
         }
         else{
-            $title = "Cập Nhật Sản Phẩm";
+            $title = __('messages.add-section.update-section');
             $section = Section::find($id);
-            $message = "Cập Nhật sản phẩm thành công!";
+            $message =  __('messages.add-section.update-section-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
             $rules = [
-                'section_name' => 'min:2',
+                'section_name' => 'required|min:2',
             ];
             $customMessages = [
                 // 'n' => 'Tên sản phẩm là bắt buộc',
-                'section_name.min' => 'Tên sản phẩm phải có ít nhất 2 ký tự',
+                'section_name.required' => __('messages.add-section.required'),
+                'section_name.min' => __('messages.add-section.min'),
             ];
             $this->validate($request, $rules, $customMessages);
 

@@ -16,10 +16,10 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Bộ Lọc Giá Trị') }}</h4>
+                            <h4 class="card-title">{{ __('messages.filter.value-filter') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-filter-value') }}"
-                                class="btn btn-block btn-primary">{{ __('Thêm Bộ Lọc') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.filter.add-value-filter') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
@@ -33,13 +33,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Id bộ Lọc') }}</th>
-
-                                            <th>{{ __('Tên') }}</th>
-                                            <th>{{ __('Cột') }}</th>
-
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('ID') }}</th>
+                                            <th>{{ __('messages.filter.name') }}</th>
+                                            <th>{{ __('messages.filter.column_value_filter') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

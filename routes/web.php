@@ -27,10 +27,12 @@ use App\Http\Controllers\Front\PaypalController;
 use App\Http\Controllers\Front\ProductsViewController;
 use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\Front\VendorController as FrontVendorController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchProductController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+// Route::post('/language', function (Request $request) {
+//     $locale = $request->input('locale');
+//     app()->setLocale($locale);
+//     // dd($locale);
+//     return back();
+// })->name('language');
+Route::get('lang/{locale}', [HomeController::class, 'lang'])->name('lang.switch');
+
+
 
 require __DIR__ . '/auth.php';
 Route::prefix('admin')->group(function () {
@@ -180,6 +191,7 @@ Route::prefix('admin')->group(function () {
         //SHIPPING
         Route::get('shipping', [ShippingController::class, 'shipping']);
         Route::post('update-status-shipping', [ShippingController::class, 'updateStatusShipping']);
+        Route::get('delete-shipping/{id}', [ShippingController::class, 'deleteShipping']);
 
         Route::match(['get', 'post'], 'add-edit-shipping/{id?}', [ShippingController::class, 'addEditShipping']);
     });

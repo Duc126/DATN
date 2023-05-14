@@ -39,33 +39,33 @@
                                     <div class="col-md-6">
                                         @if (empty($coupon['coupon_code']))
                                             <div class="form-group">
-                                                <label for="coupon_option">{{ __('Tùy chọn phiếu giảm giá ') }}</label><br>
+                                                <label for="coupon_option">{{ __('messages.coupons.coupon_option') }}</label><br>
                                                 <span>
                                                     <input type="radio" id="AutomaticCoupon" name="coupon_option"
                                                         value="Automatic"
-                                                        checked="">&nbsp;{{ __('Tạo mã tự động') }}&nbsp;&nbsp;
+                                                        checked="">&nbsp;{{ __('messages.coupons.auto_code') }}&nbsp;&nbsp;
                                                 </span>
                                                 <span>
                                                     <input type="radio" id="ManualCoupon" name="coupon_option"
-                                                        value="Manual">&nbsp;{{ __('Nhập mã thủ công') }}&nbsp;&nbsp;
+                                                        value="Manual">&nbsp;{{ __('messages.coupons.enter_code') }}&nbsp;&nbsp;
                                                 </span>
                                             </div>
                                             <div class="form-group" style="display: none;" id="couponField">
-                                                <label for="coupon_code">{{ __('Mã giảm giá:') }}</label>
+                                                <label for="coupon_code">{{ __('messages.coupons.code_coupons') }}</label>
                                                 <input type="text" class="form-control" name="coupon_code"
-                                                    id="coupon_code" placeholder="Nhập Mã Giảm Giá">
+                                                    id="coupon_code">
                                             </div>
                                         @else
                                             <input type="hidden" name="coupon_option"
                                                 value="{{ $coupon['coupon_option'] }}">
                                             <input type="hidden" name="coupon_code" value="{{ $coupon['coupon_code'] }}">
                                             <div>
-                                                <strong for="coupon_code">{{ __('Mã Giảm Giá:') }}</strong>
+                                                <strong for="coupon_code">{{ __('messages.coupons.code_coupons') }}</strong>
                                                 <span>{{ $coupon['coupon_code'] }}</span>
                                             </div>
                                         @endif
                                         <div class="form-group">
-                                            <label for="coupon_type">{{ __('Loại phiếu giảm giá : ') }}</label><br>
+                                            <label for="coupon_type">{{ __('messages.coupons.type_coupons') }}</label><br>
                                             <span>
                                                 <input type="radio" name="coupon_type" value="Multiple Time"
                                                     @if (isset($coupon['coupon_type']) && $coupon['coupon_type'] == 'Multiple Time') checked="" @endif>&nbsp;{{ __('Multiple Time') }}&nbsp;&nbsp;
@@ -78,7 +78,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="amount_type">{{ __('Loại số tiền :') }}</label><br>
+                                            <label for="amount_type">{{ __('messages.coupons.discount_currency') }}</label><br>
                                             <span>
                                                 <input type="radio" name="amount_type"
                                                     value="Percentage"@if (isset($coupon['amount_type']) && $coupon['amount_type'] == 'Percentage') checked="" @endif>&nbsp;{{ __('Tỷ Lệ Phần Trăm') }}&nbsp;{{ __('- (Tính Bằng %)') }}&nbsp;
@@ -89,15 +89,15 @@
                                             </span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="amount">{{ __('Số lượng') }}</label>
+                                            <label for="amount">{{ __('messages.coupons.number') }}</label>
                                             <input type="text" class="form-control" name="amount" id="amount"
                                                 @if (isset($coupon['amount'])) value="{{ $coupon['amount'] }}"
                                                 @else
                                             value="{{ old('amount') }}"
-                                            placeholder="Nhập Mã Giảm Giá" @endif>
+                                            @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="categories">{{ __('Chọn Danh Mục :') }}</label>
+                                            <label for="categories">{{ __('messages.coupons.select_category') }}</label>
                                             <select name="categories[]" class="form-control text-dark" multiple="">
                                                 @foreach ($categories as $section)
                                                     <optgroup label="{{ $section['name'] }}"></optgroup>
@@ -118,7 +118,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="brands">{{ __('Chọn Thương Hiệu ') }}</label>
+                                            <label for="brands">{{ __('messages.coupons.select_brand') }}</label>
                                             <select name="brands[]" class="form-control text-dark" multiple="">
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand['id'] }}"
@@ -128,7 +128,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="users">{{ __('Chọn Người Dùng ') }}</label>
+                                            <label for="users">{{ __('messages.coupons.select_user') }}</label>
                                             <select name="users[]" class="form-control text-dark" multiple="">
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user['email'] }}"
@@ -138,14 +138,14 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="expiry_date">{{ __('Ngày hết hạn ') }}</label>
+                                            <label for="expiry_date">{{ __('messages.coupons.expiration_date') }}</label>
                                             <input type="date" class="form-control" id="expiry_date"
                                                 name="expiry_date"
                                                 @if (isset($coupon['expiry_date'])) value="{{ $coupon['expiry_date'] }}"
                                                     @else
 
                                                 value="{{ old('expiry_date') }}"
-                                                placeholder="Nhập ngày hết hạn" @endif>
+                                                @endif>
                                         </div>
 
                                     </div>

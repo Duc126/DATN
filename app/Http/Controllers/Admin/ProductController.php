@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function deleteProduct($id)
     {
         Product::where('id', $id)->delete();
-        $message = "Đã Xóa Thành Công!";
+        $message = __('messages.product.delete_success');
         return redirect()->back()->with('success_message', $message);
     }
     public function addEditProduct(Request $request, $id = null)
@@ -74,14 +74,14 @@ class ProductController extends Controller
         Session::put('page', 'products');
 
         if ($id == "") {
-            $title = "Thêm Sản Phẩm";
+            $title = __('messages.product.add-product');
             $product = new Product;
-            $message = "Thêm sản phẩm thành công";
+            $message = __('messages.product.add-product-success');
         } else {
-            $title = "Chỉnh sửa sản phẩm";
+            $title = __('messages.product.update-product');
             $product = Product::find($id);
             // dd($product);
-            $message = "Cập nhật sản phẩm thành công";
+            $message = __('messages.product.update-product-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -92,18 +92,19 @@ class ProductController extends Controller
                 'category_id' => 'required',
                 'product_code' => 'required',
                 'product_price' => 'required|numeric',
-                'product_color' => 'required|regex:/^[\pL\s-]+$/u',
+                'product_color' => 'required',
+                // 'product_color' => 'required|regex:/^[\pL\s-]+$/u',
+
 
             ];
             $customMessages = [
-                'product_name.required' => 'Tên là bắt buộc',
-                'product_name.regex' => 'Tên đúng định dạng',
-                'category_id.required' => 'category là bắt buộc',
-                'product_code.required' => ' Code là bắt buộc',
+                'product_name.required' => __('messages.product.product_name_r'),
+                'category_id.required' => __('messages.product.category_r'),
+                'product_code.required' => __('messages.product.product_code_r'),
                 // 'product_code.regex' => 'Code phải đúng định dạng',
-                'product_price' => 'Giá là bắt buộc',
-                'product_color.required' => 'Màu là bắt buộc',
-                'product_color.regex' => 'Màu phải đúng định dạng',
+                'product_price.required' => __('messages.product.product_price_r'),
+                'product_color.required' => __('messages.product.product_color_r'),
+                // 'product_color.regex' => 'Màu phải đúng định dạng',
             ];
             $this->validate($request, $rules, $customMessages);
 
@@ -235,7 +236,7 @@ class ProductController extends Controller
         // Delete Product image
 
         Product::where('id', $id)->update(['product_image' => '']);
-        $message = "Đã Xóa Ảnh Thành Công!";
+        $message = __('messages.delete_image_success');
         return redirect()->back()->with('success_message', $message);
     }
 
@@ -253,7 +254,7 @@ class ProductController extends Controller
 
         // Delete Product Video
         Product::where('id', $id)->update(['product_video' => '']);
-        $message = "Đã Xóa Video Thành Công!";
+        $message = __('messages.delete_video_success');
         return redirect()->back()->with('success_message', $message);
     }
 }

@@ -18,13 +18,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Quản Lý Số Lượng') }}</h4>
+                            <h4 class="card-title">{{ __('messages.management.management_quantity') }}</h4>
                                 <form method="GET" action="{{ route('order-product') }}">
                                     <div class="form-group row">
-                                        <label for="product-select" style="margin-left: 60px;margin-top: 8px;">{{ __('Chọn sản phẩm') }}</label>
+                                        <label for="product-select" style="margin-left: 60px;margin-top: 8px;">{{ __('messages.management.select_product') }}</label>
                                         <div class="col-md-6">
                                             <select class="form-control month-input text-dark" id="product-select" name="product-select">
-                                                <option value="">{{ __('Tất Cả Sản Phẩm') }}</option>
+                                                <option value="">{{ __('messages.management.all_product') }}</option>
                                                 @foreach($productTotal as $product)
                                                     <option value="{{ $product->product_name }}" @if ($productSelected == $product->product_name) selected @endif>{{ $product->product_name }}</option>
                                                 @endforeach
@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <button type="submit"
-                                                class="btn btn-primary button-class">{{ __('Tìm kiếm') }}</button>
+                                                class="btn btn-primary button-class">{{ __('messages.management.search') }}</button>
                                         </div>
                                         <style>
                                             .month-input {
@@ -60,10 +60,10 @@
                                 <table id="brand" class="table table-striped display">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Tên Sản Phẩm') }}</th>
-                                            <th>{{ __('Mã Sản Phẩm') }}</th>
-                                            <th>{{ __('Tổng Sản Phẩm Lúc Thêm Vào') }}</th>
-                                            <th>{{ __('Tổng Còn Lại Trong Kho') }}</th>
+                                            <th>{{ __('messages.management.name') }}</th>
+                                            <th>{{ __('messages.management.code') }}</th>
+                                            <th>{{ __('messages.management.total_product_add') }}</th>
+                                            <th>{{ __('messages.management.total_weight') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

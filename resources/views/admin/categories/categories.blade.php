@@ -14,13 +14,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Danh Mục') }}</h4>
+                            <h4 class="card-title">{{ __('messages.category.category') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-category') }}"
-                                class="btn btn-block btn-primary">{{ __('Thêm Danh Mục') }}</a>
+                                class="btn btn-block btn-primary"><i class="mdi mdi-plus-circle-outline mt-4 mr-2"></i>{{ __('messages.category.add') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -31,12 +31,12 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên Loại') }}</th>
-                                            <th>{{ __('Nguồn Gốc') }}</th>
-                                            <th>{{ __('Thuộc nhóm') }}</th>
+                                            <th>{{ __('messages.table.type-name') }}</th>
+                                            <th>{{ __('messages.category.category') }}</th>
+                                            <th>{{ __('messages.table.group') }}</th>
                                             <th>{{ __('url') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

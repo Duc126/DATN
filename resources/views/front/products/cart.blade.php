@@ -6,14 +6,14 @@
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>{{ __('Giỏ Hàng') }}</h2>
+                <h2>{{ __('messages.cart.cart') }}</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="index.html">{{ __('Trang Chủ') }}</a>
+                        <a href="#">{{ __('messages.front.home') }}</a>
                     </li>
                     <li class="is-marked">
-                        <a href="cart.html">{{ __('Giỏ Hàng') }}</a>
+                        <a href="#">{{ __('messages.cart.cart') }}</a>
                     </li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@
         <div class="container">
             @if (Session::has('error_message'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                    <strong>{{ __('messages.error') }}:</strong> {{ Session::get('error_message') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -33,7 +33,7 @@
             @endif
             @if (Session::has('success_message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,8 +59,8 @@
                             </div>
                         </div>
                         <div class="button-area">
-                            <a href="{{ url('/') }}" class="continue">{{ __('Tiếp tục mua sắm') }}</a>
-                            <a href="{{ url('/checkout') }}" class="checkout">{{ __('Chuyển sang thanh toán') }}</a>
+                            <a href="{{ url('/') }}" class="continue">{{ __('messages.cart.coutinue_shopping') }}</a>
+                            <a href="{{ url('/checkout') }}" class="checkout">{{ __('messages.cart.switch_to_payment') }}</a>
                         </div>
                     </div>
                 </div>

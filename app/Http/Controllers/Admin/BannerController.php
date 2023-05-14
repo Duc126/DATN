@@ -42,7 +42,7 @@ class BannerController extends Controller
             unlink($banner_image_path . $bannerImage->image);
         }
         Banners::where('id', $id)->delete();
-        $message = "Đã Xóa Thành Công!";
+        $message = __('messages.delete_success');
         return redirect()->back()->with('success_message', $message);
     }
     public function addEditBanner(Request $request, $id = null)
@@ -50,13 +50,13 @@ class BannerController extends Controller
         Session::put('page', 'banner');
 
         if ($id == "") {
-            $title = "Thêm Sản Phẩm";
+            $title = __('messages.banner.add_banner');
             $banner = new Banners;
-            $message = "Thêm sản phẩm thành công!";
+            $message = __('messages.banner.add_banner_success');
         } else {
-            $title = "Cập Nhật Sản Phẩm";
+            $title = __('messages.banner.update_banner');
             $banner = Banners::find($id);
-            $message = "Cập Nhật sản phẩm thành công!";
+            $message = __('messages.banner.update_banner_success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();

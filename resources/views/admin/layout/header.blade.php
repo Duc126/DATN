@@ -3,9 +3,9 @@
         <a class="navbar-brand brand-logo" href="{{ url('admin/dashboard') }}">
             {{-- <img
                 src="{{ url('admin/images/logo.svg') }}" class="mr-2" alt="logo" /> --}}
-                <img style="height: 60px;" src="{{ asset('front/images/main-logo/TechHub.png') }}">
+            <img style="height: 60px;" src="{{ asset('front/images/main-logo/TechHub.png') }}">
 
-            </a>
+        </a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ url('admin/images/logo-mini.svg') }}"
                 alt="logo" /></a>
     </div>
@@ -27,86 +27,60 @@
             </li>
         </ul> --}}
         <ul class="navbar-nav navbar-nav-right">
-            {{-- <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                    data-toggle="dropdown">
-                    <i class="icon-bell mx-0"></i>
-                    <span class="count"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                    aria-labelledby="notificationDropdown">
-                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-success">
-                                <i class="ti-info-alt mx-0"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                Just now
-                            </p>
-                        </div>
+
+            <!-- đối với ngôn ngữ tiếng Anh -->
+            {{-- <div class="mt-4 mr-4">
+                <a href="{{ route('lang.switch', 'en') }}">English</a>
+
+                <!-- đối với ngôn ngữ tiếng Pháp -->
+                <a href="{{ route('lang.switch', 'vi') }}">Tiếng Việt</a>
+            </div> --}}
+            <div class="btn-group">
+                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{-- {{ __('messages.language') }} --}}
+                    <i class="mdi mdi-translate "></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">{{ __('messages.en') }}
                     </a>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-warning">
-                                <i class="ti-settings mx-0"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">Settings</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                Private message
-                            </p>
-                        </div>
-                    </a>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-info">
-                                <i class="ti-user mx-0"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                2 days ago
-                            </p>
-                        </div>
-                    </a>
+                    <a class="dropdown-item" href="{{ route('lang.switch', 'vi') }}">{{ __('messages.vi') }}</a>
+                    <!-- Add more language options here -->
                 </div>
-            </li> --}}
-            <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url('admin/update-details') }}" data-toggle="dropdown"
-                    id="profileDropdown">
-                    @if (!empty(Auth::guard('admin')->user()->image))
-                        <img src="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}"
-                            alt="profile" />
-                    @else
-                        <img src="{{ url('admin/images/photos/no-image.png') }}" alt="profile" />
-                    @endif
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a href="{{ url('admin/update-details') }}" class="dropdown-item">
-                        <i class="ti-settings text-primary"></i>
-                        {{ __('Cài Đặt') }}
-                    </a>
-                    <a href="{{ url('admin/logout') }}" class="dropdown-item">
-                        <i class="ti-power-off text-primary"></i>
-                        {{ __('Đăng Xuất') }}
-                    </a>
-                </div>
-            </li>
-            {{-- <li class="nav-item nav-settings d-none d-lg-flex">
+            </div>
+
+
+
+
+
+    <li class="nav-item nav-profile dropdown">
+        <a class="nav-link dropdown-toggle" href="{{ url('admin/update-details') }}" data-toggle="dropdown"
+            id="profileDropdown">
+            @if (!empty(Auth::guard('admin')->user()->image))
+                <img src="{{ url('admin/images/photos/' . Auth::guard('admin')->user()->image) }}" alt="profile" />
+            @else
+                <img src="{{ url('admin/images/photos/no-image.png') }}" alt="profile" />
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+            <a href="{{ url('admin/update-details') }}" class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                {{ __('messages.setting') }}
+            </a>
+            <a href="{{ url('admin/logout') }}" class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                {{ __('messages.logout') }}
+            </a>
+        </div>
+    </li>
+    {{-- <li class="nav-item nav-settings d-none d-lg-flex">
                 <a class="nav-link" href="#">
                     <i class="icon-ellipsis"></i>
                 </a>
             </li> --}}
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-            data-toggle="offcanvas">
-            <span class="icon-menu"></span>
-        </button>
+    </ul>
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+        data-toggle="offcanvas">
+        <span class="icon-menu"></span>
+    </button>
     </div>
 </nav>

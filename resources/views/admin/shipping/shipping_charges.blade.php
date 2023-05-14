@@ -14,11 +14,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Chi phí vận chuyển') }}</h4>
-
+                            <h4 class="card-title">{{ __('messages.shipping.shipping') }}</h4>
+                            <a style="max-width: 175px; float:right;display: inline-block;"
+                            href="{{ url('admin/add-edit-shipping') }}"
+                            class="btn btn-block btn-primary">{{ __('messages.shipping.add-shipping') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -29,15 +31,15 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tỉnh') }}</th>
+                                            <th>{{ __('messages.shipping.name') }}</th>
                                             {{-- <th>{{ __('Quốc gia') }}</th> --}}
-                                            <th>{{ __('Giá Từ 0g-500g') }}</th>
-                                            <th>{{ __('Giá Từ 501g-1000g') }}</th>
-                                            <th>{{ __('Giá Từ 1001g-2000g') }}</th>
-                                            <th>{{ __('Giá Từ 2001g-5000g') }}</th>
-                                            <th>{{ __('Giá Trên 5000g') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('messages.shipping.price_from') }} {{ __('0g-500g') }}</th>
+                                            <th>{{ __('messages.shipping.price_from') }} {{ __('501g-1000g') }}</th>
+                                            <th>{{ __('messages.shipping.price_from') }} {{ __('1001g-2000g') }}</th>
+                                            <th>{{ __('messages.shipping.price_from') }} {{ __('2001g-5000g') }}</th>
+                                            <th>{{ __('messages.shipping.above_price') }} {{ __('5000g') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,10 +63,6 @@
                                                  <td>
                                                     {{ number_format($shipping['above_5000g'], 0, '.', '.') }} VNĐ
                                                  </td>
-                                                {{-- <td>{{ $shipping['501_1000g'] }}.VNĐ </td>
-                                                <td>{{ $shipping['1001_2000g'] }}.VNĐ </td>
-                                                <td>{{ $shipping['2001_5000g'] }}.VNĐ </td>
-                                                <td>{{ $shipping['above_5000g'] }}.VNĐ </td> --}}
                                                 <td>
                                                     @if ($shipping['status'] == 1)
                                                         <a class="updateShipping" id="shipping-{{ $shipping['id'] }}"
@@ -81,7 +79,9 @@
                                                 <th>
                                                     <a href={{ url('admin/add-edit-shipping/' . $shipping['id']) }}>
                                                         <i style="font-size: 25px" class="mdi mdi mdi-pencil-box"></i></a>
-
+                                                        <a href="javascript:void(0)" class="confirmDelete" module="shipping"
+                                                        moduleid="{{ $shipping['id'] }}">
+                                                        <i style="font-size: 25px" class="mdi mdi mdi-delete-sweep"></i></a>
                                                 </th>
                                             </tr>
                                         @endforeach

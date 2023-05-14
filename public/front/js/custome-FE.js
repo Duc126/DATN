@@ -391,12 +391,16 @@ $(document).ready(function () {
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerView);
                 if (resp.couponAmount > 0) {
-                    $(".couponAmount").text(resp.couponAmount + ".VNĐ");
+                    // $(".couponAmount").text(resp.couponAmount + ".VNĐ");
+                    $(".couponAmount").text(formatNumber(resp.couponAmount) + " VNĐ");
+
                 } else {
                     $(".couponAmount").text("0.VNĐ");
                 }
                 if (resp.grand_total > 0) {
-                    $(".grand_total").text(resp.grand_total + ".VNĐ");
+                    // $(".grand_total").text(resp.grand_total + ".VNĐ");
+                    $(".grand_total").text(formatNumber(resp.grand_total) + " VNĐ");
+
                 }
             },
             error: function () {
@@ -600,23 +604,67 @@ function get_filter(class_name) {
 //         }
 //     }
 // });
+// const paymentGateway = document.getElementsByName('payment_gateway');
+
+//     paymentGateway.forEach(function(radio) {
+//         radio.addEventListener('change', function() {
+//             if (radio.value === 'Credit_Card') {
+//                 document.getElementById('myDiv').style.display = 'block';
+//                 document.getElementById('name').setAttribute('required', '');
+//                 document.getElementById('ccd').setAttribute('required', '');
+//                 document.getElementById('card_number').setAttribute('required', '');
+//                 document.getElementById('expiration_date').setAttribute('required', '');
+//             } else {
+//                 document.getElementById('myDiv').style.display = 'none';
+//                 document.getElementById('name').removeAttribute('required');
+//                 document.getElementById('ccd').removeAttribute('required');
+//                 document.getElementById('card_number').removeAttribute('required');
+//                 document.getElementById('expiration_date').removeAttribute('required');
+//             }
+//         });
+//     });
+
 const paymentGateway = document.getElementsByName('payment_gateway');
 
-    paymentGateway.forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            if (radio.value === 'Credit_Card') {
-                document.getElementById('myDiv').style.display = 'block';
-                document.getElementById('name').setAttribute('required', '');
-                document.getElementById('ccd').setAttribute('required', '');
-                document.getElementById('card_number').setAttribute('required', '');
-                document.getElementById('expiration_date').setAttribute('required', '');
-            } else {
-                document.getElementById('myDiv').style.display = 'none';
-                document.getElementById('name').removeAttribute('required');
-                document.getElementById('ccd').removeAttribute('required');
-                document.getElementById('card_number').removeAttribute('required');
-                document.getElementById('expiration_date').removeAttribute('required');
-            }
-        });
-    });
+paymentGateway.forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    if (radio.value === 'Credit_Card') {
+      document.getElementById('myDiv').style.display = 'block';
+      document.getElementById('name').setAttribute('required', '');
+      document.getElementById('ccd').setAttribute('required', '');
+      document.getElementById('card_number').setAttribute('required', '');
+      document.getElementById('expiration_date').setAttribute('required', '');
 
+      // Validate CCD input
+      document.getElementById('ccd').addEventListener('input', function() {
+        let ccdValue = this.value;
+        let ccdPattern = /^[0-9]{3}$/;
+        if (ccdPattern.test(ccdValue)) {
+          this.setCustomValidity('');
+        } else {
+          this.setCustomValidity('CCD không hợp lệ. Vui lòng nhập đúng 3 chữ số');
+        }
+      });
+
+      // Validate Expiration Date input
+      document.getElementById('expiration_date').addEventListener('input', function() {
+        let expirationDateValue = this.value;
+        let expirationDatePattern = /^(0[1-9]|1[0-2])\/([0-9]{4})$/;
+        if (expirationDatePattern.test(expirationDateValue)) {
+          this.setCustomValidity('');
+        } else {
+          this.setCustomValidity('Ngày hết hạn không hợp lệ. Vui lòng nhập đúng định dạng MM/YYYY');
+        }
+      });
+
+    } else {
+      document.getElementById('myDiv').style.display = 'none';
+      document.getElementById('name').removeAttribute('required');
+      document.getElementById('ccd').removeAttribute('required');
+      document.getElementById('card_number').removeAttribute('required');
+      document.getElementById('expiration_date').removeAttribute('required');
+      document.getElementById('ccd').setCustomValidity('');
+      document.getElementById('expiration_date').setCustomValidity('');
+    }
+  });
+});

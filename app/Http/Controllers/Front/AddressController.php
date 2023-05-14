@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Countries;
 use App\Models\DeliveryAddress;
+use App\Models\ShippingCharges;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -31,7 +32,7 @@ class AddressController extends Controller
                 'delivery_city' => 'required|string|max:100',
                 'delivery_state' => 'required|string|max:100',
                 'delivery_country' => 'required|string|max:100',
-                'delivery_pincode' => 'required|digits:6',
+                // 'delivery_pincode' => 'required|digits:6',
                 'delivery_phone' => 'required|numeric|digits:10',
             ]);
             if ($validator->passes()) {
@@ -66,9 +67,12 @@ class AddressController extends Controller
                 }
                 $deliveryAddress = DeliveryAddress::deliveryAddress();
                 $countries = Countries::where('status', 1)->get()->toArray();
+                $shippingState = ShippingCharges::where('status', 1)->get()->toArray();
+                // dd($shipping);
+
 
                 return response()->json([
-                    'view' => (string)View::make('front.products.delivery_address')->with(compact('deliveryAddress', 'countries'))
+                    'view' => (string)View::make('front.products.delivery_address')->with(compact('deliveryAddress', 'countries','shippingState'))
                 ]);
             } else {
                 return response()->json(['type' => 'error', 'errors' => $validator->messages()]);
@@ -83,8 +87,10 @@ class AddressController extends Controller
             DeliveryAddress::where('id', $data['addressid'])->delete();
             $deliveryAddress = DeliveryAddress::deliveryAddress();
             $countries = Countries::where('status', 1)->get()->toArray();
+            $shippingState = ShippingCharges::where('status', 1)->get()->toArray();
+
             return response()->json([
-                'view' => (string)View::make('front.products.delivery_address')->with(compact('deliveryAddress', 'countries'))
+                'view' => (string)View::make('front.products.delivery_address')->with(compact('deliveryAddress', 'countries','shippingState'))
             ]);
         }
     }

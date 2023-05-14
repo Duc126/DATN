@@ -14,13 +14,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Phiếu Giảm Giá') }}</h4>
+                            <h4 class="card-title">{{ __('messages.coupons.coupons') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-coupon') }}"
-                                class="btn btn-block btn-primary">{{ __('+ Phiếu Giảm Giá') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.coupons.add-coupons') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -31,12 +31,12 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Mã giảm giá') }}</th>
-                                            <th>{{ __('Loại phiếu giảm giá') }}</th>
-                                            <th>{{ __('Số tiền') }}</th>
-                                            <th>{{ __('Ngày hết hạn') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('messages.coupons.code_coupons') }}</th>
+                                            <th>{{ __('messages.coupons.type_coupons') }}</th>
+                                            <th>{{ __('messages.coupons.percent_discount') }}</th>
+                                            <th>{{ __('messages.coupons.expiration_date') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
