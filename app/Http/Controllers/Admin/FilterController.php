@@ -59,13 +59,13 @@ class FilterController extends Controller
     public function addEditFilter(Request $request, $id = null)
     {
         if ($id == "") {
-            $title = "Thêm Bộ Lọc";
+            $title = __('messages.filter.add-filter');
             $filter = new ProductsFilter;
-            $message = "Thêm Bộ Lọc Thành Công";
+            $message = __('messages.filter.add-filter-success');
         } else {
-            $title = "Chỉnh Sửa Bộ Lọc";
+            $title =  __('messages.filter.update-filter');
             $filter = ProductsFilter::find($id);
-            $message = "Cập Nhật Bộ Lọc Thành Công";
+            $message = __('messages.filter.update-filter-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -89,13 +89,13 @@ class FilterController extends Controller
     public function addEditFilterValue(Request $request, $id = null)
     {
         if ($id == "") {
-            $title = "Thêm Giá Trị Bộ Lọc";
+            $title = __('messages.filter.add-value-filter');
             $filterValue = new ProductsFiltersValue();
-            $message = "Thêm Giá Trị Bộ Lọc Thành Công";
+            $message = __('messages.filter.add-filter-value-success');
         } else {
-            $title = "Chỉnh Sửa Giá Trị Bộ Lọc";
+            $title = __('messages.filter.update-value-filter');
             $filterValue = ProductsFiltersValue::find($id);
-            $message = "Cập Nhật Giá Trị Bộ Lọc Thành Công";
+            $message = __('messages.filter.update-filter-value-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();

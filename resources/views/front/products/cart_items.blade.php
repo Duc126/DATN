@@ -5,11 +5,11 @@
     <table>
         <thead>
             <tr>
-                <th>{{ __('Sản Phẩm') }}</th>
-                <th>{{ __('Giá Tiền') }}</th>
-                <th>{{ __('Số Lượng') }}</th>
-                <th>{{ __('Tổng Tiền') }}</th>
-                <th>{{ __('Hành Động') }}</th>
+                <th>{{ __('messages.cart.product') }}</th>
+                <th>{{ __('messages.cart.price') }}</th>
+                <th>{{ __('messages.cart.quantity') }}</th>
+                <th>{{ __('messages.cart.total_price') }}</th>
+                <th>{{ __('messages.table.action') }}</th>
 
 
             </tr>
@@ -31,7 +31,7 @@
                                     ({{ $item['product']['product_code'] }})
                                     -
                                     {{ $item['size'] }}<br>
-                                    {{ __('Màu:') }} {{ $item['product']['product_color'] }}
+                                    {{ __('messages.cart.color') }}: {{ $item['product']['product_color'] }}
 
                                 </h6>
                             </a>
@@ -76,7 +76,9 @@
                     </td>
                     <td>
                         <div class="cart-price">
-                            {{ $getDiscountAttributePrice['final_price'] * $item['quantity'] }}đ
+                            {{-- {{ $getDiscountAttributePrice['final_price'] * $item['quantity'] }}đ --}}
+                            {{ number_format($getDiscountAttributePrice['final_price'] * $item['quantity'], 0, '.', '.') }} VNĐ
+
                         </div>
                     </td>
                     <td>
@@ -93,27 +95,7 @@
         </tbody>
     </table>
 </div>
-<!-- Products-List-Wrapper /- -->
-<!-- Coupon -->
-{{-- <div class="coupon-continue-checkout u-s-m-b-60">
-    <div class="coupon-area">
-        <h6>{{ __('Nhập mã phiếu giảm giá của bạn nếu bạn có') }}</h6>
-        <div class="coupon-field">
-            <form id="applyCoupon" method="post" action="javascript:void(0);"
-                @if (Auth::check()) user="1" @endif>
-                @csrf
-                <label class="sr-only" for="coupon-code">{{ __('Áp dụng phiếu giảm giá') }}</label>
-                <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
-                <button type="submit" class="button">{{ __('Áp dụng phiếu giảm giá') }}</button>
-            </form>
-        </div>
-    </div>
-    <div class="button-area">
-        <a href="{{ url('/') }}" class="continue">{{ __('Tiếp tục mua sắm') }}</a>
-        <a href="{{ url('/checkout') }}" class="checkout">{{ __('Chuyển sang thanh toán') }}</a>
-    </div>
-</div> --}}
-<!-- Coupon /- -->
+
 
 <!-- Billing -->
 <div class="calculation u-s-m-b-60">
@@ -121,13 +103,13 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2">{{ __('Tổng số giỏ hàng') }}</th>
+                    <th colspan="2">{{ __('messages.cart.total_shoppig_cart') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng tiền chưa giảm') }}</h3>
+                        <h3 class="calc-h3 u-s-m-b-0">{{ __('messages.cart.total_amount_decreased') }}</h3>
                         {{-- {{ number_format($getDiscountPrice, 0, '.', '.') }} VNĐ --}}
 
                     </td>
@@ -137,12 +119,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="calc-h3 u-s-m-b-0">{{ __('Phiếu Giảm Giá') }}</h3>
+                        <h3 class="calc-h3 u-s-m-b-0">{{ __('messages.cart.coupon') }}</h3>
                     </td>
                     <td>
                         <span class="calc-text couponAmount">
                             @if (Session::has('couponAmount'))
-                                {{ Session::get('couponAmount') }}.VNĐ
+                                {{-- {{ Session::get('couponAmount') }}.VNĐ --}}
+                                {{ number_format(Session::get('couponAmount'), 0, '.', '.') }} VNĐ
+
                             @else
                                 0.VNĐ
 
@@ -152,7 +136,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="calc-h3 u-s-m-b-0">{{ __('Tổng Cộng') }}</h3>
+                        <h3 class="calc-h3 u-s-m-b-0">{{ __('messages.cart.total') }}</h3>
                     </td>
                     <td>
                         <span class="calc-text grand_total">

@@ -9,7 +9,7 @@
                             <h4 class="card-title">{{ $title }}</h4>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                    <strong>{{ __('messages.error') }}:</strong> {{ Session::get('error_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -17,7 +17,7 @@
                             @endif
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -38,10 +38,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="cat_ids">{{ __('Chọn Danh Mục ') }}</label>
+                                            <label for="cat_ids">{{ __('messages.filter.select-category') }}</label>
                                             <select name="cat_ids[]" id="cat_ids" class="form-control"
                                                 style="color: #000; height:200px" multiple="">
-                                                <option value="">{{ __('Chọn Danh Mục ') }}</option>
+                                                <option value="">{{ __('messages.filter.select-category') }}</option>
                                                 @foreach ($categories as $section)
                                                     <optgroup label="{{ $section['name'] }}"></optgroup>
                                                     @foreach ($section['categories'] as $category)
@@ -60,25 +60,23 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="filter_name">{{ __('Tên Bộ Lọc') }}<span
-                                                    class="text-danger">*</span> :</label>
+                                            <label for="filter_name">{{ __('messages.filter.name') }} :</label>
                                             <input type="text" class="form-control" id="filter_name"
-                                                placeholder="Nhập Tên Bộ Lọc" name="filter_name"
+                                                 name="filter_name"
                                                 @if (!empty($filter['filter_name'])) value="{{ $filter['filter_name'] }}" @else value="{{ old('filter_name') }}" @endif>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="filter_column">{{ __('Cột Lọc') }}<span
-                                                    class="text-danger">*</span> :</label>
+                                            <label for="filter_column">{{ __('messages.filter.column_filter') }} :</label>
                                             <input type="text" class="form-control" id="filter_column"
-                                                placeholder="Nhập Cột Bộ Lọc" name="filter_column"
+                                                 name="filter_column"
                                                 @if (!empty($filter['filter_column'])) value="{{ $filter['filter_column'] }}" @else value="{{ old('filter_column') }}" @endif>
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit"
-                                    class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <a class="btn btn-danger" href="{ url('admin/filters') }}">{{ __('Quay lai ') }}</a>
+                                    class="btn btn-primary mr-2 float-right">{{ __('messages.save') }}</button>
+                                <a class="btn btn-danger" href="{{  url('admin/filters')  }}">{{ __('messages.back') }}</a>
 
                             </form>
                         </div>

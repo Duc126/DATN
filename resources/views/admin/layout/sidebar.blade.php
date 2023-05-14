@@ -4,7 +4,7 @@
             <a @if (Session::get('page') == 'dashboard') style="background: #4B49AC !important; color: #fff !important;" @endif
                 class="nav-link menu-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('admin/dashboard') }}">
                 <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">{{ __('Trang Chủ') }}</span>
+                <span class="menu-title">{{ __('messages.dashboard') }}</span>
             </a>
         </li>
         @if (Auth::guard('admin')->user()->type == 'vendor')
@@ -47,7 +47,7 @@
                     class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false"
                     aria-controls="ui-catalogue">
                     <i class="icon-grid-2 menu-icon"></i>
-                    <span class="menu-title">{{ __('Quản lý danh mục') }}</span>
+                    <span class="menu-title">{{ __('messages.dashboard') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-catalogue">
@@ -75,7 +75,7 @@
                     class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false"
                     aria-controls="ui-order">
                     <i class="icon-grid-2 menu-icon"></i>
-                    <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
+                    <span class="menu-title">{{ __('messages.management-order') }}</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-order">
@@ -125,7 +125,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false"
             aria-controls="ui-catalogue">
             <i class="icon-grid-2 menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý danh mục') }}</span>
+            <span class="menu-title">{{ __('messages.management-directory') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-catalogue">
@@ -133,33 +133,33 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'sections') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/sections') }}">{{ __('Thể Loại') }}</a>
+                        class="nav-link" href="{{ url('admin/sections') }}">{{ __('messages.section') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'categories') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/categories') }}">{{ __('Danh Mục') }}</a>
+                        class="nav-link" href="{{ url('admin/categories') }}">{{ __('messages.category.category') }}</a>
 
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'brands') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/brands') }}"> {{ __('Thương Hiệu') }}</a>
+                        class="nav-link" href="{{ url('admin/brands') }}"> {{ __('messages.brand.brand') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'products') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/products') }}"> {{ __('Sản phẩm') }}</a>
+                        class="nav-link" href="{{ url('admin/products') }}"> {{ __('messages.product.product') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'filters') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/filters') }}">{{ __('Bộ Lọc') }}</a>
+                        class="nav-link" href="{{ url('admin/filters') }}">{{ __('messages.filter.filter') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'coupons') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/coupons') }}"> {{ __('Phiếu Giảm Giá') }}</a>
+                        class="nav-link" href="{{ url('admin/coupons') }}"> {{ __('messages.coupons.coupons') }}</a>
                 </li>
             </ul>
         </div>
@@ -168,7 +168,7 @@
         <a @if (Session::get('page') == 'users' || Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-user" aria-expanded="false" aria-controls="ui-user">
             <i class="mdi mdi-account-circle menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý Người Dùng') }}</span>
+            <span class="menu-title">{{ __('messages.management-user') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-user">
@@ -176,7 +176,7 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'users') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/users') }}">{{ __('Người Dùng') }}</a>
+                        class="nav-link" href="{{ url('admin/users') }}">{{ __('messages.user') }}</a>
                 </li>
                 {{-- <li class="nav-item"><a
                         @if (Session::get('page') == 'staff') style="background:#4B49AC !important; color: #fff !important;"
@@ -191,7 +191,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false"
             aria-controls="ui-order">
             <i class="mdi mdi-cart-plus menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý đơn đặt hàng') }}</span>
+            <span class="menu-title">{{ __('messages.management-order') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-order">
@@ -199,7 +199,7 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'order') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/order') }}">{{ __('Đơn đặt hàng') }}</a>
+                        class="nav-link" href="{{ url('admin/order') }}">{{ __('messages.order') }}</a>
                 </li>
 
             </ul>
@@ -210,7 +210,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-banner" aria-expanded="false"
             aria-controls="ui-banner">
             <i class="icon-grid-2 menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý Slider Banners') }}</span>
+            <span class="menu-title">{{ __('messages.management-slider') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-banner">
@@ -218,7 +218,7 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'banner') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/banner') }}">{{ __('Quản Lý Slider Banner') }}</a>
+                        class="nav-link" href="{{ url('admin/banner') }}">{{ __('messages.management-slider') }}</a>
                 </li>
             </ul>
         </div>
@@ -228,7 +228,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-shipping" aria-expanded="false"
             aria-controls="ui-shipping">
             <i class="mdi mdi-truck-delivery menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý Chi Phí Vận Chuyển') }}</span>
+            <span class="menu-title">{{ __('messages.management-shipped') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-shipping">
@@ -237,7 +237,7 @@
                         @if (Session::get('page') == 'shipping') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link"
-                        href="{{ url('admin/shipping') }}">{{ __('Quản Lý Chi Phí Vận Chuyển') }}</a>
+                        href="{{ url('admin/shipping') }}">{{ __('messages.management-shipped') }}</a>
                 </li>
             </ul>
         </div>
@@ -249,7 +249,7 @@
             class="nav-link" data-toggle="collapse" href="#ui-order-product" aria-expanded="false"
             aria-controls="ui-order-product">
             <i class="icon-bar-graph menu-icon"></i>
-            <span class="menu-title">{{ __('Quản lý và thống kê sản phẩm') }}</span>
+            <span class="menu-title">{{ __('messages.management-product-and-statistics') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-order-product">
@@ -258,19 +258,19 @@
                         @if (Session::get('page') == 'order-product') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
                         class="nav-link"
-                        href="{{ url('admin/order-product/search') }}">{{ __('Thống Kê Sản Phẩm') }}</a>
+                        href="{{ url('admin/order-product/search') }}">{{ __('messages.product-static') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'order-product-total') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/order-product') }}">{{ __('Quản Lý Số Lượng') }}</a>
+                        class="nav-link" href="{{ url('admin/order-product') }}">{{ __('messages.quantity-static') }}</a>
                         {{-- class="nav-link" href="{{ url('admin/order-product-total/search') }}">{{ __('Quản Lý Số Lượng') }}</a> --}}
 
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'order-date') style="background:#4B49AC !important; color: #fff !important;"
             @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/order-date') }}">{{ __('Doanh Thu Theo Ngày') }}</a>
+                        class="nav-link" href="{{ url('admin/order-date') }}">{{ __('messages.revenue-static') }}</a>
                 </li>
             </ul>
         </div>
@@ -283,8 +283,8 @@
             class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false"
             aria-controls="ui-admin">
             {{-- <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-admin"> --}}
-            <i class="icon-bar-graph menu-icon"></i>
-            <span class="menu-title">{{ __('Quản Lý Tài Khoản Admin') }}</span>
+            <i class="mdi mdi-account-settings menu-icon"></i>
+            <span class="menu-title">{{ __('messages.management-account-admin') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-admin">
@@ -307,7 +307,7 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'view_admin') style="background:#4B49AC !important; color: #fff !important;"
                     @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('Tất Cả') }}</a>
+                        class="nav-link" href="{{ url('admin/list-admin/admin') }}">{{ __('messages.management-account-admin') }}</a>
                 </li>
 
             </ul>
@@ -317,8 +317,8 @@
         <a @if (Session::get('page') == 'update-password' || Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;" @endif
             class="nav-link" data-toggle="collapse" href="#ui-setting" aria-expanded="false"
             aria-controls="ui-setting">
-            <i class="icon-grid-2 menu-icon"></i>
-            <span class="menu-title">{{ __('Cài Đặt') }}</span>
+            <i class="mdi mdi-settings menu-icon"></i>
+            <span class="menu-title">{{ __('messages.setting') }}</span>
             <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-setting">
@@ -326,12 +326,12 @@
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'update-password') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/update-password') }}">{{ __('Cập nhật mật khẩu') }}</a>
+                        class="nav-link" href="{{ url('admin/update-password') }}">{{ __('messages.update-password') }}</a>
                 </li>
                 <li class="nav-item"><a
                         @if (Session::get('page') == 'update-details') style="background:#4B49AC !important; color: #fff !important;"
                 @else style="background: #fff !important; color:#4B49AC !important;" @endif
-                        class="nav-link" href="{{ url('admin/update-details') }}">{{ __('Cập nhật chi tiết') }}</a>
+                        class="nav-link" href="{{ url('admin/update-details') }}">{{ __('messages.update-detail') }}</a>
                 </li>
             </ul>
         </div>

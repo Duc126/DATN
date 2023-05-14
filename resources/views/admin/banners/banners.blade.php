@@ -14,13 +14,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Banner') }}</h4>
+                            <h4 class="card-title">{{ __('messages.banner.banner') }}</h4>
                             <a style="max-width: 175px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-banner') }}"
-                                class="btn btn-block btn-primary">{{ __('Thêm Banner') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.banner.add_banner') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -31,12 +31,13 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Ảnh') }}</th>
-                                            <th>{{ __('Type ') }}</th>
-                                            <th>{{ __('Link') }}</th>
-                                            <th>{{ __('Tiêu Đề ') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            <th>{{ __('messages.image') }}</th>
+                                            <th>{{ __('messages.banner.type') }}</th>
+                                            <th>{{ __('messages.banner.link') }}</th>
+                                            <th>{{ __('messages.banner.title') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>

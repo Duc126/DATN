@@ -9,7 +9,7 @@
                             <h4 class="card-title">{{ $title }}</h4>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                    <strong>{{ __('messages.error') }}:</strong> {{ Session::get('error_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -17,7 +17,7 @@
                             @endif
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -38,7 +38,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="link"> {{ __('Kiểu') }}</label>
+                                            <label for="link"> {{ __('messages.banner.type') }}</label>
                                             <select class="form-control" id="type" name="type" required>
                                                 <option value="">{{ __('Chọn') }}</option>
                                                 <option @if (!empty($banner['type']) && $banner['type'] == "Slider")
@@ -49,34 +49,34 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">{{ __('Danh Mục Hình Ảnh') }}<span
+                                            <label for="image">{{ __('messages.image') }}<span
                                                     class="text-danger">*</span>
                                                 :</label>
                                             <input type="file" class="form-control" id="image"
                                                 name="image">
                                                 @if(!empty($banner['image']))
                                                 <a target="_blank" href="{{ url('front/images/banner_images/'.$banner['image']) }}">
-                                                    {{ __('Xem Ảnh') }}</a>
+                                                    {{ __('messages.view_image') }}</a>
                                                 @endif
                                         </div>
                                         <div class="form-group">
-                                            <label for="link">{{ __('Link ') }}<span
+                                            <label for="link">{{ __('messages.banner.link') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="link"
-                                                placeholder="Nhập Link" name="link"
+                                                placeholder="" name="link"
                                                 @if (!empty($banner['link'])) value="{{ $banner['link'] }}" @else value="{{ old('link') }}" @endif>
                                         </div>
 
 
                                         <div class="form-group">
-                                            <label for="title">{{ __('Tiêu Đề') }} :</label>
+                                            <label for="title">{{ __('messages.banner.title') }} :</label>
                                             <input type="text" class="form-control" id="title"
                                                 placeholder="Nhập Tiêu Đề" name="title"
                                                 @if (!empty($banner['title'])) value="{{ $banner['title'] }}" @else value="{{ old('title') }}" @endif>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="alt">{{ __('Văn bản thay thế biểu ngữ') }}
+                                            <label for="alt">{{ __('messages.banner.banner_all_text') }}
                                                 :</label>
                                             <input type="text" class="form-control" id="alt"
                                                 placeholder="Nhập Văn Bản" name="alt"

@@ -1,24 +1,5 @@
-    {{-- @if (count($deliveryAddress) > 0)
-        <h4 class="section-h4">{{ __('Địa Chỉ giao hàng') }}</h4>
-        @foreach ($deliveryAddress as $address)
-            <div class="control-group" style="float:left; margin-right: 5px;">
-                <input type="radio" id="address{{ $address['id'] }}" name="address_id" value="{{ $address['id'] }}">
-            </div>
-            <div>
-                <label class="control-label">
-                    {{ $address['name'] }}, {{ $address['address'] }}, {{ $address['city'] }},
-                    {{ $address['state'] }},{{ $address['country'] }}, ({{ $address['phone'] }})
-                </label>
-                <a style="float:right;margin-left: 5px;" href="javascript:;" data-addressid="{{ $address['id'] }}"
-                class="removeAddress">
-                {{ __('Xóa') }}</a> &nbsp;&nbsp;
-                <a style="float:right;" href="javascript:;" data-addressid="{{ $address['id'] }}" class="editAddress">
-                    {{ __('Chỉnh sửa') }}</a>
 
-            </div>
-        @endforeach <br>
-    @endif --}}
-    <h4 class="section-h4 deliveryText">{{ __('Thêm địa chỉ giao hàng mới') }}</h4>
+    <h4 class="section-h4 deliveryText">{{ __('messages.checkout.add_new_address') }}</h4>
     <div class="u-s-m-b-24">
         <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse"
             data-target="#showDifferent">
@@ -41,14 +22,14 @@
             <input type="hidden" name="delivery_id">
             <div class="group-inline u-s-m-b-13">
                 <div class="group-1 u-s-p-r-16">
-                    <label for="delivery_name">{{ 'Tên' }}
+                    <label for="delivery_name">{{ __('messages.table.name') }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" id="delivery_name" name="delivery_name" class="text-field">
                     <p id ="delivery-delivery_name"></p>
                 </div>
                 <div class="group-2">
-                    <label for="delivery_address">{{ 'Địa Chỉ' }}
+                    <label for="delivery_address">{{ __('messages.delivery-address.address') }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" name="delivery_address" id="delivery_address" class="text-field">
@@ -58,20 +39,40 @@
             </div>
             <div class="group-inline u-s-m-b-13">
                 <div class="group-1 u-s-p-r-16">
-                    <label for="delivery_city">{{ 'Thành Phố' }}
+                    <label for="delivery_city">{{ __('messages.list-user.city') }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" name="delivery_city" id="delivery_city" class="text-field">
                     <p id ="delivery-delivery_city"></p>
 
                 </div>
-                <div class="group-2">
-                    <label for="delivery_state">{{ 'Tỉnh' }}
+                {{-- <div class="group-2">
+                    {{-- <label for="delivery_state">{{ __('messages.delivery-address.province') }}
                         <span class="astk">*</span>
                     </label>
                     <input type="text" name="delivery_state" id="delivery_state" class="text-field">
-                    <p id ="delivery-delivery_state"></p>
+                    <p id ="delivery-delivery_state"></p> --}}
 
+
+                {{-- </div> --}}
+                <div class="u-s-m-b-13">
+
+                    <label for="select-country-extra">{{ __('messages.delivery-address.province') }}
+                        <span class="astk">*</span>
+                    </label>
+                    <div class="select-box-wrapper">
+                        <select class="select-box" id="delivery_state" name="delivery_state">
+                            <option value="">{{ __('Chọn Tỉnh') }}</option>
+                            @foreach ($shippingState as $shipping)
+                                <option value="{{ $shipping['state'] }}" @if ($shipping['state']
+                                 == Auth::user()->shipping) selected @endif>
+                                    {{ $shipping['state'] }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <p id ="delivery-delivery_state"></p>
+
+                    </div>
                 </div>
             </div>
             <div class="u-s-m-b-13">
@@ -103,7 +104,7 @@
 
             </div>
             <div class="u-s-m-b-13">
-                <label for="delivery_phone">{{ __('Số Điện Thoại') }}
+                <label for="delivery_phone">{{ __('messages.delivery-address.phone') }}
                     <span class="astk">*</span>
                 </label>
                 <input type="text" id="delivery_phone" name="delivery_phone" class="text-field">
@@ -112,18 +113,8 @@
             </div>
             <div class="u-s-m-b-13">
                 <button style="width:100%;" type="submit" class="button button-outline-secondary"
-                    id="btnShipping">{{ __('Lưu') }}</button>
+                    id="btnShipping">{{ __('messages.save') }}</button>
             </div>
         </form>
         <!-- Form-Fields /- -->
     </div>
-    {{-- <div>
-        <label for="order-notes">Order Notes</label>
-        <textarea class="text-area" id="order-notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-    </div> --}}
-    {{-- <div class="u-s-m-b-24">
-            <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse"
-                data-target="#showDifferent">
-            <label class="label-text" for="ship-to-different-address">Ship to a different
-                address?</label>
-        </div> --}}

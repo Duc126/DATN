@@ -14,13 +14,13 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Sản Phẩm') }}</h4>
+                            <h4 class="card-title">{{ __('messages.product.product') }}</h4>
                             <a style="max-width: 150px; float:right;display: inline-block;"
                                 href="{{ url('admin/add-edit-product') }}"
-                                class="btn btn-block btn-primary">{{ __('Thêm Sản Phẩm') }}</a>
+                                class="btn btn-block btn-primary">{{ __('messages.product.add-product') }}</a>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -31,15 +31,22 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên Sản Phẩm') }}</th>
-                                            <th>{{ __('Mã Sản Phẩm') }}</th>
+                                            <th>{{ __('messages.product.name') }}</th>
+                                            <th>{{ __('messages.product.code') }}</th>
+                                            <th>{{ __('messages.product.color') }}</th>
+                                            <th>{{ __('messages.image') }}</th>
+                                            <th>{{ __('messages.table.type-name') }}</th>
+                                            <th>{{ __('messages.table.group') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
+                                            {{-- <th>{{ __('Mã Sản Phẩm') }}</th>
                                             <th>{{ __('Màu Sản Phẩm') }}</th>
                                             <th>{{ __('Ảnh') }}</th>
                                             <th>{{ __('Thuộc Loại') }}</th>
-                                            <th>{{ __('Thuộc Phần') }}</th>
+                                            <th>{{ __('Thuộc Phần') }}</th> --}}
                                             {{-- <th>{{ __('Thêm Bởi') }}</th> --}}
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt động') }}</th>
+                                            {{-- <th>{{ __('Trang Thái') }}</th>
+                                            <th>{{ __('Hoạt động') }}</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>

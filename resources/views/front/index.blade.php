@@ -41,23 +41,23 @@
      <section class="section-maker">
          <div class="container">
              <div class="sec-maker-header text-center">
-                 <h3 class="sec-maker-h3">{{ __('Top Hàng Đầu') }}</h3>
+                 <h3 class="sec-maker-h3">{{ __('messages.front.top_collection') }}</h3>
                  <ul class="nav tab-nav-style-1-a justify-content-center">
                      <li class="nav-item">
                          <a class="nav-link active" data-toggle="tab"
-                             href="#men-latest-products">{{ __('Sản Phẩm Mới') }}</a>
+                             href="#men-latest-products">{{ __('messages.front.new_arrivals') }}</a>
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" data-toggle="tab"
-                             href="#men-best-selling-products">{{ __('Sản Phẩm Bán Chạy Nhất') }}</a>
+                             href="#men-best-selling-products">{{ __('messages.front.best_sellers') }}</a>
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" data-toggle="tab"
-                             href="#discounted-products">{{ __('Sản Phẩm Giảm Giá') }}</a>
+                             href="#discounted-products">{{ __('messages.front.discount_product') }}</a>
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" data-toggle="tab"
-                             href="#men-featured-products">{{ __('Sản Phẩm Nổi Bật') }}</a>
+                             href="#men-featured-products">{{ __('messages.front.featured_product') }}</a>
                      </li>
                  </ul>
              </div>

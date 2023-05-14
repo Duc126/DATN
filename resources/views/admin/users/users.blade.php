@@ -14,10 +14,10 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Người Dùng') }}</h4>
+                            <h4 class="card-title">{{ __('messages.user') }}</h4>
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.succes') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -28,14 +28,15 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên Người Dùng') }}</th>
-                                            <th>{{ __('Địa Chỉ') }}</th>
-                                            <th>{{ __('Thành Phố') }}</th>
+                                            <th>{{ __('messages.list-user.name') }}</th>
+                                            <th>{{ __('messages.list-user.address') }}</th>
+                                            <th>{{ __('messages.list-user.city') }}</th>
+                                            <th>{{ __('messages.list-user.phone') }}</th>
+
                                             {{-- <th>{{ __('Quốc Gia') }}</th> --}}
-                                            <th>{{ __('Số Điện Thoại') }}</th>
                                             <th>{{ __('Email') }}</th>
-                                            <th>{{ __('Trang Thái') }}</th>
-                                            <th>{{ __('Hoạt Động') }}</th>
+                                            <th>{{ __('messages.table.status') }}</th>
+                                            <th>{{ __('messages.table.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

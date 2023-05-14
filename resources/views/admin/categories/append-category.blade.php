@@ -1,5 +1,5 @@
        <div class="form-group">
-           <label for="parent_id">{{ __('Phân Loại danh mục') }} :</label>
+           <label for="parent_id">{{ __('messages.category.section_category') }} :</label>
            <select name="parent_id" id="parent_id" class="form-control">
                <option value="0" @if (isset($category['parent_id']) && $category['parent_id'] == 0) selected="" @endif>{{ __('Danh Mục Chính') }}
                </option>

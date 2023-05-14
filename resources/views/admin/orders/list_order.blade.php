@@ -14,7 +14,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Danh Sách Đơn Đặt Hàng') }}</h4>
+                            <h4 class="card-title">{{ __('messages.order') }}</h4>
                             {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#employeeModal">Gán Đơn Hàng Cho Nhân Viên</button>
 
@@ -70,14 +70,14 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>{{ __('Tên khách hàng') }}</th>
-                                            <th>{{ __('Email khách hàng') }}</th>
-                                            <th>{{ __('Ngày Đặt Hàng') }}</th>
-                                            <th>{{ __('Mã Sản phẩm khách hàng đặt') }}</th>
-                                            <th>{{ __('	Số tiền đơn đặt hàng') }}</th>
-                                            <th>{{ __('Tình trạng đặt hàng') }}</th>
-                                            <th>{{ __('Phương thức thanh toán') }}</th>
-                                            <th data-orderable="false">{{ __('Hành Động') }}</th>
+                                            <th>{{ __('messages.list-user.name') }}</th>
+                                            <th>{{ __('Email') }}</th>
+                                            <th>{{ __('messages.order-detail.date-order') }}</th>
+                                            <th>{{ __('messages.product.code') }}</th>
+                                            <th>{{ __('messages.order-detail.total-price-order') }}</th>
+                                            <th>{{ __('messages.order-detail.status-order') }}</th>
+                                            <th>{{ __('messages.order-detail.payment-method') }}</th>
+                                            <th data-orderable="false">{{ __('messages.table.action') }}</th>
 
                                         </tr>
                                     </thead>

@@ -38,10 +38,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="category_id">{{ __('Chọn Danh Mục ') }}</label>
+                                            <label for="category_id">{{ __('messages.product.select-category') }}</label>
                                             <select name="category_id" id="category_id" class="form-control"
                                                 style="color: #000;">
-                                                <option value="">{{ __('Chọn Danh Mục ') }}</option>
+                                                <option value="">{{ __('messages.product.select-category') }}</option>
                                                 @foreach ($categories as $section)
                                                     <optgroup label="{{ $section['name'] }}"></optgroup>
                                                     @foreach ($section['categories'] as $category)
@@ -63,10 +63,10 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="brand_id">{{ __('Chọn Thương Hiệu ') }}</label>
+                                            <label for="brand_id">{{ __('messages.product.select-brand') }}</label>
                                             <select name="brand_id" id="brand_id" class="form-control"
                                                 style="Color: #000;">
-                                                <option value="">{{ __('Chọn Thương Hiệu ') }}</option>
+                                                <option value="">{{ __('messages.product.select-brand') }}</option>
                                                 @foreach ($brands as $brand)
                                                     <option @if (!empty($product['brand_id'] == $brand['id'])) selected="" @endif
                                                         value="{{ $brand['id'] }}">{{ $brand['name'] }}</option>
@@ -74,51 +74,51 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_name">{{ __('Tên Sản Phẩm ') }}<span
+                                            <label for="product_name">{{ __('messages.product.name') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_name"
-                                                placeholder="Nhập Tên Sản Phẩm" name="product_name"
+                                                name="product_name"
                                                 @if (!empty($product['product_name'])) value="{{ $product['product_name'] }}" @else value="{{ old('product_name') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_code">{{ __('Mã Sản Phẩm ') }}<span
+                                            <label for="product_code">{{ __('messages.product.code') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_code"
-                                                placeholder="Nhập Mã Sản Phẩm" name="product_code"
+                                                 name="product_code"
                                                 @if (!empty($product['product_code'])) value="{{ $product['product_code'] }}" @else value="{{ old('product_code') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_color">{{ __('Product Color ') }}<span
+                                            <label for="product_color">{{ __('messages.product.color') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_color"
-                                                placeholder="Nhập Màu Sản Phẩm" name="product_color"
+                                                name="product_color"
                                                 @if (!empty($product['product_color'])) value="{{ $product['product_color'] }}" @else value="{{ old('product_color') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_price">{{ __('Giá Sản Phẩm ') }}<span
+                                            <label for="product_price">{{ __('messages.product.price') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_price"
-                                                placeholder="Nhập Giá Sản Phẩm" name="product_price"
+                                                name="product_price"
                                                 @if (!empty($product['product_price'])) value="{{ $product['product_price'] }}" @else value="{{ old('product_price') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_discount">{{ __('Giảm Giá Sản Phẩm (%) ') }}<span
+                                            <label for="product_discount">{{ __('messages.discount') }}<span
                                                     class="text-danger">*</span> :</label>
                                             <input type="text" class="form-control" id="product_discount"
-                                                placeholder="Nhập % Giảm Giá Sản Phẩm" name="product_discount"
+                                               name="product_discount"
                                                 @if (!empty($product['product_discount'])) value="{{ $product['product_discount'] }}" @else value="{{ old('product_discount') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="product_weight">{{ __('Trọng Lượng Sản Phẩm ') }} :</label>
+                                            <label for="product_weight">{{ __('messages.product.product_weight') }} :</label>
                                             <input type="text" class="form-control" id="product_weight"
-                                                placeholder="Nhập Trọng Lượng Sản Phẩm" name="product_weight"
+                                                name="product_weight"
                                                 @if (!empty($product['product_weight'])) value="{{ $product['product_weight'] }}" @else value="{{ old('product_weight') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="group_code">{{ __('Mã Nhóm ') }}<span class="text-danger">*</span>
+                                            <label for="group_code">{{ __('messages.product.group_code') }}
                                                 :</label>
                                             <input type="text" class="form-control" id="group_code"
-                                                placeholder="Nhập Mã Nhóm" name="group_code"
+                                                name="group_code"
                                                 @if (!empty($product['group_code'])) value="{{ $product['group_code'] }}" @else value="{{ old('group_code') }}" @endif>
                                         </div>
                                         {{-- <div id="appendProductsLevel">
@@ -126,72 +126,72 @@
                                         </div> --}}
                                         <div class="form-group">
                                             <label
-                                                for="product_image">{{ __('Danh Mục Hình Ảnh (Kích thước ảnh: 1000x1000)') }}
+                                                for="product_image">{{ __('messages.image') }}
                                                 :</label>
                                             <input type="file" class="form-control" id="product_image"
                                                 name="product_image">
                                             @if (!empty($product['product_image']))
                                                 <a target="_blank"
                                                     href="{{ url('front/images/product_images/medium/' . $product['product_image']) }}">
-                                                    {{ __('Xem Ảnh') }}</a>&nbsp;|&nbsp;
+                                                    {{ __('messages.view_image') }}</a>&nbsp;|&nbsp;
                                                 <a href="javascript:void(0)" class="confirmDelete" module="product-image"
-                                                    moduleid="{{ $product['id'] }}">{{ __('Xóa Ảnh') }}</a>
+                                                    moduleid="{{ $product['id'] }}">{{ __('messages.delete_image') }}</a>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label
-                                                for="product_video">{{ __('Danh Mục Video (Kích thước video: Ít hơn 2MB )') }}
+                                                for="product_video">{{ __('messages.video') }}
                                                 :</label>
                                             <input type="file" class="form-control" id="product_video"
                                                 name="product_video">
                                             @if (!empty($product['product_video']))
                                                 <a target="_blank"
                                                     href="{{ url('front/videos/product_videos/' . $product['product_video']) }}">
-                                                    {{ __('Xem Video') }}</a>&nbsp;|&nbsp;
+                                                    {{ __('messages.view_video') }}</a>&nbsp;|&nbsp;
                                                 <a href="javascript:void(0)" class="confirmDelete" module="product-video"
-                                                    moduleid="{{ $product['id'] }}">{{ __('Xóa Video') }}
+                                                    moduleid="{{ $product['id'] }}">{{ __('messages.delete_video') }}
                                                 </a>
                                             @endif
                                         </div>
                                         <div class="form-group">
-                                            <label for="category_discount">{{ __('Danh Mục Giảm Giá') }} :</label>
+                                            <label for="category_discount">{{ __('messages.product.category_discount') }} :</label>
                                             <input type="number" class="form-control" id="category_discount"
-                                                placeholder="Nhập Danh Mục Giảm Giá" name="category_discount"
+                                               name="category_discount"
                                                 @if (!empty($product['category_discount'])) value="{{ $product['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="description">{{ __('Mô Tả Danh Mục') }}</label>
+                                            <label for="description">{{ __('messages.description') }}</label>
                                             <textarea name="description" id="description" class="form-control" rows="3">{{ $product['description'] }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="meta_title">{{ __('Tiêu Đề Meta') }} :</label>
+                                            <label for="meta_title">{{ __('messages.title_meta') }} :</label>
                                             <input type="text" class="form-control" id="meta_title"
-                                                placeholder="Nhập Tiêu Đề " name="meta_title"
+                                                 name="meta_title"
                                                 @if (!empty($product['meta_title'])) value="{{ $product['meta_title'] }}" @else value="{{ old('meta_title') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="meta_description">{{ __('Mô Tả Meta') }} :</label>
+                                            <label for="meta_description">{{ __('messages.description_meta') }} :</label>
                                             <input type="text" class="form-control" id="meta_description"
-                                                placeholder="Nhập Mô Tả" name="meta_description"
+                                                 name="meta_description"
                                                 @if (!empty($product['meta_description'])) value="{{ $product['meta_description'] }}" @else value="{{ old('meta_description') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="meta_keywords">{{ __('Từ Khóa Meta') }} :</label>
+                                            <label for="meta_keywords">{{ __('messages.keywords_meta') }} :</label>
                                             <input type="text" class="form-control" id="meta_keywords"
-                                                placeholder="Nhập Từ Khóa" name="meta_keywords"
+                                                 name="meta_keywords"
                                                 @if (!empty($product['meta_keywords'])) value="{{ $product['meta_keywords'] }}" @else value="{{ old('meta_keywords') }}" @endif>
                                         </div>
                                         <div class="form-group">
-                                            <label for="is_featured">{{ __('Đặc sắc') }}
+                                            <label for="is_featured">{{ __('messages.product.featured') }}
                                             </label>
                                             <input type="checkbox" name="is_featured" id="is_featured" value="Yes"
                                                 @if (!empty($product['is_featured']) && $product['is_featured'] == 'Yes') checked="" @endif>
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="is_bestseller">{{ __('Sản Phẩm Bán Chạy Nhất') }}
+                                            <label for="is_bestseller">{{ __('messages.product.best_seller') }}
                                             </label>
                                             <input type="checkbox" name="is_bestseller" id="is_bestseller"
                                                 value="Yes" @if (!empty($product['is_bestseller']) && $product['is_bestseller'] == 'Yes') checked="" @endif>

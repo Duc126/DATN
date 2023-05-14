@@ -9,7 +9,7 @@
                             <h4 class="card-title">{{ $title }}</h4>
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Lỗi') }}:</strong> {{ Session::get('error_message') }}
+                                    <strong>{{ __('messages.error') }}:</strong> {{ Session::get('error_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -17,7 +17,7 @@
                             @endif
                             @if (Session::has('success_message'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ __('Thành Công') }}:</strong> {{ Session::get('success_message') }}
+                                    <strong>{{ __('messages.success') }}:</strong> {{ Session::get('success_message') }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -37,16 +37,16 @@
                                 <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="brand_name">{{ __('Tên Thương Hiệu ') }}<span
+                                        <label for="brand_name">{{ __('messages.brand.name') }}<span
                                                 class="text-danger">*</span> :</label>
-                                            <input type="text" class="form-control" id="brand_name" placeholder="Nhập Tên Thương Hiệu" name="brand_name"
+                                            <input type="text" class="form-control" id="brand_name" name="brand_name"
                                                 @if(!empty($brand['name'])) value="{{ $brand['name']}}" @else value="{{ old('brand_name') }}" @endif>
                                     </div>
                                 </div>
                             </div>
                                 <button type="submit"
-                                    class="btn btn-primary mr-2 float-right">{{ __('Lưu') }}</button>
-                                <a class="btn btn-danger" href="{{  url('admin/brands')  }}">{{ __('Quay lai ') }}</a>
+                                    class="btn btn-primary mr-2 float-right">{{ __('messages.save') }}</button>
+                                <a class="btn btn-danger" href="{{  url('admin/brands')  }}">{{ __('messages.back') }}</a>
 
                             </form>
                         </div>

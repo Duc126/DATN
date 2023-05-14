@@ -48,7 +48,7 @@
                                 @csrf
 
                                 @if (count($deliveryAddress) > 0)
-                                    <h4 class="section-h4">{{ __('Địa Chỉ giao hàng') }}</h4>
+                                    <h4 class="section-h4">{{ __('messages.checkout.delivery_address') }}</h4>
                                     @foreach ($deliveryAddress as $address)
                                         <div class="control-group" style="float:left; margin-right: 5px;">
                                             <input type="radio" id="address{{ $address['id'] }}" name="address_id"
@@ -64,31 +64,24 @@
                                                 {{ $address['state'] }},{{ $address['country'] }},
                                                 ({{ $address['phone'] }})
                                             </label>
-                                            {{-- <a style="float:right;margin-left: 5px;" href="javascript:;"
-                                                data-addressid="{{ $address['id'] }}" class="removeAddress">
-                                                {{ __('Xóa') }}</a> &nbsp;&nbsp;
-                                            <a style="float:right;" href="javascript:;"
-                                                data-addressid="{{ $address['id'] }}" class="editAddress">
-                                                {{ __('Chỉnh sửa') }}</a> --}}
-
                                                 <a style="float:right;margin-left: 5px;" href="javascript:;"
                                                 data-addressid="{{ $address['id'] }}" class="removeAddress">
                                                 <i class="ion-md-remove-circle" style="font-size: 24px;"></i></a> &nbsp;&nbsp;
                                             <a style="float:right;" href="javascript:;"
                                                 data-addressid="{{ $address['id'] }}" class="editAddress">
-                                                {{ __('Chỉnh sửa') }}</a>
+                                                {{ __('messages.edit') }}</a>
 
                                         </div>
                                     @endforeach <br>
                                 @endif
 
-                                <h4 class="section-h4">{{ __('Đơn Đặt Hàng') }}</h4>
+                                <h4 class="section-h4">{{ __('messages.checkout.the_order') }}</h4>
                                 <div class="order-table">
                                     <table class="u-s-m-b-13">
                                         <thead>
                                             <tr>
-                                                <th>{{ __('Sản Phẩm') }}</th>
-                                                <th>{{ __('Tổng Tiền') }}</th>
+                                                <th>{{ __('messages.product.product') }}</th>
+                                                <th>{{ __('messages.checkout.total_price') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -121,7 +114,7 @@
                                             @endforeach
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">{{ __('Tổng Tiền') }}</h3>
+                                                    <h3 class="order-h3">{{ __('messages.checkout.total_price') }}</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3">
@@ -132,7 +125,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h6 class="order-h6">{{ __('Chi phí vận chuyển') }}</h6>
+                                                    <h6 class="order-h6">{{ __('messages.shipping.shipping') }}</h6>
                                                 </td>
                                                 <td>
                                                     <h6 class="order-h6">
@@ -143,13 +136,15 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h6 class="order-h6">{{ __('Giảm Giá') }}</h6>
+                                                    <h6 class="order-h6">{{ __('messages.coupons.percent_discount') }}</h6>
                                                 </td>
                                                 <td>
                                                     <span class="calc-text couponAmount">
                                                         @if (Session::has('couponAmount'))
                                                             <span class="couponAmount">
-                                                                {{ Session::get('couponAmount') }}.VNĐ
+                                                                {{-- {{ Session::get('couponAmount') }}.VNĐ --}}
+                                                                {{ number_format(Session::get('couponAmount'), 0, '.', '.') }} VNĐ
+
                                                             </span>
                                                         @else
                                                             0.VNĐ
@@ -159,7 +154,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">{{ _('Tổng cộng') }}</h3>
+                                                    <h3 class="order-h3">{{ __('messages.cart.total') }}</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3">
@@ -176,7 +171,7 @@
                                         <input type="radio" class="radio-box" name="payment_gateway" id="cash-on-delivery"
                                             value="COD">
                                         <label class="label-text"
-                                            for="cash-on-delivery">{{ __('Thanh Toán Khi Giao Hàng') }}</label>
+                                            for="cash-on-delivery">{{ __('messages.checkout.payment_delivery') }}</label>
                                     </div>
                                     {{-- <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="paypal"
@@ -186,7 +181,7 @@
                                     <div class="u-s-m-b-13">
                                         <input type="radio" class="radio-box" name="payment_gateway" id="credit_card"
                                             value="Credit_Card">
-                                        <label class="label-text" for="credit_card">{{ __('Thẻ Ngân Hàng') }}</label>
+                                        <label class="label-text" for="credit_card">{{ __('messages.checkout.cart') }}</label>
                                     </div>
                                     <div id="myDiv" style="display:none;">
                                         <div class="form-row">
@@ -220,12 +215,12 @@
                                         <input type="checkbox" class="check-box" id="accept"
                                             name="accept"value="Yes" title="Vui lòng đồng ý với T&C">
                                         <label class="label-text no-color"
-                                            for="accept">{{ __('Tôi Đã Đọc Và Chấp Nhận Các') }}
-                                            <a href="#" class="u-c-brand">{{ __('Điều Khoản Và Điều Kiện') }}</a>
+                                            for="accept">{{ __('messages.checkout.accept') }}
+                                            <a href="#" class="u-c-brand">{{ __('messages.checkout.t&c') }}</a>
                                         </label>
                                     </div>
                                     <button type="submit" id="placeOrder"
-                                        class="button button-outline-secondary">{{ __('Đặt Hàng') }}</button>
+                                        class="button button-outline-secondary">{{ __('messages.checkout.order') }}</button>
                                 </div>
                             </form>
                         </div>

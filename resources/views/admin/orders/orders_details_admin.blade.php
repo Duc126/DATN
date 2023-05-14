@@ -13,80 +13,51 @@ use App\Models\OrderLogs; ?>
                     </button>
                 </div>
             @endif
-            {{-- <div class="row">
-                <div class="col-md-12 grid-margin">
-                    <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">{{ __('Chi tiết đơn hàng số') }} #{{ $orderDetails['id'] }} </h3>
-                            <h6 class="font-weight-normal mb-0"> <a
-                                    href="{{ url('admin/order') }}">{{ __('Quay trở lại bảng danh danh sách đơn đặt hàng') }}
-                            </h6>
-                        </div>
-                        <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button"
-                                        id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true">
-                                        <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="row">
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Chi tiết đơn đặt hàng') }}</h4>
+                            <h4 class="card-title">{{ __('messages.order-detail.order-detail') }}</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('ID Đặt Hàng:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.order-detail.id-order') }}:</strong></label>
                                         <label>#{{ $orderDetails['id'] }}</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('Ngày Đặt Hàng:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.order-detail.date-order') }}:</strong></label>
                                         <label>{{ date('d/m/Y H:i:s', strtotime($orderDetails['created_at'])) }}</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Tình trạng đặt hàng:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.order-detail.status-order') }}</strong></label>
                                         <label>
                                             @if ($orderDetails['order_status'] == 'Van Chuyen')
                                                 <span class="badge bg-secondary color-white"
-                                                    style="color: #fff; background: #0633ED !important;">{{ __('Vận Chuyển') }}</span>
+                                                    style="color: #fff; background: #0633ED !important;">{{ __('messages.order-status.transport') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Moi')
                                                 <span class="badge bg-danger"
-                                                    style="color: #fff; background: #E6B912 !important">{{ __('Mới') }}</span>
+                                                    style="color: #fff; background: #E6B912 !important">{{ __('messages.order-status.new') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Da Huy')
                                                 <span class="badge bg-danger"
-                                                    style="color: #fff;">{{ __('Đã Hủy') }}</span>
+                                                    style="color: #fff;">{{ __('messages.order-status.cancelled') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Dang Tien Hanh')
                                                 <span class="badge bg-success"
-                                                    style="color: #fff;">{{ __('Đang Tiến Hành') }}</span>
+                                                    style="color: #fff;">{{ __('messages.order-status.in-process') }}</span>
                                             @elseif($orderDetails['order_status'] == 'Da Giao Hang')
                                                 <span class="badge bg-primary"
-                                                    style="color: #fff;">{{ __('Đã Giao Hàng') }}</span>
+                                                    style="color: #fff;">{{ __('messages.order-status.delivered') }}</span>
                                             @else
                                                 <span class="badge bg-info"
-                                                    style="color: #fff;">{{ __('Chưa Giải Quyết') }}</span>
+                                                    style="color: #fff;">{{ __('messages.order-status.pending') }}</span>
                                             @endif
 
                                         </label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Tổng số tiền đặt hàng:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.order-detail.total-price-order') }}:</strong></label>
                                         <label>
                                             {{ number_format($orderDetails['grand_total'], 0, '.', '.') }} VNĐ
 
@@ -96,7 +67,7 @@ use App\Models\OrderLogs; ?>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Phí vận chuyển:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.order-detail.price-shipping') }}:</strong></label>
                                         <label>
                                             {{ number_format($orderDetails['shipping_charges'], 0, '.', '.') }} VNĐ
 
@@ -106,49 +77,49 @@ use App\Models\OrderLogs; ?>
                                     @if (!empty($orderDetails['coupon_code']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Mã Giảm Giá:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('messages.order-detail.code-coupons') }}:</strong></label>
                                             <label>{{ $orderDetails['coupon_code'] }}</label>
                                         </div>
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Số tiền được giảm:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('messages.order-detail.amount-reduced') }}:</strong></label>
                                             <label>{{ $orderDetails['coupon_amount'] }}</label>
                                         </div>
                                     @endif
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Phương thức thanh toán:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.order-detail.payment-method') }}:</strong></label>
 
                                         <label>
 
                                             @if ($orderDetails['payment_method'] == 'COD')
                                                 <span class="badge bg-info color-white"
-                                                    style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                                    style="color: #fff;">{{ __('messages.table.cod') }}</span>
                                                 {{-- @elseif($orderDetails['payment_method'] == 'Paypal')
                                                 <span class="badge bg-warning"
                                                     style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
                                                 <span class="badge bg-success"
-                                                    style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
+                                                    style="color: #fff;">{{ __('messages.table.credit_card') }}</span>
                                             @endif
                                         </label>
 
                                     </div>
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Cổng thanh toán:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.order-detail.payment-gateway') }}:</strong></label>
 
                                         <label>
 
                                             @if ($orderDetails['payment_gateway'] == 'COD')
                                                 <span class="badge bg-info color-white"
-                                                    style="color: #fff;">{{ __('Tiền Mặt') }}</span>
+                                                    style="color: #fff;">{{ __('messages.table.cod') }}</span>
                                                 {{-- @elseif($orderDetails['payment_gateway'] == 'Paypal')
                                                 <span class="badge bg-warning"
                                                     style="color: #fff;">{{ __('Paypal') }}</span> --}}
                                             @else
                                                 <span class="badge bg-success"
-                                                    style="color: #fff;">{{ __('Thanh Toán Thẻ') }}</span>
+                                                    style="color: #fff;">{{ __('messages.table.credit_card') }}</span>
                                             @endif
                                         </label>
 
@@ -162,33 +133,33 @@ use App\Models\OrderLogs; ?>
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Chi Tiết Khách Hàng ') }}</h4>
+                            <h4 class="card-title">{{ __('messages.delivery-address.customer-detail') }}</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('Tên:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.name-customer') }}:</strong></label>
                                         <label>{{ $userDetails['name'] }}</label>
                                     </div>
                                     @if (!empty($userDetails['address']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label style="font-weight: 550;"><strong>{{ __('Địa Chỉ:') }}</strong></label>
+                                            <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.address') }}:</strong></label>
                                             <label>{{ $userDetails['address'] }}</label>
                                         </div>
                                     @endif
                                     @if (!empty($userDetails['city']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Thành Phố:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('messages.delivery-address.city') }}:</strong></label>
                                             <label>{{ $userDetails['city'] }}</label>
                                         </div>
                                     @endif
                                     @if (!empty($userDetails['state']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label style="font-weight: 550;"><strong>{{ __('Tỉnh:') }}</strong></label>
+                                            <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.province') }}:</strong></label>
                                             <label>{{ $userDetails['state'] }}</label>
                                         </div>
                                     @endif
-                                    @if (!empty($userDetails['country']))
+                                    {{-- @if (!empty($userDetails['country']))
                                         <div class="form-group" style="height: 15px;">
                                             <label style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
                                             <label>{{ $userDetails['country'] }}</label>
@@ -199,14 +170,14 @@ use App\Models\OrderLogs; ?>
                                             <label style="font-weight: 550;"><strong>{{ __('Mã Code:') }}</strong></label>
                                             <label>{{ $userDetails['pincode'] }}</label>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Số Điện Thoại:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.delivery-address.phone') }}:</strong></label>
                                         <label>{{ $userDetails['phone'] }}</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('Email:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.email') }}:</strong></label>
                                         <label>{{ $userDetails['email'] }}</label>
                                     </div>
                                 </div>
@@ -220,34 +191,34 @@ use App\Models\OrderLogs; ?>
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Địa Chỉ Giao Hàng ') }}</h4>
+                            <h4 class="card-title">{{ __('messages.delivery-address.delivery-address') }}</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('Tên:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.name') }}:</strong></label>
                                         <label>{{ $orderDetails['name'] }}</label>
                                     </div>
                                     @if (!empty($orderDetails['address']))
                                         <div class="form-group" style="height: 15px;">
-                                            <label style="font-weight: 550;"><strong>{{ __('Địa Chỉ:') }}</strong></label>
+                                            <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.address') }}:</strong></label>
                                             <label>{{ $orderDetails['address'] }}</label>
                                         </div>
                                     @endif
                                     @if (!empty($orderDetails['city']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Thành Phố:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('messages.delivery-address.city') }}:</strong></label>
                                             <label>{{ $orderDetails['city'] }}</label>
                                         </div>
                                     @endif
                                     @if (!empty($orderDetails['state']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
-                                                style="font-weight: 550;"><strong>{{ __('Tình Trạng:') }}</strong></label>
+                                                style="font-weight: 550;"><strong>{{ __('messages.delivery-address.province') }}:</strong></label>
                                             <label>{{ $orderDetails['state'] }}</label>
                                         </div>
                                     @endif
-                                    @if (!empty($orderDetails['country']))
+                                    {{-- @if (!empty($orderDetails['country']))
                                         <div class="form-group" style="height: 15px;">
                                             <label
                                                 style="font-weight: 550;"><strong>{{ __('Quốc Gia:') }}</strong></label>
@@ -259,14 +230,14 @@ use App\Models\OrderLogs; ?>
                                             <label style="font-weight: 550;"><strong>{{ __('Mã Code:') }}</strong></label>
                                             <label>{{ $orderDetails['pincode'] }}</label>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                     <div class="form-group" style="height: 15px;">
                                         <label
-                                            style="font-weight: 550;"><strong>{{ __('Số Điện Thoại:') }}</strong></label>
+                                            style="font-weight: 550;"><strong>{{ __('messages.delivery-address.phone') }}:</strong></label>
                                         <label>{{ $orderDetails['phone'] }}</label>
                                     </div>
                                     <div class="form-group" style="height: 15px;">
-                                        <label style="font-weight: 550;"><strong>{{ __('Email:') }}</strong></label>
+                                        <label style="font-weight: 550;"><strong>{{ __('messages.delivery-address.email') }}:</strong></label>
                                         <label>{{ $orderDetails['email'] }}</label>
                                     </div>
                                 </div>
@@ -278,7 +249,7 @@ use App\Models\OrderLogs; ?>
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __(' Cập Nhật Trạng Thái Đơn Hàng') }}</h4>
+                            <h4 class="card-title">{{ __('messages.order-status.update') }}</h4>
                             @if (Auth::guard('admin')->user()->type != 'vendor')
                                 <form action="{{ url('admin/update-order-status') }}" method="post">
                                     @csrf
@@ -297,24 +268,24 @@ use App\Models\OrderLogs; ?>
                                         placeholder="Tên chuyển phát nhanh">
                                     <input type="text" name="tracking_number" id="tracking_number"
                                         placeholder="Số Vận Chuyển">
-                                    <button type="submit" class="btn btn-success mt-3">{{ __('Cập Nhật') }}</button>
+                                    <button type="submit" class="btn btn-success mt-3">{{ __('messages.update') }}</button>
                                 </form>
                                 <br>
                                 @foreach ($orderLog as $key => $log)
                                 {{-- <?php var_dump($orderLog); ?> --}}
                                     {{-- <strong>{{ $log['order_status'] }}</strong> --}}
                                     @if($log['order_status'] == "Van Chuyen")
-                                    <strong> {{ __('Vận Chuyển: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.transport') }}:</strong>
                                     @elseif($log['order_status'] == "Moi")
-                                    <strong> {{ __('Mới: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.new') }}:</strong>
                                     @elseif($log['order_status'] == "Chua Giai Quyet")
-                                    <strong> {{ __('Chưa Giải Quyết: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.pending') }}:</strong>
                                     @elseif($log['order_status'] == "Da Huy")
-                                    <strong> {{ __('Đã Hủy: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.cancelled') }}:</strong>
                                     @elseif($log['order_status'] == "Dang Tien Hanh")
-                                    <strong> {{ __('Đang Tiến Hành: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.in-process') }}:</strong>
                                     @elseif($log['order_status'] == "Da Giao Hang")
-                                    <strong> {{ __('Đã Giao Hàng: ') }}</strong>
+                                    <strong> {{ __('messages.order-status.delivered') }}:</strong>
                                     @endif
 
                                     @if (isset($log['order_item_id']) && $log['order_item_id'] > 0)
@@ -358,15 +329,15 @@ use App\Models\OrderLogs; ?>
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ __('Sản Phẩm Đã Đặt ') }}</h4>
+                            <h4 class="card-title">{{ __('messages.order-product.order_product') }}</h4>
                             <table class="table table-striped table-borderless">
                                 <tr>
-                                    <td>{{ __('Ảnh Sản Phẩm') }}</td>
-                                    <td>{{ __('Mã Sản Phẩm') }}</td>
-                                    <td>{{ __('Tên Sản Phẩm') }}</td>
-                                    <td>{{ __('Kích Thước Sản Phẩm') }}</td>
-                                    <td>{{ __('Màu Sản Phẩm') }}</td>
-                                    <td>{{ __('Sô Lượng Sản Phẩm') }}</td>
+                                    <td>{{ __('messages.order-product.product_image') }}</td>
+                                    <td>{{ __('messages.order-product.code') }}</td>
+                                    <td>{{ __('messages.order-product.name') }}</td>
+                                    <td>{{ __('messages.order-product.size') }}</td>
+                                    <td>{{ __('messages.order-product.color') }}</td>
+                                    <td>{{ __('messages.order-product.quantity') }}</td>
                                     {{-- <td>{{ __('Trạng Thái Mặt Hàng') }}</td> --}}
                                 </tr>
                                 @foreach ($orderDetails['orders_products'] as $product)

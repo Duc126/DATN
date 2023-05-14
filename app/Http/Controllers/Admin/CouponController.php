@@ -50,7 +50,7 @@ class CouponController extends Controller
     public function deleteCoupon($id)
     {
         Coupon::where('id', $id)->delete();
-        $message = "Đã Xóa Thành Công!";
+        $message = __('messages.delete');
         return redirect()->back()->with('success_message', $message);
     }
     public function addEditCoupon(Request $request, $id = null)
@@ -59,20 +59,20 @@ class CouponController extends Controller
 
         if ($id == "") {
             //add coupon
-            $title = "Thêm Phiếu Giảm Giá";
+            $title = __('messages.coupons.add-coupons');
             $coupon = new Coupon();
             $selCats = array();
             $selBrands = array();
             $selUsers = array();
-            $message = "Thêm Phiếu Giảm Gía Thành Công";
+            $message = __('messages.coupons.add-coupons-success');
         } else {
             //edit coupon
-            $title = "Chỉnh Sửa Phiếu Giảm Giá";
+            $title = __('messages.coupons.update-coupons');
             $coupon = Coupon::find($id);
             $selCats = explode(',', $coupon['categories']);
             $selBrands = explode(',', $coupon['brands']);
             $selUsers = explode(',', $coupon['users']);
-            $message = "Cập Nhật Phiếu Giảm Gía Thành Công";
+            $message = __('messages.coupons.update-coupons-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -88,14 +88,14 @@ class CouponController extends Controller
 
             ];
             $customMessages = [
-                'categories.required' => 'Chọn thể loại là bắt buộc',
-                'brands.required' => 'Chọn thương hiệu là bắt buộc',
-                'coupon_option.required' => 'Chọn phiếu giảm giá là bắt buộc',
-                'coupon_type.required' => 'Chọn loại phiếu giảm giá là bắt buộc',
-                'amount.required' => 'Số lượng là bắt buộc',
+                'categories.required' => __('messages.coupons.category_r'),
+                'brands.required' => __('messages.coupons.brand_r'),
+                'coupon_option.required' => __('messages.coupons.coupon_option_r'),
+                'coupon_type.required' => __('messages.coupons.coupon_type_r'),
+                'amount.required' => __('messages.coupons.amount_r'),
                 'amount.numeric' => 'Enter amount valid',
-                'expiry_date.numeric' => 'Ngày hết hạn là bắt buộc',
-                'amount_type.required' => 'Loại số lượng là bắt buộc',
+                'expiry_date.required' => __('messages.coupons.expiry_date_r'),
+                'amount_type.required' => __('messages.coupons.amount_type_r'),
 
             ];
             $this->validate($request, $rules, $customMessages);

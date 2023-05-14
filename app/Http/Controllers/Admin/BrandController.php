@@ -32,21 +32,21 @@ class BrandController extends Controller
     }
     public function deleteBrand($id){
         Brand::where('id',$id)->delete();
-        $message = "Đã Xóa Thành Công!";
+        $message = __('messages.delete_success');
         return redirect()->back()->with('success_message', $message);
     }
 
     public function addEditBrand(Request $request, $id=null){
         Session::put('page', 'brands');
         if($id==""){
-            $title = "Thêm Sản Phẩm";
+            $title = __('messages.brand.add-brand');
             $brand = new Brand;
-            $message = "Thêm sản phẩm thành công!";
+            $message = __('messages.brand.add-brand-success');
         }
         else{
-            $title = "Cập Nhật Sản Phẩm";
+            $title =  __('messages.brand.update-brand');
             $brand = Brand::find($id);
-            $message = "Cập Nhật sản phẩm thành công!";
+            $message = __('messages.brand.update-brand-success');
         }
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -54,8 +54,8 @@ class BrandController extends Controller
                 'brand_name' => 'required|min:2',
             ];
             $customMessages = [
-                'brand_name.required' => 'Tên thuơng hiệu là bắt buộc',
-                'brand_name.min' => 'Tên sản phẩm phải có ít nhất 2 ký tự',
+                'brand_name.required' => __('messages.brand.required'),
+                'brand_name.min' => __('messages.brand.min'),
             ];
             $this->validate($request, $rules, $customMessages);
 

@@ -29,10 +29,18 @@ class ShippingController extends Controller
         }
     }
 
-    public function addEditShipping($id, Request $request)
+    public function addEditShipping(Request $request, $id = null)
     {
         Session::put('page', 'shipping');
-
+        if ($id == "") {
+            $title = __('messages.shipping.add-shipping');
+            $shippingDetails = new ShippingCharges;
+            $message = __('messages.shipping.add-shipping-success');
+        } else {
+            $title =  __('messages.shipping.update-shipping');
+            $shippingDetails = ShippingCharges::find($id);
+            $message = __('messages.shipping.update-shipping-success');
+        }
         if ($request->isMethod('post')) {
             $data = $request->all();
             $rules = [
@@ -57,16 +65,32 @@ class ShippingController extends Controller
                 'above_5000g.min' => 'Giá tiền trên 5000g không được nhỏ hơn 0',
             ];
             $this->validate($request, $rules, $customMessages);
-            ShippingCharges::where('id', $id)->update([
-                '0_500g' => $data['0_500g'], '501_1000g' => $data['501_1000g'], '1001_2000g' => $data['1001_2000g'],
-                '2001_5000g' => $data['2001_5000g'], 'above_5000g' => $data['above_5000g']
-            ]);
-            $message = "Chỉnh Sửa Đơn Giá Vận Chuyển Thành Công";
-            return redirect()->back()->with('success_message', $message);
+            $shippingDetails->state = $data['state'];
+            $shippingDetails->{"0_500g"} = $data['0_500g'];
+            $shippingDetails->{"501_1000g"} = $data['501_1000g'];
+            $shippingDetails->{"1001_2000g"} = $data['1001_2000g'];
+            $shippingDetails->{"2001_5000g"} = $data['2001_5000g'];
+            $shippingDetails->{"above_5000g"} = $data['above_5000g'];
+            $shippingDetails->status = 1;
+            $shippingDetails->save();
+            // dd();
+            // dd($section);
+            return redirect('admin/shipping')->with('success_message', $message);
+            // ShippingCharges::where('id', $id)->update([
+            //     '0_500g' => $data['0_500g'], '501_1000g' => $data['501_1000g'], '1001_2000g' => $data['1001_2000g'],
+            //     '2001_5000g' => $data['2001_5000g'], 'above_5000g' => $data['above_5000g']
+            // ]);
+            // $message = "Chỉnh Sửa Đơn Giá Vận Chuyển Thành Công";
+            // return redirect()->back()->with('success_message', $message);
         }
 
-        $shippingDetails = ShippingCharges::Where('id', $id)->first();
-        $title = 'Chỉnh Sửa Đơn Gía Vận Chuyển';
+        // $shippingDetails = ShippingCharges::Where('id', $id)->first();
+        // $title = 'Chỉnh Sửa Đơn Gía Vận Chuyển';
         return view('admin.shipping.edit_shipping')->with(compact('shippingDetails', 'title'));
+    }
+    public function deleteShipping($id){
+        ShippingCharges::where('id',$id)->delete();
+        $message = __('messages.delete_success');
+        return redirect()->back()->with('success_message', $message);
     }
 }

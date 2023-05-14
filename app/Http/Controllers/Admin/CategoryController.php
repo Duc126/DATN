@@ -36,15 +36,15 @@ class CategoryController extends Controller
     {
         Session::put('page', 'categories');
         if ($id == "") {
-            $title = "Thêm Sản Phẩm";
+            $title = __('messages.category.add');
             $category = new Category;
             $getCategories = array();
-            $message = "Thêm sản phẩm thành công!";
+            $message = __('messages.category.add-success');
         } else {
-            $title = "Cập Nhật Sản Phẩm";
+            $title =  __('messages.category.update');
             $category = Category::find($id);
             $getCategories = Category::with('subcategories')->where(['parent_id' => 0, 'section_id' => $category['section_id']])->get()->toArray();
-            $message = "Cập Nhật sản phẩm thành công!";
+            $message = __('messages.category.update-success');
         }
         // dd($getCategories);
 
@@ -58,9 +58,9 @@ class CategoryController extends Controller
 
             ];
             $customMessages = [
-                'category_name.required' => 'Tên  là bắt buộc',
-                'section_id.required' => 'section là bắt buộc',
-                'url.required' => 'url là bắt buộc',
+                'category_name.required' => __('messages.category.name_required'),
+                'section_id.required' => __('messages.category.section_required'),
+                'url.required' => __('messages.category.url_required'),
             ];
             $this->validate($request, $rules, $customMessages);
             // if($data['description'] == ""){
@@ -116,25 +116,27 @@ class CategoryController extends Controller
         }
     }
 
-    public function deleteCategory($id){
-        Category::where('id',$id)->delete();
-        $message = "Đã Xóa Thành Công!";
+    public function deleteCategory($id)
+    {
+        Category::where('id', $id)->delete();
+        $message = __('messages.delete_success');
         return redirect()->back()->with('success_message', $message);
     }
 
-    public function deleteCategoryImage($id){
+    public function deleteCategoryImage($id)
+    {
         // Category::where('id',$id)->delete();
         $categoryImage = Category::select('category_image')->where('id', $id)->first();
 
-        $category_image_path ='front/images/category_images/';
-        if(file_exists($category_image_path.$categoryImage->category_image)){
-            unlink($category_image_path.$categoryImage->category_image);
+        $category_image_path = 'front/images/category_images/';
+        if (file_exists($category_image_path . $categoryImage->category_image)) {
+            unlink($category_image_path . $categoryImage->category_image);
         }
 
         // Delete Categort image
 
-        Category::where('id',$id)->update(['category_image' => '']);
-        $message = "Đã Xóa Thành Công!";
+        Category::where('id', $id)->update(['category_image' => '']);
+        $message = __('messages.delete_success');
         return redirect()->back()->with('success_message', $message);
     }
 }
